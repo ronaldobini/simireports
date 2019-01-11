@@ -11794,23 +11794,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\rbsbini\\.nuget\\packages\\": {},
+    "C:\\Users\\simi_bini\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rbsbini\\Documents\\GitHub\\simireports\\projetoSR\\projetoSR\\projetoSR.csproj",
+      "projectUniqueName": "C:\\Users\\simi_bini\\Documents\\simireports\\projetoSR\\projetoSR\\projetoSR.csproj",
       "projectName": "projetoSR",
-      "projectPath": "C:\\Users\\rbsbini\\Documents\\GitHub\\simireports\\projetoSR\\projetoSR\\projetoSR.csproj",
-      "packagesPath": "C:\\Users\\rbsbini\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rbsbini\\Documents\\GitHub\\simireports\\projetoSR\\projetoSR\\obj\\",
+      "projectPath": "C:\\Users\\simi_bini\\Documents\\simireports\\projetoSR\\projetoSR\\projetoSR.csproj",
+      "packagesPath": "C:\\Users\\simi_bini\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\simi_bini\\Documents\\simireports\\projetoSR\\projetoSR\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\rbsbini\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\simi_bini\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
