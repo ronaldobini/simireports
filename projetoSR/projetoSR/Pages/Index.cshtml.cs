@@ -7,10 +7,23 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace projetoSR.Pages
 {
-    public class Index1Model : PageModel
+    public class IndexModel : PageModel
     {
+
+        public String teste = "UHUUUUUUUUUUUUU";
+        public String resultNome;
+
         public void OnGet()
         {
+
+            DAO.BancoAzure ba = new DAO.BancoAzure();
+            resultNome = ba.retornarNome();
+
+
+
+
+
+
         }
     }
 }
