@@ -30,3 +30,4 @@ C:\Users\rbsbini\Documents\GitHub\simireports\projetoSR\projetoSR\obj\Debug\netc
 C:\Users\rbsbini\Documents\GitHub\simireports\projetoSR\projetoSR\obj\Debug\netcoreapp2.1\projetoSR.dll
 C:\Users\rbsbini\Documents\GitHub\simireports\projetoSR\projetoSR\obj\Debug\netcoreapp2.1\projetoSR.pdb
 C:\Users\rbsbini\Documents\GitHub\simireports\projetoSR\projetoSR\obj\Debug\netcoreapp2.1\projetoSR.csproj.CopyComplete
+C:\Users\rbsbini\Documents\GitHub\simireports\projetoSR\projetoSR\obj\Debug\netcoreapp2.1\Razor\Pages\indexBKP.g.cshtml.cs
