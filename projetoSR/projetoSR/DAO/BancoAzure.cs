@@ -9,7 +9,7 @@ namespace projetoSR.DAO
     public class BancoAzure
     {
 
-        public SqlConnection conectar()
+        public SqlConnection abrir()
         {
             string connetionString = null;
             SqlConnection conn;
@@ -29,25 +29,62 @@ namespace projetoSR.DAO
         }
 
 
-
-        public String retornarNome()
+        public void fechar(SqlConnection conn)
         {
-            SqlConnection conn = conectar();
-            string resultUsuarios = "-";
-            SqlCommand command = new SqlCommand("SELECT * FROM Usuarios", conn);
-            SqlDataReader reader = command.ExecuteReader();
-            
-            if (reader.Read())
-            {                
-                resultUsuarios = (string) reader["nome"];
-            }
-            
 
-            return resultUsuarios;
+            try
+            {
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRO AO CONECTAR COM BANCO AZURE" + ex);
+            }
+
         }
 
-        
 
 
-    }
+        public string consultar(string sql)
+        {
+            string result = "-";
+            SqlConnection conn = abrir();
+            try
+            {
+                SqlCommand command = new SqlCommand(sql, conn);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    result = (string)reader["nome"];
+                }
+            }
+            catch (Exception e)
+            {
+                result = "ERRO: " + e;
+            }
+            fechar(conn);
+            return result;
+        }
+
+
+
+
+        public string executar(string sql)
+        {
+            string result = "-";
+            SqlConnection conn = abrir();
+            try
+            {
+                SqlCommand command =
+                    new SqlCommand(sql, conn);
+                command.ExecuteNonQuery();                
+                result = "OK";
+            }
+            catch (Exception e)
+            {                
+                result = "ERRO: " + e;
+            }
+            return result;
+        }
 }
