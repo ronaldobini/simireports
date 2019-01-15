@@ -34,14 +34,25 @@ namespace projetoSR.DAO
         {
             SqlConnection conn = conectar();
             string resultUsuarios = "-";
-            SqlCommand command = new SqlCommand("SELECT * FROM Usuarios", conn);
-            SqlDataReader reader = command.ExecuteReader();
-            
-            if (reader.Read())
-            {                
-                resultUsuarios = (string) reader["nome"];
+            //SqlCommand command = new SqlCommand("SELECT * FROM Usuarios", conn);
+            //SqlDataReader reader = command.ExecuteReader();
+            try
+            {
+                SqlCommand command = 
+                    new SqlCommand("UPDATE Usuarios set pcom = 'PC_NA00', nlog = 1, configlist = 'Propostas|FUP|PrePedidos|Contatos|Clientes|Agenda|Produtos|FUPFast|MenuRelat|PrePedidosFUPFast|CdC|PriceCalc|Agenda_Short|ProdutosCentral' " +
+                    "WHERE nome = 'Alyson'", conn);
+                command.ExecuteNonQuery();
+                resultUsuarios = "UPDATE DONE";
             }
-            
+            catch(Exception e)
+            {
+                resultUsuarios = resultUsuarios + e;
+            }
+            //if (reader.Read())
+            //{
+            //    resultUsuarios = (string)reader["nome"];
+            //}
+
 
             return resultUsuarios;
         }
