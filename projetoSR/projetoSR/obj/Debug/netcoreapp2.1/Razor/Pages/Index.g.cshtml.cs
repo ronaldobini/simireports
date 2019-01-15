@@ -55,7 +55,7 @@ using projetoSR;
             WriteLiteral("\r\n\r\n<div style=\"margin-top:50px;\">\r\n    ");
             EndContext();
             BeginContext(111, 214, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cfaab0b139ad40bdb2c3989a415b4ab4", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4aed57323fcb493cb310b6b2098f3749", async() => {
                 BeginContext(117, 201, true);
                 WriteLiteral("\r\n        <input type=\"text\" name=\"login\" />\r\n        <input type=\"password\" name=\"pass\" />\r\n        <input type=\"checkbox\" name=\"Bini\" />Bini?<br>\r\n        <input type=\"submit\" value=\"Entrar\" />\r\n    ");
                 EndContext();
