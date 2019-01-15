@@ -9,7 +9,7 @@ namespace projetoSR.DAO
     public class BancoAzure
     {
 
-        public SqlConnection conectar()
+        public SqlConnection abrir()
         {
             string connetionString = null;
             SqlConnection conn;
@@ -18,7 +18,6 @@ namespace projetoSR.DAO
             try
             {
                 conn.Open();
-
             }
             catch (Exception ex)
             {
@@ -30,34 +29,70 @@ namespace projetoSR.DAO
 
 
 
-        public String retornarNome()
+        public SqlConnection fechar(SqlConnection conn)
         {
-            SqlConnection conn = conectar();
-            string resultUsuarios = "-";
-            //SqlCommand command = new SqlCommand("SELECT * FROM Usuarios", conn);
-            //SqlDataReader reader = command.ExecuteReader();
+            
             try
             {
-                SqlCommand command = 
-                    new SqlCommand("UPDATE Usuarios set pcom = 'PC_NA00', nlog = 1, configlist = 'Propostas|FUP|PrePedidos|Contatos|Clientes|Agenda|Produtos|FUPFast|MenuRelat|PrePedidosFUPFast|CdC|PriceCalc|Agenda_Short|ProdutosCentral' " +
-                    "WHERE nome = 'Alyson'", conn);
-                command.ExecuteNonQuery();
-                resultUsuarios = "UPDATE DONE";
+                conn.Close();
             }
-            catch(Exception e)
+            catch (Exception ex)
             {
-                resultUsuarios = resultUsuarios + e;
+                Console.WriteLine("ERRO AO CONECTAR COM BANCO AZURE" + ex);
             }
-            //if (reader.Read())
-            //{
-            //    resultUsuarios = (string)reader["nome"];
-            //}
+            return conn;
 
-
-            return resultUsuarios;
         }
 
-        
+
+
+
+
+
+        public string executar(string sql)
+        {
+            string result = "-";
+            SqlConnection conn = abrir();
+            try
+            {
+                SqlCommand command =
+                    new SqlCommand(sql, conn);
+                command.ExecuteNonQuery();
+                result = "OK";
+            }
+            catch (Exception e)
+            {
+                result = "ERRO: "+e;
+            }
+
+            fechar(conn);
+            return result;
+        }
+
+
+        public string consultar(string sql)
+        {
+            string result = "-";
+            SqlConnection conn = abrir();
+            try
+            {
+                SqlCommand command = new SqlCommand(sql, conn);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    result = (string)reader["nome"];
+                }
+            }
+            catch (Exception e)
+            {
+                result = "ERRO: " + e;
+            }
+            fechar(conn);
+            return result;
+        }
+
+
 
 
     }

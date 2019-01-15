@@ -6,16 +6,17 @@
 
 
 <div style="margin-top:50px;">
-    <form>
-        <input type="text" name="login" />
-        <input type="password" name="pass" />
-        <input type="checkbox" name="Bini" />Bini?<br>
-        <input type="submit" value="Entrar" />
-    </form>
+   
 
-    <br /><br /><br />
-    @Model.teste
-    <br /><br /><br />
-    @Model.resultNome
+        <br /><br /><br />
+
+        <form>
+            <input style="width:400px;" type="text" name="sql" placeholder="sql" />
+            <input type="submit" value="Executar" />
+        </form>
+
+
+        <br /><br /><br />
+        Resposta: @Model.resultExe
 
 </div>

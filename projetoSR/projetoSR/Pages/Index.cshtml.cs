@@ -10,14 +10,15 @@ namespace projetoSR.Pages
     public class IndexModel : PageModel
     {
 
-        public String teste = "UHUUUUUUUUUUUUU";
-        public String resultNome;
+        
+        public String resultExe;
 
         public void OnGet()
         {
 
             DAO.BancoAzure ba = new DAO.BancoAzure();
-            resultNome = ba.retornarNome();
+            String sql = "";
+            //resultExe = ba.executar(sql);
 
 
 
