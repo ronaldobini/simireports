@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\NovaPasta\**" />
+    <Content Remove="Pages\NovaPasta\**" />
+    <EmbeddedResource Remove="Pages\NovaPasta\**" />
+    <None Remove="Pages\NovaPasta\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Pages\Index - Cópia.cshtml.cs" />
     <Compile Remove="Pages\Page.cs" />
     <Compile Remove="Pages\Page.xaml.cs" />
@@ -19,6 +26,23 @@
   <ItemGroup>
     <None Remove="Pages\Page.xaml" />
     <None Remove="Pages\View.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="DAO\BancoAzure.cs" />
+    <Content Include="Pages\About.cshtml.cs" />
+    <Content Include="Pages\Contact.cshtml.cs" />
+    <Content Include="Pages\Error.cshtml.cs" />
+    <Content Include="Pages\Index - Cópia.cshtml.cs" />
+    <Content Include="Pages\index.cshtml.cs" />
+    <Content Include="Pages\indexBKP.cshtml.cs" />
+    <Content Include="Pages\Page.cs" />
+    <Content Include="Pages\Page.xaml" />
+    <Content Include="Pages\Page.xaml.cs" />
+    <Content Include="Pages\Privacy.cshtml.cs" />
+    <Content Include="Pages\View.cs" />
+    <Content Include="Pages\View.xaml" />
+    <Content Include="Pages\View.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>
