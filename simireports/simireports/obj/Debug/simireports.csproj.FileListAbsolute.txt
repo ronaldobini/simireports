@@ -4,3 +4,6 @@ C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\bin\simire
 C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\obj\Debug\simireports.csproj.CoreCompileInputs.cache
 C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\obj\Debug\simireports.dll
 C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\obj\Debug\simireports.pdb
+C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\obj\Debug\simireports.csprojAssemblyReference.cache
+C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\bin\IBM.Data.Informix.dll
+C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\obj\Debug\simireports.csproj.CopyComplete

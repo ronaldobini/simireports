@@ -10,8 +10,13 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            asp ok
-            <%=result%>
+            ULTIMOS PEDIDOS EFETIV: <br /><br />
+            <%=result%><br />
+            <%=result2%><br />
+            <%=result3%><br />
+            <%=result4%><br />
+            <%=result5%><br />
+            <%=result6%><br />
         </div>
     </form>
 </body>

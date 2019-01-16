@@ -39,6 +39,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IBM.Data.Informix, Version=3.0.0.2, Culture=neutral, PublicKeyToken=7c307b91aa13d208, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Informix Client-SDK\bin\netf40\IBM.Data.Informix.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -67,11 +71,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="index.html" />
     <Content Include="simireports\index.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="simireports\Conn\BancoLogix.cs" />
     <Compile Include="simireports\Conn\BancoAzure.cs" />
     <Compile Include="simireports\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>

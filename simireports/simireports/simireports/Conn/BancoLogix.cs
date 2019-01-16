@@ -3,24 +3,29 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using IBM.Data.Informix;
 
-
-    public class BancoAzure
+public class BancoLogix
     {
 
-        public SqlConnection abrir()
+        public IfxConnection abrir()
         {
             string connetionString = null;
-            SqlConnection conn;
-            connetionString = "Data Source=similar.database.windows.net;Initial Catalog=SimiSysDB;User ID=similar;Password=@lbertor!ter15";
-            conn = new SqlConnection(connetionString);
-            try
+            
+            connetionString = "Database = logix; Host = server.similar.ind.br; Server = ol_producao; Service = 9088;" +
+                               "Protocol = onsoctcp; UID = informix; Password = AdXmX2006;";
+
+            IfxConnection conn = new IfxConnection();
+            conn.ConnectionString = connetionString;
+
+        try
             {
                 conn.Open();
 
             }
             catch (Exception ex)
             {
+                conn = null;
                 Console.WriteLine("ERRO AO CONECTAR COM BANCO AZURE" + ex);
             }
             return conn;
@@ -28,7 +33,7 @@ using System.Threading.Tasks;
         }
 
 
-        public void fechar(SqlConnection conn)
+        public void fechar(IfxConnection conn)
         {
 
             try
@@ -44,14 +49,13 @@ using System.Threading.Tasks;
 
 
 
-        public SqlDataReader consultar(string sql, SqlConnection conn)
+        public IfxDataReader consultar(string sql, IfxConnection conn)
         {
-            SqlDataReader reader = null;
+        IfxDataReader reader = null;
             try
             {
-                SqlCommand command = new SqlCommand(sql, conn);
+                IfxCommand command = new IfxCommand(sql, conn);
                 reader = command.ExecuteReader();
-                
             }
             catch (Exception e)
             {
@@ -63,13 +67,13 @@ using System.Threading.Tasks;
 
 
 
-        public string executar(string sql, SqlConnection conn)
+        public string executar(string sql, IfxConnection conn)
         {
             string result = "-";
             try
             {
-                SqlCommand command =
-                    new SqlCommand(sql, conn);
+                IfxCommand command =
+                    new IfxCommand(sql, conn);
                 command.ExecuteNonQuery();
                 result = "OK";
             }

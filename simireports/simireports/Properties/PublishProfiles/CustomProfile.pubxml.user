@@ -10,17 +10,26 @@ ao editar este arquivo MSBuild. Para saber mais sobre isso, visite https://go.mi
     <_PublishTargetUrl>ftp://ftp.similarautomacao.com.br/web</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="bin/IBM.Data.Informix.dll">
+      <publishTime>11/18/2016 22:16:35</publishTime>
+    </File>
     <File Include="bin/simireports.dll">
-      <publishTime>01/16/2019 11:34:40</publishTime>
+      <publishTime>01/16/2019 17:20:33</publishTime>
     </File>
     <File Include="bin/simireports.pdb">
-      <publishTime>01/16/2019 11:34:40</publishTime>
+      <publishTime>01/16/2019 17:20:33</publishTime>
+    </File>
+    <File Include="index.html">
+      <publishTime>01/16/2019 16:22:27</publishTime>
+    </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>01/16/2019 13:11:53</publishTime>
     </File>
     <File Include="simireports/index.aspx">
-      <publishTime>01/16/2019 11:33:26</publishTime>
+      <publishTime>01/16/2019 17:20:26</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/16/2019 11:34:43</publishTime>
+      <publishTime>01/16/2019 13:12:46</publishTime>
     </File>
   </ItemGroup>
 </Project>
