@@ -55,7 +55,7 @@ using projetoSR;
             WriteLiteral("\r\n<h2>Sql</h2>\r\n\r\n\r\n<div style=\"margin-top:50px;\">\r\n    ");
             EndContext();
             BeginContext(135, 111, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3c989a91399f42129bd1c64d6b260519", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8dd53be60cea46aa917e361243240389", async() => {
                 BeginContext(141, 98, true);
                 WriteLiteral("\r\n        <input type=\"text\" name=\"sql\" />\r\n\r\n        <input type=\"submit\" value=\"Entrar\" />\r\n    ");
                 EndContext();
