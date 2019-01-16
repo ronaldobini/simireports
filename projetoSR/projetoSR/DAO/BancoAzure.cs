@@ -22,7 +22,7 @@ namespace projetoSR.DAO
             }
             catch (Exception ex)
             {
-                Console.WriteLine("ERRO AO CONECTAR COM BANCO AZURE"+ex);
+                Console.WriteLine("ERRO AO CONECTAR COM BANCO AZURE" + ex);
             }
             return conn;
 
@@ -38,7 +38,7 @@ namespace projetoSR.DAO
             }
             catch (Exception ex)
             {
-                Console.WriteLine("ERRO AO CONECTAR COM BANCO AZURE" + ex);
+                Console.WriteLine("ERRO AO DAR CLOSE COM BANCO AZURE" + ex);
             }
 
         }
@@ -56,7 +56,7 @@ namespace projetoSR.DAO
 
                 while (reader.Read())
                 {
-                    result = (string)reader["nome"];
+                    result = (string)reader[0];
                 }
             }
             catch (Exception e)
@@ -78,13 +78,19 @@ namespace projetoSR.DAO
             {
                 SqlCommand command =
                     new SqlCommand(sql, conn);
-                command.ExecuteNonQuery();                
+                command.ExecuteNonQuery();
                 result = "OK";
             }
             catch (Exception e)
-            {                
+            {
                 result = "ERRO: " + e;
             }
+            fechar(conn);
             return result;
         }
+
+
+
+
+    }
 }

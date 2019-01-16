@@ -1,0 +1,21 @@
+﻿@page
+@model projetoSR.Pages.SqlModel
+@{
+    ViewData["Title"] = "Sql";
+}
+
+<h2>Sql</h2>
+
+
+<div style="margin-top:50px;">
+    <form>
+        <input type="text" name="sql" />
+
+        <input type="submit" value="Entrar" />
+    </form>
+
+
+    <br /><br /><br />
+    Respostas: @Model.result
+
+</div>

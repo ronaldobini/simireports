@@ -11,13 +11,11 @@ namespace projetoSR.Pages
     {
 
         public String teste = "UHUUUUUUUUUUUUU";
-        public String resultNome;
 
         public void OnGet()
         {
 
-            DAO.BancoAzure ba = new DAO.BancoAzure();
-            resultNome = ba.retornarNome();
+            
 
 
 
