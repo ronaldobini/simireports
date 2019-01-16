@@ -1,0 +1,7 @@
+C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\bin\simireports.dll.config
+C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\bin\simireports.dll
+C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\bin\simireports.pdb
+C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\obj\Release\simireports.csprojAssemblyReference.cache
+C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\obj\Release\simireports.csproj.CoreCompileInputs.cache
+C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\obj\Release\simireports.dll
+C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\obj\Release\simireports.pdb
