@@ -8,7 +8,9 @@
     <title></title>
 </head>
 <body>
+    <center><br />
     <h3>PRE PREDIDOS HOJE</h3>
+        <br />
     <form id="form1" runat="server">
         <div>
             <table>
