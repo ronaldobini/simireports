@@ -1,7 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="login.aspx.cs" Inherits="simireports.simireports.WebForm1" %>
 
 
-<br /><br /><br /><br />
+<center>
+        <br /><br /><br /><br />
     <form runat="server" name="login" action="#" method="post">
 
         <input type="text"  autocomplete="off" runat="server" id="login" />
