@@ -52,6 +52,7 @@
                         string nomRepres = comissao.NomRepres;
                         DateTime datAltSit = comissao.DatAltSit;
                         DateTime datHorEmiss = comissao.DatHorEmiss;
+
                 %> 
 
                     <tr>
@@ -60,10 +61,10 @@
                         <td><%= item %></td>
                         <td><%= nomCliente %></td>
                         <td><%= desItem %></td>
-                        <td><%= qtdItem %></td>
-                        <td><%= precoUnitBruto %></td>
+                        <td><%= float.Parse(qtdItem) %></td>
+                        <td><%= float.Parse(precoUnitBruto) %></td>
                         <td><%= preTotal %></td>
-                        <td><%= pctComissao %></td>
+                        <td><%= float.Parse(pctComissao) %></td>
                         <td><%= comiss %></td>
                         <td><%= nomRepres %></td>
                         <td><%= datAltSit %></td>
