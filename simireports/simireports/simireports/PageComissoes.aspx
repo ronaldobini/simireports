@@ -21,33 +21,53 @@
         <div id="resultados">
             <table class="table table-striped table-dark" style = "max-width:90%; color:white; font-size: 12px;">
                 <tr>
-                    <th style="width: 10%;">Empresa</th>
-                    <th style="width: 10%;">Cliente</th>
-                    <th style="width: 10%;">Ped</th>
-                    <th style="width: 20%;">Tempo</th>
-                    <th style="width: 20%;">Comiss</th>
-                    <th style="width: 20%;">Repres</th>
+                    <th style="width: 10%;">Nota Fiscal</th>
+                    <th style="width: 10%;">N Pedido</th>
+                    <th style="width: 10%;">Item</th>
+                    <th style="width: 10%;">Nome cliente</th>
+                    <th style="width: 10%;">Desc Item</th>
+                    <th style="width: 20%;">Qtd Item</th>
+                    <th style="width: 20%;">Preco Unit Bruto</th>
+                    <th style="width: 20%;">PreTotal</th>
+                    <th style="width: 20%;">% Comissao</th>
+                    <th style="width: 20%;">Comissao</th>
+                    <th style="width: 20%;">Nome Representante</th>
+                    <th style="width: 20%;">Dat Alt Sit</th>
+                    <th style="width: 20%;">Data Hora Emiss</th>
                     <th style="width: 10%;">-</th>
                 </tr>
                 
                 <% 
                     foreach (var comissao in comissoes) {
-
-                        string codEmpresa = comissao.CodEmpresa;
-                        string codCliente = comissao.CodCliente;
-                        string ped = comissao.NumPed;
-                        string tempo = comissao.Tempo;
-                        string comiss = comissao.Comiss;
-                        string repres = comissao.Repres;
+                        int notaFiscal = comissao.NotaFiscal;
+                        int numPed = comissao.NumPed;
+                        string item = comissao.Item;
+                        string nomCliente = comissao.NomCliente;
+                        string desItem = comissao.DesItem;
+                        string qtdItem = comissao.QtdItem;
+                        string precoUnitBruto = comissao.PrecoUnitBruto;
+                        double preTotal = comissao.PreTotal;
+                        string pctComissao = comissao.PctComissao;
+                        double comiss = comissao.Comiss;
+                        string nomRepres = comissao.NomRepres;
+                        DateTime datAltSit = comissao.DatAltSit;
+                        DateTime datHorEmiss = comissao.DatHorEmiss;
                 %> 
 
                     <tr>
-                        <td><%= codEmpresa %></td>
-                        <td><%= codCliente %></td>
-                        <td><%= ped %></td>
-                        <td><%= tempo %></td>
-                        <td><%=comiss %></td>
-                        <td><%= repres %> </td>
+                        <td><%= notaFiscal %></td>
+                        <td><%= numPed %></td>
+                        <td><%= item %></td>
+                        <td><%= nomCliente %></td>
+                        <td><%= desItem %></td>
+                        <td><%= qtdItem %></td>
+                        <td><%= precoUnitBruto %></td>
+                        <td><%= preTotal %></td>
+                        <td><%= pctComissao %></td>
+                        <td><%= comiss %></td>
+                        <td><%= nomRepres %></td>
+                        <td><%= datAltSit %></td>
+                        <td><%= datHorEmiss %></td>
                         <td></td>
                     </tr>
               

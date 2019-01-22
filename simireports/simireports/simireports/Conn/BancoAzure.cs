@@ -16,7 +16,6 @@ using System.Data.SqlClient;
             try
             {
                 conn.Open();
-
             }
             catch (Exception ex)
             {

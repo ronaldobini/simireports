@@ -20,8 +20,8 @@ public class BancoLogix
         try
             {
                 conn.Open();
-
-            }
+                executar("set isolation to dirty read", conn);
+        }
             catch (Exception ex)
             {
                 conn = null;
