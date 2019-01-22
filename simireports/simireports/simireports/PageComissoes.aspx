@@ -13,8 +13,11 @@
     <h3><font color=white>Comissões</font></h3>
         <br />
         
-        <div id="filtros">
-            <form id="form1" runat="server">
+        <div id="filtros" style="margin-bottom:100px;">
+            <form runat="server" id="filtrosComissoes" action="#" method="post">
+                <input runat="server" type="text" id="datInicio" placeholder="Data Ini" value="2019-01-22"/>
+                <input runat="server" type="text" id="repres" placeholder="Repres"/>
+                <input runat="server" type="submit" value="Filtrar" onserverclick="filtrarComiss_Click" />
             </form>
         </div>
 
