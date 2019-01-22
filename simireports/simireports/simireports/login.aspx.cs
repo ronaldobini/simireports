@@ -26,7 +26,7 @@ namespace simireports.simireports
             if (loginPost == "bini")
             {
                 prePedidos.key = 1;
-                Response.Redirect("prePedidos.aspx");
+                Response.Redirect("PagePrePedidos.aspx");
             }
             else
             {

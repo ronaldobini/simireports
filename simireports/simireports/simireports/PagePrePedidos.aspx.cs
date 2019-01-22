@@ -18,10 +18,10 @@ namespace simireports
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (key == 0) { Response.Redirect("erro.aspx");  }
+            //if (key == 0) { Response.Redirect("erro.aspx");  }
 
             SqlConnection conn = new BancoAzure().abrir();
-            SqlDataReader reader = new BancoAzure().consultar("SELECT codped, title, dataped, representante from PrePedidos where dataped >= '2019-01-17 00:00:00' order by dataped desc", conn);
+            SqlDataReader reader = new BancoAzure().consultar("SELECT codped, title, dataped, representante from PrePedidos where dataped >= '2019-01-21 00:00:00' order by dataped desc", conn);
 
             while (reader.Read())
             {

@@ -11,7 +11,7 @@ public class BancoLogix
         {
             string connetionString = null;
             
-            connetionString = "Database = logix; Host = server.similar.ind.br; Server = ol_producao; Service = 9088;" +
+            connetionString = "Database = logix; Host = 192.168.1.16; Server = ol_producao; Service = 9088;" +
                                "Protocol = onsoctcp; UID = informix; Password = AdXmX2006;";
 
             IfxConnection conn = new IfxConnection();

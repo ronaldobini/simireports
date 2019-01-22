@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="prePedidos.aspx.cs" Inherits="simireports.prePedidos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PagePrePedidos.aspx.cs" Inherits="simireports.prePedidos" %>
 
 <!DOCTYPE html>
 

@@ -1,0 +1,59 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PageComissoes.aspx.cs" Inherits="simireports.PageComissoes" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Relatorio de Comissões</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+</head>
+<body style="background-color:#222;">
+    <center><br />
+    <h3><font color=white>Comissões</font></h3>
+        <br />
+        
+        <div id="filtros">
+            <form id="form1" runat="server">
+            </form>
+        </div>
+
+        <div id="resultados">
+            <table class="table table-striped table-dark" style = "max-width:90%; color:white; font-size: 12px;">
+                <tr>
+                    <th style="width: 10%;">Empresa</th>
+                    <th style="width: 10%;">Cliente</th>
+                    <th style="width: 10%;">Ped</th>
+                    <th style="width: 20%;">Tempo</th>
+                    <th style="width: 20%;">Comiss</th>
+                    <th style="width: 20%;">Repres</th>
+                    <th style="width: 10%;">-</th>
+                </tr>
+                
+                <% 
+                    foreach (var comissao in comissoes) {
+
+                        string codEmpresa = comissao.CodEmpresa;
+                        string codCliente = comissao.CodCliente;
+                        string ped = comissao.NumPed;
+                        string tempo = comissao.Tempo;
+                        string comiss = comissao.Comiss;
+                        string repres = comissao.Repres;
+                %> 
+
+                    <tr>
+                        <td><%= codEmpresa %></td>
+                        <td><%= codCliente %></td>
+                        <td><%= ped %></td>
+                        <td><%= tempo %></td>
+                        <td><%=comiss %></td>
+                        <td><%= repres %> </td>
+                        <td></td>
+                    </tr>
+              
+                <%  } %>
+            </table>
+        </div>
+    
+</body>
+</html>

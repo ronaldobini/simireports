@@ -81,19 +81,28 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.html" />
-    <Content Include="simireports\prePedidos.aspx" />
+    <Content Include="simireports\PageComissoes.aspx" />
+    <Content Include="simireports\PagePrePedidos.aspx" />
     <Content Include="simireports\index.aspx" />
     <Content Include="simireports\login.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="simireports\Classes\Comissao.cs" />
     <Compile Include="simireports\Classes\PrePedido.cs" />
-    <Compile Include="simireports\prePedidos.aspx.cs">
-      <DependentUpon>prePedidos.aspx</DependentUpon>
+    <Compile Include="simireports\PageComissoes.aspx.cs">
+      <DependentUpon>PageComissoes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="simireports\prePedidos.aspx.designer.cs">
-      <DependentUpon>prePedidos.aspx</DependentUpon>
+    <Compile Include="simireports\PageComissoes.aspx.designer.cs">
+      <DependentUpon>PageComissoes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simireports\PagePrePedidos.aspx.cs">
+      <DependentUpon>PagePrePedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\PagePrePedidos.aspx.designer.cs">
+      <DependentUpon>PagePrePedidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="simireports\Conn\BancoLogix.cs" />
