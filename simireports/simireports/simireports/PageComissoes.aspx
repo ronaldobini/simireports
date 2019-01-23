@@ -15,7 +15,7 @@
         
         <div id="filtros" style="margin-bottom:100px;">
             <form runat="server" id="filtrosComissoes" action="#" method="post">
-                <input runat="server" type="text" id="datInicio" placeholder="Data Ini" value="2019-01-22"/>
+                <input runat="server" type="text" id="datInicio" placeholder="Data Ini" value="2019-01-23"/>
                 <input runat="server" type="text" id="repres" placeholder="Repres"/>
                 <input runat="server" type="submit" value="Filtrar" onserverclick="filtrarComiss_Click" />
             </form>
@@ -24,57 +24,51 @@
         <div id="resultados">
             <table class="table table-striped table-dark" style = "max-width:90%; color:white; font-size: 12px;">
                 <tr>
-                    <th style="width: 10%;">Nota Fiscal</th>
-                    <th style="width: 10%;">N Pedido</th>
-                    <th style="width: 10%;">Item</th>
-                    <th style="width: 10%;">Nome cliente</th>
-                    <th style="width: 10%;">Desc Item</th>
-                    <th style="width: 20%;">Qtd Item</th>
-                    <th style="width: 20%;">Preco Unit Bruto</th>
-                    <th style="width: 20%;">PreTotal</th>
+                    <th style="width: 10%;">Empresa</th>
+                    <th style="width: 10%;">N Documento</th>
+                    <th style="width: 10%;">Origem</th>
+                    <th style="width: 10%;">Pedido</th>
+                    <th style="width: 10%;">Cliente</th>
+                    <th style="width: 20%;">Valor Bruto</th>
                     <th style="width: 20%;">% Comissao</th>
                     <th style="width: 20%;">Comissao</th>
-                    <th style="width: 20%;">Nome Representante</th>
-                    <th style="width: 20%;">Dat Alt Sit</th>
-                    <th style="width: 20%;">Data Hora Emiss</th>
+                    <th style="width: 20%;">Representante</th>
+                    <th style="width: 20%;">Emissao</th>
+                    <th style="width: 20%;">Vencimento</th>
+                    <th style="width: 20%;">Pagamento</th>
                     <th style="width: 10%;">-</th>
                 </tr>
                 
                 <% 
                     foreach (var comissao in comissoes) {
-                        int notaFiscal = comissao.NotaFiscal;
-                        int numPed = comissao.NumPed;
-                        string item = comissao.Item;
+                        string codEmpresa = comissao.CodEmpresa;
+                        string numDocum = comissao.NumDocum;
+                        string numDocumOrigem = comissao.NumDocumOrigem;
+                        string numPedido = comissao.NumPedido;
                         string nomCliente = comissao.NomCliente;
-                        string desItem = comissao.DesItem;
-                        string qtdItem = comissao.QtdItem;
-                        string precoUnitBruto = comissao.PrecoUnitBruto;
-                        double preTotal = comissao.PreTotal;
-                        string pctComissao = comissao.PctComissao;
-                        double comiss = comissao.Comiss;
+                        Decimal valBruto = Decimal.Round(comissao.ValBruto,2);
+                        Decimal pctComissao = Decimal.Round(comissao.PctComissao,2);
+                        Decimal comiss = Decimal.Round(comissao.Comiss,2);
                         string nomRepres = comissao.NomRepres;
-                        DateTime datAltSit = comissao.DatAltSit;
-                        DateTime datHorEmiss = comissao.DatHorEmiss;
-
+                        DateTime datEmiss = comissao.DatEmiss;
+                        DateTime datVcto = comissao.DatVcto;
+                        char iesPgtoDocum = comissao.IesPgtoDocum;
                 %> 
-
                     <tr>
-                        <td><%= notaFiscal %></td>
-                        <td><%= numPed %></td>
-                        <td><%= item %></td>
+                        <td><%= codEmpresa %></td>
+                        <td><%= numDocum %></td>
+                        <td><%= numDocumOrigem %></td>
+                        <td><%= numPedido %></td>
                         <td><%= nomCliente %></td>
-                        <td><%= desItem %></td>
-                        <td><%= float.Parse(qtdItem) %></td>
-                        <td><%= float.Parse(precoUnitBruto) %></td>
-                        <td><%= preTotal %></td>
-                        <td><%= float.Parse(pctComissao) %></td>
+                        <td><%= valBruto %></td>
+                        <td><%= pctComissao %></td>
                         <td><%= comiss %></td>
                         <td><%= nomRepres %></td>
-                        <td><%= datAltSit %></td>
-                        <td><%= datHorEmiss %></td>
+                        <td><%= datEmiss %></td>
+                        <td><%= datVcto %></td>
+                        <td><%= iesPgtoDocum %></td>
                         <td></td>
                     </tr>
-              
                 <%  } %>
             </table>
         </div>
