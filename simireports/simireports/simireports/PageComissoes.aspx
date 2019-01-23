@@ -15,11 +15,16 @@
         
         <div id="filtros" style="margin-bottom:100px;">
             <form runat="server" id="filtrosComissoes" action="#" method="post">
-                <input runat="server" type="text" id="datInicio" placeholder="Data Ini" value="2019-01-23"/>
+                <input runat="server" type="text" id="datInicio" placeholder="Data Ini" value="01/01/2019"/>
+                <input runat="server" type="text" id="datFim" placeholder="Data Fim" value="31/01/2019"/>
                 <input runat="server" type="text" id="repres" placeholder="Repres"/>
+                <input runat="server" type="text" id="sitPgto" placeholder="Pgto" value="T"/>
+                
                 <input runat="server" type="submit" value="Filtrar" onserverclick="filtrarComiss_Click" />
             </form>
         </div>
+
+        <div style="color:white; margin-bottom:30px;">Total Comiss: <%=totComiss %></div>
 
         <div id="resultados">
             <table class="table table-striped table-dark" style = "max-width:90%; color:white; font-size: 12px;">
