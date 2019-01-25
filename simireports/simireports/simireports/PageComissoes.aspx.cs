@@ -42,7 +42,6 @@ namespace simireports
             postRepres = repres.Value.ToUpper();
             postSitPgto = sitPgto.Value.ToUpper();
             executarRelatorio();
-
         }
         
         protected void executarRelatorio()

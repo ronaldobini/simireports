@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.html" />
+    <Content Include="simiMaster\PageAlterarPedido.aspx" />
     <Content Include="simireports\PageComissoes.aspx" />
     <Content Include="simireports\PagePrePedidos.aspx" />
     <Content Include="simireports\index.aspx" />
@@ -88,6 +89,16 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="simiMaster\Classes\ItemPedido.cs" />
+    <Compile Include="simiMaster\Classes\Item.cs" />
+    <Compile Include="simiMaster\Classes\Pedido.cs" />
+    <Compile Include="simiMaster\PageAlterarPedido.aspx.cs">
+      <DependentUpon>PageAlterarPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simiMaster\PageAlterarPedido.aspx.designer.cs">
+      <DependentUpon>PageAlterarPedido.aspx</DependentUpon>
+    </Compile>
     <Compile Include="simireports\Classes\Comissao.cs" />
     <Compile Include="simireports\Classes\PrePedido.cs" />
     <Compile Include="simireports\PageComissoes.aspx.cs">
