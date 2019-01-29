@@ -58,15 +58,17 @@ namespace simireports
                                         "r.nom_repres," +
                                         "d.dat_emis," +
                                         "d.dat_vencto_s_desc," +
+                                        "dp.dat_pgto," +
                                         "d.ies_pgto_docum " +
                                         "FROM docum d " +
                                         "JOIN representante r on r.cod_repres = d.cod_repres_1 " +
                                         "JOIN clientes cl on cl.cod_cliente = d.cod_cliente " +
-                                        "WHERE d.dat_vencto_s_desc >= '"+ postDatInicio + "' " +
-                                        "AND d.dat_vencto_s_desc <= '" + postDatFim + "' " +
+                                        "JOIN docum_pgto dp on d.num_docum = dp.num_docum and d.cod_empresa = dp.cod_empresa " +
+                                        "WHERE dp.dat_pgto >= '" + postDatInicio + "' " +
+                                        "AND dp.dat_pgto <= '" + postDatFim + "' " +
                                         "AND r.nom_repres like '%" + postRepres +"%' " +
                                         "AND ies_pgto_docum = '"+postSitPgto+"' " +
-                                        "AND d.ies_situa_docum = 'N' AND d.ies_tip_docum = 'DP' order by d.dat_vencto_s_desc desc", conn);
+                                        "AND d.ies_situa_docum = 'N' AND d.ies_tip_docum = 'DP' order by d.dat_emis desc", conn);
 
             totComiss = 0.0M;
             while (reader.Read())
@@ -90,6 +92,10 @@ namespace simireports
                     Decimal comiss;
                     if (!pctComissaoS.Equals("")) {
                         pctComissao = Decimal.Parse(pctComissaoS);
+                        if (pctComissao == 3.8m)
+                        {
+                            //pctComissao = 1.5m;
+                        }
                         comiss = valBruto * (pctComissao / 100);
                     }
                     else
@@ -103,9 +109,10 @@ namespace simireports
                     string nomRepres = reader.GetString(7);
                     DateTime datEmiss = reader.GetDateTime(8);
                     DateTime datVcto = reader.GetDateTime(9);
-                    char iesPgtoDocum = reader.GetChar(10);
+                    DateTime datPgto = reader.GetDateTime(10);
+                    char iesPgtoDocum = reader.GetChar(11);
 
-                    Comissao comissao = new Comissao(codEmpresa, numDocum, numDocumOrigem, numPedido, nomCliente, valBruto, pctComissao, comiss, nomRepres, datEmiss, datVcto, iesPgtoDocum);
+                    Comissao comissao = new Comissao(codEmpresa, numDocum, numDocumOrigem, numPedido, nomCliente, valBruto, pctComissao, comiss, nomRepres, datEmiss, datVcto, datPgto, iesPgtoDocum);
                     comissoes.Add(comissao);
                 }
         }
