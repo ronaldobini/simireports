@@ -59,16 +59,17 @@ namespace simireports
                                         "d.dat_emis," +
                                         "d.dat_vencto_s_desc," +
                                         "dp.dat_pgto," +
-                                        "d.ies_pgto_docum " +
+                                        "d.ies_pgto_docum, " +
+                                        "d.cod_repres_1 " +
                                         "FROM docum d " +
                                         "JOIN representante r on r.cod_repres = d.cod_repres_1 " +
                                         "JOIN clientes cl on cl.cod_cliente = d.cod_cliente " +
-                                        "JOIN docum_pgto dp on d.num_docum = dp.num_docum and d.cod_empresa = dp.cod_empresa " +
+                                        "LEFT JOIN docum_pgto dp on d.num_docum = dp.num_docum and d.cod_empresa = dp.cod_empresa " +
                                         "WHERE dp.dat_pgto >= '" + postDatInicio + "' " +
                                         "AND dp.dat_pgto <= '" + postDatFim + "' " +
                                         "AND r.nom_repres like '%" + postRepres +"%' " +
                                         "AND ies_pgto_docum = '"+postSitPgto+"' " +
-                                        "AND d.ies_situa_docum = 'N' AND d.ies_tip_docum = 'DP' order by d.dat_emis desc", conn);
+                                        "AND d.ies_situa_docum = 'N' AND d.ies_tip_docum = 'DP' order by d.cod_repres_1", conn);
 
             totComiss = 0.0M;
             while (reader.Read())
@@ -109,11 +110,19 @@ namespace simireports
                     string nomRepres = reader.GetString(7);
                     DateTime datEmiss = reader.GetDateTime(8);
                     DateTime datVcto = reader.GetDateTime(9);
-                    DateTime datPgto = reader.GetDateTime(10);
-                    char iesPgtoDocum = reader.GetChar(11);
+                    DateTime datPgto = new DateTime();
 
-                    Comissao comissao = new Comissao(codEmpresa, numDocum, numDocumOrigem, numPedido, nomCliente, valBruto, pctComissao, comiss, nomRepres, datEmiss, datVcto, datPgto, iesPgtoDocum);
+                    if (postSitPgto == "T")
+                    {
+                        datPgto = reader.GetDateTime(10);
+                    }
+                    
+                    char iesPgtoDocum = reader.GetChar(11);
+                    string codRepres = reader.GetString(12);
+
+                    Comissao comissao = new Comissao(codEmpresa, numDocum, numDocumOrigem, numPedido, nomCliente, valBruto, pctComissao, comiss, nomRepres, datEmiss, datVcto, datPgto, iesPgtoDocum, codRepres);
                     comissoes.Add(comissao);
+                    
                 }
         }
 

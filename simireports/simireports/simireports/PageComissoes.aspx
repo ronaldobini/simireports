@@ -29,22 +29,26 @@
         <div id="resultados">
             <table class="table table-striped table-dark" style = "max-width:90%; color:white; font-size: 12px;">
                 <tr>
-                    <th style="width: 10%;">Empresa</th>
+                    <th style="width: 5%;">CodRepres</th>
+                    <th style="width: 5%;">Empresa</th>
                     <th style="width: 10%;">N Documento</th>
                     <th style="width: 10%;">Origem</th>
                     <th style="width: 10%;">Pedido</th>
                     <th style="width: 10%;">Cliente</th>
                     <th style="width: 20%;">Valor Bruto</th>
-                    <th style="width: 20%;">% Comissao</th>
+                    <th style="width: 5%;">% Comissao</th>
                     <th style="width: 20%;">Comissao</th>
                     <th style="width: 20%;">Representante</th>
                     <th style="width: 20%;">Emissao</th>
-                    <th style="width: 20%;">Vencimento</th>
-                    <th style="width: 20%;">Pagamento</th>
-                    <th style="width: 10%;">-</th>
+                    <th style="width: 20%;">Dat. Pgto</th>
+                    <th style="width: 5%;">Pagamento</th>
                 </tr>
                 
                 <% 
+                    string uCodRepres = "";
+                    string uNomRepres = "";
+                    Decimal totRepres = 0.0m;
+
                     foreach (var comissao in comissoes) {
                         string codEmpresa = comissao.CodEmpresa;
                         string numDocum = comissao.NumDocum;
@@ -56,10 +60,24 @@
                         Decimal comiss = Decimal.Round(comissao.Comiss,2);
                         string nomRepres = comissao.NomRepres;
                         DateTime datEmiss = comissao.DatEmiss;
-                        DateTime datVcto = comissao.DatVcto;
+                        DateTime datPgto = comissao.DatPgto;
                         char iesPgtoDocum = comissao.IesPgtoDocum;
+                        string codRepres = comissao.CodRepres;
+
+                        totRepres = totRepres + comiss;
+                        if(uCodRepres != "" && uCodRepres != codRepres)
+                        {
+                            %>
+                                <tr><td colspan="4" style="background-color:black; color:white;"><b><% = uNomRepres %>(<% = uCodRepres %>) Total Comiss: <% = totRepres %></td><td colspan="6"></td><td colspan="4"></td></tr>
+                            <%
+                            totRepres = 0.0M;
+                        }
+                        uCodRepres = codRepres;
+                        uNomRepres = nomRepres;
+                        
                 %> 
                     <tr>
+                        <td><%= codRepres %></td>
                         <td><%= codEmpresa %></td>
                         <td><%= numDocum %></td>
                         <td><%= numDocumOrigem %></td>
@@ -70,11 +88,12 @@
                         <td><%= comiss %></td>
                         <td><%= nomRepres %></td>
                         <td><%= datEmiss %></td>
-                        <td><%= datVcto %></td>
+                        <td><%= datPgto %></td>
                         <td><%= iesPgtoDocum %></td>
-                        <td></td>
                     </tr>
-                <%  } %>
+                <%                         
+                    }
+                %>
             </table>
         </div>
     

@@ -18,16 +18,16 @@ namespace simireports.simireports.Classes
         private string nomRepres;
         private DateTime datEmiss;
         private DateTime datVcto;
-        private DateTime datPgto;
-        
+        private DateTime datPgto;        
         private char iesPgtoDocum;
+        private string codRepres;
 
         public Comissao()
         {
 
         }
 
-        public Comissao(string codEmpresa, string numDocum, string numDocumOrigem, string numPedido, string nomCliente, Decimal valBruto, Decimal pctComissao, Decimal comiss, string nomRepres, DateTime datEmiss, DateTime datVcto, DateTime datPgto, char iesPgtoDocum)
+        public Comissao(string codEmpresa, string numDocum, string numDocumOrigem, string numPedido, string nomCliente, Decimal valBruto, Decimal pctComissao, Decimal comiss, string nomRepres, DateTime datEmiss, DateTime datVcto, DateTime datPgto, char iesPgtoDocum, string codRepres)
         {
             this.codEmpresa = codEmpresa;
             this.numDocum = numDocum;
@@ -42,6 +42,7 @@ namespace simireports.simireports.Classes
             this.datVcto = datVcto;
             this.datPgto = datPgto;
             this.iesPgtoDocum = iesPgtoDocum;
+            this.codRepres =codRepres;
         }
 
         public string CodEmpresa { get => codEmpresa; set => codEmpresa = value; }
@@ -57,5 +58,6 @@ namespace simireports.simireports.Classes
         public DateTime DatVcto { get => datVcto; set => datVcto = value; }
         public char IesPgtoDocum { get => iesPgtoDocum; set => iesPgtoDocum = value; }
         public DateTime DatPgto { get => datPgto; set => datPgto = value; }
+        public string CodRepres { get => codRepres; set => codRepres = value; }
     }
 }
