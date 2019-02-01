@@ -85,6 +85,7 @@
     <Content Include="index.html" />
     <Content Include="simiMaster\PageAlterarPedido.aspx" />
     <Content Include="simireports\PageComissoes.aspx" />
+    <Content Include="simireports\PageOMsPendentes.aspx" />
     <Content Include="simireports\PagePrePedidos.aspx" />
     <Content Include="simireports\index.aspx" />
     <Content Include="simireports\login.aspx" />
@@ -102,6 +103,8 @@
       <DependentUpon>PageAlterarPedido.aspx</DependentUpon>
     </Compile>
     <Compile Include="simireports\Classes\Comissao.cs" />
+    <Compile Include="simireports\Classes\Item.cs" />
+    <Compile Include="simireports\Classes\OMPendente.cs" />
     <Compile Include="simireports\Classes\PrePedido.cs" />
     <Compile Include="simireports\PageComissoes.aspx.cs">
       <DependentUpon>PageComissoes.aspx</DependentUpon>
@@ -109,6 +112,13 @@
     </Compile>
     <Compile Include="simireports\PageComissoes.aspx.designer.cs">
       <DependentUpon>PageComissoes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simireports\PageOMsPendentes.aspx.cs">
+      <DependentUpon>PageOMsPendentes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\PageOMsPendentes.aspx.designer.cs">
+      <DependentUpon>PageOMsPendentes.aspx</DependentUpon>
     </Compile>
     <Compile Include="simireports\PagePrePedidos.aspx.cs">
       <DependentUpon>PagePrePedidos.aspx</DependentUpon>
