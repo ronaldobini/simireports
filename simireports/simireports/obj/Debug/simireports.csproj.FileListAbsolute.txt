@@ -5,7 +5,6 @@ C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\obj\Debug\
 C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\obj\Debug\simireports.dll
 C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\obj\Debug\simireports.pdb
 C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\obj\Debug\simireports.csprojAssemblyReference.cache
-C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\bin\IBM.Data.Informix.dll
 C:\Users\rbsbini\Documents\GitHub\simireports\simireports\simireports\obj\Debug\simireports.csproj.CopyComplete
 C:\Users\simi_bini\Documents\simireports\simireports\simireports\bin\simireports.dll.config
 C:\Users\simi_bini\Documents\simireports\simireports\simireports\bin\simireports.dll
