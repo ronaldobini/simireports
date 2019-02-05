@@ -58,7 +58,7 @@
   <ItemGroup>
     <Reference Include="IBM.Data.Informix, Version=3.0.0.2, Culture=neutral, PublicKeyToken=7c307b91aa13d208, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Informix Client-SDK\bin\netf20\IBM.Data.Informix.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Informix Client-SDK\bin\netf40\IBM.Data.Informix.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.DataSetExtensions" />
