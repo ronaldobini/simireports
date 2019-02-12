@@ -83,6 +83,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\simireports - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\simireports - Web Deploy1.pubxml" />
+    <Content Include="simireports\img\simisyslogo.psd" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -93,6 +94,48 @@
   <ItemGroup>
     <Content Include="index.html" />
     <Content Include="simiMaster\PageAlterarPedido.aspx" />
+    <Content Include="simireports\img\add.png" />
+    <Content Include="simireports\img\add2.png" />
+    <Content Include="simireports\img\brady.png" />
+    <Content Include="simireports\img\bradyblock.jpg" />
+    <Content Include="simireports\img\cell.png" />
+    <Content Include="simireports\img\down.png" />
+    <Content Include="simireports\img\downbutton.png" />
+    <Content Include="simireports\img\e.png" />
+    <Content Include="simireports\img\emailasd.png" />
+    <Content Include="simireports\img\emissoesblock.jpg" />
+    <Content Include="simireports\img\export.png" />
+    <Content Include="simireports\img\f5.png" />
+    <Content Include="simireports\img\formatar.png" />
+    <Content Include="simireports\img\ger.png" />
+    <Content Include="simireports\img\green.gif" />
+    <Content Include="simireports\img\homee.png" />
+    <Content Include="simireports\img\info.png" />
+    <Content Include="simireports\img\k.png" />
+    <Content Include="simireports\img\logoSimi.png" />
+    <Content Include="simireports\img\ls.png" />
+    <Content Include="simireports\img\lsblock.jpg" />
+    <Content Include="simireports\img\noteb.png" />
+    <Content Include="simireports\img\okk.png" />
+    <Content Include="simireports\img\open.png" />
+    <Content Include="simireports\img\pc.png" />
+    <Content Include="simireports\img\ppgblock.jpg" />
+    <Content Include="simireports\img\projetosblock.jpg" />
+    <Content Include="simireports\img\quads.jpg" />
+    <Content Include="simireports\img\ramal.png" />
+    <Content Include="simireports\img\red.gif" />
+    <Content Include="simireports\img\rotina.png" />
+    <Content Include="simireports\img\sick.png" />
+    <Content Include="simireports\img\sickblock.jpg" />
+    <Content Include="simireports\img\similaricon.png" />
+    <Content Include="simireports\img\similogo.png" />
+    <Content Include="simireports\img\simisys1.1controle1.35.png" />
+    <Content Include="simireports\img\simisyslogo.png" />
+    <Content Include="simireports\img\syss.png" />
+    <Content Include="simireports\img\trash.png" />
+    <Content Include="simireports\img\up.png" />
+    <Content Include="simireports\img\wait.png" />
+    <Content Include="simireports\img\x.png" />
     <Content Include="simireports\PageComissoes.aspx" />
     <Content Include="simireports\PageOMsPendentes.aspx" />
     <Content Include="simireports\PagePrePedidos.aspx" />
@@ -114,6 +157,7 @@
     </Compile>
     <Compile Include="simireports\Classes\Comissao.cs" />
     <Compile Include="simireports\Classes\Item.cs" />
+    <Compile Include="simireports\Classes\LoginS.cs" />
     <Compile Include="simireports\Classes\OMPendente.cs" />
     <Compile Include="simireports\Classes\PrePedido.cs" />
     <Compile Include="simireports\PageComissoes.aspx.cs">
