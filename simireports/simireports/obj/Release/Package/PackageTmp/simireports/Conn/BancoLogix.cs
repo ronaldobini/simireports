@@ -36,7 +36,7 @@ public class BancoLogix
             string connetionString = null;
             string erros = "sem erros";
             connetionString = "Database = logix; Host = server.similar.ind.br; Server = ol_producao; Service = 9088;" +
-                               "Protocol = onsoctcp; UID = informix; Password = AdXmX2006;";
+                               "Protocol = olsoctcp; UID = informix; Password = AdXmX2006;";
         //olsoctcp 
         IfxConnection conn = new IfxConnection();
             conn.ConnectionString = connetionString;
