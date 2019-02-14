@@ -13,19 +13,19 @@ ao editar este arquivo MSBuild. Para saber mais sobre isso, visite https://go.mi
       <publishTime>11/18/2016 22:16:35</publishTime>
     </File>
     <File Include="bin/simireports.dll">
-      <publishTime>01/17/2019 10:08:54</publishTime>
+      <publishTime>02/14/2019 16:21:27</publishTime>
     </File>
     <File Include="bin/simireports.dll.config">
-      <publishTime>01/16/2019 11:22:44</publishTime>
+      <publishTime>02/05/2019 11:26:38</publishTime>
     </File>
     <File Include="bin/simireports.pdb">
-      <publishTime>01/17/2019 10:08:54</publishTime>
+      <publishTime>02/14/2019 16:21:27</publishTime>
     </File>
     <File Include="index.html">
-      <publishTime>01/16/2019 16:22:27</publishTime>
+      <publishTime>02/14/2019 10:56:46</publishTime>
     </File>
     <File Include="Properties/AssemblyInfo.cs">
-      <publishTime>01/16/2019 11:22:44</publishTime>
+      <publishTime>02/04/2019 10:36:19</publishTime>
     </File>
     <File Include="Properties/PublishProfiles/CustomProfile.pubxml">
       <publishTime>01/16/2019 13:12:40</publishTime>
@@ -39,29 +39,236 @@ ao editar este arquivo MSBuild. Para saber mais sobre isso, visite https://go.mi
     <File Include="Properties/PublishProfiles/FolderProfile.pubxml.user">
       <publishTime>01/17/2019 10:02:56</publishTime>
     </File>
+    <File Include="Properties/PublishProfiles/simireports - Web Deploy.pubxml">
+      <publishTime>02/04/2019 11:20:39</publishTime>
+    </File>
+    <File Include="Properties/PublishProfiles/simireports - Web Deploy1.pubxml">
+      <publishTime>02/11/2019 10:30:13</publishTime>
+    </File>
+    <File Include="simiMaster/Classes/Item.cs">
+      <publishTime>01/29/2019 14:05:05</publishTime>
+    </File>
+    <File Include="simiMaster/Classes/ItemPedido.cs">
+      <publishTime>01/29/2019 14:05:05</publishTime>
+    </File>
+    <File Include="simiMaster/Classes/Pedido.cs">
+      <publishTime>01/29/2019 14:05:05</publishTime>
+    </File>
+    <File Include="simiMaster/PageAlterarPedido.aspx">
+      <publishTime>01/29/2019 14:05:05</publishTime>
+    </File>
+    <File Include="simiMaster/PageAlterarPedido.aspx.cs">
+      <publishTime>01/29/2019 14:05:05</publishTime>
+    </File>
+    <File Include="simiMaster/PageAlterarPedido.aspx.designer.cs">
+      <publishTime>01/29/2019 14:05:05</publishTime>
+    </File>
     <File Include="simireports.csproj">
-      <publishTime>01/17/2019 10:03:33</publishTime>
+      <publishTime>02/14/2019 16:21:09</publishTime>
     </File>
     <File Include="simireports.csproj.user">
-      <publishTime>01/17/2019 10:03:33</publishTime>
+      <publishTime>02/14/2019 16:21:26</publishTime>
+    </File>
+    <File Include="simireports/Classes/Comissao.cs">
+      <publishTime>01/31/2019 16:32:48</publishTime>
+    </File>
+    <File Include="simireports/Classes/Item.cs">
+      <publishTime>02/01/2019 15:14:51</publishTime>
+    </File>
+    <File Include="simireports/Classes/LoginS.cs">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/Classes/OMPendente.cs">
+      <publishTime>02/01/2019 15:14:51</publishTime>
+    </File>
+    <File Include="simireports/Classes/PrePedido.cs">
+      <publishTime>01/18/2019 17:19:41</publishTime>
     </File>
     <File Include="simireports/Conn/BancoAzure.cs">
-      <publishTime>01/16/2019 16:53:33</publishTime>
+      <publishTime>01/22/2019 16:07:48</publishTime>
     </File>
     <File Include="simireports/Conn/BancoLogix.cs">
-      <publishTime>01/16/2019 17:00:19</publishTime>
+      <publishTime>02/07/2019 15:20:01</publishTime>
+    </File>
+    <File Include="simireports/img/add.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/add2.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/brady.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/bradyblock.jpg">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/cell.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/down.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/downbutton.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/e.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/emailasd.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/emissoesblock.jpg">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/export.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/f5.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/formatar.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/ger.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/green.gif">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/homee.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/info.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/k.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/logoSimi.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/ls.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/lsblock.jpg">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/noteb.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/okk.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/open.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/pc.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/ppgblock.jpg">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/projetosblock.jpg">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/quads.jpg">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/ramal.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/red.gif">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/rotina.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/sick.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/sickblock.jpg">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/similaricon.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/similogo.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/simisys1.1controle1.35.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/simisyslogo.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/simisyslogo.psd">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/syss.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/trash.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/up.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/wait.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/img/x.png">
+      <publishTime>02/14/2019 10:56:46</publishTime>
     </File>
     <File Include="simireports/index.aspx">
-      <publishTime>01/16/2019 17:20:26</publishTime>
+      <publishTime>02/14/2019 10:56:46</publishTime>
     </File>
     <File Include="simireports/index.aspx.cs">
-      <publishTime>01/16/2019 17:19:32</publishTime>
+      <publishTime>02/14/2019 10:56:46</publishTime>
     </File>
     <File Include="simireports/index.aspx.designer.cs">
-      <publishTime>01/16/2019 11:31:47</publishTime>
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/login.aspx">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/login.aspx.cs">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/login.aspx.designer.cs">
+      <publishTime>02/14/2019 10:56:46</publishTime>
+    </File>
+    <File Include="simireports/PageComissoes.aspx">
+      <publishTime>01/31/2019 16:55:06</publishTime>
+    </File>
+    <File Include="simireports/PageComissoes.aspx.cs">
+      <publishTime>02/04/2019 16:58:44</publishTime>
+    </File>
+    <File Include="simireports/PageComissoes.aspx.designer.cs">
+      <publishTime>01/23/2019 15:01:58</publishTime>
+    </File>
+    <File Include="simireports/PageOMsPendentes.aspx">
+      <publishTime>02/01/2019 15:14:51</publishTime>
+    </File>
+    <File Include="simireports/PageOMsPendentes.aspx.cs">
+      <publishTime>02/01/2019 15:14:51</publishTime>
+    </File>
+    <File Include="simireports/PageOMsPendentes.aspx.designer.cs">
+      <publishTime>02/01/2019 15:14:51</publishTime>
+    </File>
+    <File Include="simireports/PagePrePedidos.aspx">
+      <publishTime>01/21/2019 13:35:57</publishTime>
+    </File>
+    <File Include="simireports/PagePrePedidos.aspx.cs">
+      <publishTime>01/21/2019 14:13:09</publishTime>
+    </File>
+    <File Include="simireports/PagePrePedidos.aspx.designer.cs">
+      <publishTime>01/21/2019 11:56:20</publishTime>
+    </File>
+    <File Include="syss.ico">
+      <publishTime>02/04/2019 13:01:04</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/17/2019 09:33:57</publishTime>
+      <publishTime>02/14/2019 16:08:50</publishTime>
     </File>
     <File Include="Web.Debug.config">
       <publishTime>01/16/2019 11:22:45</publishTime>
