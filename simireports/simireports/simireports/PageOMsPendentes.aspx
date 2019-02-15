@@ -9,14 +9,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
 </head>
 <body style="background-color: #222;">
+    <a  title="Voltar ao Inicio" href="index.aspx"><img style="margin:25px;" width="100px" src="img/syss.png" /></a>
     <center><br />
     <h3><font color=white>OMs Pendentes</font></h3>
         <br />
         
         <div id="filtros" style="margin-bottom:100px;">
             <form runat="server" id="filtrosOMs" action="#" method="post">
-                <input runat="server" type="text" id="empresa" placeholder="Empresa" value="0">
-                <input runat="server" type="text" id="tipoEntrega" placeholder="1, 2, 3, 4"/>
+                <input runat="server" type="text" id="empresa" placeholder="Empresa (2,3,4,5,6)">
+                <input runat="server" type="text" id="tipoEntrega" placeholder="Tip Entrega (1, 2, 3, 4)"/>
                 
                 <input runat="server" type="submit" value="Filtrar" onserverclick="filtrarOMs_Click" />
             </form>

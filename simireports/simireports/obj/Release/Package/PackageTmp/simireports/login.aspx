@@ -16,13 +16,13 @@
 
   		<!-- LOGO TOP -->
 		<div style="text-align: center; height: 110px; background-color:white; padding-top: 10px;">
-			 <a href="index.php"><img src = "img/simisyslogo.png" width="250"></a>
+			 <a href="index.php"><img src = "img/simireportslogo.png" width="250"></a>
 		</div>
 
 	    <div class="container" style="margin-top:70px; width:25%;">
 
 	     <form runat="server" class="form-signin" method="post" action="#">
-	        <h3 class="form-signin-heading" style="color:white;">SimiReports</h3>
+	        <h3 class="form-signin-heading" style="color:white;">Senha de acesso</h3>
 	        <input runat="server" type="password" name="pass" id="senha" class="form-control" placeholder="Senha" required="" style="font-size: 15px;">
 	        <br>
                <center> <input runat="server" style="width:100px;" class="btn btn-lg btn-primary btn-block" type="submit" value="Entrar" onserverclick="Logar_Click" /></center>
@@ -31,7 +31,7 @@
 
             <%if (logado != null)
                 {%>
-                    <center><h2 style="color:white;">Logando...</h2></center>
+                    <center><h3 style="color:white;">Entrando...</h3></center>
                     <meta http-equiv="refresh" content="0; URL=index.aspx" />
                 <%}logado = null;%>
 	     	

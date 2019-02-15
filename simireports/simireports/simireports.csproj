@@ -86,6 +86,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\simireports - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\simireports - Web Deploy1.pubxml" />
+    <Content Include="simireports\img\simireportslogo.png" />
     <Content Include="simireports\img\simisyslogo.psd" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

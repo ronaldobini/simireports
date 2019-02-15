@@ -14,8 +14,8 @@ namespace simireports
     {
         public static int first = 1;
 
-        public static string postDatInicio = "01/01/2019";
-        public static string postDatFim = "31/01/2019";
+        public static string postDatInicio = "01/02/2019";
+        public static string postDatFim = "28/02/2019";
         public static string postRepres = "";
         public static string postSitPgto = "T";
 

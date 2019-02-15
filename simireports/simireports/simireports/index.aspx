@@ -5,20 +5,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>SimiReports</title>
 </head>
-<body>
+<body bgcolor="#2a2d33">
     <center>
+        <a  title="Atualizar a página" href="index.aspx"><img style="margin:25px;" width="100px" src="img/syss.png" /></a>
         <br /><br /><br /><br />
-        <a href="login.aspx">Login </a><br />
-        <a href="PageComissoes.aspx">Comissoes</a><br />
-        <a href="PageAlterarPedido.aspx">Alterar Pedido Logix</a><br />
-        <a href="Estoque.aspx">Estoque</a><br />
-        <a href="PageOMsPendentes.aspx">OMs Pendentes</a><br />
+        <a href="PageComissoes.aspx"><h3><font color="white">Comissoes</font></h3></a>
+        <!--<a href="Estoque.aspx">Estoque</a><br />-->
+        <a href="PageOMsPendentes.aspx"><h3><font color="white">OMs Pendentes</font></h3></a>
     </center>
-    <%--<%= logado.Nome %>--%>
-    <br><br><br><center><font color="white"><h3>Carregando SimiReports...
-
-	<%--<meta http-equiv="refresh" content="0; URL=login.aspx"/>--%>
+   
 </body>
 </html>
