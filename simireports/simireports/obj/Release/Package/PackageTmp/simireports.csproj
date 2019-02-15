@@ -82,6 +82,7 @@
     <Content Include="bin\simireports.dll.config" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile2.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\simireports - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\simireports - Web Deploy1.pubxml" />

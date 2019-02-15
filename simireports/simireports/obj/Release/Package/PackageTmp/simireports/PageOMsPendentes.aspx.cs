@@ -91,7 +91,7 @@ namespace simireports
 
                     conn2 = new BancoLogix().abrir();
                     reader2 = new
-                    BancoLogix().consultar("SELECT b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega " +
+                    BancoLogix().consultar("SELECT b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item" +
                     "                                                    FROM ped_itens b join item i on i.cod_item = b.cod_item and i.cod_empresa = b.cod_empresa" +
                     "                                                    WHERE b.num_pedido = " + numPed + " and b.cod_empresa = " + codEmpresa, conn2);
                     if (reader2 != null)
@@ -105,7 +105,8 @@ namespace simireports
                             //DateTime przEntregaS = reader.GetDateTime(4);
                             string przEntregaS = reader2.GetString(4);
                             //DateTime przEntrega = Convert.ToDateTime(przEntregaS);
-                            Item item = new Item(qtdSolic, qtdCancel, qtdAtend, nomeItem, przEntregaS);
+                            string codItem = reader2.GetString(5);
+                            Item item = new Item(qtdSolic, qtdCancel, qtdAtend, nomeItem, przEntregaS,codItem);
                             itens.Add(item);
                         }
 

@@ -31,10 +31,10 @@
                     {
                         %> <tr>
                     <th style="width: 5%;">Empresa</th>
-                    <th style="width: 10%;">DatAltSit</th>
-                    <th style="width: 10%;">CodCliente</th>
+                    <th style="width: 10%;">Efetiv</th>
+                    <th style="width: 10%;">Cod Cliente</th>
                     <th style="width: 20%;">Cliente</th>
-                    <th style="width: 5%;">NumPed</th>
+                    <th style="width: 5%;">Pedido</th>
                     <th style="width: 5%;">Tipo Entrega</th>
                     </tr><%
                         string empresa = omsp.Empresa;
@@ -54,29 +54,38 @@
                                     <td><%= tipoEntrega %></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 5%;">qtdSolic</td>
-                                    <td style="width: 5%;">qtdCancel</td>
-                                    <td style="width: 5%;">qtdAtend</td>
-                                    <td style="width: 20%;">nomeItem</td>
-                                    <td style="width: 10%;">przEntrega</td>
-                                </tr><%
+                                    <td colspan ="6"><table class="table table-striped table-dark" style="background-color:#3f4142; width:100%; color:white; font-size: 12px;">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width: 15%;">Cod Item</th>
+                                                <th style="width: 10%;">Solic</th>
+                                                <th style="width: 10%;">Cancel</th>
+                                                <th style="width: 10%;">Atend</th>
+                                                <th style="width: 45%;">Descricao Item</th>
+                                                <th style="width: 20%;">Prazo</th>
+                                            </tr><%
 
                                          foreach (var item in omsp.Itens)
                                          {
+                                             string codItem = item.CodItem;
                                              string qtdSolic = item.QtdSolic;
                                              string qtdCancel = item.QtdCancel;
                                              string qtdAtend = item.QtdAtend;
                                              string nomeItem = item.NomeItem;
                                              string przEntrega = item.PrzEntrega;
-                            %>
-                                <tr>
-                                    <td><%= qtdSolic %></td>
-                                    <td><%= qtdCancel %></td>
-                                    <td><%= qtdAtend %></td>
-                                    <td><%= nomeItem %></td>
-                                    <td><%= przEntrega %></td>
-                                </tr><%
-                                         }       
+                                          %>
+                                            <tr>
+                                                <td><%= codItem %></td>
+                                                <td><%= qtdSolic %></td>
+                                                <td><%= qtdCancel %></td>
+                                                <td><%= qtdAtend %></td>
+                                                <td><%= nomeItem %></td>
+                                                <td><%= przEntrega %></td>
+                                            </tr>
+                                          <%
+                                                     }%>
+                                        </tbody></table></td>
+                                    </tr><%
                     }
                 %>
     </table>

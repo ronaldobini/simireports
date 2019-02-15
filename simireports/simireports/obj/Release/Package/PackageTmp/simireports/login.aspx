@@ -33,7 +33,7 @@
                 {%>
                     <center><h2 style="color:white;">Logando...</h2></center>
                     <meta http-equiv="refresh" content="0; URL=index.aspx" />
-                <%}%>
+                <%}logado = null;%>
 	     	
 	    </div> <!-- /container -->
          
