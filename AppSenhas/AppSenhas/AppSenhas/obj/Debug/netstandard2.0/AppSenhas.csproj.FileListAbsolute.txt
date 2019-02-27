@@ -1,0 +1,17 @@
+C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas\bin\Debug\netstandard2.0\AppSenhas.deps.json
+C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas\bin\Debug\netstandard2.0\AppSenhas.dll
+C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas\bin\Debug\netstandard2.0\AppSenhas.pdb
+C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas\obj\Debug\netstandard2.0\AppSenhas.csprojAssemblyReference.cache
+C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas\obj\Debug\netstandard2.0\Views\AboutPage.xaml.g.cs
+C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas\obj\Debug\netstandard2.0\Views\ItemDetailPage.xaml.g.cs
+C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas\obj\Debug\netstandard2.0\Views\ItemsPage.xaml.g.cs
+C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas\obj\Debug\netstandard2.0\Views\MainPage.xaml.g.cs
+C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas\obj\Debug\netstandard2.0\Views\MenuPage.xaml.g.cs
+C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas\obj\Debug\netstandard2.0\Views\NewItemPage.xaml.g.cs
+C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas\obj\Debug\netstandard2.0\AppSenhas.csproj.CoreCompileInputs.cache
+C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas\obj\Debug\netstandard2.0\AppSenhas.AssemblyInfoInputs.cache
+C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas\obj\Debug\netstandard2.0\AppSenhas.AssemblyInfo.cs
+C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas\obj\Debug\netstandard2.0\AppSenhas.dll
+C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas\obj\Debug\netstandard2.0\AppSenhas.pdb
