@@ -9,19 +9,28 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
 <body style="background-color:#222;">
-    <a  title="Voltar ao Inicio" href="index.aspx"><img style="margin:25px;" width="100px" src="img/syss.png" /></a>
-    <center><br />
+    <a  title="Voltar ao Inicio" href=" .aspx"><img style="margin:25px;" width="100px" src="img/syss.png" /></a>
+    <center>
     <h3><font color=white>Comissões</font></h3>
         <br />
         
         <div id="filtros" style="margin-bottom:100px;">
             <form runat="server" id="filtrosComissoes" action="#" method="post">
-                <input runat="server" type="text" id="datInicio" placeholder="Data Ini" value="01/02/2019"/>
-                <input runat="server" type="text" id="datFim" placeholder="Data Fim" value="28/02/2019"/>
-                <input runat="server" type="text" id="repres" placeholder="Repres"/>
-                <input runat="server" type="text" id="sitPgto" placeholder="Pgto" value="T"/>
-                
-                <input runat="server" type="submit" value="Filtrar" onserverclick="filtrarComiss_Click" />
+                <table>
+                    <tr style="color:white;">
+                        <th style="width:100px; text-align:center;">Data Inicio</th>
+                        <th style="width:100px; text-align:center;">Data Fim</th>
+                        <th style="width:100px; text-align:center;">Representante</th>
+                        <th>Pgto</th>
+                    </tr>
+                    <tr>
+                        <td><input style="width:100px; text-align:center;" runat="server" type="text" id="datInicio" value="01/02/2019"/></td>
+                        <td><input style="width:100px; text-align:center;" runat="server" type="text" id="datFim" value="28/02/2019"/></td>
+                        <td><input runat="server" type="text" id="repres"/></td>
+                        <td><input style="width:35px; text-align:center;" runat="server" type="text" id="sitPgto" value="T"/></td>
+                        <td><input runat="server" type="submit" value="Filtrar" onserverclick="filtrarComiss_Click" /></td>
+                    </tr>
+                </table>
             </form>
         </div>
 
@@ -30,19 +39,19 @@
         <div id="resultados">
             <table class="table table-striped table-dark" style = "max-width:90%; color:white; font-size: 12px;">
                 <tr>
-                    <th style="width: 5%;">CodRepres</th>
-                    <th style="width: 5%;">Empresa</th>
-                    <th style="width: 10%;">N Documento</th>
-                    <th style="width: 10%;">Origem</th>
-                    <th style="width: 10%;">Pedido</th>
-                    <th style="width: 10%;">Cliente</th>
-                    <th style="width: 20%;">Valor Bruto</th>
-                    <th style="width: 5%;">% Comissao</th>
-                    <th style="width: 20%;">Comissao</th>
-                    <th style="width: 20%;">Representante</th>
-                    <th style="width: 20%;">Emissao</th>
-                    <th style="width: 20%;">Dat. Pgto</th>
-                    <th style="width: 5%;">Pagamento</th>
+                    <th style="width: 5%; text-align:center;">CodRepres</th>
+                    <th style="width: 5%; text-align:center;">Empresa</th>
+                    <th style="width: 10%; text-align:center;">N Docum</th>
+                    <th style="width: 10%; text-align:center;">Origem</th>
+                    <th style="width: 10%; text-align:center;">Pedido</th>
+                    <th style="width: 10%; text-align:center;">Cliente</th>
+                    <th style="width: 15%; text-align:center;">Valor Bruto</th>
+                    <th style="width: 10%; text-align:center;">% Comiss</th>
+                    <th style="width: 10%; text-align:center;">Comissao</th>
+                    <th style="width: 20%; text-align:center;">Representante</th>
+                    <th style="width: 20%; text-align:center;">Emissao</th>
+                    <th style="width: 20%; text-align:center;">Dat. Pgto</th>
+                    <th style="width: 5%; text-align:center;">Pagamento</th>
                 </tr>
                 
                 <% 
@@ -78,19 +87,19 @@
                         
                 %> 
                     <tr>
-                        <td><%= codRepres %></td>
-                        <td><%= codEmpresa %></td>
-                        <td><%= numDocum %></td>
-                        <td><%= numDocumOrigem %></td>
-                        <td><%= numPedido %></td>
-                        <td><%= nomCliente %></td>
-                        <td><%= valBruto %></td>
-                        <td><%= pctComissao %></td>
-                        <td><%= comiss %></td>
-                        <td><%= nomRepres %></td>
-                        <td><%= datEmiss %></td>
-                        <td><%= datPgto %></td>
-                        <td><%= iesPgtoDocum %></td>
+                        <td style="text-align:center;"><%= codRepres %></td>
+                        <td style="text-align:center;"><%= codEmpresa %></td>
+                        <td style="text-align:center;"><%= numDocum %></td>
+                        <td style="text-align:center;"><%= numDocumOrigem %></td>
+                        <td style="text-align:center;"><%= numPedido %></td>
+                        <td style="text-align:center;"><%= nomCliente %></td>
+                        <td style="text-align:right;"><%= valBruto %></td>
+                        <td style="text-align:right;"><%= pctComissao %></td>
+                        <td style="text-align:right;"><%= comiss %></td>
+                        <td style="text-align:center;"><%= nomRepres %></td>
+                        <td style="text-align:center;"><%= datEmiss %></td>
+                        <td style="text-align:center;"><%= datPgto %></td>
+                        <td style="text-align:center;"><%= iesPgtoDocum %></td>
                     </tr>
                 <%                         
                     }
