@@ -162,6 +162,7 @@
     <Compile Include="simireports\Classes\Comissao.cs" />
     <Compile Include="simireports\Classes\Item.cs" />
     <Compile Include="simireports\Classes\LoginS.cs" />
+    <Compile Include="simireports\Classes\Metodos.cs" />
     <Compile Include="simireports\Classes\OMPendente.cs" />
     <Compile Include="simireports\Classes\PrePedido.cs" />
     <Compile Include="simireports\PageComissoes.aspx.cs">

@@ -13,16 +13,17 @@ namespace simireports
     public partial class PageComissoes : System.Web.UI.Page
     {
         public static int first = 1;
-
+        public static Metodos m = new Metodos();
         public static string postDatInicio = "01/02/2019";
         public static string postDatFim = "28/02/2019";
         public static string postRepres = "";
         public static string postSitPgto = "T";
 
 
-        public static decimal totComiss = 0.0M;
+        public static Decimal totComiss = 0.0M;
+        public static String totComissS = "";
 
-        
+
 
         public List<Comissao> comissoes = new List<Comissao> { };
         
@@ -94,6 +95,7 @@ namespace simireports
                     Decimal valBruto = Decimal.Parse(valBrutoS);
                     Decimal pctComissao;
                     Decimal comiss;
+                    
                     if (!pctComissaoS.Equals(""))
                     {
                         pctComissao = Decimal.Parse(pctComissaoS);
@@ -128,6 +130,8 @@ namespace simireports
                     comissoes.Add(comissao);
 
                 }
+                totComiss = decimal.Round(totComiss, 2);
+                totComissS = m.formatarDecimal(totComiss);
             }
             else
             {
@@ -156,11 +160,6 @@ namespace simireports
                 
             }
         }
-
-
-
-
-
-
+        
     }
 }

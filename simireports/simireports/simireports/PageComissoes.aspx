@@ -34,24 +34,24 @@
             </form>
         </div>
 
-        <div style="color:white; margin-bottom:30px;">Total Comiss: <%=totComiss %></div>
+        <div style="color:white; margin-bottom:30px;">Total Comiss: R$ <%=totComissS %></div>
 
         <div id="resultados">
-            <table class="table table-striped table-dark" style = "max-width:90%; color:white; font-size: 12px;">
+            <table class="table table-striped table-dark" style = "max-width:95%; color:white; font-size: 12px;">
                 <tr>
                     <th style="width: 5%; text-align:center;">CodRepres</th>
-                    <th style="width: 5%; text-align:center;">Empresa</th>
-                    <th style="width: 10%; text-align:center;">N Docum</th>
-                    <th style="width: 10%; text-align:center;">Origem</th>
-                    <th style="width: 10%; text-align:center;">Pedido</th>
-                    <th style="width: 10%; text-align:center;">Cliente</th>
-                    <th style="width: 15%; text-align:center;">Valor Bruto</th>
+                    <th style="width: 5%; text-align:center;">Unidade</th>
+                    <th style="width: 15%; text-align:center;">N Docum</th>
+                    <th style="width: 5%; text-align:center;">Origem</th>
+                    <th style="width: 5%; text-align:center;">Pedido</th>
+                    <th style="width: 20%; text-align:center;">Cliente</th>
+                    <th style="width: 10%; text-align:center;">Valor Bruto</th>
                     <th style="width: 10%; text-align:center;">% Comiss</th>
-                    <th style="width: 10%; text-align:center;">Comissao</th>
-                    <th style="width: 20%; text-align:center;">Representante</th>
+                    <th style="width: 5%; text-align:center;">Comissao</th>
+                    <th style="width: 10%; text-align:center;">Representante</th>
                     <th style="width: 20%; text-align:center;">Emissao</th>
                     <th style="width: 20%; text-align:center;">Dat. Pgto</th>
-                    <th style="width: 5%; text-align:center;">Pagamento</th>
+                    <th style="width: 5%; text-align:center;">Pgto</th>
                 </tr>
                 
                 <% 
@@ -75,16 +75,21 @@
                         string codRepres = comissao.CodRepres;
 
                         totRepres = totRepres + comiss;
+                        string totRepresS = m.formatarDecimal(totRepres);
                         if(uCodRepres != "" && uCodRepres != codRepres)
                         {
                             %>
-                                <tr><td colspan="4" style="background-color:black; color:white;"><b><% = uNomRepres %>(<% = uCodRepres %>) Total Comiss: <% = totRepres %></td><td colspan="6"></td><td colspan="4"></td></tr>
+                                <tr><td colspan="4" style="background-color:black; color:white;"><b><% = uNomRepres %>(<% = uCodRepres %>) Total Comiss: R$ <% = totRepresS %></td><td colspan="6"></td><td colspan="4"></td></tr>
                             <%
-                            totRepres = 0.0M;
-                        }
-                        uCodRepres = codRepres;
-                        uNomRepres = nomRepres;
-                        
+                                    totRepres = 0.0M;
+                                }
+                                uCodRepres = codRepres;
+                                uNomRepres = nomRepres;
+                                //valBruto = 100000000.00M;
+                                string valBrutoS = m.formatarDecimal(valBruto);
+
+                                string comissaoS = comiss.ToString();
+                                comissaoS = m.pontoPorVirgula(comissaoS);
                 %> 
                     <tr>
                         <td style="text-align:center;"><%= codRepres %></td>
@@ -93,9 +98,9 @@
                         <td style="text-align:center;"><%= numDocumOrigem %></td>
                         <td style="text-align:center;"><%= numPedido %></td>
                         <td style="text-align:center;"><%= nomCliente %></td>
-                        <td style="text-align:right;"><%= valBruto %></td>
-                        <td style="text-align:right;"><%= pctComissao %></td>
-                        <td style="text-align:right;"><%= comiss %></td>
+                        <td style="text-align:right;"><%= "R$ "+valBrutoS %></td>
+                        <td style="text-align:center;"><%= pctComissao %></td>
+                        <td style="text-align:right;"><%= "R$ "+comissaoS %></td>
                         <td style="text-align:center;"><%= nomRepres %></td>
                         <td style="text-align:center;"><%= datEmiss %></td>
                         <td style="text-align:center;"><%= datPgto %></td>
