@@ -16,6 +16,10 @@ namespace simireports
         public static Metodos m = new Metodos();
         public static string postDatInicio = "01/02/2019";
         public static string postDatFim = "28/02/2019";
+        public static string postCliente = "";
+        public static string postPctComiss = "";
+        public static string postValor = "";
+        public static string postUnidade = "";
         public static string postRepres = "";
         public static string postSitPgto = "T";
 
@@ -41,12 +45,28 @@ namespace simireports
             postDatInicio = datInicio.Value;
             postDatFim = datFim.Value;
             postRepres = repres.Value.ToUpper();
+            postCliente = cliente.Value.ToUpper();
+            postUnidade = unidade.Value;
+            //postValor = valor.Value;
+            //postPctComiss = pctComiss.Value;
             postSitPgto = sitPgto.Value.ToUpper();
             executarRelatorio();
         }
         
         protected void executarRelatorio()
         {
+            if (postCliente.Contains("*") || postCliente.Contains("?"))
+            {
+                postCliente = postCliente.Replace("*", "%");
+                postCliente = postCliente.Replace("?", "%");
+            }
+            if (postRepres.Contains("*") || postRepres.Contains("?"))
+            {
+                postRepres = postRepres.Replace("*", "%");
+                postRepres = postRepres.Replace("?", "%");
+            }
+
+
             IfxConnection conn = new BancoLogix().abrir();    
             string sql = "SELECT d.cod_empresa," +
                                         "d.num_docum," +
@@ -69,12 +89,16 @@ namespace simireports
                                         "AND dp.dat_pgto <= '" + postDatFim + "' " +
                                         "AND r.nom_repres like '%" + postRepres + "%' " +
                                         "AND ies_pgto_docum = '" + postSitPgto + "' " +
+                                        "AND cl.nom_cliente like '%" + postCliente + "%' " +
+                                        //"AND d.pct_comis_1 = " + postPctComiss + " " +
+                                        //"AND d.val_bruto like " + postValor + " " +
+                                        "AND d.cod_empresa like '%" + postUnidade + "%' " +
                                         "AND d.ies_situa_docum = 'N' AND d.ies_tip_docum = 'DP' order by d.cod_repres_1";
 
             IfxDataReader reader = new BancoLogix().consultar(sql, conn);
 
             totComiss = 0.0M;
-            if (reader != null)
+            if (reader.HasRows)
             {
                 while (reader.Read())
                 {

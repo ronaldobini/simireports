@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
 <body style="background-color:#222;">
-    <a  title="Voltar ao Inicio" href=" .aspx"><img style="margin:25px;" width="100px" src="img/syss.png" /></a>
+    <a  title="Voltar ao Inicio" href=" .aspx"><img style="margin:25px;" width="100px;" src="img/syss.png" /></a>
     <center>
-    <h3><font color=white>Comissões</font></h3>
+    <h3><font color=white >Comissões</font></h3>
         <br />
         
         <div id="filtros" style="margin-bottom:100px;">
@@ -20,12 +20,20 @@
                     <tr style="color:white;">
                         <th style="width:100px; text-align:center;">Data Inicio</th>
                         <th style="width:100px; text-align:center;">Data Fim</th>
+                        <th style="width:100px; text-align:center;">Unidade</th>
+                        <th style="width:100px; text-align:center;">Cliente</th>
+<%--                        <th style="width:100px; text-align:center;">% Comiss</th>
+                        <th style="width:100px; text-align:center;">Valor</th>--%>
                         <th style="width:100px; text-align:center;">Representante</th>
                         <th>Pgto</th>
                     </tr>
                     <tr>
                         <td><input style="width:100px; text-align:center;" runat="server" type="text" id="datInicio" value="01/02/2019"/></td>
                         <td><input style="width:100px; text-align:center;" runat="server" type="text" id="datFim" value="28/02/2019"/></td>
+                        <td><input runat="server" type="text" id="unidade"/></td>
+                        <td><input runat="server" type="text" id="cliente"/></td>
+<%--                        <td><input runat="server" type="text" id="pctComiss"/></td>
+                        <td><input runat="server" type="text" id="valor"/></td>--%>
                         <td><input runat="server" type="text" id="repres"/></td>
                         <td><input style="width:35px; text-align:center;" runat="server" type="text" id="sitPgto" value="T"/></td>
                         <td><input runat="server" type="submit" value="Filtrar" onserverclick="filtrarComiss_Click" /></td>
@@ -58,7 +66,7 @@
                     string uCodRepres = "";
                     string uNomRepres = "";
                     Decimal totRepres = 0.0m;
-
+                    string totRepresS = "";
                     foreach (var comissao in comissoes) {
                         string codEmpresa = comissao.CodEmpresa;
                         string numDocum = comissao.NumDocum;
@@ -74,15 +82,16 @@
                         char iesPgtoDocum = comissao.IesPgtoDocum;
                         string codRepres = comissao.CodRepres;
 
-                        totRepres = totRepres + comiss;
-                        string totRepresS = m.formatarDecimal(totRepres);
                         if(uCodRepres != "" && uCodRepres != codRepres)
                         {
+                            totRepresS = m.formatarDecimal(totRepres);
                             %>
                                 <tr><td colspan="4" style="background-color:black; color:white;"><b><% = uNomRepres %>(<% = uCodRepres %>) Total Comiss: R$ <% = totRepresS %></td><td colspan="6"></td><td colspan="4"></td></tr>
                             <%
-                                    totRepres = 0.0M;
+                                    totRepres = 0.0m;
                                 }
+                                totRepres = totRepres + comiss;
+                                
                                 uCodRepres = codRepres;
                                 uNomRepres = nomRepres;
                                 //valBruto = 100000000.00M;
@@ -106,9 +115,11 @@
                         <td style="text-align:center;"><%= datPgto %></td>
                         <td style="text-align:center;"><%= iesPgtoDocum %></td>
                     </tr>
-                <%                         
+                <%
                     }
+                totRepresS = m.formatarDecimal(totRepres);
                 %>
+                <tr><td colspan="4" style="background-color:black; color:white;"><b><% = uNomRepres %>(<% = uCodRepres %>) Total Comiss: R$ <% = totRepresS %></td><td colspan="6"></td><td colspan="4"></td></tr>
             </table>
         </div>
     
