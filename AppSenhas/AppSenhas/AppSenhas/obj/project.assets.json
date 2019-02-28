@@ -343,23 +343,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\simi_bini\\.nuget\\packages\\": {},
+    "C:\\Users\\rbsbini\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\simi_bini\\source\\repos\\AppSenhas\\AppSenhas\\AppSenhas\\AppSenhas.csproj",
+      "projectUniqueName": "C:\\Users\\rbsbini\\Documents\\GitHub\\simireports\\AppSenhas\\AppSenhas\\AppSenhas\\AppSenhas.csproj",
       "projectName": "AppSenhas",
-      "projectPath": "C:\\Users\\simi_bini\\source\\repos\\AppSenhas\\AppSenhas\\AppSenhas\\AppSenhas.csproj",
-      "packagesPath": "C:\\Users\\simi_bini\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\simi_bini\\source\\repos\\AppSenhas\\AppSenhas\\AppSenhas\\obj\\",
+      "projectPath": "C:\\Users\\rbsbini\\Documents\\GitHub\\simireports\\AppSenhas\\AppSenhas\\AppSenhas\\AppSenhas.csproj",
+      "packagesPath": "C:\\Users\\rbsbini\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\rbsbini\\Documents\\GitHub\\simireports\\AppSenhas\\AppSenhas\\AppSenhas\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\simi_bini\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\rbsbini\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

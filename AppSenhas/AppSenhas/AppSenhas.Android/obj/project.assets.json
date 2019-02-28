@@ -795,20 +795,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\simi_bini\\.nuget\\packages\\": {}
+    "C:\\Users\\rbsbini\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\simi_bini\\source\\repos\\AppSenhas\\AppSenhas\\AppSenhas.Android\\AppSenhas.Android.csproj",
+      "projectUniqueName": "C:\\Users\\rbsbini\\Documents\\GitHub\\simireports\\AppSenhas\\AppSenhas\\AppSenhas.Android\\AppSenhas.Android.csproj",
       "projectName": "AppSenhas.Android",
-      "projectPath": "C:\\Users\\simi_bini\\source\\repos\\AppSenhas\\AppSenhas\\AppSenhas.Android\\AppSenhas.Android.csproj",
-      "packagesPath": "C:\\Users\\simi_bini\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\simi_bini\\source\\repos\\AppSenhas\\AppSenhas\\AppSenhas.Android\\obj\\",
+      "projectPath": "C:\\Users\\rbsbini\\Documents\\GitHub\\simireports\\AppSenhas\\AppSenhas\\AppSenhas.Android\\AppSenhas.Android.csproj",
+      "packagesPath": "C:\\Users\\rbsbini\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\rbsbini\\Documents\\GitHub\\simireports\\AppSenhas\\AppSenhas\\AppSenhas.Android\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
-        "C:\\Users\\simi_bini\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\rbsbini\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -821,8 +821,8 @@
       "frameworks": {
         "monoandroid81": {
           "projectReferences": {
-            "C:\\Users\\simi_bini\\source\\repos\\AppSenhas\\AppSenhas\\AppSenhas\\AppSenhas.csproj": {
-              "projectPath": "C:\\Users\\simi_bini\\source\\repos\\AppSenhas\\AppSenhas\\AppSenhas\\AppSenhas.csproj"
+            "C:\\Users\\rbsbini\\Documents\\GitHub\\simireports\\AppSenhas\\AppSenhas\\AppSenhas\\AppSenhas.csproj": {
+              "projectPath": "C:\\Users\\rbsbini\\Documents\\GitHub\\simireports\\AppSenhas\\AppSenhas\\AppSenhas\\AppSenhas.csproj"
             }
           }
         }

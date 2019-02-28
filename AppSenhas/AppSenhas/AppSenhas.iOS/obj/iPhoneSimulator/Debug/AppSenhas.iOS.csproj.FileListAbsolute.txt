@@ -56,3 +56,13 @@ C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas.iOS\obj\iPhoneSimu
 C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas.iOS\obj\iPhoneSimulator\Debug\AppSenhas.iOS.exe
 C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas.iOS\obj\iPhoneSimulator\Debug\AppSenhas.iOS.pdb
 C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas.iOS\bin\iPhoneSimulator\Debug\AppSenhas.dll.mdb
+C:\Users\rbsbini\Documents\GitHub\simireports\AppSenhas\AppSenhas\AppSenhas.iOS\obj\iPhoneSimulator\Debug\ibtool\_BundleResourceWithLogicalName.items
+C:\Users\rbsbini\Documents\GitHub\simireports\AppSenhas\AppSenhas\AppSenhas.iOS\obj\iPhoneSimulator\Debug\actool\_PartialAppManifest.items
+C:\Users\rbsbini\Documents\GitHub\simireports\AppSenhas\AppSenhas\AppSenhas.iOS\obj\iPhoneSimulator\Debug\actool\_BundleResourceWithLogicalName.items
+C:\Users\rbsbini\Documents\GitHub\simireports\AppSenhas\AppSenhas\AppSenhas.iOS\obj\iPhoneSimulator\Debug\coremlc\_PartialAppManifest.items
+C:\Users\rbsbini\Documents\GitHub\simireports\AppSenhas\AppSenhas\AppSenhas.iOS\obj\iPhoneSimulator\Debug\coremlc\_BundleResourceWithLogicalName.items
+C:\Users\rbsbini\Documents\GitHub\simireports\AppSenhas\AppSenhas\AppSenhas.iOS\obj\iPhoneSimulator\Debug\optimized\
+C:\Users\rbsbini\Documents\GitHub\simireports\AppSenhas\AppSenhas\AppSenhas.iOS\obj\iPhoneSimulator\Debug\AppSenhas.iOS.csprojAssemblyReference.cache
+C:\Users\rbsbini\Documents\GitHub\simireports\AppSenhas\AppSenhas\AppSenhas.iOS\obj\iPhoneSimulator\Debug\AppSenhas.iOS.csproj.CoreCompileInputs.cache
+C:\Users\rbsbini\Documents\GitHub\simireports\AppSenhas\AppSenhas\AppSenhas.iOS\obj\iPhoneSimulator\Debug\AppSenhas.iOS.exe
+C:\Users\rbsbini\Documents\GitHub\simireports\AppSenhas\AppSenhas\AppSenhas.iOS\obj\iPhoneSimulator\Debug\AppSenhas.iOS.pdb

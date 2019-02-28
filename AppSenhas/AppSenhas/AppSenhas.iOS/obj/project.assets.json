@@ -714,20 +714,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\simi_bini\\.nuget\\packages\\": {}
+    "C:\\Users\\rbsbini\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\simi_bini\\source\\repos\\AppSenhas\\AppSenhas\\AppSenhas.iOS\\AppSenhas.iOS.csproj",
+      "projectUniqueName": "C:\\Users\\rbsbini\\Documents\\GitHub\\simireports\\AppSenhas\\AppSenhas\\AppSenhas.iOS\\AppSenhas.iOS.csproj",
       "projectName": "AppSenhas.iOS",
-      "projectPath": "C:\\Users\\simi_bini\\source\\repos\\AppSenhas\\AppSenhas\\AppSenhas.iOS\\AppSenhas.iOS.csproj",
-      "packagesPath": "C:\\Users\\simi_bini\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\simi_bini\\source\\repos\\AppSenhas\\AppSenhas\\AppSenhas.iOS\\obj\\",
+      "projectPath": "C:\\Users\\rbsbini\\Documents\\GitHub\\simireports\\AppSenhas\\AppSenhas\\AppSenhas.iOS\\AppSenhas.iOS.csproj",
+      "packagesPath": "C:\\Users\\rbsbini\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\rbsbini\\Documents\\GitHub\\simireports\\AppSenhas\\AppSenhas\\AppSenhas.iOS\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
-        "C:\\Users\\simi_bini\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\rbsbini\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -740,8 +740,8 @@
       "frameworks": {
         "xamarinios10": {
           "projectReferences": {
-            "C:\\Users\\simi_bini\\source\\repos\\AppSenhas\\AppSenhas\\AppSenhas\\AppSenhas.csproj": {
-              "projectPath": "C:\\Users\\simi_bini\\source\\repos\\AppSenhas\\AppSenhas\\AppSenhas\\AppSenhas.csproj"
+            "C:\\Users\\rbsbini\\Documents\\GitHub\\simireports\\AppSenhas\\AppSenhas\\AppSenhas\\AppSenhas.csproj": {
+              "projectPath": "C:\\Users\\rbsbini\\Documents\\GitHub\\simireports\\AppSenhas\\AppSenhas\\AppSenhas\\AppSenhas.csproj"
             }
           }
         }

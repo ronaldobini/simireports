@@ -104,4 +104,7 @@ C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas.Android\obj\Debug\
 C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas.Android\obj\Debug\81\android\assets\Xamarin.Forms.Core.pdb
 C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas.Android\obj\Debug\81\android\assets\Xamarin.Forms.Platform.Android.pdb
 C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas.Android\obj\Debug\81\android\assets\Xamarin.Forms.Xaml.pdb
-C:\Users\simi_bini\source\repos\AppSenhas\AppSenhas\AppSenhas.Android\obj\Debug\81\linksrc\AppSenhas.dll.mdb
+C:\Users\rbsbini\Documents\GitHub\simireports\AppSenhas\AppSenhas\AppSenhas.Android\obj\Debug\81\MonoAndroid,Version=v8.1.AssemblyAttributes.cs
+C:\Users\rbsbini\Documents\GitHub\simireports\AppSenhas\AppSenhas\AppSenhas.Android\obj\Debug\81\AppSenhas.Android.csprojAssemblyReference.cache
+C:\Users\rbsbini\Documents\GitHub\simireports\AppSenhas\AppSenhas\AppSenhas.Android\obj\Debug\81\AppSenhas.Android.dll
+C:\Users\rbsbini\Documents\GitHub\simireports\AppSenhas\AppSenhas\AppSenhas.Android\obj\Debug\81\AppSenhas.Android.pdb
