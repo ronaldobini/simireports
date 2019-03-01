@@ -24,6 +24,7 @@
         </div>
 
         <div id="resultados">
+            <font color=white>Mostrando <%=omsps.Count%> resultados</font><br/>
             <table class="table table-striped table-dark" style = "max-width:90%; color:white; font-size: 12px;">
                 
                 

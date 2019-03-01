@@ -33,7 +33,7 @@ namespace simireports.simireports.Classes
                         break;
                     }
                 }
-                inicio = nS.IndexOf(",")-1;
+                inicio = nS.IndexOf(",") - 1;
             }
             else
             {
@@ -48,7 +48,7 @@ namespace simireports.simireports.Classes
                     nF += ".";
                 }
             }
-            
+
             nF = new string(nF.Reverse().ToArray());
             return nF;
         }
@@ -62,6 +62,16 @@ namespace simireports.simireports.Classes
         {
             if (s.Contains(","))
                 s = s.Replace(",", ".");
+            return s;
+        }
+
+        public String configCoringas(String s)
+        {
+            if (s.Contains("*") || s.Contains("?"))
+            {
+                s = s.Replace("*", "%");
+                s = s.Replace("?", "%");
+            }
             return s;
         }
     }

@@ -30,8 +30,8 @@
                         <td><input style="width:50px; text-align:center;" runat="server" type="text" id="unidade"/></td>
                         <td><input style="width:70px; text-align:center;" runat="server" type="text" id="numNF"/></td>
                         <td><input style="width:70px; text-align:center;" runat="server" type="text" id="avisoRec"/></td>
-                        <td><input style="width:100px; text-align:center;" runat="server" type="text" id="datIni" value="01/02/2019"/></td>
-                        <td><input style="width:100px; text-align:center;" runat="server" type="text" id="datFim" value="28/02/2019"/></td>
+                        <td><input style="width:100px; text-align:center;" runat="server" type="text" id="datIni"/></td>
+                        <td><input style="width:100px; text-align:center;" runat="server" type="text" id="datFim"/></td>
                         <td><input style="width:100px; text-align:center;" runat="server" type="text" id="codItem"/></td>
                         <td><input style="width:50px; text-align:center;" runat="server" type="text" id="codOper" value="DEVC"/></td>
                         <td><input runat="server" type="submit" value="Filtrar" onserverclick="filtrarDevolucoes_Click" /></td>
@@ -41,6 +41,7 @@
         </div>
 
         <div id="resultados">
+            <font color=white>Mostrando <%=devolucoes.Count%> resultados, de <%=dataPesqIni%> a <%=dataPesqFim%></font><br/>
             <table class="table table-striped table-dark" style = "max-width:95%; color:white; font-size: 12px;">
                 <tr>
                     <th style="width: 5%; text-align:center;">Unidade</th>

@@ -19,13 +19,16 @@ namespace simireports
         public static string postNumNF = "";
         public static string postAvisoRec = "";
         public static string postValor = "";
-        public static string postDatInicio = "01/02/2019";
-        public static string postDatFim = "28/02/2019";
+        public static String mesPassado = DateTime.Today.AddMonths(-1).ToString("d");
+        public static String hoje = DateTime.Today.ToString("d");
+        public static string postDatInicio = "AND ns.dat_emis_nf >= '" + mesPassado + "'";
+        public static string dataPesqIni = mesPassado;
+        public static string dataPesqFim = hoje;
+        public static string postDatFim = "AND ns.dat_emis_nf <= '" + hoje + "'";
         public static string postCodItem = "";
         public static string postPreUnit = "";
         public static string postCodOper = "DEVC";
 
-        
         public List<Devolucao> devolucoes = new List<Devolucao> { };
 
         protected void Page_Load(object sender, EventArgs e)
@@ -51,9 +54,28 @@ namespace simireports
                 postAvisoRec = "AND ns.num_aviso_rec = " + postAvisoRec + " ";
             }
             postCodItem = codItem.Value.ToUpper();
+            postCodItem = m.configCoringas(postCodItem);
             postCodOper = codOper.Value.ToUpper();
             postDatInicio = datIni.Value;
+            if (!postDatInicio.Equals(""))
+            {
+                postDatInicio = "AND ns.dat_emis_nf >= '" + postDatInicio + "' ";
+                dataPesqIni = datIni.Value;
+            }
+            else
+            {
+                dataPesqIni = "-";
+            }
             postDatFim = datFim.Value;
+            if (!postDatFim.Equals(""))
+            {
+                postDatFim = "AND ns.dat_emis_nf <= '" + postDatFim + "' ";
+                dataPesqFim = datFim.Value;
+            }
+            else
+            {
+                dataPesqFim = "-";
+            }
             executarRelatorio();
         }
 
@@ -68,8 +90,8 @@ namespace simireports
                             "AND ns.cod_empresa like '%" + postUnidade + "%' " + 
                             postNumNF +
                             postAvisoRec +
-                            "AND ns.dat_emis_nf >= '" + postDatInicio + "' " +
-                            "AND ns.dat_emis_nf <= '" + postDatFim + "' " +
+                            postDatInicio +
+                            postDatFim +
                             "AND ar.cod_item like  '%" + postCodItem + "%' " +
                             "order by dat_emis_nf desc";
 

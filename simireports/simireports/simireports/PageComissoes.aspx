@@ -28,8 +28,8 @@
                         <th>Pgto</th>
                     </tr>
                     <tr>
-                        <td><input style="width:100px; text-align:center;" runat="server" type="text" id="datInicio" value="01/02/2019"/></td>
-                        <td><input style="width:100px; text-align:center;" runat="server" type="text" id="datFim" value="28/02/2019"/></td>
+                        <td><input style="width:100px; text-align:center;" runat="server" type="text" id="datInicio"/></td>
+                        <td><input style="width:100px; text-align:center;" runat="server" type="text" id="datFim"/></td>
                         <td><input runat="server" type="text" id="unidade"/></td>
                         <td><input runat="server" type="text" id="cliente"/></td>
 <%--                        <td><input runat="server" type="text" id="pctComiss"/></td>
@@ -45,6 +45,7 @@
         <div style="color:white; margin-bottom:30px;">Total Comiss: R$ <%=totComissS %></div>
 
         <div id="resultados">
+            <font color=white>Mostrando <%=comissoes.Count%> resultados, de <%=dataPesqIni%> a <%=dataPesqFim%></font><br/>
             <table class="table table-striped table-dark" style = "max-width:95%; color:white; font-size: 12px;">
                 <tr>
                     <th style="width: 5%; text-align:center;">CodRepres</th>

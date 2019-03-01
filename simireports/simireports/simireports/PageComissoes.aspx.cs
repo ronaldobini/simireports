@@ -14,8 +14,12 @@ namespace simireports
     {
         public static int first = 1;
         public static Metodos m = new Metodos();
-        public static string postDatInicio = "01/02/2019";
-        public static string postDatFim = "28/02/2019";
+        public static String mesPassado = DateTime.Today.AddMonths(-1).ToString("d");
+        public static String hoje = DateTime.Today.ToString("d");
+        public static string postDatInicio = "AND dp.dat_pgto >= '" + mesPassado + "'";
+        public static string postDatFim = "AND dp.dat_pgto <= '" + hoje + "'";
+        public static string dataPesqIni = mesPassado;
+        public static string dataPesqFim = hoje;
         public static string postCliente = "";
         public static string postPctComiss = "";
         public static string postValor = "";
@@ -44,29 +48,45 @@ namespace simireports
         {
             postDatInicio = datInicio.Value;
             postDatFim = datFim.Value;
+
+            postDatInicio = datInicio.Value;
+            if (!postDatInicio.Equals(""))
+            {
+                dataPesqIni = postDatInicio;
+                postDatInicio = "AND dp.dat_pgto >= '" + postDatInicio + "' ";
+            }
+            else
+            {
+                dataPesqIni = "-";
+            }
+            postDatFim = datFim.Value;
+            if (!postDatFim.Equals(""))
+            {
+                dataPesqFim = postDatFim;
+                postDatFim = "AND dp.dat_pgto <= '" + postDatFim + "' ";
+                
+            }
+            else
+            {
+                dataPesqFim = "-";
+            }
+
             postRepres = repres.Value.ToUpper();
             postCliente = cliente.Value.ToUpper();
             postUnidade = unidade.Value;
             //postValor = valor.Value;
             //postPctComiss = pctComiss.Value;
+
+
             postSitPgto = sitPgto.Value.ToUpper();
             executarRelatorio();
         }
         
         protected void executarRelatorio()
         {
-            if (postCliente.Contains("*") || postCliente.Contains("?"))
-            {
-                postCliente = postCliente.Replace("*", "%");
-                postCliente = postCliente.Replace("?", "%");
-            }
-            if (postRepres.Contains("*") || postRepres.Contains("?"))
-            {
-                postRepres = postRepres.Replace("*", "%");
-                postRepres = postRepres.Replace("?", "%");
-            }
-
-
+            postCliente = m.configCoringas(postCliente);
+            postRepres = m.configCoringas(postRepres);
+            
             IfxConnection conn = new BancoLogix().abrir();    
             string sql = "SELECT d.cod_empresa," +
                                         "d.num_docum," +
@@ -85,9 +105,9 @@ namespace simireports
                                         "JOIN representante r on r.cod_repres = d.cod_repres_1 " +
                                         "JOIN clientes cl on cl.cod_cliente = d.cod_cliente " +
                                         "LEFT JOIN docum_pgto dp on d.num_docum = dp.num_docum and d.cod_empresa = dp.cod_empresa " +
-                                        "WHERE dp.dat_pgto >= '" + postDatInicio + "' " +
-                                        "AND dp.dat_pgto <= '" + postDatFim + "' " +
-                                        "AND r.nom_repres like '%" + postRepres + "%' " +
+                                        "WHERE r.nom_repres like '%" + postRepres + "%' " +
+                                        postDatInicio +
+                                        postDatFim +
                                         "AND ies_pgto_docum = '" + postSitPgto + "' " +
                                         "AND cl.nom_cliente like '%" + postCliente + "%' " +
                                         //"AND d.pct_comis_1 = " + postPctComiss + " " +
@@ -98,7 +118,7 @@ namespace simireports
             IfxDataReader reader = new BancoLogix().consultar(sql, conn);
 
             totComiss = 0.0M;
-            if (reader.HasRows)
+            if (reader != null && reader.HasRows)
             {
                 while (reader.Read())
                 {
