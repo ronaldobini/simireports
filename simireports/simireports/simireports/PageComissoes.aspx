@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
 <body style="background-color:#222;">
-    <a  title="Voltar ao Inicio" href=" .aspx"><img style="margin:25px;" width="100px;" src="img/syss.png" /></a>
+    <a  title="Voltar ao Inicio" href=" index.aspx"><img style="margin:25px;" width="100px;" src="img/syss.png" /></a>
     <center>
     <h3><font color=white >Comissões</font></h3>
         <br />
