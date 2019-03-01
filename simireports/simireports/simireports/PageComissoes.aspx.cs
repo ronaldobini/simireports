@@ -189,7 +189,7 @@ namespace simireports
                     erro = "---" + ex;
                 }
                
-                if(reader != null)
+                if(reader != null && reader.HasRows)
                 {
                     String npedido = reader.GetString(1);
                     Comissao comissao = new Comissao("OK", npedido, "-", "-", "-", 0, 0, 0, "-", new DateTime(), new DateTime(), new DateTime(), 'T', "-");

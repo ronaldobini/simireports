@@ -14,31 +14,41 @@
     <h3><font color=white >Comissões</font></h3>
         <br />
         
-        <div id="filtros" style="margin-bottom:100px;">
+        <div id="filtros" style="margin-bottom:40px;">
             <form runat="server" id="filtrosComissoes" action="#" method="post">
                 <table>
                     <tr style="color:white;">
-                        <th style="width:100px; text-align:center;">Data Inicio</th>
-                        <th style="width:100px; text-align:center;">Data Fim</th>
-                        <th style="width:100px; text-align:center;">Unidade</th>
-                        <th style="width:100px; text-align:center;">Cliente</th>
+                        <th style="width:100px;">Data Inicio</th>
+                        <th style="width:100px;">Data Fim</th>
+                        <th style="width:100px;">Unidade</th>
+                        <th style="width:100px;">Cliente</th>
 <%--                        <th style="width:100px; text-align:center;">% Comiss</th>
                         <th style="width:100px; text-align:center;">Valor</th>--%>
-                        <th style="width:100px; text-align:center;">Representante</th>
+                        <th style="width:100px;">Representante</th>
                         <th>Pgto</th>
                     </tr>
                     <tr>
-                        <td><input style="width:100px; text-align:center;" runat="server" type="text" id="datInicio"/></td>
-                        <td><input style="width:100px; text-align:center;" runat="server" type="text" id="datFim"/></td>
-                        <td><input runat="server" type="text" id="unidade"/></td>
-                        <td><input runat="server" type="text" id="cliente"/></td>
+                        <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="datInicio"/></td>
+                        <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="datFim"/></td>
+                        <td style="width:120px;">
+                            <select class="form-control" style="width:100px;" id="unidade" runat="server">
+                                <option value="">Todas</option>
+                                <option value="2">02</option>
+                                <option value="3">03</option>
+                                <option value="4">04</option>
+                                <option value="5">05</option>
+                                <option value="6">06</option>
+                            </select>
+                        </td>
+                        <td style="width:120px;"><input class="form-control" style="width:100px;" runat="server" type="text" id="cliente"/></td>
 <%--                        <td><input runat="server" type="text" id="pctComiss"/></td>
                         <td><input runat="server" type="text" id="valor"/></td>--%>
-                        <td><input runat="server" type="text" id="repres"/></td>
-                        <td><input style="width:35px; text-align:center;" runat="server" type="text" id="sitPgto" value="T"/></td>
-                        <td><input runat="server" type="submit" value="Filtrar" onserverclick="filtrarComiss_Click" /></td>
+                        <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="repres"/></td>
+                        <td style="width:120px;"><input class="form-control" style="width:35px; text-align:center;" runat="server" type="text" id="sitPgto" value="T"/></td>
                     </tr>
                 </table>
+                <br />
+                <input class="btn btn-primary btn-xs" style="background-color:#126DBD" runat="server" type="submit" value="Filtrar" onserverclick="filtrarComiss_Click" />
             </form>
         </div>
 

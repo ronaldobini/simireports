@@ -14,29 +14,39 @@
     <h3><font color=white >Devoluções</font></h3>
         <br />
         
-        <div id="filtros" style="margin-bottom:100px;">
+        <div id="filtros" style="margin-bottom:40px;">
             <form runat="server" id="filtrosDevolucoes" action="#" method="post">
                 <table>
                     <tr style="color:white;">
-                        <th style="width:50px; text-align:center;">Unidade</th>
-                        <th style="width:70px; text-align:center;">Nota</th>
-                        <th style="width:70px; text-align:center;">NumAvisoRec</th>
-                        <th style="width:100px; text-align:center;">Data Inicio</th>
-                        <th style="width:100px; text-align:center;">Data Final</th>
-                        <th style="width:100px; text-align:center;">CodItem</th>
-                        <th style="width:50px; text-align:center;">CodOperacao</th>
+                        <th>Unidade</th>
+                        <th>Nota</th>
+                        <th>NumAvisoRec</th>
+                        <th>Data Inicio</th>
+                        <th>Data Final</th>
+                        <th>CodItem</th>
+                        <th>CodOperacao</th>
                     </tr>
                     <tr>
-                        <td><input style="width:50px; text-align:center;" runat="server" type="text" id="unidade"/></td>
-                        <td><input style="width:70px; text-align:center;" runat="server" type="text" id="numNF"/></td>
-                        <td><input style="width:70px; text-align:center;" runat="server" type="text" id="avisoRec"/></td>
-                        <td><input style="width:100px; text-align:center;" runat="server" type="text" id="datIni"/></td>
-                        <td><input style="width:100px; text-align:center;" runat="server" type="text" id="datFim"/></td>
-                        <td><input style="width:100px; text-align:center;" runat="server" type="text" id="codItem"/></td>
-                        <td><input style="width:50px; text-align:center;" runat="server" type="text" id="codOper" value="DEVC"/></td>
-                        <td><input runat="server" type="submit" value="Filtrar" onserverclick="filtrarDevolucoes_Click" /></td>
+                        <td style="width:120px;">
+                            <select class="form-control" style="width:100px;" id="unidade" runat="server">
+                                <option value="">Todas</option>
+                                <option value="2">02</option>
+                                <option value="3">03</option>
+                                <option value="4">04</option>
+                                <option value="5">05</option>
+                                <option value="6">06</option>
+                            </select>
+                        </td>
+                        <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="numNF"/></td>
+                        <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="avisoRec"/></td>
+                        <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="datIni"/></td>
+                        <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="datFim"/></td>
+                        <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="codItem"/></td>
+                        <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="codOper" value="DEVC"/></td>
                     </tr>
                 </table>
+                <br>
+                <input class="btn btn-primary btn-xs" style="background-color:#126DBD" runat="server" type="submit" value="Filtrar" onserverclick="filtrarDevolucoes_Click" />
             </form>
         </div>
 
