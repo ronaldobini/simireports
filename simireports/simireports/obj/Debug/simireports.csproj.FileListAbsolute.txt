@@ -15,3 +15,4 @@ C:\Users\simi_bini\Documents\simireports\simireports\simireports\obj\Debug\simir
 C:\Users\simi_bini\Documents\simireports\simireports\simireports\obj\Debug\simireports.csproj.CopyComplete
 C:\Users\simi_bini\Documents\simireports\simireports\simireports\obj\Debug\simireports.dll
 C:\Users\simi_bini\Documents\simireports\simireports\simireports\obj\Debug\simireports.pdb
+C:\Users\simi_bini\Documents\simireports\simireports\simireports\obj\Debug\simireports.csprojAssemblyReference.cache
