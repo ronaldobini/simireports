@@ -145,6 +145,7 @@
     <Content Include="simireports\PagePrePedidos.aspx" />
     <Content Include="simireports\index.aspx" />
     <Content Include="simireports\login.aspx" />
+    <Content Include="simireports\PageDevolucoes.aspx" />
     <Content Include="syss.ico" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -160,8 +161,10 @@
       <DependentUpon>PageAlterarPedido.aspx</DependentUpon>
     </Compile>
     <Compile Include="simireports\Classes\Comissao.cs" />
+    <Compile Include="simireports\Classes\Devolucao.cs" />
     <Compile Include="simireports\Classes\Item.cs" />
     <Compile Include="simireports\Classes\LoginS.cs" />
+    <Compile Include="simireports\Classes\Metodos.cs" />
     <Compile Include="simireports\Classes\OMPendente.cs" />
     <Compile Include="simireports\Classes\PrePedido.cs" />
     <Compile Include="simireports\PageComissoes.aspx.cs">
@@ -201,6 +204,13 @@
     </Compile>
     <Compile Include="simireports\login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simireports\PageDevolucoes.aspx.cs">
+      <DependentUpon>PageDevolucoes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\PageDevolucoes.aspx.designer.cs">
+      <DependentUpon>PageDevolucoes.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />

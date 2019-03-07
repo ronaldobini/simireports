@@ -39,8 +39,8 @@
                         </td>
                         <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="numNF"/></td>
                         <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="avisoRec"/></td>
-                        <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="datIni"/></td>
-                        <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="datFim"/></td>
+                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datIni"/></td>
+                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"/></td>
                         <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="codItem"/></td>
                         <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="codOper" value="DEVC"/></td>
                     </tr>

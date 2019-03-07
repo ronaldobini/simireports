@@ -13,16 +13,25 @@ namespace simireports
     public partial class PageComissoes : System.Web.UI.Page
     {
         public static int first = 1;
-
-        public static string postDatInicio = "01/02/2019";
-        public static string postDatFim = "28/02/2019";
+        public static Metodos m = new Metodos();
+        public static String mesPassado = DateTime.Today.AddMonths(-1).ToString("d");
+        public static String hoje = DateTime.Today.ToString("d");
+        public static string postDatInicio = "AND dp.dat_pgto >= '" + mesPassado + "'";
+        public static string postDatFim = "AND dp.dat_pgto <= '" + hoje + "'";
+        public static string dataPesqIni = mesPassado;
+        public static string dataPesqFim = hoje;
+        public static string postCliente = "";
+        public static string postPctComiss = "";
+        public static string postValor = "";
+        public static string postUnidade = "";
         public static string postRepres = "";
         public static string postSitPgto = "T";
 
 
-        public static decimal totComiss = 0.0M;
+        public static Decimal totComiss = 0.0M;
+        public static String totComissS = "";
 
-        
+
 
         public List<Comissao> comissoes = new List<Comissao> { };
         
@@ -39,13 +48,45 @@ namespace simireports
         {
             postDatInicio = datInicio.Value;
             postDatFim = datFim.Value;
+
+            postDatInicio = datInicio.Value;
+            if (!postDatInicio.Equals(""))
+            {
+                dataPesqIni = postDatInicio;
+                postDatInicio = "AND dp.dat_pgto >= '" + postDatInicio + "' ";
+            }
+            else
+            {
+                dataPesqIni = "-";
+            }
+            postDatFim = datFim.Value;
+            if (!postDatFim.Equals(""))
+            {
+                dataPesqFim = postDatFim;
+                postDatFim = "AND dp.dat_pgto <= '" + postDatFim + "' ";
+                
+            }
+            else
+            {
+                dataPesqFim = "-";
+            }
+
             postRepres = repres.Value.ToUpper();
+            postCliente = cliente.Value.ToUpper();
+            postUnidade = unidade.Value;
+            //postValor = valor.Value;
+            //postPctComiss = pctComiss.Value;
+
+
             postSitPgto = sitPgto.Value.ToUpper();
             executarRelatorio();
         }
         
         protected void executarRelatorio()
         {
+            postCliente = m.configCoringas(postCliente);
+            postRepres = m.configCoringas(postRepres);
+            
             IfxConnection conn = new BancoLogix().abrir();    
             string sql = "SELECT d.cod_empresa," +
                                         "d.num_docum," +
@@ -64,16 +105,20 @@ namespace simireports
                                         "JOIN representante r on r.cod_repres = d.cod_repres_1 " +
                                         "JOIN clientes cl on cl.cod_cliente = d.cod_cliente " +
                                         "LEFT JOIN docum_pgto dp on d.num_docum = dp.num_docum and d.cod_empresa = dp.cod_empresa " +
-                                        "WHERE dp.dat_pgto >= '" + postDatInicio + "' " +
-                                        "AND dp.dat_pgto <= '" + postDatFim + "' " +
-                                        "AND r.nom_repres like '%" + postRepres + "%' " +
+                                        "WHERE r.nom_repres like '%" + postRepres + "%' " +
+                                        postDatInicio +
+                                        postDatFim +
                                         "AND ies_pgto_docum = '" + postSitPgto + "' " +
+                                        "AND cl.nom_cliente like '%" + postCliente + "%' " +
+                                        //"AND d.pct_comis_1 = " + postPctComiss + " " +
+                                        //"AND d.val_bruto like " + postValor + " " +
+                                        "AND d.cod_empresa like '%" + postUnidade + "%' " +
                                         "AND d.ies_situa_docum = 'N' AND d.ies_tip_docum = 'DP' order by d.cod_repres_1";
 
             IfxDataReader reader = new BancoLogix().consultar(sql, conn);
 
             totComiss = 0.0M;
-            if (reader != null)
+            if (reader != null && reader.HasRows)
             {
                 while (reader.Read())
                 {
@@ -94,6 +139,7 @@ namespace simireports
                     Decimal valBruto = Decimal.Parse(valBrutoS);
                     Decimal pctComissao;
                     Decimal comiss;
+                    
                     if (!pctComissaoS.Equals(""))
                     {
                         pctComissao = Decimal.Parse(pctComissaoS);
@@ -128,6 +174,8 @@ namespace simireports
                     comissoes.Add(comissao);
 
                 }
+                totComiss = decimal.Round(totComiss, 2);
+                totComissS = m.formatarDecimal(totComiss);
             }
             else
             {
@@ -135,32 +183,21 @@ namespace simireports
                 try
                 {
                     erro = new BancoLogix().abrirErros();
+                    if (!erro.Equals("sem erros"))
+                    {
+                        Comissao comissao = new Comissao("NULL", erro, "-", "-", "-", 0, 0, 0, "-", new DateTime(), new DateTime(), new DateTime(), 'T', "-");
+                        comissoes.Add(comissao);
+                    }
                 }
                 catch(Exception ex)
                 {
                     erro = "---" + ex;
-                }
-               
-                if(reader != null)
-                {
-                    String npedido = reader.GetString(1);
-                    Comissao comissao = new Comissao("OK", npedido, "-", "-", "-", 0, 0, 0, "-", new DateTime(), new DateTime(), new DateTime(), 'T', "-");
-                    comissoes.Add(comissao);
-                }
-                else
-                {
                     Comissao comissao = new Comissao("NULL", erro, "-", "-", "-", 0, 0, 0, "-", new DateTime(), new DateTime(), new DateTime(), 'T', "-");
                     comissoes.Add(comissao);
-
                 }
                 
             }
         }
-
-
-
-
-
-
+        
     }
 }

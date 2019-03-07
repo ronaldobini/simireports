@@ -6,24 +6,58 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Relatorio de OMs Pendentes</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous" />
 </head>
 <body style="background-color: #222;">
-    <a  title="Voltar ao Inicio" href="index.aspx"><img style="margin:25px;" width="100px" src="img/syss.png" /></a>
+    <a title="Voltar ao Inicio" href="index.aspx">
+        <img style="margin: 25px;" width="100px" src="img/syss.png" /></a>
     <center><br />
-    <h3><font color=white>OMs Pendentes</font></h3>
+    <h2><font color=white>OMs Pendentes</font></h2>
         <br />
         
-        <div id="filtros" style="margin-bottom:100px;">
+        <div id="filtros" style="margin-bottom:40px;">
             <form runat="server" id="filtrosOMs" action="#" method="post">
-                <input runat="server" type="text" id="empresa" placeholder="Empresa (2,3,4,5,6)">
-                <input runat="server" type="text" id="tipoEntrega" placeholder="Tip Entrega (1, 2, 3, 4)"/>
-                
-                <input runat="server" type="submit" value="Filtrar" onserverclick="filtrarOMs_Click" />
+<%--                <input runat="server" select id="empresa" placeholder="Empresa (2,3,4,5,6)">
+                <input runat="server" type="text" id="Text1" placeholder="Tip Entrega (1, 2, 3, 4)"/>--%>
+                <h3><font color=white>
+                    <table>
+                        <tr>
+                        <td style="width:150px;text-align:center;">
+                    Empresa
+                            </td>
+                        <td style="width:150px;text-align:center;">
+                    Tipo
+                            </td>
+
+                        </tr><tr>
+
+                            <td>
+                <select class="form-control" id="empresa" runat="server">
+                    <option value="0">Todas</option>
+                    <option value="2">02</option>
+                    <option value="3">03</option>
+                    <option value="4">04</option>
+                    <option value="5">05</option>
+                    <option value="6">06</option>
+                </select>
+                            </td><td>
+                <select class="form-control" id="tipoEntrega" runat="server">
+                    <option value="0">Todas</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                            </td></tr>
+                        </table>
+                            </font></h3>
+                <input class="btn btn-primary btn-xs" style="background-color:#126DBD" runat="server" type="submit" value="Filtrar" onserverclick="filtrarOMs_Click" />
             </form>
         </div>
 
         <div id="resultados">
+            <font color=white>Mostrando <%=omsps.Count%> resultados</font><br/>
             <table class="table table-striped table-dark" style = "max-width:90%; color:white; font-size: 12px;">
                 
                 
@@ -38,12 +72,12 @@
                     <th style="width: 5%;">Pedido</th>
                     <th style="width: 5%;">Tipo Entrega</th>
                     </tr><%
-                        string empresa = omsp.Empresa;
-                        DateTime datAltSit = omsp.DatAltSit;
-                        string codCliente = omsp.CodCliente;
-                        string cliente = omsp.Cliente;
-                        string numPed = omsp.NumPed;
-                        string tipoEntrega = omsp.TipoEntrega;
+                             string empresa = omsp.Empresa;
+                             DateTime datAltSit = omsp.DatAltSit;
+                             string codCliente = omsp.CodCliente;
+                             string cliente = omsp.Cliente;
+                             string numPed = omsp.NumPed;
+                             string tipoEntrega = omsp.TipoEntrega;
 
                         %>
                                 <tr>
@@ -66,14 +100,14 @@
                                                 <th style="width: 20%;">Prazo</th>
                                             </tr><%
 
-                                         foreach (var item in omsp.Itens)
-                                         {
-                                             string codItem = item.CodItem;
-                                             string qtdSolic = item.QtdSolic;
-                                             string qtdCancel = item.QtdCancel;
-                                             string qtdAtend = item.QtdAtend;
-                                             string nomeItem = item.NomeItem;
-                                             string przEntrega = item.PrzEntrega;
+                                                     foreach (var item in omsp.Itens)
+                                                     {
+                                                         string codItem = item.CodItem;
+                                                         string qtdSolic = item.QtdSolic;
+                                                         string qtdCancel = item.QtdCancel;
+                                                         string qtdAtend = item.QtdAtend;
+                                                         string nomeItem = item.NomeItem;
+                                                         string przEntrega = item.PrzEntrega;
                                           %>
                                             <tr>
                                                 <td><%= codItem %></td>
@@ -84,13 +118,12 @@
                                                 <td><%= przEntrega %></td>
                                             </tr>
                                           <%
-                                                     }%>
+                                              }%>
                                         </tbody></table></td>
                                     </tr><%
-                    }
+                                             }
                 %>
     </table>
         </div>
-    
 </body>
 </html>

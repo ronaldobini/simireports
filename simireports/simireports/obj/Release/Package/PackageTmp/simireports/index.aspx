@@ -12,6 +12,7 @@
         <a  title="Atualizar a página" href="index.aspx"><img style="margin:25px;" width="100px" src="img/syss.png" /></a>
         <br /><br /><br /><br />
         <a href="PageComissoes.aspx"><h3><font color="white">Comissoes</font></h3></a>
+        <a href="PageDevolucoes.aspx"><h3><font color="white">Devoluções</font></h3></a>
         <!--<a href="Estoque.aspx">Estoque</a><br />-->
         <a href="PageOMsPendentes.aspx"><h3><font color="white">OMs Pendentes</font></h3></a>
     </center>

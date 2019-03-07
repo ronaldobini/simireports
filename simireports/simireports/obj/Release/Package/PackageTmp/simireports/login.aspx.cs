@@ -30,9 +30,9 @@ namespace simireports.simireports
             SqlDataReader reader = new BancoAzure().consultar(sql, conn);
 
 
-            if (reader != null)
+            reader.Read();
+            if (reader.HasRows)
             {
-                reader.Read();
 
                 logado = new LoginS((reader.GetString(0)), (reader.GetString(1)), (reader.GetDouble(2)));
 

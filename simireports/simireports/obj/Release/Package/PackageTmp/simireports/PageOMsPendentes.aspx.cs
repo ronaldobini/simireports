@@ -73,7 +73,7 @@ namespace simireports
             "                                    AND "+ postTipoEntrega +
             "                                    AND "+ postEmpresa +
             "                                    GROUP BY a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, a.ies_tip_entrega, c.nom_cliente" +
-            "                                    ORDER BY a.dat_alt_sit  ", conn);
+            "                                    ORDER BY a.dat_alt_sit desc ", conn);
             IfxDataReader reader2;
             IfxConnection conn2;
             if (reader != null)

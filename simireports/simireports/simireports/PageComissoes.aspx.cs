@@ -183,23 +183,17 @@ namespace simireports
                 try
                 {
                     erro = new BancoLogix().abrirErros();
+                    if (!erro.Equals("sem erros"))
+                    {
+                        Comissao comissao = new Comissao("NULL", erro, "-", "-", "-", 0, 0, 0, "-", new DateTime(), new DateTime(), new DateTime(), 'T', "-");
+                        comissoes.Add(comissao);
+                    }
                 }
                 catch(Exception ex)
                 {
                     erro = "---" + ex;
-                }
-               
-                if(reader != null && reader.HasRows)
-                {
-                    String npedido = reader.GetString(1);
-                    Comissao comissao = new Comissao("OK", npedido, "-", "-", "-", 0, 0, 0, "-", new DateTime(), new DateTime(), new DateTime(), 'T', "-");
-                    comissoes.Add(comissao);
-                }
-                else
-                {
                     Comissao comissao = new Comissao("NULL", erro, "-", "-", "-", 0, 0, 0, "-", new DateTime(), new DateTime(), new DateTime(), 'T', "-");
                     comissoes.Add(comissao);
-
                 }
                 
             }

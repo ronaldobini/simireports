@@ -28,8 +28,8 @@
                         <th>Pgto</th>
                     </tr>
                     <tr>
-                        <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="datInicio"/></td>
-                        <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="datFim"/></td>
+                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datInicio"/></td>
+                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"/></td>
                         <td style="width:120px;">
                             <select class="form-control" style="width:100px;" id="unidade" runat="server">
                                 <option value="">Todas</option>
@@ -40,7 +40,7 @@
                                 <option value="6">06</option>
                             </select>
                         </td>
-                        <td style="width:120px;"><input class="form-control" style="width:100px;" runat="server" type="text" id="cliente"/></td>
+                        <td style="width:150px;"><input class="form-control" style="width:130px;" runat="server" type="text" id="cliente"/></td>
 <%--                        <td><input runat="server" type="text" id="pctComiss"/></td>
                         <td><input runat="server" type="text" id="valor"/></td>--%>
                         <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="repres"/></td>
