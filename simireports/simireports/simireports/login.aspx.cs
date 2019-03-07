@@ -15,17 +15,38 @@ namespace simireports.simireports
         private string loginPost = "-";
         public string senhaPost = "-";
         public static LoginS logado = null;
-        public string nome = "MERDA";
+        public string nome = "null";
+        public string erro = " ";
+        
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            //SE NAO EXISTE SESSAO SETA PRA ZERO
+            if (Session["key"] == null)
+            {
+                Session["key"] = 0;
+            }
+            else
+            {
+                //SE A CHAVE É 1 PULA O LOGIN
+                if ((int)Session["key"] == 1)
+                {
+                    Response.Redirect("index.aspx");
+                }
+                //SE FALSO PEDE LOGIN DE NOVO
+                else
+                {
+                    Session["key"] = 0;
+                }
+            }
         }
         
         protected void Logar_Click(object sender, EventArgs e)
         {
             senhaPost = senha.Value;
+            loginPost = login.Value;
             SqlConnection conn = new BancoAzure().abrir();
-            string sql = "SELECT Nome,Senha,Idx FROM Usuarios WHERE Senha = '" + senhaPost + "'";
+            string sql = "SELECT Senha,Nome,Idx FROM Usuarios WHERE Nome = '" + loginPost + "' AND Senha = '"+senhaPost+"'";
             
             SqlDataReader reader = new BancoAzure().consultar(sql, conn);
 
@@ -33,17 +54,21 @@ namespace simireports.simireports
             reader.Read();
             if (reader.HasRows)
             {
-
-                logado = new LoginS((reader.GetString(0)), (reader.GetString(1)), (reader.GetDouble(2)));
-
-                //logado.Nome = reader.GetString(0);
-                //logado.Senha = reader.GetString(1);
-                //logado.Nivel = reader.GetDouble(2);
-
+                String senha = reader.GetString(0);
+                if(senha == senhaPost)
+                {
+                    Session["nome"] = reader.GetString(1);
+                    Session["idx"] = reader.GetDouble(2);
+                    Session["key"] = 1;
+                }
+                else
+                {
+                    erro = "Dados de login incorretos (2)";
+                }
             }
             else
             {
-                nome = "reader nulo k7";
+                erro = "Dados de login incorretos (1)";
             }
         }
 

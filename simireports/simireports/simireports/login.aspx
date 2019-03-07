@@ -22,18 +22,24 @@
 	    <div class="container" style="margin-top:70px; width:25%;">
 
 	     <form runat="server" class="form-signin" method="post" action="#">
-	        <h3 class="form-signin-heading" style="color:white;">Senha de acesso</h3>
+            <h3 class="form-signin-heading" style="color:white;">Login</h3>
+	        <input runat="server" type="text" name="login" id="login" class="form-control" placeholder="Login" required="" style="font-size: 15px;">
+	        <h3 class="form-signin-heading" style="color:white;">Senha</h3>
 	        <input runat="server" type="password" name="pass" id="senha" class="form-control" placeholder="Senha" required="" style="font-size: 15px;">
 	        <br>
-               <center> <input runat="server" style="width:100px;" class="btn btn-lg btn-primary btn-block" type="submit" value="Entrar" onserverclick="Logar_Click" /></center>
+               <center> 
+                   <input runat="server" style="width:100px;" class="btn btn-lg btn-primary btn-block" type="submit" value="Entrar" onserverclick="Logar_Click" /><br />
+                   <font color="red"><%=erro %></font>
+               </center>
 	        
 	     </form>
 
-            <%if (logado != null)
+            <%  int key = (int) Session["key"];
+                if (key == 1)
                 {%>
-                    <center><h3 style="color:white;">Entrando...</h3></center>
+                    <center><p style="color:white;">Bem vindo <%=Session["Nome"] %>!</p><h3 style="color:white;">Entrando...</h3></center>
                     <meta http-equiv="refresh" content="0; URL=index.aspx" />
-                <%}logado = null;%>
+                <%}%>
 	     	
 	    </div> <!-- /container -->
          

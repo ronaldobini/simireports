@@ -30,15 +30,36 @@ namespace simireports
 
         public static Decimal totComiss = 0.0M;
         public static String totComissS = "";
-
+        public String erro = " ";
 
 
         public List<Comissao> comissoes = new List<Comissao> { };
         
         protected void Page_Load(object sender, EventArgs e)
         {
+            //VERIFICACAO DE SESSAO E NIVEL
+            if (Session["key"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
+            else
+            {
+                //VERFICA NIVEL
+                if ((int)Session["key"] >= 1)
+                {
+                    //OK
+                }
+                //SE FALSO MOSTRA ERRO
+                else
+                {
+                    erro = "Voce nao tem permissao para esta pagina";
+                }
+            }
+
+
             if (first == 1)
             {
+                
                 first = 0;
                 executarRelatorio();
             }
