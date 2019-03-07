@@ -15,6 +15,7 @@
         <a href="PageDevolucoes.aspx"><h3><font color="white">Devoluções</font></h3></a>
         <!--<a href="Estoque.aspx">Estoque</a><br />-->
         <a href="PageOMsPendentes.aspx"><h3><font color="white">OMs Pendentes</font></h3></a>
+        <a href="PagePedidosEfetivados.aspx"><h3><font color="white">Pedidos Efetivados</font></h3></a>
     </center>
    
 </body>
