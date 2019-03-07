@@ -11,8 +11,8 @@ C:\Users\simi_bini\Documents\simireports\simireports\simireports\bin\simireports
 C:\Users\simi_bini\Documents\simireports\simireports\simireports\bin\simireports.dll
 C:\Users\simi_bini\Documents\simireports\simireports\simireports\bin\simireports.pdb
 C:\Users\simi_bini\Documents\simireports\simireports\simireports\bin\IBM.Data.Informix.dll
+C:\Users\simi_bini\Documents\simireports\simireports\simireports\obj\Debug\simireports.csprojAssemblyReference.cache
 C:\Users\simi_bini\Documents\simireports\simireports\simireports\obj\Debug\simireports.csproj.CoreCompileInputs.cache
 C:\Users\simi_bini\Documents\simireports\simireports\simireports\obj\Debug\simireports.csproj.CopyComplete
 C:\Users\simi_bini\Documents\simireports\simireports\simireports\obj\Debug\simireports.dll
 C:\Users\simi_bini\Documents\simireports\simireports\simireports\obj\Debug\simireports.pdb
-C:\Users\simi_bini\Documents\simireports\simireports\simireports\obj\Debug\simireports.csprojAssemblyReference.cache
