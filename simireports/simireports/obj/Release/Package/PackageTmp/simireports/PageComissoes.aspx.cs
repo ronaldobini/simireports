@@ -16,8 +16,8 @@ namespace simireports
         public static Metodos m = new Metodos();
         public static String mesPassado = DateTime.Today.AddMonths(-1).ToString("d");
         public static String hoje = DateTime.Today.ToString("d");
-        public static string postDatInicio = "AND dp.dat_pgto >= '" + mesPassado + "'";
-        public static string postDatFim = "AND dp.dat_pgto <= '" + hoje + "'";
+        public static string postDatInicio = "";
+        public static string postDatFim = "";
         public static string dataPesqIni = mesPassado;
         public static string dataPesqFim = hoje;
         public static string postCliente = "";
@@ -26,21 +26,43 @@ namespace simireports
         public static string postUnidade = "";
         public static string postRepres = "";
         public static string postSitPgto = "T";
+        public static string sqlview = "";
 
 
         public static Decimal totComiss = 0.0M;
         public static String totComissS = "";
-
+        public String erro = " ";
 
 
         public List<Comissao> comissoes = new List<Comissao> { };
         
         protected void Page_Load(object sender, EventArgs e)
         {
+            //VERIFICACAO DE SESSAO E NIVEL
+            if (Session["key"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
+            else
+            {
+                //VERFICA NIVEL
+                if ((int)Session["key"] >= 1)
+                {
+                    //OK
+                }                
+                else
+                {
+                    erro = "Você não tem permissão para esta pagina";
+                    Response.Redirect("index.aspx");
+                }
+            }
+
+
             if (first == 1)
             {
+                postRepres = (string)Session["nome"];
                 first = 0;
-                executarRelatorio();
+                //executarRelatorio();
             }
         }
 
@@ -63,15 +85,23 @@ namespace simireports
             if (!postDatFim.Equals(""))
             {
                 dataPesqFim = postDatFim;
-                postDatFim = "AND dp.dat_pgto <= '" + postDatFim + "' ";
-                
+                postDatFim = "AND dp.dat_pgto <= '" + postDatFim + "' ";                
             }
             else
             {
                 dataPesqFim = "-";
             }
 
-            postRepres = repres.Value.ToUpper();
+            if((int)Session["key"] >= 4)
+            {
+                postRepres = repres.Value.ToUpper();
+            }
+            else
+            {
+                postRepres = (string)Session["nome"];
+                postRepres = postRepres.ToUpper();
+            }
+            
             postCliente = cliente.Value.ToUpper();
             postUnidade = unidade.Value;
             //postValor = valor.Value;
@@ -115,6 +145,7 @@ namespace simireports
                                         "AND d.cod_empresa like '%" + postUnidade + "%' " +
                                         "AND d.ies_situa_docum = 'N' AND d.ies_tip_docum = 'DP' order by d.cod_repres_1";
 
+            //sqlview = sql; //ativa a exibicao do sql na tela
             IfxDataReader reader = new BancoLogix().consultar(sql, conn);
 
             totComiss = 0.0M;

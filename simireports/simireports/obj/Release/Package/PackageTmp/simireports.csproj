@@ -140,12 +140,14 @@
     <Content Include="simireports\img\up.png" />
     <Content Include="simireports\img\wait.png" />
     <Content Include="simireports\img\x.png" />
+    <Content Include="simireports\Logout.aspx" />
     <Content Include="simireports\PageComissoes.aspx" />
     <Content Include="simireports\PageOMsPendentes.aspx" />
     <Content Include="simireports\PagePrePedidos.aspx" />
     <Content Include="simireports\index.aspx" />
     <Content Include="simireports\login.aspx" />
     <Content Include="simireports\PageDevolucoes.aspx" />
+    <Content Include="simireports\PagePedidosEfetivados.aspx" />
     <Content Include="syss.ico" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -166,7 +168,15 @@
     <Compile Include="simireports\Classes\LoginS.cs" />
     <Compile Include="simireports\Classes\Metodos.cs" />
     <Compile Include="simireports\Classes\OMPendente.cs" />
+    <Compile Include="simireports\Classes\PedidoEfetivado.cs" />
     <Compile Include="simireports\Classes\PrePedido.cs" />
+    <Compile Include="simireports\Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
     <Compile Include="simireports\PageComissoes.aspx.cs">
       <DependentUpon>PageComissoes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -211,6 +221,13 @@
     </Compile>
     <Compile Include="simireports\PageDevolucoes.aspx.designer.cs">
       <DependentUpon>PageDevolucoes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simireports\PagePedidosEfetivados.aspx.cs">
+      <DependentUpon>PagePedidosEfetivados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\PagePedidosEfetivados.aspx.designer.cs">
+      <DependentUpon>PagePedidosEfetivados.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />

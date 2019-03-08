@@ -28,8 +28,8 @@ namespace simireports.simireports
             }
             else
             {
-                //SE A CHAVE É 1 PULA O LOGIN
-                if ((int)Session["key"] == 1)
+                //SE A CHAVE É MAIOR QUE 1 PULA O LOGIN
+                if ((int)Session["key"] >= 1)
                 {
                     Response.Redirect("index.aspx");
                 }
@@ -46,7 +46,7 @@ namespace simireports.simireports
             senhaPost = senha.Value;
             loginPost = login.Value;
             SqlConnection conn = new BancoAzure().abrir();
-            string sql = "SELECT Senha,Nome,Idx FROM Usuarios WHERE Nome = '" + loginPost + "' AND Senha = '"+senhaPost+"'";
+            string sql = "SELECT Senha,Nome,Idx,new_cod_repres FROM Usuarios WHERE Nome = '" + loginPost + "' AND Senha = '"+senhaPost+"'";
             
             SqlDataReader reader = new BancoAzure().consultar(sql, conn);
 
@@ -57,9 +57,24 @@ namespace simireports.simireports
                 String senha = reader.GetString(0);
                 if(senha == senhaPost)
                 {
-                    Session["nome"] = reader.GetString(1);
-                    Session["idx"] = reader.GetDouble(2);
-                    Session["key"] = 1;
+                    string nome = reader.GetString(1);
+                    double idx = reader.GetDouble(2);
+                    string codRepres = reader.GetString(3);
+
+                    Session["nome"] = nome;
+                    Session["idx"] = idx;
+                    Session["codRepres"] = codRepres;
+
+                    //DEFINE A KEY DO USUARIO
+                    int key = 1;
+                    if (idx <= 25) key = 2;
+                    if (idx <= 20) key = 3;
+                    if (idx <= 15) key = 4;
+                    if (idx <= 10) key = 5;
+
+                    if (nome == "SimiSys") key = 11;
+
+                    Session["key"] = key;
                 }
                 else
                 {

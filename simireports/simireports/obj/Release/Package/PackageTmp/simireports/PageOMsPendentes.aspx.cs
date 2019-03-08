@@ -22,11 +22,23 @@ namespace simireports
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (first == 1)
-            //{
-            //    first = 0;
-            //    executarRelatorio();
-            //}
+            //VERIFICACAO DE SESSAO E NIVEL
+            if (Session["key"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
+            else
+            {
+                //VERFICA NIVEL
+                if ((int)Session["key"] >= 2)
+                {
+                    //OK
+                }
+                else
+                {                    
+                    Response.Redirect("index.aspx");
+                }
+            }
         }
 
         protected void filtrarOMs_Click(object sender, EventArgs e)

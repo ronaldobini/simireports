@@ -34,12 +34,21 @@
 	        
 	     </form>
 
-            <%  int key = (int) Session["key"];
-                if (key == 1)
-                {%>
-                    <center><p style="color:white;">Bem vindo <%=Session["Nome"] %>!</p><h3 style="color:white;">Entrando...</h3></center>
+
+             <% //VERIFICA SESSAO E REDIRECIONA
+
+                if(Session["key"]!= null) { 
+                    int key = (int) Session["key"];
+                    if (key >= 1)
+                    {
+             %>
+                    <center><h3 style="color:white;"><%=Session["Nome"] %> entrando...</h3></p></center>
                     <meta http-equiv="refresh" content="0; URL=index.aspx" />
-                <%}%>
+             <%     
+                    }
+
+                }//--------------------
+             %>
 	     	
 	    </div> <!-- /container -->
          

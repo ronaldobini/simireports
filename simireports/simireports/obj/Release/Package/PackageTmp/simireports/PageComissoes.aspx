@@ -13,7 +13,7 @@
     <center>
     <h3><font color=white >Comissões</font></h3>
         <br />
-        
+        <p><%=sqlview %></p>
         <div id="filtros" style="margin-bottom:40px;">
             <form runat="server" id="filtrosComissoes" action="#" method="post">
                 <table>
@@ -24,12 +24,12 @@
                         <th style="width:100px;">Cliente</th>
 <%--                        <th style="width:100px; text-align:center;">% Comiss</th>
                         <th style="width:100px; text-align:center;">Valor</th>--%>
-                        <th style="width:100px;">Representante</th>
+                        <th style="width:100px;">Representante (<%=postRepres %>)</th>
                         <th>Pgto</th>
                     </tr>
                     <tr>
-                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datInicio"/></td>
-                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"/></td>
+                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datInicio" autocomplete="off"/></td>
+                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"  autocomplete="off"/></td>
                         <td style="width:120px;">
                             <select class="form-control" style="width:100px;" id="unidade" runat="server">
                                 <option value="">Todas</option>
@@ -40,11 +40,11 @@
                                 <option value="6">06</option>
                             </select>
                         </td>
-                        <td style="width:150px;"><input class="form-control" style="width:130px;" runat="server" type="text" id="cliente"/></td>
+                        <td style="width:150px;"><input class="form-control" style="width:130px;" runat="server" type="text" id="cliente" autocomplete="off"/></td>
 <%--                        <td><input runat="server" type="text" id="pctComiss"/></td>
                         <td><input runat="server" type="text" id="valor"/></td>--%>
-                        <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="repres"/></td>
-                        <td style="width:120px;"><input class="form-control" style="width:35px; text-align:center;" runat="server" type="text" id="sitPgto" value="T"/></td>
+                        <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="repres"  autocomplete="off"/></td>
+                        <td style="width:120px;"><input class="form-control" style="width:35px; text-align:center;" runat="server" type="text" id="sitPgto" value="T"  autocomplete="off"/></td>
                     </tr>
                 </table>
                 <br />

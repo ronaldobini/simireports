@@ -8,14 +8,19 @@
     <title>SimiReports</title>
 </head>
 <body bgcolor="#2a2d33">
+
+
+
     <center>
         <a  title="Atualizar a página" href="index.aspx"><img style="margin:25px;" width="100px" src="img/syss.png" /></a>
-        <br /><br /><br /><br />
+        <br /><br /><%=Session["nome"] %><br /><br />
         <a href="PageComissoes.aspx"><h3><font color="white">Comissoes</font></h3></a>
         <a href="PageDevolucoes.aspx"><h3><font color="white">Devoluções</font></h3></a>
         <!--<a href="Estoque.aspx">Estoque</a><br />-->
         <a href="PageOMsPendentes.aspx"><h3><font color="white">OMs Pendentes</font></h3></a>
+        <a href="PagePedidosEfetivados.aspx"><h3><font color="white">Pedidos Efetivados</font></h3></a>
+        <a href="Logout.aspx"><h3><font color="red">Sair</font></h3></a>
     </center>
-   
+    
 </body>
 </html>
