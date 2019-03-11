@@ -12,6 +12,7 @@ namespace simireports.simireports.Classes
         private string qtdCancel;
         private string qtdAtend;
         private string nomeItem;
+        private Decimal precoUnit;
         private string przEntrega;
 
         public Item(string qtdSolic, string qtdCancel, string qtdAtend, string nomeItem, string przEntrega, string codItem)
@@ -23,6 +24,16 @@ namespace simireports.simireports.Classes
             this.przEntrega = przEntrega;
             this.codItem = codItem;
         }
+        public Item(string qtdSolic, string qtdCancel, string qtdAtend, string nomeItem, string przEntrega, string codItem, Decimal precoUnit)
+        {
+            this.qtdSolic = qtdSolic;
+            this.qtdCancel = qtdCancel;
+            this.qtdAtend = qtdAtend;
+            this.nomeItem = nomeItem;
+            this.przEntrega = przEntrega;
+            this.codItem = codItem;
+            this.precoUnit = precoUnit;
+        }
 
         public string QtdSolic { get => qtdSolic; set => qtdSolic = value; }
         public string QtdCancel { get => qtdCancel; set => qtdCancel = value; }
@@ -30,5 +41,6 @@ namespace simireports.simireports.Classes
         public string NomeItem { get => nomeItem; set => nomeItem = value; }
         public string PrzEntrega { get => przEntrega; set => przEntrega = value; }
         public string CodItem { get => codItem; set => codItem = value; }
+        public decimal PrecoUnit { get => precoUnit; set => precoUnit = value; }
     }
 }
