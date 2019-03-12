@@ -4,12 +4,45 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Relatorio de Comissões</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <script>
+        //onload
+        function onload() {
+
+            //bloqueia campo repres
+            var represChange = "<%=represChange %>";
+            if (represChange != "sim") {
+                var repres = document.getElementById('repres');
+                repres.disabled = true;
+                repres.value = "<%=postRepres %>";
+            }
+
+            //first
+            var first = <%=Session["firstJ"] %>;
+            if (first == 1) {
+                var inicio = document.getElementById('datInicio');
+                inicio.value = "<%=mesPassado %>";
+
+                var fim = document.getElementById('datFim');
+                fim.value = "<%=hoje %>";
+
+                <% Session["firstJ"] = 0; %>
+            }
+        }
+
+        //reset
+        function resetFirst(){
+            <% Session["firstJ"] = 1; %>
+            <% Session["first"] = 1; %>
+        }
+    </script>
+
 </head>
-<body style="background-color:#222;">
-    <a  title="Voltar ao Inicio" href=" index.aspx"><img style="margin:25px;" width="100px;" src="img/syss.png" /></a>
+<body style="background-color:#222;" onload="onload();">
+    <a  title="Voltar ao Inicio" href=" index.aspx" onclick="resetFirst();"><img style="margin:25px;" width="50px;" src="img/syss.png" /></a>
     <center>
     <h3><font color=white >Comissões</font></h3>
         <br />
@@ -24,7 +57,7 @@
                         <th style="width:100px;">Cliente</th>
 <%--                        <th style="width:100px; text-align:center;">% Comiss</th>
                         <th style="width:100px; text-align:center;">Valor</th>--%>
-                        <th style="width:100px;">Representante (<%=postRepres %>)</th>
+                        <th style="width:100px;">Representante </th>
                         <th>Pgto</th>
                     </tr>
                     <tr>
@@ -55,7 +88,7 @@
         <div style="color:white; margin-bottom:30px;">Total Comiss: R$ <%=totComissS %></div>
 
         <div id="resultados">
-            <font color=white>Mostrando <%=comissoes.Count%> resultados, de <%=dataPesqIni%> a <%=dataPesqFim%></font><br/>
+            <font color=white>Mostrando <%=comissoes.Count%> resultados, de <%=postDatInicio%> a <%=postDatFim%></font><br/>
             <table class="table table-striped table-dark" style = "max-width:95%; color:white; font-size: 12px;">
                 <tr>
                     <th style="width: 5%; text-align:center;">CodRepres</th>

@@ -99,7 +99,6 @@
                                                 <th style="width: 45%;">Descricao Item</th>
                                                 <th style="width: 20%;">Prazo</th>
                                             </tr><%
-
                                                      foreach (var item in omsp.Itens)
                                                      {
                                                          string codItem = item.CodItem;

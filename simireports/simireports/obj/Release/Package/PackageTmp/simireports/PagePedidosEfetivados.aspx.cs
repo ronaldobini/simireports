@@ -108,8 +108,7 @@ namespace simireports
         protected void executarRelatorio()
         {
             IfxConnection conn = new BancoLogix().abrir();
-            string sql = "SELECT a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, b.qtd_pecas_solic," +
-                                   " b.qtd_pecas_cancel, b.cod_item, b.pre_unit, c.nom_cliente, r.nom_repres " +
+            string sql = "SELECT a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres " +
 
                                    " FROM pedidos a"+
                                     " JOIN ped_itens b on a.num_pedido = b.num_pedido AND a.cod_empresa = b.cod_empresa" +
@@ -136,11 +135,12 @@ namespace simireports
                                    " AND ies_sit_pedido = 'N' AND cod_nat_oper<> 9001" +
 
                                    " AND a.num_pedido = b.num_pedido AND a.cod_empresa = b.cod_empresa AND c.cod_cliente = a.cod_cliente" +
-
+                                   " GROUP BY a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres " +
                                    " ORDER BY a.dat_alt_sit desc, a.num_pedido";
 
             IfxDataReader reader = new BancoLogix().consultar(sql, conn);
-
+            IfxDataReader reader2;
+            IfxConnection conn2;
             if (reader != null && reader.HasRows)
             {
                 while (reader.Read())
@@ -149,17 +149,39 @@ namespace simireports
                     DateTime dat = reader.GetDateTime(1);
                     string codCliente = reader.GetString(2);
                     string numPed = reader.GetString(3);
-                    string qtdPecasSolic = reader.GetString(4);
-                    string qtdPecasCancel = reader.GetString(5);
-                    string codItem = reader.GetString(6);
-                    string precoUnitS = reader.GetString(7);
-                    precoUnitS = m.pontoPorVirgula(precoUnitS);
-                    Decimal precoUnit = Decimal.Parse(precoUnitS);
-                    string cliente = reader.GetString(8);
-                    string repres = reader.GetString(9);
+                    string cliente = reader.GetString(4);
+                    string repres = reader.GetString(5);
+                    List<Item> itens = new List<Item>();
 
-                    PedidoEfetivado pedEfet = new PedidoEfetivado(codEmpresa,dat,codCliente,numPed,qtdPecasSolic,qtdPecasCancel,codItem,precoUnit,cliente,repres);
-                    pedsEfets.Add(pedEfet);
+                    conn2 = new BancoLogix().abrir();
+                    reader2 = new
+                    BancoLogix().consultar("SELECT b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, b.pre_unit" +
+                    "                                                    FROM ped_itens b join item i on i.cod_item = b.cod_item and i.cod_empresa = b.cod_empresa" +
+                    "                                                    WHERE b.num_pedido = " + numPed + " and b.cod_empresa = " + codEmpresa, conn2);
+                    if (reader2 != null)
+                    {
+                        while (reader2.Read())
+                        {
+                            string qtdSolic = reader2.GetString(0);
+                            string qtdCancel = reader2.GetString(1);
+                            string qtdAtend = reader2.GetString(2);
+                            string nomeItem = reader2.GetString(3);
+                            //DateTime przEntregaS = reader.GetDateTime(4);
+                            string przEntregaS = reader2.GetString(4);
+                            //DateTime przEntrega = Convert.ToDateTime(przEntregaS);
+                            string codItem = reader2.GetString(5);
+                            string preUnitS = reader2.GetString(6);
+                            preUnitS = m.pontoPorVirgula(preUnitS);
+                            Decimal preUnit = Decimal.Parse(preUnitS);
+                            Item item = new Item(qtdSolic, qtdCancel, qtdAtend, nomeItem, przEntregaS, codItem, preUnit);
+                            itens.Add(item);
+                        }
+
+                        PedidoEfetivado pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, numPed, itens, cliente, repres);
+                        pedsEfets.Add(pedEfet);
+                    }
+                    new BancoLogix().fechar(conn2);
+                    reader2.Close();
 
                 }
             }

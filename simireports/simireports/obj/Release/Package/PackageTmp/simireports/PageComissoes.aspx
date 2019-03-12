@@ -4,11 +4,28 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Relatorio de Comissões</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <script>
+        function onload() {
+
+            //first
+            if (localStorage.getItem("first") === null) {
+                var inicio = document.getElementById('datInicio');
+                inicio.value = "<%=mesPassado %>";
+
+                var fim = document.getElementById('datFim');
+                fim.value = "<%=hoje %>";
+
+                localStorage.setItem("first", true);
+            }
+        }
+    </script>
+
 </head>
-<body style="background-color:#222;">
+<body style="background-color:#222;" onload="onload();">
     <a  title="Voltar ao Inicio" href=" index.aspx"><img style="margin:25px;" width="100px;" src="img/syss.png" /></a>
     <center>
     <h3><font color=white >Comissões</font></h3>

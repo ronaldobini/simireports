@@ -55,47 +55,85 @@
         <div id="resultados">
             <font color=white>Mostrando <%=pedsEfets.Count%> resultados, de <%=dataPesqIni%> a <%=dataPesqFim%></font><br/>
             <table class="table table-striped table-dark" style = "max-width:95%; color:white; font-size: 12px;">
-                <tr>
-                    <th style="width: 5%; text-align:center;">Unidade</th>
-                    <th style="width: 5%; text-align:center;">CodCliente</th>
-                    <th style="width: 10%; text-align:center;">Cliente</th>
-                    <th style="width: 10%; text-align:center;">Representante</th>
-                    <th style="width: 10%; text-align:center;">numPed</th>
-                    <th style="width: 10%; text-align:center;">QtdS</th>
-                    <th style="width: 10%; text-align:center;">QtdC</th>
-                    <th style="width: 10%; text-align:center;">codItem</th>
-                    <th style="width: 5%; text-align:center;">preUnit</th>
-                    <th style="width: 5%; text-align:center;">Data</th>
-                </tr>
+                
                 
                 <% 
+                    Decimal totPrePed = 0.0m;
+                    string totPrePedS = "";
                     foreach (var pedEfet in pedsEfets) {
+
+                     %> <tr>
+                            <th style="width: 5%; text-align:center;">Unidade</th>
+                            <th style="width: 5%; text-align:center;">CodCliente</th>
+                            <th style="width: 10%; text-align:center;">Cliente</th>
+                            <th style="width: 10%; text-align:center;">Representante</th>
+                            <th style="width: 10%; text-align:center;">numPed</th>
+                            <th style="width: 5%; text-align:center;">Data</th>
+                        </tr>
+                     <%
                         string codEmpresa = pedEfet.CodEmpresa;
                         DateTime dat = pedEfet.Dat;
                         string codCliente = pedEfet.CodCliente;
                         String numPed = pedEfet.NumPed;
-                        string qtdPecasSolic = pedEfet.QtdPecasSolic;
-                        string qtdPecasCancel = pedEfet.QtdPecasCancel;
-                        string codItem = pedEfet.CodItem;
-                        Decimal preUnit = Decimal.Round(pedEfet.PrecoUnit,2);
-                        String preUnitS = m.formatarDecimal(preUnit);
                         string cliente = pedEfet.Cliente;
                         string repres = pedEfet.Repres;
-                %> 
-                    <tr>
-                        <td style="text-align:center;"><%= codEmpresa %></td>
-                        <td style="text-align:center;"><%= codCliente %></td>
-                        <td style="text-align:center;"><%= cliente %></td>
-                        <td style="text-align:center;"><%= repres %></td>
-                        <td style="text-align:right;"><%= numPed %></td>
-                        <td style="text-align:center;"><%= qtdPecasSolic%></td>
-                        <td style="text-align:center;"><%= qtdPecasCancel %></td>
-                        <td style="text-align:center;"><%= codItem %></td>
-                        <td style="text-align:right;"><%= "R$ "+preUnitS %></td>
-                        <td style="text-align:center;"><%= dat %></td>
-                    </tr>
-                <%
-                    }%>
+                     %> 
+                        <tr>
+                            <td style="text-align:center;"><%= codEmpresa %></td>
+                            <td style="text-align:center;"><%= codCliente %></td>
+                            <td style="text-align:center;"><%= cliente %></td>
+                            <td style="text-align:center;"><%= repres %></td>
+                            <td style="text-align:right;"><%= numPed %></td>
+                            <td style="text-align:center;"><%= dat %></td>
+                        </tr>
+                                <tr>
+                                    <td colspan ="6"><table class="table table-striped table-dark" style="background-color:#3f4142; width:100%; color:white; font-size: 12px;">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width: 15%;">Cod Item</th>
+                                                <th style="width: 10%;">Solic</th>
+                                                <th style="width: 10%;">Cancel</th>
+                                                <th style="width: 10%;">Atend</th>
+                                                <th style="width: 45%;">Descricao Item</th>
+                                                <th style="width: 45%;">Preco Unit</th>
+                                                <th style="width: 20%;">Prazo</th>
+                                            </tr><%
+                                                     totPrePed = 0.0m;
+                                                     totPrePedS = m.formatarDecimal(totPrePed);
+                                                     foreach (var item in pedEfet.Itens)
+                                                     {
+                                                         string codItem = item.CodItem;
+                                                         string qtdSolic = item.QtdSolic;
+                                                         qtdSolic = m.pontoPorVirgula(qtdSolic);
+                                                         Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic),0);
+
+                                                         string qtdCancel = item.QtdCancel;
+                                                         string qtdAtend = item.QtdAtend;
+                                                         string nomeItem = item.NomeItem;
+                                                         string przEntrega = item.PrzEntrega;
+
+                                                         Decimal preUnit = Decimal.Round(item.PrecoUnit,2);
+                                                         String preUnitS = m.formatarDecimal(preUnit);
+
+                                                         totPrePed += preUnit*qtdSolicD;
+                                                         totPrePedS = m.formatarDecimal(totPrePed);
+                                          %>
+                                            <tr>
+                                                <td><%= codItem %></td>
+                                                <td><%= qtdSolic %></td>
+                                                <td><%= qtdCancel %></td>
+                                                <td><%= qtdAtend %></td>
+                                                <td><%= nomeItem %></td>
+                                                <td><%= "R$"+preUnitS %></td>
+                                                <td><%= przEntrega %></td>
+                                            </tr>
+                                                
+                                            <% } %>
+                                            <tr><td colspan="4" style="background-color:black; color:white;"><b>Total Pre Pedido: R$ <%= totPrePedS %></td><td colspan="6"></td><td colspan="4"></td></tr>
+                                        </tbody></table></td>
+                                    </tr><%
+                                    }
+                                %>
             </table>
         </div>
     

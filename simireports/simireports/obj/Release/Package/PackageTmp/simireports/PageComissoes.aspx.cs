@@ -12,21 +12,21 @@ namespace simireports
 {
     public partial class PageComissoes : System.Web.UI.Page
     {
-        public static int first = 1;
+        public int first = 1;
         public static Metodos m = new Metodos();
         public static String mesPassado = DateTime.Today.AddMonths(-1).ToString("d");
         public static String hoje = DateTime.Today.ToString("d");
-        public static string postDatInicio = "";
-        public static string postDatFim = "";
-        public static string dataPesqIni = mesPassado;
-        public static string dataPesqFim = hoje;
-        public static string postCliente = "";
-        public static string postPctComiss = "";
-        public static string postValor = "";
-        public static string postUnidade = "";
-        public static string postRepres = "";
-        public static string postSitPgto = "T";
-        public static string sqlview = "";
+        public string postDatInicio = "";
+        public string postDatFim = "";
+        public string dataPesqIni = mesPassado;
+        public string dataPesqFim = hoje;
+        public string postCliente = "";
+        public string postPctComiss = "";
+        public string postValor = "";
+        public string postUnidade = "";
+        public string postRepres = "";
+        public string postSitPgto = "T";
+        public string sqlview = "";
 
 
         public static Decimal totComiss = 0.0M;
@@ -61,6 +61,8 @@ namespace simireports
             if (first == 1)
             {
                 postRepres = (string)Session["nome"];
+                postDatInicio = mesPassado;
+                postDatFim = hoje;
                 first = 0;
                 //executarRelatorio();
             }
