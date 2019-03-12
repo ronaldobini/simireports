@@ -23,6 +23,9 @@ namespace simireports
         public string postCodItem = "";
         public string postPreUnit = "";
         public string sqlview = "";
+        public decimal totGeral = 0.0m;
+        public string totGeralS = "0,00";
+
 
         public Metodos m = new Metodos();
         public String ontem = DateTime.Today.AddDays(-1).ToString("d");
@@ -57,6 +60,8 @@ namespace simireports
 
                 if ((int)Session["first"] == 1)
                 {
+                    postRepres = (string)Session["nome"];
+                    postRepres = postRepres.ToUpper();
                     Session["first"] = 0;
                     //executarRelatorio();
                 }
@@ -104,7 +109,7 @@ namespace simireports
 
         protected void executarRelatorio()
         {
-            
+            Session["firstJ"] = "0";
             IfxConnection conn = new BancoLogix().abrir();
             string sql = "SELECT a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres " +
 
@@ -153,11 +158,11 @@ namespace simireports
                     string repres = reader.GetString(5);
                     List<Item> itens = new List<Item>();
 
-                    conn2 = new BancoLogix().abrir();
+                    //conn2 = new BancoLogix().abrir();
                     reader2 = new
                     BancoLogix().consultar("SELECT b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, b.pre_unit" +
                     "                                                    FROM ped_itens b join item i on i.cod_item = b.cod_item and i.cod_empresa = b.cod_empresa" +
-                    "                                                    WHERE b.num_pedido = " + numPed + " and b.cod_empresa = " + codEmpresa, conn2);
+                    "                                                    WHERE b.num_pedido = " + numPed + " and b.cod_empresa = " + codEmpresa, conn);
                     if (reader2 != null)
                     {
                         while (reader2.Read())
@@ -169,8 +174,12 @@ namespace simireports
                             string przEntregaS = reader2.GetString(4);
                             string codItem = reader2.GetString(5);
                             string preUnitS = reader2.GetString(6);
-                            preUnitS = m.pontoPorVirgula(preUnitS);
-                            Decimal preUnit = Decimal.Parse(preUnitS);
+                            preUnitS = m.pontoPorVirgula(preUnitS);                            
+                            Decimal preUnit = Decimal.Round(Decimal.Parse(preUnitS),2);
+                            qtdSolic = m.pontoPorVirgula(qtdSolic);
+                            Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
+                            totGeral += (qtdSolicD * preUnit);
+                            totGeralS = m.formatarDecimal(totGeral);
                             Item item = new Item(qtdSolic, qtdCancel, qtdAtend, nomeItem, przEntregaS, codItem, preUnit);
                             itens.Add(item);
                         }
@@ -178,7 +187,7 @@ namespace simireports
                         PedidoEfetivado pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, numPed, itens, cliente, repres);
                         pedsEfets.Add(pedEfet);
                     }
-                    new BancoLogix().fechar(conn2);
+                    //new BancoLogix().fechar(conn2);
                     reader2.Close();
 
                 }
@@ -196,6 +205,9 @@ namespace simireports
                 }
 
             }
+
+            new BancoLogix().fechar(conn);
+
         }
 
     }

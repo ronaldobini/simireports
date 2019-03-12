@@ -23,7 +23,9 @@ namespace simireports
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            
+            Session["firstJ"] = 1; 
+            Session["first"] = 1; 
+
             IfxConnection conn = new BancoLogix().abrir();
             IfxDataReader reader = new BancoLogix().consultar("SELECT * FROM pedidos where dat_alt_sit >= '16/01/2019' order by dat_alt_sit desc", conn);
 

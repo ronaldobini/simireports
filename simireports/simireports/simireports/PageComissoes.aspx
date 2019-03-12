@@ -22,30 +22,30 @@
 
             //first
             var first = <%=Session["firstJ"] %>;
-            if (first == 1) {
+            if (first == "1") {
                 var inicio = document.getElementById('datInicio');
                 inicio.value = "<%=mesPassado %>";
 
                 var fim = document.getElementById('datFim');
                 fim.value = "<%=hoje %>";
 
-                <% Session["firstJ"] = 0; %>
+                var repres = document.getElementById('repres');
+                repres.value = "<%=postRepres %>";
             }
         }
 
-        //reset
-        function resetFirst(){
-            <% Session["firstJ"] = 1; %>
-            <% Session["first"] = 1; %>
-        }
+       
     </script>
 
 </head>
 <body style="background-color:#222;" onload="onload();">
-    <a  title="Voltar ao Inicio" href=" index.aspx" onclick="resetFirst();"><img style="margin:25px;" width="50px;" src="img/syss.png" /></a>
+     <div id="logo" style="margin-left:20px; float:left;">
+        <a  title="Voltar ao Inicio" href=" index.aspx"><img style=" width:50px;" src="img/syss.png" /></a>
+    </div>
     <center>
-    <h3><font color=white >Comissões</font></h3>
-        <br />
+    <div id="titulo" style="margin-top:40px; margin-right:70px; color:white; font-size:30px;">Comissões</div>
+    <br />
+
         <p><%=sqlview %></p>
         <div id="filtros" style="margin-bottom:40px;">
             <form runat="server" id="filtrosComissoes" action="#" method="post">
@@ -67,10 +67,7 @@
                             <select class="form-control" style="width:100px;" id="unidade" runat="server">
                                 <option value="">Todas</option>
                                 <option value="2">02</option>
-                                <option value="3">03</option>
                                 <option value="4">04</option>
-                                <option value="5">05</option>
-                                <option value="6">06</option>
                             </select>
                         </td>
                         <td style="width:150px;"><input class="form-control" style="width:130px;" runat="server" type="text" id="cliente" autocomplete="off"/></td>
@@ -111,7 +108,10 @@
                     string uNomRepres = "";
                     Decimal totRepres = 0.0m;
                     string totRepresS = "";
+                    
+
                     foreach (var comissao in comissoes) {
+
                         string codEmpresa = comissao.CodEmpresa;
                         string numDocum = comissao.NumDocum;
                         string numDocumOrigem = comissao.NumDocumOrigem;

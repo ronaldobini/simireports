@@ -65,6 +65,8 @@ namespace simireports
             //first execution
             if ((int)Session["first"] == 1)
             {
+                postRepres = (string)Session["nome"];
+                postRepres = postRepres.ToUpper();
                 Session["first"] = 0;
                 //executarRelatorio();
             }
@@ -98,6 +100,7 @@ namespace simireports
         
         protected void executarRelatorio()
         {
+            Session["firstJ"] = "0";
             postCliente = m.configCoringas(postCliente);
             postRepres = m.configCoringas(postRepres);
             
@@ -127,7 +130,9 @@ namespace simireports
                                         //"AND d.pct_comis_1 = " + postPctComiss + " " +
                                         //"AND d.val_bruto like " + postValor + " " +
                                         "AND d.cod_empresa like '%" + postUnidade + "%' " +
-                                        "AND d.ies_situa_docum = 'N' AND d.ies_tip_docum = 'DP' order by d.cod_repres_1";
+                                        "AND d.ies_situa_docum = 'N' AND d.ies_tip_docum = 'DP' " +
+                                        "AND d.pct_comis_1 <> 0.14 " +
+                                        "ORDER BY d.cod_repres_1 ";
 
             //sqlview = sql; //ativa a exibicao do sql na tela
             IfxDataReader reader = new BancoLogix().consultar(sql, conn);
@@ -212,6 +217,9 @@ namespace simireports
                 }
                 
             }
+
+            new BancoLogix().fechar(conn);
+
         }
         
     }

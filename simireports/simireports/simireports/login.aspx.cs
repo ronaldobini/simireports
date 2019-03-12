@@ -64,8 +64,6 @@ namespace simireports.simireports
                     Session["nome"] = nome;
                     Session["idx"] = idx;
                     Session["codRepres"] = codRepres;
-                    Session["first"] = 1;
-                    Session["firstJ"] = 1;
 
                     //DEFINE A KEY DO USUARIO
                     int key = 1;

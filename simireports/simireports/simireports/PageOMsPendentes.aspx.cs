@@ -101,11 +101,11 @@ namespace simireports
 
                     List<Item> itens = new List<Item>();
 
-                    conn2 = new BancoLogix().abrir();
+                    //conn2 = new BancoLogix().abrir();
                     reader2 = new
                     BancoLogix().consultar("SELECT b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item" +
                     "                                                    FROM ped_itens b join item i on i.cod_item = b.cod_item and i.cod_empresa = b.cod_empresa" +
-                    "                                                    WHERE b.num_pedido = " + numPed + " and b.cod_empresa = " + codEmpresa, conn2);
+                    "                                                    WHERE b.num_pedido = " + numPed + " and b.cod_empresa = " + codEmpresa, conn);
                     if (reader2 != null)
                     {
                         while (reader2.Read())
@@ -125,10 +125,13 @@ namespace simireports
                         OMPendente omp = new OMPendente(codEmpresa, datAltSit, codCliente, cliente, numPed, tipoEntrega, itens);
                         omsps.Add(omp);
                     }
-                    new BancoLogix().fechar(conn2);
+                    //new BancoLogix().fechar(conn2);
                     reader2.Close();
                 }
             }
+
+            new BancoLogix().fechar(conn);
+
         }
 
 

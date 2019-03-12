@@ -12,14 +12,9 @@ namespace simireports
 {
     public partial class PageComissoes : System.Web.UI.Page
     {
-        public int first = 1;
-        public static Metodos m = new Metodos();
-        public static String mesPassado = DateTime.Today.AddMonths(-1).ToString("d");
-        public static String hoje = DateTime.Today.ToString("d");
+                
         public string postDatInicio = "";
         public string postDatFim = "";
-        public string dataPesqIni = mesPassado;
-        public string dataPesqFim = hoje;
         public string postCliente = "";
         public string postPctComiss = "";
         public string postValor = "";
@@ -27,6 +22,12 @@ namespace simireports
         public string postRepres = "";
         public string postSitPgto = "T";
         public string sqlview = "";
+
+        public Metodos m = new Metodos();
+        public String mesPassado = DateTime.Today.AddMonths(-1).ToString("d");
+        public String hoje = DateTime.Today.ToString("d");
+        public string represChange = "nao";
+        
 
 
         public static Decimal totComiss = 0.0M;
@@ -48,7 +49,10 @@ namespace simireports
                 //VERFICA NIVEL
                 if ((int)Session["key"] >= 1)
                 {
-                    //OK
+                    if ((int)Session["key"] >= 4)
+                    {
+                        represChange = "sim";
+                    }
                 }                
                 else
                 {
@@ -57,13 +61,13 @@ namespace simireports
                 }
             }
 
-
-            if (first == 1)
+            
+            //first execution
+            if ((int)Session["first"] == 1)
             {
                 postRepres = (string)Session["nome"];
-                postDatInicio = mesPassado;
-                postDatFim = hoje;
-                first = 0;
+                postRepres = postRepres.ToUpper();
+                Session["first"] = 0;
                 //executarRelatorio();
             }
         }
@@ -71,30 +75,12 @@ namespace simireports
         protected void filtrarComiss_Click(object sender, EventArgs e)
         {
             postDatInicio = datInicio.Value;
+            if (postDatInicio == "") postDatInicio = mesPassado;
+            
             postDatFim = datFim.Value;
+            if (postDatFim == "") postDatFim = hoje;
 
-            postDatInicio = datInicio.Value;
-            if (!postDatInicio.Equals(""))
-            {
-                dataPesqIni = postDatInicio;
-                postDatInicio = "AND dp.dat_pgto >= '" + postDatInicio + "' ";
-            }
-            else
-            {
-                dataPesqIni = "-";
-            }
-            postDatFim = datFim.Value;
-            if (!postDatFim.Equals(""))
-            {
-                dataPesqFim = postDatFim;
-                postDatFim = "AND dp.dat_pgto <= '" + postDatFim + "' ";                
-            }
-            else
-            {
-                dataPesqFim = "-";
-            }
-
-            if((int)Session["key"] >= 4)
+            if ((int)Session["key"] >= 4)
             {
                 postRepres = repres.Value.ToUpper();
             }
@@ -106,8 +92,6 @@ namespace simireports
             
             postCliente = cliente.Value.ToUpper();
             postUnidade = unidade.Value;
-            //postValor = valor.Value;
-            //postPctComiss = pctComiss.Value;
 
 
             postSitPgto = sitPgto.Value.ToUpper();
@@ -116,6 +100,7 @@ namespace simireports
         
         protected void executarRelatorio()
         {
+            Session["firstJ"] = "0";
             postCliente = m.configCoringas(postCliente);
             postRepres = m.configCoringas(postRepres);
             
@@ -138,14 +123,16 @@ namespace simireports
                                         "JOIN clientes cl on cl.cod_cliente = d.cod_cliente " +
                                         "LEFT JOIN docum_pgto dp on d.num_docum = dp.num_docum and d.cod_empresa = dp.cod_empresa " +
                                         "WHERE r.nom_repres like '%" + postRepres + "%' " +
-                                        postDatInicio +
-                                        postDatFim +
+                                        "AND dp.dat_pgto >= '" + postDatInicio + "' " +
+                                        "AND dp.dat_pgto <= '" + postDatFim + "' " +
                                         "AND ies_pgto_docum = '" + postSitPgto + "' " +
                                         "AND cl.nom_cliente like '%" + postCliente + "%' " +
                                         //"AND d.pct_comis_1 = " + postPctComiss + " " +
                                         //"AND d.val_bruto like " + postValor + " " +
                                         "AND d.cod_empresa like '%" + postUnidade + "%' " +
-                                        "AND d.ies_situa_docum = 'N' AND d.ies_tip_docum = 'DP' order by d.cod_repres_1";
+                                        "AND d.ies_situa_docum = 'N' AND d.ies_tip_docum = 'DP' " +
+                                        "AND d.pct_comis_1 <> 0.14 " +
+                                        "ORDER BY d.cod_repres_1 ";
 
             //sqlview = sql; //ativa a exibicao do sql na tela
             IfxDataReader reader = new BancoLogix().consultar(sql, conn);
@@ -230,6 +217,9 @@ namespace simireports
                 }
                 
             }
+
+            new BancoLogix().fechar(conn);
+
         }
         
     }

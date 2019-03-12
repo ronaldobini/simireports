@@ -9,27 +9,43 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
     <script>
+        //onload
         function onload() {
 
+            //bloqueia campo repres
+            var represChange = "<%=represChange %>";
+            if (represChange != "sim") {
+                var repres = document.getElementById('repres');
+                repres.disabled = true;
+                repres.value = "<%=postRepres %>";
+            }
+
             //first
-            if (localStorage.getItem("first") === null) {
+            var first = <%=Session["firstJ"] %>;
+            if (first == "1") {
                 var inicio = document.getElementById('datInicio');
                 inicio.value = "<%=mesPassado %>";
 
                 var fim = document.getElementById('datFim');
                 fim.value = "<%=hoje %>";
 
-                localStorage.setItem("first", true);
+                var repres = document.getElementById('repres');
+                repres.value = "<%=postRepres %>";
             }
         }
+
+       
     </script>
 
 </head>
 <body style="background-color:#222;" onload="onload();">
-    <a  title="Voltar ao Inicio" href=" index.aspx"><img style="margin:25px;" width="100px;" src="img/syss.png" /></a>
+     <div id="logo" style="margin-left:20px; float:left;">
+        <a  title="Voltar ao Inicio" href=" index.aspx"><img style=" width:50px;" src="img/syss.png" /></a>
+    </div>
     <center>
-    <h3><font color=white >Comissões</font></h3>
-        <br />
+    <div id="titulo" style="margin-top:40px; margin-right:70px; color:white; font-size:30px;">Comissões</div>
+    <br />
+
         <p><%=sqlview %></p>
         <div id="filtros" style="margin-bottom:40px;">
             <form runat="server" id="filtrosComissoes" action="#" method="post">
@@ -41,7 +57,7 @@
                         <th style="width:100px;">Cliente</th>
 <%--                        <th style="width:100px; text-align:center;">% Comiss</th>
                         <th style="width:100px; text-align:center;">Valor</th>--%>
-                        <th style="width:100px;">Representante (<%=postRepres %>)</th>
+                        <th style="width:100px;">Representante </th>
                         <th>Pgto</th>
                     </tr>
                     <tr>
@@ -51,10 +67,7 @@
                             <select class="form-control" style="width:100px;" id="unidade" runat="server">
                                 <option value="">Todas</option>
                                 <option value="2">02</option>
-                                <option value="3">03</option>
                                 <option value="4">04</option>
-                                <option value="5">05</option>
-                                <option value="6">06</option>
                             </select>
                         </td>
                         <td style="width:150px;"><input class="form-control" style="width:130px;" runat="server" type="text" id="cliente" autocomplete="off"/></td>
@@ -72,7 +85,7 @@
         <div style="color:white; margin-bottom:30px;">Total Comiss: R$ <%=totComissS %></div>
 
         <div id="resultados">
-            <font color=white>Mostrando <%=comissoes.Count%> resultados, de <%=dataPesqIni%> a <%=dataPesqFim%></font><br/>
+            <font color=white>Mostrando <%=comissoes.Count%> resultados, de <%=postDatInicio%> a <%=postDatFim%></font><br/>
             <table class="table table-striped table-dark" style = "max-width:95%; color:white; font-size: 12px;">
                 <tr>
                     <th style="width: 5%; text-align:center;">CodRepres</th>
@@ -95,7 +108,10 @@
                     string uNomRepres = "";
                     Decimal totRepres = 0.0m;
                     string totRepresS = "";
+                    
+
                     foreach (var comissao in comissoes) {
+
                         string codEmpresa = comissao.CodEmpresa;
                         string numDocum = comissao.NumDocum;
                         string numDocumOrigem = comissao.NumDocumOrigem;

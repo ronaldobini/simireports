@@ -13,21 +13,24 @@ namespace simireports
     public partial class PagePedidosEfetivados : System.Web.UI.Page
     {
 
-        public static int first = 1;
-        public static Metodos m = new Metodos();
-        public static string postUnidade = "";
-        public static string postCodCliente = "";
-        public static string postCliente = "";
-        public static string postRepres = "";
-        public static string postNumPed = "";
-        public static String ontem = DateTime.Today.AddDays(-1).ToString("d");
-        public static String hoje = DateTime.Today.ToString("d");
-        public static string dataPesqIni = ontem;
-        public static string dataPesqFim = hoje;
-        public static string postDatInicio = "AND dat_alt_sit >= '" + ontem + "'";
-        public static string postDatFim = "AND dat_alt_sit <= '" + hoje + "'";
-        public static string postCodItem = "";
-        public static string postPreUnit = "";
+        public string postDatInicio = "";
+        public string postDatFim = "";
+        public string postUnidade = "";
+        public string postCodCliente = "";
+        public string postCliente = "";
+        public string postRepres = "";
+        public string postNumPed = "";       
+        public string postCodItem = "";
+        public string postPreUnit = "";
+        public string sqlview = "";
+        public decimal totGeral = 0.0m;
+        public string totGeralS = "0,00";
+
+
+        public Metodos m = new Metodos();
+        public String ontem = DateTime.Today.AddDays(-1).ToString("d");
+        public String hoje = DateTime.Today.ToString("d");        
+        public string represChange = "nao";
 
         public List<PedidoEfetivado> pedsEfets = new List<PedidoEfetivado> { };
 
@@ -43,70 +46,70 @@ namespace simireports
                 //VERFICA NIVEL
                 if ((int)Session["key"] >= 1)
                 {
-                    //OK
+                    if ((int)Session["key"] >= 4)
+                    {
+                        represChange = "sim";
+                    }
                 }
                 else
                 {
-                    
                     Response.Redirect("index.aspx");
                 }
             }
-            if (first == 1)
-            {
-                first = 0;
-                executarRelatorio();
-            }
+                            
+
+                if ((int)Session["first"] == 1)
+                {
+                    postRepres = (string)Session["nome"];
+                    postRepres = postRepres.ToUpper();
+                    Session["first"] = 0;
+                    //executarRelatorio();
+                }
         }
+
+        
 
         protected void filtrarPedEfet_Click(object sender, EventArgs e)
         {
             postUnidade = unidade.Value;
             postCodCliente = codCliente.Value;
-            //if (!postCodCliente.Equals(""))
-            //{
-            //    postCodCliente = "AND ns.num_nf = " + postCodCliente + " ";
-                    postCodCliente = m.configCoringas(postCodCliente);
-            //}
+           
+            postCodCliente = m.configCoringas(postCodCliente);
 
             postCliente = cliente.Value.ToUpper();
-            postCliente = m.configCoringas(postCliente);
+            postCliente = m.configCoringas(postCliente);           
             
-            postRepres = repres.Value.ToUpper();
-            postRepres = m.configCoringas(postRepres);
 
             postNumPed = numPed.Value;
             if (!postNumPed.Equals(""))
             {
-                postNumPed = "AND a.num_pedido = " + postNumPed + " ";
+                postNumPed = " AND a.num_pedido = " + postNumPed + "";
             }
             postCodItem = codItem.Value.ToUpper();
             postCodItem = m.configCoringas(postCodItem);
 
             postDatInicio = datIni.Value;
-            if (!postDatInicio.Equals(""))
-            {
-                postDatInicio = "AND dat_alt_sit >= '" + postDatInicio + "' ";
-                dataPesqIni = datIni.Value;
-            }
-            else
-            {
-                dataPesqIni = "-";
-            }
+            if (postDatInicio == "") postDatInicio = ontem;
+
             postDatFim = datFim.Value;
-            if (!postDatFim.Equals(""))
+            if (postDatFim == "") postDatFim = hoje;
+
+            if ((int)Session["key"] >= 4)
             {
-                postDatFim = "AND dat_alt_sit <= '" + postDatFim + "' ";
-                dataPesqFim = datFim.Value;
+                postRepres = repres.Value.ToUpper();
             }
             else
             {
-                dataPesqFim = "-";
+                postRepres = (string)Session["nome"];
+                postRepres = postRepres.ToUpper();
             }
+
             executarRelatorio();
         }
 
         protected void executarRelatorio()
         {
+            Session["firstJ"] = "0";
             IfxConnection conn = new BancoLogix().abrir();
             string sql = "SELECT a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres " +
 
@@ -122,11 +125,9 @@ namespace simireports
 
                                    " AND r.nom_repres LIKE '%" + postRepres + "%'" +
 
-                                   postDatInicio +
-                                   
-                                   postDatFim +
+                                   " AND a.dat_alt_sit >= '" + postDatInicio + "'" +
 
-                                   postNumPed +
+                                   " AND a.dat_alt_sit <= '" + postDatFim + "'" +
 
                                    " AND b.cod_item like '%" + postCodItem + "%'" +
 
@@ -134,9 +135,13 @@ namespace simireports
 
                                    " AND ies_sit_pedido = 'N' AND cod_nat_oper<> 9001" +
 
+                                   postNumPed + 
+
                                    " AND a.num_pedido = b.num_pedido AND a.cod_empresa = b.cod_empresa AND c.cod_cliente = a.cod_cliente" +
                                    " GROUP BY a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres " +
                                    " ORDER BY a.dat_alt_sit desc, a.num_pedido";
+
+            //sqlview = sql; //ativa a exibicao do sql na tela
 
             IfxDataReader reader = new BancoLogix().consultar(sql, conn);
             IfxDataReader reader2;
@@ -153,11 +158,11 @@ namespace simireports
                     string repres = reader.GetString(5);
                     List<Item> itens = new List<Item>();
 
-                    conn2 = new BancoLogix().abrir();
+                    //conn2 = new BancoLogix().abrir();
                     reader2 = new
                     BancoLogix().consultar("SELECT b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, b.pre_unit" +
                     "                                                    FROM ped_itens b join item i on i.cod_item = b.cod_item and i.cod_empresa = b.cod_empresa" +
-                    "                                                    WHERE b.num_pedido = " + numPed + " and b.cod_empresa = " + codEmpresa, conn2);
+                    "                                                    WHERE b.num_pedido = " + numPed + " and b.cod_empresa = " + codEmpresa, conn);
                     if (reader2 != null)
                     {
                         while (reader2.Read())
@@ -166,13 +171,15 @@ namespace simireports
                             string qtdCancel = reader2.GetString(1);
                             string qtdAtend = reader2.GetString(2);
                             string nomeItem = reader2.GetString(3);
-                            //DateTime przEntregaS = reader.GetDateTime(4);
                             string przEntregaS = reader2.GetString(4);
-                            //DateTime przEntrega = Convert.ToDateTime(przEntregaS);
                             string codItem = reader2.GetString(5);
                             string preUnitS = reader2.GetString(6);
-                            preUnitS = m.pontoPorVirgula(preUnitS);
-                            Decimal preUnit = Decimal.Parse(preUnitS);
+                            preUnitS = m.pontoPorVirgula(preUnitS);                            
+                            Decimal preUnit = Decimal.Round(Decimal.Parse(preUnitS),2);
+                            qtdSolic = m.pontoPorVirgula(qtdSolic);
+                            Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
+                            totGeral += (qtdSolicD * preUnit);
+                            totGeralS = m.formatarDecimal(totGeral);
                             Item item = new Item(qtdSolic, qtdCancel, qtdAtend, nomeItem, przEntregaS, codItem, preUnit);
                             itens.Add(item);
                         }
@@ -180,7 +187,7 @@ namespace simireports
                         PedidoEfetivado pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, numPed, itens, cliente, repres);
                         pedsEfets.Add(pedEfet);
                     }
-                    new BancoLogix().fechar(conn2);
+                    //new BancoLogix().fechar(conn2);
                     reader2.Close();
 
                 }
@@ -198,6 +205,9 @@ namespace simireports
                 }
 
             }
+
+            new BancoLogix().fechar(conn);
+
         }
 
     }
