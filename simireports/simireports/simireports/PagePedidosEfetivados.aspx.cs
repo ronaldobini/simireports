@@ -145,7 +145,7 @@ namespace simireports
 
             IfxDataReader reader = new BancoLogix().consultar(sql, conn);
             IfxDataReader reader2;
-            IfxConnection conn2;
+
             if (reader != null && reader.HasRows)
             {
                 while (reader.Read())

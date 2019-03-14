@@ -77,8 +77,22 @@ using System.Data.SqlClient;
             }
             return result;
         }
-
-
-
-
+    public String consultarErros(string sql, SqlConnection conn)
+    {
+        string result = "Sem Erros";
+        SqlDataReader reader = null;
+        try
+        {
+            SqlCommand command = new SqlCommand(sql, conn);
+            reader = command.ExecuteReader();
+        }
+        catch (Exception e)
+        {
+            result = "ERRO: " + e;
+        }
+        return result;
     }
+
+
+
+}

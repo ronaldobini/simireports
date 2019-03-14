@@ -110,39 +110,44 @@ namespace simireports
         protected void executarRelatorio()
         {
             Session["firstJ"] = "0";
+
+            SqlDataReader reader = null;
+            SqlDataReader reader2 = null;
+
             SqlConnection conn = new BancoAzure().abrir();
+            SqlConnection conn2 = new BancoAzure().abrir();
+
             string sql = "SELECT a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante " +
 
-                                   " FROM dbo_PrePEDIDOS a"+
+                                        " FROM PrePEDIDOS a" +
 
-                                    " JOIN dbo_PrePedidosItens b on a.CodPed = b.CodPed" +
+                                        " INNER JOIN PrePedidosItens b on a.CodPed = b.CodPed" +
 
-                                   " WHERE a.cod_cliente LIKE '%" + postCodCliente + "%'" +
+                                        " WHERE a.cod_cliente LIKE '%" + postCodCliente + "%'" +
 
-                                   " AND a.nom_cliente LIKE '%" + postCliente + "%'" +
+                                        " AND a.nom_cliente LIKE '%" + postCliente + "%'" +
 
-                                   " AND a.nom_repres LIKE '%" + postRepres + "%'" +
+                                        " AND a.Representante LIKE '%" + postRepres + "%'" +
 
-                                   " AND a.DataUlt >= '" + postDatInicio + "'" +
+                                        //" AND a.DataUlt >= '" + postDatInicio + "'" +
 
-                                   " AND a.DataUlt <= '" + postDatFim + "'" +
+                                        //" AND a.DataUlt <= '" + postDatFim + "'" +
 
-                                   " AND b.cod_item like '%" + postCodItem + "%'" +
+                                        " AND b.cod_item like '%" + postCodItem + "%'" +
 
-                                   " AND a.Unidade LIKE '%" + postUnidade +"%'" +
+                                        " AND a.Unidade LIKE '%" + postUnidade + "%'" +
 
-                                   " AND a.CLProp  NOT like = 'E%'"+
+                                        //" AND a.CLProp NOT like 'E%'"+
 
-                                   postNumPed +
+                                        postNumPed +
 
-                                   " GROUP BY a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.nom_repres " +
-                                   " ORDER BY a.DataUlt desc, a.CodPed";
+                                        " GROUP BY a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante " +
+                                        " ORDER BY a.DataUlt desc, a.CodPed";
 
             //sqlview = sql; //ativa a exibicao do sql na tela
-
-            SqlDataReader reader = new BancoAzure().consultar(sql, conn);
-            SqlDataReader reader2;
-            SqlConnection conn2;
+            //String errosql = new BancoAzure().consultarErros(sql,conn);
+            reader = new BancoAzure().consultar(sql, conn);
+            
             if (reader != null && reader.HasRows)
             {
                 while (reader.Read())
@@ -154,13 +159,16 @@ namespace simireports
                     string cliente = reader.GetString(4);
                     string repres = reader.GetString(5);
                     List<Item> itens = new List<Item>();
+                    string sql2 = "SELECT b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit" +
+                    "                                                    FROM PrePedidosItens b inner join LgxPRODUTOS i on i.cod_item = b.cod_item" +
+                    "                                                    WHERE b.CodPed = " + numPed;
+                    
+                    String errosql = new BancoAzure().consultarErros(sql2, conn);
 
-                    //conn2 = new BancoLogix().abrir();
                     reader2 = new
-                    BancoAzure().consultar("SELECT b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit" +
-                    "                                                    FROM dbo_PrePedidosItens b join dbo_LgxPRODUTOS i on i.cod_item = b.cod_item" +
-                    "                                                    WHERE b.CodPed = " + numPed, conn);
-                    if (reader2 != null)
+                     BancoAzure().consultar(sql2, conn2);
+
+                    if (reader2 != null && reader2.HasRows)
                     {
                         while (reader2.Read())
                         {
@@ -183,11 +191,12 @@ namespace simireports
 
                         PedidoEfetivado pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, numPed, itens, cliente, repres);
                         pedsEfets.Add(pedEfet);
+                        reader2.Close();
                     }
-                    //new BancoLogix().fechar(conn2);
-                    reader2.Close();
+                    new BancoAzure().fechar(conn2);
 
                 }
+                reader.Close();
             }
             else
             {
