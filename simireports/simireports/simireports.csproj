@@ -149,6 +149,7 @@
     <Content Include="simireports\login.aspx" />
     <Content Include="simireports\PageDevolucoes.aspx" />
     <Content Include="simireports\PagePedidosEfetivados.aspx" />
+    <Content Include="simireports\PageEmails.aspx" />
     <Content Include="syss.ico" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -236,6 +237,13 @@
     </Compile>
     <Compile Include="simireports\PagePedidosEfetivados.aspx.designer.cs">
       <DependentUpon>PagePedidosEfetivados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simireports\PageEmails.aspx.cs">
+      <DependentUpon>PageEmails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\PageEmails.aspx.designer.cs">
+      <DependentUpon>PageEmails.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />
