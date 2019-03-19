@@ -28,8 +28,9 @@
                 <td><a href="PageOMsPendentes.aspx">OMs Pendentes</a></td>
             </tr>           
             <tr>
-                <td><a href="PagePedidosEfetivados.aspx">Pedidos Efetivados</a></td>
-                <td></td>
+                <td><a href="PagePedidosEfetivados.aspx">Pedidos Efetivados Logix</a></td>
+                <td><a href="PagePedidosEfetivadosCRM.aspx">Pedidos Efetivados CRM</a></td>
+                <td><a href="PageEmails.aspx">Email</a></td>
                 <td></td>
             </tr>
             <tr>

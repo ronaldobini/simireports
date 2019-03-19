@@ -54,14 +54,13 @@
             <font color=white>Mostrando <%=devolucoes.Count%> resultados, de <%=dataPesqIni%> a <%=dataPesqFim%></font><br/>
             <table class="table table-striped table-dark" style = "max-width:95%; color:white; font-size: 12px;">
                 <tr>
+                    <th style="width: 10%; text-align:center;">Data Emiss</th>
                     <th style="width: 5%; text-align:center;">Unidade</th>
                     <th style="width: 5%; text-align:center;">Num NF</th>
                     <th style="width: 5%; text-align:center;">Aviso Rec</th>
+                    <th style="width: 10%; text-align:center;">Cod. Item</th>
+                    <th style="width: 10%; text-align:center;">Pre Unit</th>
                     <th style="width: 10%; text-align:center;">Valor</th>
-                    <th style="width: 10%; text-align:center;">Data Emiss</th>
-                    <th style="width: 10%; text-align:center;">codItem</th>
-                    <th style="width: 10%; text-align:center;">preUnit</th>
-                    <th style="width: 5%; text-align:center;">codOper</th>
                 </tr>
                 
                 <% 
@@ -78,14 +77,13 @@
                         string codOper = devolucao.CodOper;
                 %> 
                     <tr>
+                        <td style="text-align:center;"><%= datEmiss %></td>
                         <td style="text-align:center;"><%= codEmpresa %></td>
                         <td style="text-align:center;"><%= numDocum %></td>
                         <td style="text-align:center;"><%= avisoRec %></td>
-                        <td style="text-align:right;"><%= "R$ "+valorS %></td>
-                        <td style="text-align:center;"><%= datEmiss %></td>
                         <td style="text-align:center;"><%= codItem %></td>
                         <td style="text-align:right;"><%= "R$ "+preUnitS %></td>
-                        <td style="text-align:center;"><%= codOper %></td>
+                        <td style="text-align:right;"><%= "R$ "+valorS %></td>
                     </tr>
                 <%
                     }%>

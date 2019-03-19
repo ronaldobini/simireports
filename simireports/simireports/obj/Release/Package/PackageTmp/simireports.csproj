@@ -143,11 +143,13 @@
     <Content Include="simireports\Logout.aspx" />
     <Content Include="simireports\PageComissoes.aspx" />
     <Content Include="simireports\PageOMsPendentes.aspx" />
+    <Content Include="simireports\PagePedidosEfetivadosCRM.aspx" />
     <Content Include="simireports\PagePrePedidos.aspx" />
     <Content Include="simireports\index.aspx" />
     <Content Include="simireports\login.aspx" />
     <Content Include="simireports\PageDevolucoes.aspx" />
     <Content Include="simireports\PagePedidosEfetivados.aspx" />
+    <Content Include="simireports\PageEmails.aspx" />
     <Content Include="syss.ico" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -191,6 +193,13 @@
     <Compile Include="simireports\PageOMsPendentes.aspx.designer.cs">
       <DependentUpon>PageOMsPendentes.aspx</DependentUpon>
     </Compile>
+    <Compile Include="simireports\PagePedidosEfetivadosCRM.aspx.cs">
+      <DependentUpon>PagePedidosEfetivadosCRM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\PagePedidosEfetivadosCRM.aspx.designer.cs">
+      <DependentUpon>PagePedidosEfetivadosCRM.aspx</DependentUpon>
+    </Compile>
     <Compile Include="simireports\PagePrePedidos.aspx.cs">
       <DependentUpon>PagePrePedidos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -228,6 +237,13 @@
     </Compile>
     <Compile Include="simireports\PagePedidosEfetivados.aspx.designer.cs">
       <DependentUpon>PagePedidosEfetivados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simireports\PageEmails.aspx.cs">
+      <DependentUpon>PageEmails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\PageEmails.aspx.designer.cs">
+      <DependentUpon>PageEmails.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />
