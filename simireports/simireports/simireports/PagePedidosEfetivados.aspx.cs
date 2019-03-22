@@ -46,7 +46,7 @@ namespace simireports
                 //VERFICA NIVEL
                 if ((int)Session["key"] >= 1)
                 {
-                    if ((int)Session["key"] >= 4)
+                    if ((int)Session["key"] >= 3)
                     {
                         represChange = "sim";
                     }
