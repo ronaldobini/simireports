@@ -144,7 +144,7 @@ namespace simireports
             //sqlview = sql; //ativa a exibicao do sql na tela
 
             IfxDataReader reader = new BancoLogix().consultar(sql, conn);
-            IfxDataReader reader2;
+            //IfxDataReader reader2;
             List<Item> itens = new List<Item>();
             string pedAnt = "zaburska";
 
