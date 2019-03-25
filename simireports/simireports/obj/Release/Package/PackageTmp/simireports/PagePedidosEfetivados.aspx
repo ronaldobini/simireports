@@ -94,6 +94,11 @@
                 <% 
                     Decimal totPed = 0.0m;
                     string totPedS = "";
+                    Decimal totAtend = 0.0m;
+                    string totAtendS = "";
+                    Decimal totPend = 0.0m;
+                    string totPendS = "";
+
                     foreach (var pedEfet in pedsEfets) {
 
                      %> 
@@ -128,18 +133,22 @@
                                 <table class="table table-sm table-dark" style="background-color:#3f4142; width:100%; color:white; font-size: 12px;">
                                     <thead>
                                         <tr>
-                                            <th style="width: 10%;">Cod. do Item</th>
-                                            <th style="width: 5%;">Solic</th>
-                                            <th style="width: 5%;">Cancel</th>
-                                            <th style="width: 5%;">Atend</th>
-                                            <th style="width: 55%;">Desc. Item</th>
+                                            <th style="width: 5%;">Cod. do Item</th>
+                                            <th style="width: 40%;">Desc. Item</th>
+                                            <th style="width: 5%; text-align:center;"">Solic</th>
+                                            <th style="width: 5%; text-align:center;">Cancel</th>
+                                            <th style="width: 5%; text-align:center;"">Atend</th>
                                             <th style="width: 10%;">Preço Unit</th>
+                                            <th style="width: 10%;">Preço Total Atend</th>
+                                            <th style="width: 10%;">Preço Total Solic</th>
                                             <th style="width: 20%;">Prazo</th>
                                         </tr>
                                     </thead>
                                     <%
                                     totPed = 0.0m;
+                                    totAtend = 0.0m;
                                         totPedS = m.formatarDecimal(totPed);
+                                        totAtendS = m.formatarDecimal(totPed);
                                         foreach (var item in pedEfet.Itens)
                                         {
                                             string codItem = item.CodItem;
@@ -148,7 +157,13 @@
                                             Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic),0);
 
                                             string qtdCancel = item.QtdCancel;
+                                            qtdCancel = m.pontoPorVirgula(qtdCancel);
+                                            Decimal qtdCancelD = Decimal.Round(Decimal.Parse(qtdCancel),0);
+
                                             string qtdAtend = item.QtdAtend;
+                                            qtdAtend = m.pontoPorVirgula(qtdAtend);
+                                            Decimal qtdAtendD = Decimal.Round(Decimal.Parse(qtdAtend),0);
+
                                             string nomeItem = item.NomeItem;
                                             string przEntrega = item.PrzEntrega;
 
@@ -156,21 +171,31 @@
                                             String preUnitS = m.formatarDecimal(preUnit);
 
                                             totPed += preUnit*qtdSolicD;
-                                            totPedS = m.formatarDecimal(totPed);   
+                                            totAtend += preUnit*qtdAtendD;
+
+                                            totPedS = m.formatarDecimal(totPed);
+                                            totAtendS = m.formatarDecimal(totAtend);
+
+                                            totPend = totPed - totAtend;
+                                            totPendS =  m.formatarDecimal(totPend);
                                     %>
                                             <tr>
                                                 <td><%= codItem %></td>
-                                                <td><%= qtdSolic %></td>
-                                                <td><%= qtdCancel %></td>
-                                                <td><%= qtdAtend %></td>
                                                 <td><%= nomeItem %></td>
+                                                <td style="text-align:center;"><%= qtdSolicD %></td>
+                                                <td style="text-align:center;"><%= qtdCancelD %></td>
+                                                <td style="text-align:center;"><%= qtdAtendD %></td>
                                                 <td><%= "R$"+preUnitS %></td>
+                                                <td><%= "R$"+preUnit*qtdAtendD %></td>
+                                                <td><%= "R$"+preUnit*qtdSolicD %></td>
                                                 <td><%= przEntrega %></td>
                                             </tr>
                                                 
                                     <% } %>
                                     <tr>
-                                        <td colspan="7" style="background-color: #070a0e; color:white;"><b>Total Pedido: R$ <%= totPedS %></td>
+                                        <td colspan="3" style="background-color: #070a0e; color:white;"><b>Total Pedido: R$ <%= totPedS %></td>
+                                        <td colspan="3" style="background-color: #070a0e; color:white;"><b>Total Atendido: R$ <%= totAtendS %></td>
+                                        <td colspan="3" style="background-color: #070a0e; color:white;"><b>Total Pendente: R$ <%= totPendS %></td>
                                     </tr>
                                 </table>
                             </td>
