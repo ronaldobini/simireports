@@ -35,7 +35,7 @@ namespace simireports.simireports
             if (dow == DayOfWeek.Monday)
             {
                 anteontem = DateTime.Today.AddDays(-3).ToString("d");
-                ontem = DateTime.Today.AddDays(-2).ToString("d");
+                ontem = DateTime.Today.AddDays(-1).ToString("d");
             }
             else
             {
@@ -44,7 +44,9 @@ namespace simireports.simireports
             }
             //Necessario por o nome dos representantes em maiuscula, toUpper nao funciona dentro do for each porque nao pode mudar variavel de iteraçao
             List <RepresEmails> represEmails = new List<RepresEmails>{
-                new RepresEmails("VENDAINT","ti@similar.ind.br")};
+                new RepresEmails("VENDAINT","ti@similar.ind.br"),
+                new RepresEmails("VANESSA","rbsbini@gmail.com"),
+                new RepresEmails("ALEX","ronaldo.bini@similar.ind.br")};
 
             foreach (var re in represEmails)
             {
@@ -55,92 +57,117 @@ namespace simireports.simireports
 
                 Decimal totPed = 0.0m;
                 string totPedS = "";
+                Decimal totAtend = 0.0m;
+                string totAtendS = "";
+                Decimal totPend = 0.0m;
+                string totPendS = "";
+                
                 String corpoEmail = "";
                 
                 IfxConnection conn = new BancoLogix().abrir();
-                string sql = "SELECT a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres " +
+                string sql = "SELECT a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres, " +
+                " b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, b.pre_unit, b.num_sequencia " +
+                                   " FROM pedidos a" +
+                                    " JOIN ped_itens b on a.num_pedido = b.num_pedido AND a.cod_empresa = b.cod_empresa" +
+                                    " JOIN clientes c on c.cod_cliente = a.cod_cliente" +
+                                    " join item i on i.cod_item = b.cod_item and i.cod_empresa = b.cod_empresa " +
+                                   " JOIN representante r on r.cod_repres = a.cod_repres " +
 
-                                       " FROM pedidos a" +
+                                   " WHERE c.cod_cliente LIKE '%" + "" + "%'" +
 
-                                       " JOIN ped_itens b on a.num_pedido = b.num_pedido AND a.cod_empresa = b.cod_empresa" +
+                                   " AND c.nom_cliente LIKE '%" + "" + "%'" +
 
-                                       " JOIN clientes c on c.cod_cliente = a.cod_cliente" +
+                                   " AND r.nom_repres LIKE '%" + re.nome + "%'" +
 
-                                       " JOIN representante r on r.cod_repres = a.cod_repres " +
+                                   " AND a.dat_alt_sit >= '" + anteontem + "'" +
 
-                                       " WHERE c.cod_cliente LIKE '%" + "" + "%'" +
+                                   " AND a.dat_alt_sit <= '" + ontem + "'" +
 
-                                       " AND c.nom_cliente LIKE '%" + "" + "%'" +
+                                   " AND b.cod_item like '%" + "" + "%'" +
 
-                                       " AND r.nom_repres LIKE '%" + re.nome + "%'" +
+                                   " AND a.cod_empresa LIKE '%" + "" + "%'" +
 
-                                       " AND a.dat_alt_sit >= '" + anteontem + "'" +
+                                   " AND ies_sit_pedido = 'N' AND cod_nat_oper<> 9001" +
 
-                                       " AND a.dat_alt_sit <= '" + ontem + "'" +
+                                   "" +
 
-                                       " AND b.cod_item like '%" + "" + "%'" +
-
-                                       " AND a.cod_empresa LIKE '%" + "" + "%'" +
-
-                                       " AND ies_sit_pedido = 'N' AND cod_nat_oper<> 9001" +
-
-                                       "" +
-
-                                       " AND a.num_pedido = b.num_pedido AND a.cod_empresa = b.cod_empresa AND c.cod_cliente = a.cod_cliente" +
-                                       " GROUP BY a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres " +
-                                       " ORDER BY a.dat_alt_sit desc, a.num_pedido";
+                                   " AND a.num_pedido = b.num_pedido AND a.cod_empresa = b.cod_empresa AND c.cod_cliente = a.cod_cliente" +
+                                   " GROUP BY a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres, b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, b.pre_unit,b.num_sequencia" +
+                                   " ORDER BY a.dat_alt_sit desc, a.num_pedido,b.num_sequencia";
 
                 //sqlview = sql; //ativa a exibicao do sql na tela
 
                 IfxDataReader reader = new BancoLogix().consultar(sql, conn);
-                IfxDataReader reader2;
+                List<Item> itens = new List<Item>();
+                string pedAnt = "zaburska";
+
+
+
+                string codEmpresa = "";
+                DateTime dat = new DateTime();
+                string codCliente = "";
+                string cliente = "";
+                string repres = "";
+                string numPed = "";
+                Item item = null;
+                bool primeiro = true;
+                PedidoEfetivado pedEfet = null;
 
                 if (reader != null && reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        string codEmpresa = reader.GetString(0);
-                        DateTime dat = reader.GetDateTime(1);
-                        string codCliente = reader.GetString(2);
-                        string numPed = reader.GetString(3);
-                        string cliente = reader.GetString(4);
-                        string repres = reader.GetString(5);
-                        List<Item> itens = new List<Item>();
+                        numPed = reader.GetString(3);
 
-                        //conn2 = new BancoLogix().abrir();
-                        reader2 = new
-                        BancoLogix().consultar("SELECT b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, b.pre_unit" +
-                        "                                                    FROM ped_itens b join item i on i.cod_item = b.cod_item and i.cod_empresa = b.cod_empresa" +
-                        "                                                    WHERE b.num_pedido = " + numPed + " and b.cod_empresa = " + codEmpresa, conn);
-                        if (reader2 != null)
+                        if (primeiro)
                         {
-                            while (reader2.Read())
+                            pedAnt = reader.GetString(3);
+                            primeiro = false;
+                        }
+                        else
+                        {
+                            if (numPed.Equals(pedAnt))
                             {
-                                string qtdSolic = reader2.GetString(0);
-                                string qtdCancel = reader2.GetString(1);
-                                string qtdAtend = reader2.GetString(2);
-                                string nomeItem = reader2.GetString(3);
-                                string przEntregaS = reader2.GetString(4);
-                                string codItem = reader2.GetString(5);
-                                string preUnitS = reader2.GetString(6);
-                                preUnitS = m.pontoPorVirgula(preUnitS);
-                                Decimal preUnit = Decimal.Round(Decimal.Parse(preUnitS), 2);
-                                qtdSolic = m.pontoPorVirgula(qtdSolic);
-                                Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
-                                totGeral += (qtdSolicD * preUnit);
-                                totGeralS = m.formatarDecimal(totGeral);
-                                Item item = new Item(qtdSolic, qtdCancel, qtdAtend, nomeItem, przEntregaS, codItem, preUnit);
                                 itens.Add(item);
                             }
-
-                            PedidoEfetivado pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, numPed, itens, cliente, repres);
-                            pedsEfets.Add(pedEfet);
+                            else
+                            {
+                                itens.Add(item);
+                                pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres);
+                                pedsEfets.Add(pedEfet);
+                                itens = new List<Item>();
+                                pedAnt = numPed;
+                            }
                         }
-                        //new BancoLogix().fechar(conn2);
-                        reader2.Close();
+
+                        codEmpresa = reader.GetString(0);
+                        dat = reader.GetDateTime(1);
+                        codCliente = reader.GetString(2);
+                        cliente = reader.GetString(4);
+                        repres = reader.GetString(5);
+                        
+                        string qtdSolic = reader.GetString(6);
+                        string qtdCancel = reader.GetString(7);
+                        string qtdAtend = reader.GetString(8);
+                        string nomeItem = reader.GetString(9);
+                        string przEntregaS = reader.GetString(10);
+                        string codItem = reader.GetString(11);
+                        string preUnitS = reader.GetString(12);
+                        preUnitS = m.pontoPorVirgula(preUnitS);
+                        Decimal preUnit = Decimal.Round(Decimal.Parse(preUnitS), 2);
+                        qtdSolic = m.pontoPorVirgula(qtdSolic);
+                        Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
+                        totGeral += (qtdSolicD * preUnit);
+                        totGeralS = m.formatarDecimal(totGeral);
+                        item = new Item(qtdSolic, qtdCancel, qtdAtend, nomeItem, przEntregaS, codItem, preUnit);
 
                     }
+
+                    itens.Add(item);
+                    pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres);
+                    pedsEfets.Add(pedEfet);
                 }
+                
                 else
                 {
                     String erro = "null";
@@ -154,12 +181,12 @@ namespace simireports.simireports
                     }
 
                 }
-                string babum = "zarvoska";
                 new BancoLogix().fechar(conn);
+
                 corpoEmail = "<body style=\"background-color:#222;\">Mostrando " + pedsEfets.Count + " resultados, de " + anteontem + " a " + ontem + " -Total R$ " + totGeralS + "<br/>" +
                     " <table style = \"max-width:95%; color:white; font-size: 12px;\">";
 
-                foreach (var pedEfet in pedsEfets)
+                foreach (var pedE in pedsEfets)
                 {
                     corpoEmail += "<tr>" +
                             "<td style=\"color:#222;\">" +
@@ -177,56 +204,73 @@ namespace simireports.simireports
                     "</tr>" +
                     "</thead>" +
                     "<tr>" +
-                        "<td style = \"text-align:center;\"><b>" + pedEfet.Dat + "</b></td>" +
-                        "<td style = \"text-align:center;\"><b>" + pedEfet.CodEmpresa + "</b></td>" +
-                        "<td style = \"text-align:center;\"><b>" + pedEfet.NumPed + "</b></td>" +
-                        "<td style = \"text-align:center;\"><b>" + pedEfet.CodCliente + "</b></td>" +
-                        "<td style = \"text-align:center;\"><b>" + pedEfet.Cliente + "</b></td>" +
-                        "<td style = \"text-align:center;\"><b>" + pedEfet.Repres + "</b></td>" +
+                        "<td style = \"text-align:center;\"><b>" + pedE.Dat + "</b></td>" +
+                        "<td style = \"text-align:center;\"><b>" + pedE.CodEmpresa + "</b></td>" +
+                        "<td style = \"text-align:center;\"><b>" + pedE.NumPed + "</b></td>" +
+                        "<td style = \"text-align:center;\"><b>" + pedE.CodCliente + "</b></td>" +
+                        "<td style = \"text-align:center;\"><b>" + pedE.Cliente + "</b></td>" +
+                        "<td style = \"text-align:center;\"><b>" + pedE.Repres + "</b></td>" +
                     "</tr>" +
                     "<tr>" +
                         "<td colspan = \"6\">" +
                         "<table style=\"background-color:#3f4142; width:100%; color:white; font-size: 12px;\">" +
                             "<tr>" +
-                                "<th style = \"width: 10%;\" > Cod. do Item</th>" +
+                                "<th style = \"width: 5%;\" > Cod. do Item</th>" +
+                                "<th style=\"width: 40%;\">Desc.Item</th>" +
                                 "<th style = \"width: 5%;\" > Solic </th>" +
                                 "<th style=\"width: 5%;\">Cancel</th>" +
                                 "<th style = \"width: 5%;\" > Atend </th>" +
-                                "<th style=\"width: 55%;\">Desc.Item</th>" +
                                 "<th style = \"width: 10%;\" > Preço Unit</th>" +
+                                "<th style=\"width:10%;\">Preço Total Atend</th>" +
+                                "<th style=\"width:10%;\">Preço Total Solic</th>" +
                                 "<th style = \"width: 20%;\" > Prazo </th>" +
                             "</tr>";
 
                     totPed = 0.0m;
+                    totPed = 0.0m;
+                    totAtend = 0.0m;
                     totPedS = m.formatarDecimal(totPed);
-                    foreach (var item in pedEfet.Itens)
+                    totAtendS = m.formatarDecimal(totPed);
+                    foreach (var itemV in pedE.Itens)
                     {
-                        string qtdSolic = m.pontoPorVirgula(item.QtdSolic);
+                        string qtdSolic = m.pontoPorVirgula(itemV.QtdSolic);
                         Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
 
-                        string qtdCancel = m.pontoPorVirgula(item.QtdCancel);
+                        string qtdCancel = m.pontoPorVirgula(itemV.QtdCancel);
                         Decimal qtdCancelD = Decimal.Round(Decimal.Parse(qtdCancel), 0);
 
-                        string qtdAtend = m.pontoPorVirgula(item.QtdAtend);
+                        string qtdAtend = m.pontoPorVirgula(itemV.QtdAtend);
                         Decimal qtdAtendD = Decimal.Round(Decimal.Parse(qtdAtend), 0);
 
-                        Decimal preUnit = Decimal.Round(item.PrecoUnit, 2);
+                        Decimal preUnit = Decimal.Round(itemV.PrecoUnit, 2);
                         String preUnitS = m.formatarDecimal(preUnit);
 
                         totPed += preUnit * qtdSolicD;
+                        totAtend += preUnit * qtdAtendD;
+
+                        totPedS = m.formatarDecimal(totPed);
+                        totAtendS = m.formatarDecimal(totAtend);
+
+                        totPend = totPed - totAtend;
+                        totPendS = m.formatarDecimal(totPend);
+                        
                         totPedS = m.formatarDecimal(totPed);
                         corpoEmail += "<tr>" +
-                            "<td>" + item.CodItem + "</td>" +
+                            "<td>" + itemV.CodItem + "</td>" +
+                            "<td>" + itemV.NomeItem + " </td>" +
                             "<td style = \"text-align:center;\">" + qtdSolicD + " </td>" +
                             "<td style = \"text-align:center;\">" + qtdCancelD + " </td>" +
                             "<td style = \"text-align:center;\">" + qtdAtendD + " </td>" +
-                            "<td>" + item.NomeItem + " </td>" +
-                            "<td style = \"text-align:right;\">" + "R$" + preUnitS + "</td>" +
-                            "<td style = \"text-align:right;\">" + item.PrzEntrega + "</td>" +
+                            "<td>R$" + preUnitS + "</td>" +
+                            "<td>R$" + totAtend + "</td>" +
+                            "<td>R$" + totPed + "</td>" +
+                            "<td style = \"text-align:right;\">" + itemV.PrzEntrega + "</td>" +
                         "</tr>";
                     }
                     corpoEmail += "<tr>" +
-                                    "<td colspan = \"7\" style=\"background-color: #070a0e; color:white;\"><b>Total Pedido: R$" + totPedS + "</td>" +
+                                    "<td colspan = \"3\" style=\"background-color: #070a0e; color:white;\"><b>Total Pedido: R$" + totPedS + "</td>" +
+                                    "<td colspan = \"3\" style=\"background-color: #070a0e; color:white;\"><b>Total Atendido: R$" + totAtendS + "</td>" +
+                                    "<td colspan = \"3\" style=\"background-color: #070a0e; color:white;\"><b>Total Pendente: R$" + totPendS + "</td>" +
                                 "</tr>" +
                             "</table>" +
                         "</td>" +
