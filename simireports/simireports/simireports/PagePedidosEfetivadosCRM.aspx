@@ -139,7 +139,7 @@
                                     </thead>
                                     <%
                                     totPed = 0.0m;
-                                        totPedS = m.formatarDecimal(totPed);
+                                        totPedS = m.formatarDecimal(totPed);/*
                                         foreach (var item in pedEfet.Itens)
                                         {
                                             string codItem = item.CodItem;
@@ -168,7 +168,7 @@
                                                 <td><%= przEntrega %></td>
                                             </tr>
                                                 
-                                    <% } %>
+                                    <% }*/ %>
                                     <tr>
                                         <td colspan="7" style="background-color: #070a0e; color:white;"><b>Total Pedido: R$ <%= totPedS %></td>
                                     </tr>

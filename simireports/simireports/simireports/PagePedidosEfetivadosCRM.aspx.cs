@@ -162,9 +162,9 @@ namespace simireports
                     string sql2 = "SELECT b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit" +
                     "                                                    FROM PrePedidosItens b inner join LgxPRODUTOS i on i.cod_item = b.cod_item" +
                     "                                                    WHERE b.CodPed = " + numPed;
-                    
-                    String errosql = new BancoAzure().consultarErros(sql2, conn);
 
+                    //String errosql = new BancoAzure().consultarErros(sql2, conn);
+                    /*
                     reader2 = new
                      BancoAzure().consultar(sql2, conn2);
 
@@ -194,7 +194,9 @@ namespace simireports
                         reader2.Close();
                     }
                     new BancoAzure().fechar(conn2);
-
+                    */
+                    PedidoEfetivado pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, numPed, itens, cliente, repres);
+                    pedsEfets.Add(pedEfet);
                 }
                 reader.Close();
             }
