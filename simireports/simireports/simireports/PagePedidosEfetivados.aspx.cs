@@ -147,9 +147,7 @@ namespace simireports
             //IfxDataReader reader2;
             List<Item> itens = new List<Item>();
             string pedAnt = "zaburska";
-
-
-
+            
             string codEmpresa = "";
             DateTime dat = new DateTime();
             string codCliente = "";

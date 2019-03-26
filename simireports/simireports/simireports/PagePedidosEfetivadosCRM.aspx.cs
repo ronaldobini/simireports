@@ -19,17 +19,18 @@ namespace simireports
         public string postCodCliente = "";
         public string postCliente = "";
         public string postRepres = "";
-        public string postNumPed = "";       
+        public string postNumPed = "";
         public string postCodItem = "";
         public string postPreUnit = "";
         public string sqlview = "";
         public decimal totGeral = 0.0m;
         public string totGeralS = "0,00";
-
-
+        public TimeSpan demora;
+        public DateTime dtInicio;
+        public DateTime dtFim;
         public Metodos m = new Metodos();
         public String ontem = DateTime.Today.AddDays(-1).ToString("d");
-        public String hoje = DateTime.Today.ToString("d");        
+        public String hoje = DateTime.Today.ToString("d");
         public string represChange = "nao";
 
         public List<PedidoEfetivado> pedsEfets = new List<PedidoEfetivado> { };
@@ -56,29 +57,29 @@ namespace simireports
                     Response.Redirect("index.aspx");
                 }
             }
-                            
 
-                if ((int)Session["first"] == 1)
-                {
-                    postRepres = (string)Session["nome"];
-                    postRepres = postRepres.ToUpper();
-                    Session["first"] = 0;
-                    //executarRelatorio();
-                }
+
+            if ((int)Session["first"] == 1)
+            {
+                postRepres = (string)Session["nome"];
+                postRepres = postRepres.ToUpper();
+                Session["first"] = 0;
+                //executarRelatorio();
+            }
         }
 
-        
+
 
         protected void filtrarPedEfet_Click(object sender, EventArgs e)
         {
             postUnidade = unidade.Value;
             postCodCliente = codCliente.Value;
-           
+
             postCodCliente = m.configCoringas(postCodCliente);
 
             postCliente = cliente.Value.ToUpper();
-            postCliente = m.configCoringas(postCliente);           
-            
+            postCliente = m.configCoringas(postCliente);
+
 
             postNumPed = numPed.Value;
             if (!postNumPed.Equals(""))
@@ -109,19 +110,25 @@ namespace simireports
 
         protected void executarRelatorio()
         {
+            dtInicio = DateTime.Now;
             Session["firstJ"] = "0";
 
             SqlDataReader reader = null;
-            SqlDataReader reader2 = null;
+            //SqlDataReader reader2 = null;
 
             SqlConnection conn = new BancoAzure().abrir();
-            SqlConnection conn2 = new BancoAzure().abrir();
+            //SqlConnection conn2 = new BancoAzure().abrir();
+            postDatFim = m.configDataHuman2Banco(postDatFim);
+            postDatInicio = m.configDataHuman2Banco(postDatInicio);
+            string sql = "SELECT a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante," +
 
-            string sql = "SELECT a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante " +
+                               " b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit" +
 
                                         " FROM PrePEDIDOS a" +
 
                                         " INNER JOIN PrePedidosItens b on a.CodPed = b.CodPed" +
+
+                                        " inner join LgxPRODUTOS i on i.cod_item = b.cod_item" +
 
                                         " WHERE a.cod_cliente LIKE '%" + postCodCliente + "%'" +
 
@@ -129,9 +136,11 @@ namespace simireports
 
                                         " AND a.Representante LIKE '%" + postRepres + "%'" +
 
-                                        //" AND a.DataUlt >= '" + postDatInicio + "'" +
+                                        " AND a.DataUlt >= '" + postDatInicio + " 00:00:00'" +
+                                        //" AND a.DataUlt >= '2019-03-25 00:00:00'" +
 
-                                        //" AND a.DataUlt <= '" + postDatFim + "'" +
+                                        " AND a.DataUlt <= '" + postDatFim + " 23:59:59'" +
+                                        //" AND a.DataUlt <= '2019-03-26 23:59:59'" +
 
                                         " AND b.cod_item like '%" + postCodItem + "%'" +
 
@@ -141,63 +150,109 @@ namespace simireports
 
                                         postNumPed +
 
-                                        " GROUP BY a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante " +
+                                        " GROUP BY a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante,b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit" +
                                         " ORDER BY a.DataUlt desc, a.CodPed";
 
-            //sqlview = sql; //ativa a exibicao do sql na tela
-            //String errosql = new BancoAzure().consultarErros(sql,conn);
+            sqlview = sql; //ativa a exibicao do sql na tela
+           // String errosql = new BancoAzure().consultarErros(sql,conn);
             reader = new BancoAzure().consultar(sql, conn);
-            
+            List<Item> itens = new List<Item>();
+            string pedAnt = "zaburska";
+
+            string codEmpresa = "";
+            DateTime dat = new DateTime();
+            string codCliente = "";
+            string cliente = "";
+            string repres = "";
+            string numPed = "";
+            Item item = null;
+            bool primeiro = true;
+            PedidoEfetivado pedEfet = null;
+
             if (reader != null && reader.HasRows)
             {
                 while (reader.Read())
                 {
-                    string codEmpresa = reader.GetString(0);
-                    DateTime dat = reader.GetDateTime(1);
-                    string codCliente = reader.GetString(2);
-                    string numPed = reader.GetString(3);
-                    string cliente = reader.GetString(4);
-                    string repres = reader.GetString(5);
-                    List<Item> itens = new List<Item>();
-                    string sql2 = "SELECT b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit" +
-                    "                                                    FROM PrePedidosItens b inner join LgxPRODUTOS i on i.cod_item = b.cod_item" +
-                    "                                                    WHERE b.CodPed = " + numPed;
+                    numPed = reader.GetString(3);
 
-                    //String errosql = new BancoAzure().consultarErros(sql2, conn);
-                    /*
-                    reader2 = new
-                     BancoAzure().consultar(sql2, conn2);
-
-                    if (reader2 != null && reader2.HasRows)
+                    if (primeiro)
                     {
-                        while (reader2.Read())
+                        pedAnt = reader.GetString(3);
+                        primeiro = false;
+                    }
+                    else
+                    {
+                        if (numPed.Equals(pedAnt))
                         {
-                            string qtdSolic = reader2.GetString(0);
-                            string qtdCancel = reader2.GetString(1);
-                            string qtdAtend = reader2.GetString(2);
-                            string nomeItem = reader2.GetString(3);
-                            string przEntregaS = reader2.GetString(4);
-                            string codItem = reader2.GetString(5);
-                            string preUnitS = reader2.GetString(6);
-                            preUnitS = m.pontoPorVirgula(preUnitS);                            
-                            Decimal preUnit = Decimal.Round(Decimal.Parse(preUnitS),2);
-                            qtdSolic = m.pontoPorVirgula(qtdSolic);
-                            Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
-                            totGeral += (qtdSolicD * preUnit);
-                            totGeralS = m.formatarDecimal(totGeral);
-                            Item item = new Item(qtdSolic, qtdCancel, qtdAtend, nomeItem, przEntregaS, codItem, preUnit);
                             itens.Add(item);
                         }
-
-                        PedidoEfetivado pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, numPed, itens, cliente, repres);
-                        pedsEfets.Add(pedEfet);
-                        reader2.Close();
+                        else
+                        {
+                            itens.Add(item);
+                            pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres);
+                            pedsEfets.Add(pedEfet);
+                            itens = new List<Item>();
+                            pedAnt = numPed;
+                        }
                     }
-                    new BancoAzure().fechar(conn2);
-                    */
-                    PedidoEfetivado pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, numPed, itens, cliente, repres);
-                    pedsEfets.Add(pedEfet);
+                    codEmpresa = reader.GetString(0);
+                    dat = reader.GetDateTime(1);
+                    codCliente = reader.GetString(2);
+                    //numPed = reader.GetString(3);
+                    cliente = reader.GetString(4);
+                    repres = reader.GetString(5);
+                    //itens = new List<Item>();
+                    //string sql2 = "SELECT b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit" +
+                    //"                                                    FROM PrePedidosItens b inner join LgxPRODUTOS i on i.cod_item = b.cod_item" +
+                    //"                                                    WHERE b.CodPed = " + numPed;
+
+                    //String errosql = new BancoAzure().consultarErros(sql2, conn);
+
+                    //reader2 = new
+                    // BancoAzure().consultar(sql2, conn2);
+
+                    //if (reader2 != null && reader2.HasRows)
+                    //{
+                    //    while (reader2.Read())
+                    //    {
+                    Double qtdSolic = reader.GetDouble(6);
+                    Double qtdCancel = reader.GetDouble(7);
+                    Double qtdAtend = reader.GetDouble(8);
+                    string nomeItem = reader.GetString(9);
+
+                    string przEntregaS = "";
+                    if (!reader.IsDBNull(10))
+                    {
+                        przEntregaS = reader.GetString(10);
+                    }
+
+                    string codItem = reader.GetString(11);
+                    Double preUnitD = reader.GetDouble(12);
+                    string preUnitS = Math.Round(preUnitD,2).ToString();
+                    Decimal preUnit = Decimal.Parse(preUnitS);
+
+                    //qtdSolic = m.pontoPorVirgula(qtdSolic);
+                    //Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
+                    totGeral += ((Decimal)qtdSolic * preUnit);
+                    totGeralS = m.formatarDecimal(totGeral);
+                    item = new Item(qtdSolic.ToString(), qtdCancel.ToString(), qtdAtend.ToString(), nomeItem, przEntregaS, codItem, preUnit);
+
+                    //    itens.Add(item);
+                    //}
+
+                    //PedidoEfetivado pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, numPed, itens, cliente, repres);
+                    //pedsEfets.Add(pedEfet);
+                    //reader2.Close();
+                    //}
+                    //new BancoAzure().fechar(conn2);
+
+                    //pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, numPed, itens, cliente, repres);
+                    //pedsEfets.Add(pedEfet);
                 }
+                itens.Add(item);
+                pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, numPed, itens, cliente, repres);
+                pedsEfets.Add(pedEfet);
+
                 reader.Close();
             }
             else
@@ -216,6 +271,8 @@ namespace simireports
 
             new BancoAzure().fechar(conn);
 
+            //DateTime dtFim = DateTime.Now;
+            //demora = dtFim - dtInicio;
         }
 
     }

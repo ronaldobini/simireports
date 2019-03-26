@@ -74,5 +74,35 @@ namespace simireports.simireports.Classes
             }
             return s;
         }
+        public String configDataHuman2Banco(String data)
+        {
+            if (!data.Equals(""))
+            {
+                DateTime dt = Convert.ToDateTime(data);
+                string dataConv = "";
+                dataConv = dt.ToString("yyyy-MM-dd"/* HH:mm:ss"*/);//mudei pra nao por hora pra por direto la no select, pra dai poder colocar 23:59:59
+
+                return dataConv;
+            }
+            else
+            {
+                return "";
+            }
+        }
+        public String configDataBanco2Human(String data)
+        {
+            if (!data.Equals(""))
+            {
+                DateTime dt = Convert.ToDateTime(data);
+                string dataConv = "";
+                dataConv = dt.ToString("dd/MM/yyyy");
+
+                return dataConv;
+            }
+            else
+            {
+                return "";
+            }
+        }
     }
 }

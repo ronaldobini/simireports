@@ -4,11 +4,11 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Relatorio de Pedidos Efetivados CRM</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    
-   <script>
+
+    <script>
         //onload
         function onload() {
 
@@ -34,12 +34,13 @@
             }
         }
 
-        
+
     </script>
 </head>
-<body style="background-color:#222;" onload="onload();">
-    <div id="logo" style="margin-left:20px; float:left;">
-        <a  title="Voltar ao Inicio" href=" index.aspx"><img style=" width:50px;" src="img/syss.png" /></a>
+<body style="background-color: #222;" onload="onload();">
+    <div id="logo" style="margin-left: 20px; float: left;">
+        <a title="Voltar ao Inicio" href=" index.aspx">
+            <img style="width: 50px;" src="img/syss.png" /></a>
     </div>
     <center>
     <div id="titulo" style="margin-top:40px; margin-right:70px; color:white; font-size:30px;">Pedidos Efetivados CRM</div>
@@ -87,14 +88,17 @@
 
         <div id="resultados">
             
-            <font color=white>Mostrando <%=pedsEfets.Count%> resultados, de <%=postDatInicio %> a <%=postDatFim %> - Total R$ <%=totGeralS %></font><br/>
+            <font color=white>Mostrando <%=pedsEfets.Count%> resultados, de <%=m.configDataBanco2Human(postDatInicio) %> a <%=m.configDataBanco2Human(postDatFim) %> - Total R$ <%=totGeralS %></font><br/>
+                    
+        <font color=white>Carregamento: <%= demora.Seconds%>.<%= demora.Milliseconds%>s</font><br/>
             <table class="table table-hover table-dark" style = "max-width:95%; color:white; font-size: 12px;">
                 
                 
                 <% 
                     Decimal totPed = 0.0m;
                     string totPedS = "";
-                    foreach (var pedEfet in pedsEfets) {
+                    foreach (var pedEfet in pedsEfets)
+                    {
 
                      %> 
                         <thead style="background-color: #070a0e; color:white;">
@@ -108,12 +112,12 @@
                             </tr>
                         </thead>
                      <%
-                        string codEmpresa = pedEfet.CodEmpresa;
-                        DateTime dat = pedEfet.Dat;
-                        string codCliente = pedEfet.CodCliente;
-                        String numPed = pedEfet.NumPed;
-                        string cliente = pedEfet.Cliente;
-                        string repres = pedEfet.Repres;
+                         string codEmpresa = pedEfet.CodEmpresa;
+                         DateTime dat = pedEfet.Dat;
+                         string codCliente = pedEfet.CodCliente;
+                         String numPed = pedEfet.NumPed;
+                         string cliente = pedEfet.Cliente;
+                         string repres = pedEfet.Repres;
                      %> 
                         <tr>
                             <td style="text-align:center;"><b><%= dat %></b></td>
@@ -138,25 +142,25 @@
                                         </tr>
                                     </thead>
                                     <%
-                                    totPed = 0.0m;
-                                        totPedS = m.formatarDecimal(totPed);/*
+                                        totPed = 0.0m;
+                                        totPedS = m.formatarDecimal(totPed);
                                         foreach (var item in pedEfet.Itens)
                                         {
                                             string codItem = item.CodItem;
                                             string qtdSolic = item.QtdSolic;
                                             qtdSolic = m.pontoPorVirgula(qtdSolic);
-                                            Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic),0);
+                                            Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
 
                                             string qtdCancel = item.QtdCancel;
                                             string qtdAtend = item.QtdAtend;
                                             string nomeItem = item.NomeItem;
                                             string przEntrega = item.PrzEntrega;
 
-                                            Decimal preUnit = Decimal.Round(item.PrecoUnit,2);
+                                            Decimal preUnit = Decimal.Round(item.PrecoUnit, 2);
                                             String preUnitS = m.formatarDecimal(preUnit);
 
-                                            totPed += preUnit*qtdSolicD;
-                                            totPedS = m.formatarDecimal(totPed);   
+                                            totPed += preUnit * qtdSolicD;
+                                            totPedS = m.formatarDecimal(totPed);
                                     %>
                                             <tr>
                                                 <td><%= codItem %></td>
@@ -168,7 +172,7 @@
                                                 <td><%= przEntrega %></td>
                                             </tr>
                                                 
-                                    <% }*/ %>
+                                    <% } %>
                                     <tr>
                                         <td colspan="7" style="background-color: #070a0e; color:white;"><b>Total Pedido: R$ <%= totPedS %></td>
                                     </tr>
@@ -176,10 +180,14 @@
                             </td>
                         </tr>
                                 <%
-                                    } totGeralS = m.formatarDecimal(totGeral);
+                                    }
+                                    totGeralS = m.formatarDecimal(totGeral);
+                                    
                                 %>
             </table>
         </div>
-    
+        <%            DateTime dtFim = DateTime.Now;
+                      demora = dtFim - dtInicio; %>
+        <font color=white>Carregamento: <%= demora.Seconds%>.<%= demora.Milliseconds%>s</font><br/>
 </body>
 </html>
