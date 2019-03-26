@@ -58,7 +58,7 @@
 <%--                        <th style="width:100px; text-align:center;">% Comiss</th>
                         <th style="width:100px; text-align:center;">Valor</th>--%>
                         <th style="width:100px;">Representante </th>
-                        <th>Pgto</th>
+                        <th>Detalhes</th>
                     </tr>
                     <tr>
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datInicio" autocomplete="off"/></td>
@@ -74,7 +74,7 @@
 <%--                        <td><input runat="server" type="text" id="pctComiss"/></td>
                         <td><input runat="server" type="text" id="valor"/></td>--%>
                         <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="repres"  autocomplete="off"/></td>
-                        <td style="width:120px;"><input class="form-control" style="width:35px; text-align:center;" runat="server" type="text" id="sitPgto" value="T"  autocomplete="off"/></td>
+                        <td><input type="checkbox" id="detalhes" value="Detalhes" runat="server"> </td>
                     </tr>
                 </table>
                 <br />
@@ -135,7 +135,7 @@
                                     totRepres = 0.0m;
                                 }
                                 totRepres = totRepres + comiss;
-                                
+
                                 uCodRepres = codRepres;
                                 uNomRepres = nomRepres;
                                 //valBruto = 100000000.00M;
@@ -143,6 +143,8 @@
 
                                 string comissaoS = comiss.ToString();
                                 comissaoS = m.pontoPorVirgula(comissaoS);
+
+                                if(postDetalhes == 1) { 
                 %> 
                     <tr>
                         <td style="text-align:center;"><%= codRepres %></td>
@@ -160,6 +162,7 @@
                         <td style="text-align:center;"><%= iesPgtoDocum %></td>
                     </tr>
                 <%
+                               }
                     }
                 totRepresS = m.formatarDecimal(totRepres);
                 %>

@@ -21,6 +21,7 @@ namespace simireports
         public string postUnidade = "";
         public string postRepres = "";
         public string postSitPgto = "T";
+        public int postDetalhes = 0;
         public string sqlview = "";
 
         public Metodos m = new Metodos();
@@ -39,6 +40,7 @@ namespace simireports
         
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             //VERIFICACAO DE SESSAO E NIVEL
             if (Session["key"] == null)
             {
@@ -72,8 +74,22 @@ namespace simireports
             }
         }
 
+        protected void detalhes_Click(object sender, EventArgs e)
+        {
+            
+        }
+
         protected void filtrarComiss_Click(object sender, EventArgs e)
         {
+            if (detalhes.Checked == true)
+            {
+                postDetalhes = 1;
+            }
+            else
+            {
+                postDetalhes = 0;
+            }
+
             postDatInicio = datInicio.Value;
             if (postDatInicio == "") postDatInicio = mesPassado;
             
@@ -94,7 +110,7 @@ namespace simireports
             postUnidade = unidade.Value;
 
 
-            postSitPgto = sitPgto.Value.ToUpper();
+            //postSitPgto = sitPgto.Value.ToUpper();
             executarRelatorio();
         }
         

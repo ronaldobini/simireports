@@ -67,12 +67,12 @@ namespace simireports {
         protected global::System.Web.UI.HtmlControls.HtmlInputText repres;
         
         /// <summary>
-        /// Controle sitPgto.
+        /// Controle detalhes.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText sitPgto;
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox detalhes;
     }
 }
