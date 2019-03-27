@@ -30,7 +30,8 @@
             <tr>
                 <td><a href="PagePedidosEfetivados.aspx">Pedidos Efetivados Logix</a></td>
                 <td><a href="PagePedidosEfetivadosCRM.aspx">Pedidos Efetivados CRM</a></td>
-                <td><a href="PageEmails.aspx">Email</a></td>
+                <td><a href="PageEmails.aspx">EmailLogix</a></td>
+                <td><a href="PageEmailsCRM.aspx">EmailCRM</a></td>
                 <td></td>
             </tr>
             <tr>

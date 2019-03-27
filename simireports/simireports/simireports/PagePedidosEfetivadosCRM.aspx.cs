@@ -189,6 +189,7 @@ namespace simireports
                         else
                         {
                             itens.Add(item);
+                            repres = repres.Substring(0, repres.IndexOf(","));
                             pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres);
                             pedsEfets.Add(pedEfet);
                             itens = new List<Item>();

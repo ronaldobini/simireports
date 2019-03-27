@@ -45,8 +45,7 @@ namespace simireports.simireports
             //Necessario por o nome dos representantes em maiuscula, toUpper nao funciona dentro do for each porque nao pode mudar variavel de iteraçao
             List <RepresEmails> represEmails = new List<RepresEmails>{
                 new RepresEmails("VENDAINT","ti@similar.ind.br"),
-                new RepresEmails("VANESSA","rbsbini@gmail.com"),
-                new RepresEmails("ALEX","ronaldo.bini@similar.ind.br")};
+                new RepresEmails("VANESSA","ronaldo.bini@similar.ind.br")};
 
             foreach (var re in represEmails)
             {
@@ -100,8 +99,6 @@ namespace simireports.simireports
                 IfxDataReader reader = new BancoLogix().consultar(sql, conn);
                 List<Item> itens = new List<Item>();
                 string pedAnt = "zaburska";
-
-
 
                 string codEmpresa = "";
                 DateTime dat = new DateTime();
@@ -289,7 +286,7 @@ namespace simireports.simireports
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
                 client.Credentials = new System.Net.NetworkCredential("ti@similar.ind.br", "Simi1717");
-                MailMessage mm = new MailMessage("ti@similar.ind.br", re.email, "relatorio kkkkkkkkkkk", corpoEmail);
+                MailMessage mm = new MailMessage("ti@similar.ind.br", re.email, "Relatorio Logix", corpoEmail);
                 mm.BodyEncoding = UTF8Encoding.UTF8;
                 mm.IsBodyHtml = true;
                 mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;

@@ -8,9 +8,8 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div>
-        </div>
-    </form>
+    <center>
+        <a  title="Atualizar a página" href="index.aspx"><img style="width="500px" src="img/syss.png" /></a>
+    </center>
 </body>
 </html>

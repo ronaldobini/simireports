@@ -143,6 +143,7 @@
     <Content Include="simireports\img\x.png" />
     <Content Include="simireports\Logout.aspx" />
     <Content Include="simireports\PageComissoes.aspx" />
+    <Content Include="simireports\PageEmailsCRM.aspx" />
     <Content Include="simireports\PageOMsPendentes.aspx" />
     <Content Include="simireports\PagePedidosEfetivadosCRM.aspx" />
     <Content Include="simireports\PagePrePedidos.aspx" />
@@ -186,6 +187,13 @@
     </Compile>
     <Compile Include="simireports\PageComissoes.aspx.designer.cs">
       <DependentUpon>PageComissoes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simireports\PageEmailsCRM.aspx.cs">
+      <DependentUpon>PageEmailsCRM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\PageEmailsCRM.aspx.designer.cs">
+      <DependentUpon>PageEmailsCRM.aspx</DependentUpon>
     </Compile>
     <Compile Include="simireports\PageOMsPendentes.aspx.cs">
       <DependentUpon>PageOMsPendentes.aspx</DependentUpon>
