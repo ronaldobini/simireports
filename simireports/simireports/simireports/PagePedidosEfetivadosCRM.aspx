@@ -97,6 +97,13 @@
                 <% 
                     Decimal totPed = 0.0m;
                     string totPedS = "";
+                    Decimal totAtend = 0.0m;
+                    string totAtendS = "";
+                    Decimal totCancel = 0.0m;
+                    string totCancelS = "";
+                    Decimal totPend = 0.0m;
+                    string totPendS = "";
+
                     foreach (var pedEfet in pedsEfets)
                     {
 
@@ -133,48 +140,77 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 10%;">Cod. do Item</th>
-                                            <th style="width: 5%;">Solic</th>
-                                            <th style="width: 5%;">Cancel</th>
-                                            <th style="width: 5%;">Atend</th>
-                                            <th style="width: 55%;">Desc. Item</th>
+                                            <th  style="text-align:center;width: 5%;">Solic</th>
+                                            <th style="text-align:center;width: 5%;">Cancel</th>
+                                            <th style="text-align:center;width: 5%;">Atend</th>
+                                            <th style="text-align:center;width: 45%;">Desc. Item</th>
                                             <th style="width: 10%;">Preço Unit</th>
-                                            <th style="width: 20%;">Prazo</th>
+                                            <th style="text-align:center;width: 10%;">Desconto</th>
+                                            <th style="text-align:center;width: 10%;">PedLogix</th>
+                                            <%--<th style="text-align:center;width: 30%;">Prazo</th>--%>
                                         </tr>
                                     </thead>
                                     <%
                                         totPed = 0.0m;
+                                        totAtend = 0.0m;
+                                        totCancel = 0.0m;
                                         totPedS = m.formatarDecimal(totPed);
+                                        totAtendS = m.formatarDecimal(totPed);
+                                        totCancelS = m.formatarDecimal(totPed);
                                         foreach (var item in pedEfet.Itens)
                                         {
                                             string codItem = item.CodItem;
                                             string qtdSolic = item.QtdSolic;
                                             qtdSolic = m.pontoPorVirgula(qtdSolic);
-                                            Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
+                                            Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic),0);
 
                                             string qtdCancel = item.QtdCancel;
+                                            qtdCancel = m.pontoPorVirgula(qtdCancel);
+                                            Decimal qtdCancelD = Decimal.Round(Decimal.Parse(qtdCancel),0);
+
                                             string qtdAtend = item.QtdAtend;
+                                            qtdAtend = m.pontoPorVirgula(qtdAtend);
+                                            Decimal qtdAtendD = Decimal.Round(Decimal.Parse(qtdAtend),0);
+
                                             string nomeItem = item.NomeItem;
                                             string przEntrega = item.PrzEntrega;
 
-                                            Decimal preUnit = Decimal.Round(item.PrecoUnit, 2);
+                                            Decimal preUnit = Decimal.Round(item.PrecoUnit,2);
                                             String preUnitS = m.formatarDecimal(preUnit);
+                                            
+                                            Decimal desconto = item.Desconto;
+                                            int pedLogix = item.PedLogix;
 
-                                            totPed += preUnit * qtdSolicD;
+                                            totPed += preUnit*qtdSolicD;
+                                            totAtend += preUnit*qtdAtendD;
+                                            totCancel += preUnit*qtdCancelD;
+
                                             totPedS = m.formatarDecimal(totPed);
+                                            totAtendS = m.formatarDecimal(totAtend);
+                                            totCancelS = m.formatarDecimal(totCancel);
+
+                                            totPend = totPed - totAtend - totCancel;
+                                            totPendS =  m.formatarDecimal(totPend);
                                     %>
                                             <tr>
                                                 <td><%= codItem %></td>
-                                                <td><%= qtdSolic %></td>
-                                                <td><%= qtdCancel %></td>
-                                                <td><%= qtdAtend %></td>
-                                                <td><%= nomeItem %></td>
-                                                <td><%= "R$"+preUnitS %></td>
-                                                <td><%= przEntrega %></td>
+                                                <td style="text-align:center;"><%= qtdSolic %></td>
+                                                <td style="text-align:center;"><%= qtdCancel %></td>
+                                                <td style="text-align:center;"><%= qtdAtend %></td>
+                                                <td style="text-align:center;"><%= nomeItem %></td>
+                                                <td><%= "R$ "+preUnitS %></td>
+                                                <td style="text-align:center;"><%= desconto +"%" %></td>
+                                                <td style="text-align:center;"><%= pedLogix %></td>
+                                                <%--<td><%= przEntrega %></td>--%>
                                             </tr>
                                                 
                                     <% } %>
                                     <tr>
-                                        <td colspan="7" style="background-color: #070a0e; color:white;"><b>Total Pedido: R$ <%= totPedS %></td>
+                                        <td colspan="4" style="background-color: #070a0e; color:white;"><b>Total Pedido: R$ <%= totPedS %></td>
+                                        <td colspan="2" style="background-color: #070a0e; color:white;"><div style="float:left;"><b>Total Atendido: R$ <%= totAtendS %></div>
+                                            <div style="float:right;">Total Cancelado: R$ <%= totCancelS %></div></td>
+                                        <%--<td colspan="2" style="background-color: #070a0e; color:white;"><b>Total Cancelado: R$ <%= totCancelS %></td>--%>
+                                        <td colspan="2" style="background-color: #070a0e; color:white;text-align:right;"><b>Total Pendente: R$ <%= totPendS %></td>
                                     </tr>
                                 </table>
                             </td>
@@ -186,8 +222,8 @@
                                 %>
             </table>
         </div>
-        <%            DateTime dtFim = DateTime.Now;
-                      demora = dtFim - dtInicio; %>
+        <%            /*dtFim = DateTime.Now;
+                      demora = dtFim - dtInicio;*/ %>
         <font color=white>Carregamento: <%= demora.Seconds%>.<%= demora.Milliseconds%>s</font><br/>
 </body>
 </html>

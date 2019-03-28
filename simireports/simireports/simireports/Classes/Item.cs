@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace simireports.simireports.Classes
 {
@@ -15,6 +12,7 @@ namespace simireports.simireports.Classes
         private Decimal precoUnit;
         private string przEntrega;
         private Decimal desconto;
+        private int pedLogix;
 
         public Item(string qtdSolic, string qtdCancel, string qtdAtend, string nomeItem, string przEntrega, string codItem)
         {
@@ -46,6 +44,18 @@ namespace simireports.simireports.Classes
             this.precoUnit = precoUnit;
             this.desconto = desconto;
         }
+        public Item(string qtdSolic, string qtdCancel, string qtdAtend, string nomeItem, string przEntrega, string codItem, Decimal precoUnit, Decimal desconto,int pedLogix)
+        {
+            this.qtdSolic = qtdSolic;
+            this.qtdCancel = qtdCancel;
+            this.qtdAtend = qtdAtend;
+            this.nomeItem = nomeItem;
+            this.przEntrega = przEntrega;
+            this.codItem = codItem;
+            this.precoUnit = precoUnit;
+            this.desconto = desconto;
+            this.pedLogix = pedLogix;
+        }
         public string QtdSolic { get => qtdSolic; set => qtdSolic = value; }
         public string QtdCancel { get => qtdCancel; set => qtdCancel = value; }
         public string QtdAtend { get => qtdAtend; set => qtdAtend = value; }
@@ -54,5 +64,6 @@ namespace simireports.simireports.Classes
         public string CodItem { get => codItem; set => codItem = value; }
         public decimal PrecoUnit { get => precoUnit; set => precoUnit = value; }
         public decimal Desconto { get => desconto; set => desconto = value; }
+        public int PedLogix { get => pedLogix; set => pedLogix = value; }
     }
 }

@@ -122,7 +122,7 @@ namespace simireports
             postDatInicio = m.configDataHuman2Banco(postDatInicio);
             string sql = "SELECT a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante," +
 
-                               " b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit" +
+                               " b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.LgxPedNum" +
 
                                         " FROM PrePEDIDOS a" +
 
@@ -146,15 +146,19 @@ namespace simireports
 
                                         " AND a.Unidade LIKE '%" + postUnidade + "%'" +
 
-                                        //" AND a.CLProp NOT like 'E%'"+
+                                        " AND a.CLProp NOT like 'E%'" +
+                                        " AND a.CLProp NOT like 'LAC'" +
+                                        " AND a.CLProp NOT like 'LBq'" +
+                                        " AND a.CLProp NOT like 'LCd'" +
+                                        " AND a.CLProp NOT like 'LEP'" +
 
                                         postNumPed +
 
-                                        " GROUP BY a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante,b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit" +
+                                        " GROUP BY a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante,b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.LgxPedNum " +
                                         " ORDER BY a.DataUlt desc, a.CodPed";
 
             sqlview = sql; //ativa a exibicao do sql na tela
-           // String errosql = new BancoAzure().consultarErros(sql,conn);
+            //String errosql = new BancoAzure().consultarErros(sql,conn);
             reader = new BancoAzure().consultar(sql, conn);
             List<Item> itens = new List<Item>();
             string pedAnt = "zaburska";
@@ -189,7 +193,6 @@ namespace simireports
                         else
                         {
                             itens.Add(item);
-                            repres = repres.Substring(0, repres.IndexOf(","));
                             pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres);
                             pedsEfets.Add(pedEfet);
                             itens = new List<Item>();
@@ -202,6 +205,7 @@ namespace simireports
                     //numPed = reader.GetString(3);
                     cliente = reader.GetString(4);
                     repres = reader.GetString(5);
+                    repres = repres.Substring(0, repres.IndexOf(","));
                     //itens = new List<Item>();
                     //string sql2 = "SELECT b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit" +
                     //"                                                    FROM PrePedidosItens b inner join LgxPRODUTOS i on i.cod_item = b.cod_item" +
@@ -236,7 +240,15 @@ namespace simireports
                     //Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
                     totGeral += ((Decimal)qtdSolic * preUnit);
                     totGeralS = m.formatarDecimal(totGeral);
-                    item = new Item(qtdSolic.ToString(), qtdCancel.ToString(), qtdAtend.ToString(), nomeItem, przEntregaS, codItem, preUnit);
+                    Double desconto = reader.GetDouble(13);
+
+                    int pedLogix = 0;
+                    if (!reader.IsDBNull(14))
+                    {
+                        pedLogix = reader.GetInt32(14);
+                    }
+                    
+                    item = new Item(qtdSolic.ToString(), qtdCancel.ToString(), qtdAtend.ToString(), nomeItem, przEntregaS, codItem, preUnit, Decimal.Round((((Decimal)desconto)*100m)),pedLogix);
 
                     //    itens.Add(item);
                     //}
@@ -272,8 +284,8 @@ namespace simireports
 
             new BancoAzure().fechar(conn);
 
-            //DateTime dtFim = DateTime.Now;
-            //demora = dtFim - dtInicio;
+            DateTime dtFim = DateTime.Now;
+            demora = dtFim - dtInicio;
         }
 
     }

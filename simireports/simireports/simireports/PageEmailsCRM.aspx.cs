@@ -39,7 +39,8 @@ namespace simireports.simireports
             //Necessario por o nome dos representantes em maiuscula, toUpper nao funciona dentro do for each porque nao pode mudar variavel de iteraçao
             List<RepresEmails> represEmails = new List<RepresEmails>{
                 new RepresEmails("VENDAINT","ti@similar.ind.br"),
-                new RepresEmails("VANESSA","ronaldo.bini@similar.ind.br")};
+                new RepresEmails("VANESSA","ronaldo.bini@similar.ind.br")
+            };
 
             foreach (var re in represEmails)
             {
@@ -88,7 +89,7 @@ namespace simireports.simireports
 
                                         "" +
 
-                                        " GROUP BY a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante,b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit" +
+                                        " GROUP BY a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante,b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto" +
                                         " ORDER BY a.DataUlt desc, a.CodPed";
 
                 //sqlview = sql; //ativa a exibicao do sql na tela
@@ -162,7 +163,7 @@ namespace simireports.simireports
                         totGeral += ((Decimal)qtdSolic * preUnit);
                         totGeralS = m.formatarDecimal(totGeral);
                         Double desconto = reader.GetDouble(13);
-                        item = new Item(qtdSolic.ToString(), qtdCancel.ToString(), qtdAtend.ToString(), nomeItem, przEntregaS, codItem, preUnit, desconto);
+                        item = new Item(qtdSolic.ToString(), qtdCancel.ToString(), qtdAtend.ToString(), nomeItem, przEntregaS, codItem, preUnit, Decimal.Round((((Decimal)desconto) * 100m)));
 
                     }
 
@@ -187,7 +188,7 @@ namespace simireports.simireports
                 new BancoAzure().fechar(conn);
 
                 corpoEmail = "<body style=\"background-color:#222; color:white;\">Mostrando " + pedsEfets.Count + " resultados, de " + m.configDataBanco2Human(anteontem) + " a " + m.configDataBanco2Human(ontem) + " -Total R$ " + totGeralS + "<br/>" +
-                    " <table style = \"max-width:95%; color:white; font-size: 12px;\">";
+                    " <table style = \"max-width:100%; color:white; font-size: 12px;\">";
 
                 foreach (var pedE in pedsEfets)
                 {
@@ -223,10 +224,11 @@ namespace simireports.simireports
                                 //"<th style = \"width: 5%;\" > Solic </th>" +
                                 //"<th style=\"width: 5%;\">Cancel</th>" +
                                 //"<th style = \"width: 5%;\" > Atend </th>" +
-                                "<th style = \"width: 20%;\" > Preço Unit</th>" +
-                                //"<th style=\"width:10%;\">Preço Total Atend</th>" +
-                                //"<th style=\"width:10%;\">Preço Total Solic</th>" +
-                                //"<th style = \"width: 20%;\" > Prazo </th>" +
+                                "<th style = \"width: 10%;\" > Preço Unit</th>" +
+                                "<th style = \"width: 10%;\" > Desconto</th>" +
+                            //"<th style=\"width:10%;\">Preço Total Atend</th>" +
+                            //"<th style=\"width:10%;\">Preço Total Solic</th>" +
+                            //"<th style = \"width: 20%;\" > Prazo </th>" +
                             "</tr>";
 
                     totPed = 0.0m;
@@ -248,6 +250,8 @@ namespace simireports.simireports
                         Decimal preUnit = Decimal.Round(itemV.PrecoUnit, 2);
                         String preUnitS = m.formatarDecimal(preUnit);
 
+                        Decimal desconto = itemV.Desconto;
+
                         totPed += preUnit * qtdSolicD;
                         totAtend += preUnit * qtdAtendD;
 
@@ -259,21 +263,22 @@ namespace simireports.simireports
 
                         totPedS = m.formatarDecimal(totPed);
                         corpoEmail += "<tr>" +
-                            "<td>" + itemV.CodItem + "</td>" +
-                            "<td>" + itemV.NomeItem + " </td>" +
+                            "<td style=\"text-align:center;\">" + itemV.CodItem + " </td>" +
+                            "<td style=\"text-align:center;\">" + itemV.NomeItem + " </td>" +
                             //"<td style = \"text-align:center;\">" + qtdSolicD + " </td>" +
                             //"<td style = \"text-align:center;\">" + qtdCancelD + " </td>" +
                             //"<td style = \"text-align:center;\">" + qtdAtendD + " </td>" +
                             "<td style=\"text-align:center;\">R$" + preUnitS + "</td>" +
-                            //"<td>R$" + totAtend + "</td>" +
-                            //"<td>R$" + totPed + "</td>" +
-                            //"<td style = \"text-align:right;\">" + itemV.PrzEntrega + "</td>" +
+                            "<td style=\"text-align:center;\">" + desconto + "%</td>" +
+                        //"<td>R$" + totAtend + "</td>" +
+                        //"<td>R$" + totPed + "</td>" +
+                        //"<td style = \"text-align:right;\">" + itemV.PrzEntrega + "</td>" +
                         "</tr>";
                     }
                     corpoEmail += "<tr>" +
                                     "<td colspan = \"1\" style=\"background-color: #070a0e; color:white;\"><b>Total Pedido: R$" + totPedS + "</td>" +
                                     "<td colspan = \"1\" style=\"background-color: #070a0e; color:white;\"><b>Total Atendido: R$" + totAtendS + "</td>" +
-                                    "<td colspan = \"1\" style=\"background-color: #070a0e; color:white;\"><b>Total Pendente: R$" + totPendS + "</td>" +
+                                    "<td colspan = \"2\" style=\"background-color: #070a0e; color:white;\"><b>Total Pendente: R$" + totPendS + "</td>" +
                                 "</tr>" +
                             "</table>" +
                         "</td>" +
