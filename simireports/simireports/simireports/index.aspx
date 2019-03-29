@@ -4,45 +4,106 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>SimiReports</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Simiweb</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/design.css" />
+     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
 
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Minhas',     11],
+          ['Em Atraso',      2],
+          ['Pendentes',  2],
+          ['Em Andamento', 2],
+          ['Concluidas',    7]
+        ]);
+
+        var options = {
+            title: 'Solicitações',
+            backgroundColor: '#2a2d33',
+            legendTextStyle: { color: '#fff' },
+            titleTextStyle: { color: '#fff'}
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
 </head>
 <body style="background-color:#2a2d33;">
+    
+    <div id="topo">
+        <div class="center">
+		    <table>
+			    <tr>
+				    <td width="52px">
+					    <a  title="Início" href="index.aspx"><img style = "height: 52px; margin-top:2px;" src="img/syss.png" /></a>
+				    </td>
+				    <td>
+					    <nav id="rolling-nav">
+						    <ul>
+							    <li>
+								    <form id="relatorios" action="Relatorios.aspx" method="post">
+									    <a href="javascript:;" onclick="document.getElementById('relatorios').submit();" data-clone="Reports">Relatórios</a>
+									    <input type="hidden" name="key" value="1">
+								    </form>
+							    </li>
+							    <li>
+								    <form id="upload" action="construcao.aspx" method="post">
+									    <a href="javascript:;" onclick="document.getElementById('upload').submit();" data-clone="Solicitations">Solicitações</a>
+									    <input type="hidden" name="key" value="1">
+								    </form>
+							    </li>							
+							    <li>
+								    <form id="servicos" action="construcao.aspx" method="post">
+									    <a href="javascript:;" onclick="document.getElementById('servicos').submit();" data-clone="TI"> TI</a>
+									    <input type="hidden" name="key" value="1">
+								    </form>
+							    </li>
+							    <li>
+								    <form id="adm" action="construcao.aspx" method="post">
+									    <a href="javascript:;" onclick="document.getElementById('adm').submit();" data-clone="Manage">Gerência</a>
+									    <input type="hidden" name="key" value="1">
+								    </form>
+							    </li>
+							    <li style="color:red;">
+								    <form id="sair" action="Logout.aspx" method="post">
+									    <a href="javascript:;" onclick="document.getElementById('sair').submit();" data-clone="Quit">Sair</a>
+									    <input type="hidden" name="key" value="1">
+									    <input type="hidden" name="sair" value="1">
+								    </form>
+							    </li>
+						    </ul>
+					    </nav>
+				    </td>
+			    </tr>
+		    </table>
+        </div>
+	</div>
 
 
+    
 
-    <center>
-        <a  title="Atualizar a página" href="index.aspx"><img style="margin:25px;" width="100px" src="img/syss.png" /></a>
-        <br /><font color=white><%=Session["nome"] %></font><hr /><br />
-        <table class="table table-dark" style = "text-align: center; width:50%; color:white; font-size: 14px;">
-            <tr>
-                <th style="width:33%;">Comercial</th>
-                <th style="width:33%;">Fiscal</th>
-                <th style="width:33%;">Administrativo</th>
-            </tr>
-            <tr>
-                <td><a href="PageComissoes.aspx">Comissoes</a></td>
-                <td><a href="PageDevolucoes.aspx">Devoluções</td>
-                <td><a href="PageOMsPendentes.aspx">OMs Pendentes</a></td>
-            </tr>           
-            <tr>
-                <td><a href="PagePedidosEfetivados.aspx">Pedidos Efetivados Logix</a></td>
-                <td><a href="PagePedidosEfetivadosCRM.aspx">Pedidos Efetivados CRM</a></td>
-                <td><a href="PageEmails.aspx">EmailLogix</a></td>
-                <td><a href="PageEmailsCRM.aspx">EmailCRM</a></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td colspan="3"> <a href="Logout.aspx"><h3><font color="red">Sair</font></h3></a></td>
-            </tr>
-        </table>
+           
+    <center>    
+    
+    <br /><font color=white><%=Session["nome"] %></font><hr />
+
+    <br /><br />
+    <!-- GRAFICO -->
+    <div id="piechart" style="width: 65%; height: 250px; color:white;"></div>
+    <hr /><br />
+    <!-- /GRAFICO -->
+
+
+    
        
     </center>
     

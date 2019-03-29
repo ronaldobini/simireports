@@ -10,7 +10,7 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>simireports</RootNamespace>
+    <RootNamespace>simiweb</RootNamespace>
     <AssemblyName>simireports</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
@@ -86,7 +86,8 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\simireports - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\simireports - Web Deploy1.pubxml" />
-    <Content Include="simireports\construcao.html" />
+    <Content Include="simireports\construcao.aspx" />
+    <Content Include="simireports\css\design.css" />
     <Content Include="simireports\img\simireportslogo.png" />
     <Content Include="simireports\img\simisyslogo.psd" />
     <None Include="Web.Debug.config">
@@ -142,15 +143,16 @@
     <Content Include="simireports\img\wait.png" />
     <Content Include="simireports\img\x.png" />
     <Content Include="simireports\Logout.aspx" />
-    <Content Include="simireports\PageComissoes.aspx" />
-    <Content Include="simireports\PageOMsPendentes.aspx" />
-    <Content Include="simireports\PagePedidosEfetivadosCRM.aspx" />
-    <Content Include="simireports\PagePrePedidos.aspx" />
+    <Content Include="simireports\RelComissoes.aspx" />
+    <Content Include="simireports\BotEmailsPedCRM.aspx" />
+    <Content Include="simireports\RelOMsPendentes.aspx" />
+    <Content Include="simireports\RelPedidosEfetivadosCRM.aspx" />
     <Content Include="simireports\index.aspx" />
     <Content Include="simireports\login.aspx" />
-    <Content Include="simireports\PageDevolucoes.aspx" />
-    <Content Include="simireports\PagePedidosEfetivados.aspx" />
-    <Content Include="simireports\PageEmails.aspx" />
+    <Content Include="simireports\RelDevolucoes.aspx" />
+    <Content Include="simireports\RelPedidosEfetivados.aspx" />
+    <Content Include="simireports\BotEmailsPedLogix.aspx" />
+    <Content Include="simireports\Relatorios.aspx" />
     <Content Include="syss.ico" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -180,33 +182,33 @@
     <Compile Include="simireports\Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
-    <Compile Include="simireports\PageComissoes.aspx.cs">
-      <DependentUpon>PageComissoes.aspx</DependentUpon>
+    <Compile Include="simireports\RelComissoes.aspx.cs">
+      <DependentUpon>RelComissoes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="simireports\PageComissoes.aspx.designer.cs">
-      <DependentUpon>PageComissoes.aspx</DependentUpon>
+    <Compile Include="simireports\RelComissoes.aspx.designer.cs">
+      <DependentUpon>RelComissoes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="simireports\PageOMsPendentes.aspx.cs">
-      <DependentUpon>PageOMsPendentes.aspx</DependentUpon>
+    <Compile Include="simireports\BotEmailsPedCRM.aspx.cs">
+      <DependentUpon>BotEmailsPedCRM.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="simireports\PageOMsPendentes.aspx.designer.cs">
-      <DependentUpon>PageOMsPendentes.aspx</DependentUpon>
+    <Compile Include="simireports\BotEmailsPedCRM.aspx.designer.cs">
+      <DependentUpon>BotEmailsPedCRM.aspx</DependentUpon>
     </Compile>
-    <Compile Include="simireports\PagePedidosEfetivadosCRM.aspx.cs">
-      <DependentUpon>PagePedidosEfetivadosCRM.aspx</DependentUpon>
+    <Compile Include="simireports\RelOMsPendentes.aspx.cs">
+      <DependentUpon>RelOMsPendentes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="simireports\PagePedidosEfetivadosCRM.aspx.designer.cs">
-      <DependentUpon>PagePedidosEfetivadosCRM.aspx</DependentUpon>
+    <Compile Include="simireports\RelOMsPendentes.aspx.designer.cs">
+      <DependentUpon>RelOMsPendentes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="simireports\PagePrePedidos.aspx.cs">
-      <DependentUpon>PagePrePedidos.aspx</DependentUpon>
+    <Compile Include="simireports\RelPedidosEfetivadosCRM.aspx.cs">
+      <DependentUpon>RelPedidosEfetivadosCRM.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="simireports\PagePrePedidos.aspx.designer.cs">
-      <DependentUpon>PagePrePedidos.aspx</DependentUpon>
+    <Compile Include="simireports\RelPedidosEfetivadosCRM.aspx.designer.cs">
+      <DependentUpon>RelPedidosEfetivadosCRM.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="simireports\Conn\BancoLogix.cs" />
@@ -225,26 +227,33 @@
     <Compile Include="simireports\login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="simireports\PageDevolucoes.aspx.cs">
-      <DependentUpon>PageDevolucoes.aspx</DependentUpon>
+    <Compile Include="simireports\RelDevolucoes.aspx.cs">
+      <DependentUpon>RelDevolucoes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="simireports\PageDevolucoes.aspx.designer.cs">
-      <DependentUpon>PageDevolucoes.aspx</DependentUpon>
+    <Compile Include="simireports\RelDevolucoes.aspx.designer.cs">
+      <DependentUpon>RelDevolucoes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="simireports\PagePedidosEfetivados.aspx.cs">
-      <DependentUpon>PagePedidosEfetivados.aspx</DependentUpon>
+    <Compile Include="simireports\RelPedidosEfetivados.aspx.cs">
+      <DependentUpon>RelPedidosEfetivados.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="simireports\PagePedidosEfetivados.aspx.designer.cs">
-      <DependentUpon>PagePedidosEfetivados.aspx</DependentUpon>
+    <Compile Include="simireports\RelPedidosEfetivados.aspx.designer.cs">
+      <DependentUpon>RelPedidosEfetivados.aspx</DependentUpon>
     </Compile>
-    <Compile Include="simireports\PageEmails.aspx.cs">
-      <DependentUpon>PageEmails.aspx</DependentUpon>
+    <Compile Include="simireports\BotEmailsPedLogix.aspx.cs">
+      <DependentUpon>BotEmailsPedLogix.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="simireports\PageEmails.aspx.designer.cs">
-      <DependentUpon>PageEmails.aspx</DependentUpon>
+    <Compile Include="simireports\BotEmailsPedLogix.aspx.designer.cs">
+      <DependentUpon>BotEmailsPedLogix.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simireports\Relatorios.aspx.cs">
+      <DependentUpon>Relatorios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\Relatorios.aspx.designer.cs">
+      <DependentUpon>Relatorios.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />
