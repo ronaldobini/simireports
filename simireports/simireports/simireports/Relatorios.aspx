@@ -113,7 +113,7 @@
                 </tr>
                 <tr>
                     <td><a href="RelPedidosEfetivadosCRM.aspx">003 - Pedidos Efetivados CRM</a></td>
-                    <td></td>
+                    <td><a href="BotEmailsPedCRM.aspx">Email CRM</a></td>
                     <td></td>
                 </tr>
              </table>

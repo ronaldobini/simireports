@@ -30,7 +30,7 @@ namespace simireports.simireports
             if (dow == DayOfWeek.Monday)
             {
                 anteontem = DateTime.Today.AddDays(-3).ToString("d");
-                ontem = DateTime.Today.AddDays(-1).ToString("d");
+                ontem = DateTime.Today.AddDays(-3).ToString("d");
             }
             else
             {
@@ -40,10 +40,10 @@ namespace simireports.simireports
             anteontem = m.configDataHuman2Banco(anteontem);
             ontem = m.configDataHuman2Banco(ontem);
             //Necessario por o nome dos representantes em maiuscula, toUpper nao funciona dentro do for each porque nao pode mudar variavel de iteraçao
-            List<RepresEmails> represEmails = new List<RepresEmails>{
+            List<RepresEmails> represEmails = new List<RepresEmails>{/*
                 new RepresEmails("VENDAINT","vanessa.boumer@similar.ind.br"),
                 new RepresEmails("VANESSA","vanessa.boumer@similar.ind.br"),
-                new RepresEmails("VANESSA,","ti@similar.ind.br"),
+                new RepresEmails("VANESSA,","ti@similar.ind.br"),*/
                 new RepresEmails("VENDAINT,","ti@similar.ind.br")
             };
 
@@ -173,6 +173,7 @@ namespace simireports.simireports
                     }
 
                     itens.Add(item);
+                    repres = repres.Substring(0, repres.IndexOf(","));
                     pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres);
                     pedsEfets.Add(pedEfet);
                 }
@@ -192,12 +193,18 @@ namespace simireports.simireports
                 }
                 new BancoAzure().fechar(conn);
 
-                corpoEmail = "<body style=\"background-color:#222; color:white;\">Mostrando " + pedsEfets.Count + " resultados, de " + m.configDataBanco2Human(ontem) + " a " + m.configDataBanco2Human(ontem) + " -Total R$ " + totGeralS + "<br/>" +
-                    " <table style = \"max-width:100%; color:white; font-size: 12px;\">";
+                corpoEmail = "<body style=\"background-color:#fff; color:white;\"><div style=\"background-color:#222;\">Mostrando " + pedsEfets.Count + " resultados, de " + m.configDataBanco2Human(ontem) + " a " + m.configDataBanco2Human(ontem) + " -Total R$ " + totGeralS + "<br/>" +
+                    "<table style = \"max-width:100%;background-color:#222; color:white; font-size: 12px;\">";
 
                 foreach (var pedE in pedsEfets)
                 {
                     corpoEmail += "<tr>" +
+                            "<td style=\"color:#222;\">" +
+                                "-" +
+                            "</td>" +
+                            "<td style=\"color:#222;\">" +
+                                "-" +
+                            "</td>" +
                             "<td style=\"color:#222;\">" +
                                 "-" +
                             "</td>" +
@@ -224,13 +231,13 @@ namespace simireports.simireports
                         "<td colspan = \"3\">" +
                         "<table style=\"background-color:#3f4142; width:100%; color:white; font-size: 12px;\">" +
                             "<tr>" +
-                                "<th style = \"width: 20%;\" > Cod. do Item</th>" +
-                                "<th style=\"width: 60%;\">Desc.Item</th>" +
+                                "<th style =\"text-align:left;width: 20%;\" > Cod. do Item</th>" +
+                                "<th style=\"text-align:left;width: 60%;\">Desc.Item</th>" +
                                 //"<th style = \"width: 5%;\" > Solic </th>" +
                                 //"<th style=\"width: 5%;\">Cancel</th>" +
                                 //"<th style = \"width: 5%;\" > Atend </th>" +
-                                "<th style = \"width: 10%;\" > Preço Unit</th>" +
-                                "<th style = \"width: 10%;\" > Desconto</th>" +
+                                "<th style = \"text-align:right;width: 10%;\" > Desconto</th>" +
+                                "<th style = \"text-align:right;width: 10%;\" > Preço Unit $</th>" +
                             //"<th style=\"width:10%;\">Preço Total Atend</th>" +
                             //"<th style=\"width:10%;\">Preço Total Solic</th>" +
                             //"<th style = \"width: 20%;\" > Prazo </th>" +
@@ -268,13 +275,13 @@ namespace simireports.simireports
 
                         totPedS = m.formatarDecimal(totPed);
                         corpoEmail += "<tr>" +
-                            "<td style=\"text-align:center;\">" + itemV.CodItem + " </td>" +
-                            "<td style=\"text-align:center;\">" + itemV.NomeItem + " </td>" +
+                            "<td style=\"text-align:left;\">" + itemV.CodItem + " </td>" +
+                            "<td style=\"text-align:left;\">" + itemV.NomeItem + " </td>" +
                             //"<td style = \"text-align:center;\">" + qtdSolicD + " </td>" +
                             //"<td style = \"text-align:center;\">" + qtdCancelD + " </td>" +
                             //"<td style = \"text-align:center;\">" + qtdAtendD + " </td>" +
-                            "<td style=\"text-align:center;\">R$" + preUnitS + "</td>" +
-                            "<td style=\"text-align:center;\">" + desconto + "%</td>" +
+                            "<td style=\"text-align:right;\">" + desconto + "%</td>" +
+                            "<td style=\"text-align:right;\">" + preUnitS + "</td>" +
                         //"<td>R$" + totAtend + "</td>" +
                         //"<td>R$" + totPed + "</td>" +
                         //"<td style = \"text-align:right;\">" + itemV.PrzEntrega + "</td>" +
@@ -282,17 +289,17 @@ namespace simireports.simireports
                     }
                     corpoEmail += "<tr>" +
 
-                                    "<td colspan = \"1\" style=\"background-color: #070a0e; color:white;\"><b>Total Pedido: </td>" +
-                                    "<td colspan = \"1\" style=\"background-color: #070a0e; color:white;\"></td>" +
-                                    "<td colspan = \"1\" style=\"background-color: #070a0e; text-align:center; color:white;\"><b>R$" + totPedS + "</td>" +
-                                    "<td colspan = \"1\" style=\"background-color: #070a0e;\"> </td>" +
+                                    "<td colspan = \"3\" style=\"background-color: #070a0e; color:white;\"><b>Total Pedido: </td>" +
+                                    //"<td colspan = \"1\" style=\"background-color: #070a0e; color:white;\"></td>" +
+                                    //"<td colspan = \"1\" style=\"background-color: #070a0e;\"> </td>" +
+                                    "<td colspan = \"1\" style=\"background-color: #070a0e; text-align:right; color:white;\"><b>R$" + totPedS + "</td>" +
                                 "</tr>" +
                             "</table>" +
                         "</td>" +
                     "</tr>";
                 }
                 totGeralS = m.formatarDecimal(totGeral);
-                corpoEmail += "</table></body>";
+                corpoEmail += "</table>za</div></body>brivun</div>";
 
 
                 // Command line argument must the the SMTP host.
