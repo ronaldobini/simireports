@@ -90,10 +90,10 @@
     <div id="conteudo" style="margin-top:50px;">
         <center>
 
-            <!-- GRAFICO -->
+            <!-- GRAFICO 
             <div id="chart_div" style="width: 65%; height: 300px; color:white;"></div>
             <hr /><br />
-            <!-- /GRAFICO -->
+            /GRAFICO -->
 
             <table class="table table-dark" style = "text-align: center; width:50%; color:white; font-size: 14px;">
                 <tr>
@@ -113,7 +113,7 @@
                 </tr>
                 <tr>
                     <td><a href="RelPedidosEfetivadosCRM.aspx">003 - Pedidos Efetivados CRM</a></td>
-                    <td></td>
+                    <td><a href="BotEmailsPedCRM.aspx">Email CRM</a></td>
                     <td></td>
                 </tr>
              </table>

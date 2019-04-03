@@ -10,7 +10,7 @@
         <br />
         <h3>EM CONSTRUÇÃO</h3>
         <BR>
-        <a href="index.aspx">Voltar</a>
+        <a href="index.aspx"><font color=white>Voltar</a>
     </center>
 </body>
 </html>

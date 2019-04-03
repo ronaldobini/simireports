@@ -57,19 +57,19 @@
 							    </li>
 							    <li>
 								    <form id="upload" action="construcao.aspx" method="post">
-									    <a href="javascript:;" onclick="document.getElementById('upload').submit();" data-clone="Solicitations">Solicitações</a>
+									    <a href="javascript:;" onclick="document.getElementById('upload').submit();" data-clone="Requests">Solicitações</a>
 									    <input type="hidden" name="key" value="1">
 								    </form>
 							    </li>							
 							    <li>
 								    <form id="servicos" action="construcao.aspx" method="post">
-									    <a href="javascript:;" onclick="document.getElementById('servicos').submit();" data-clone="TI"> TI</a>
+									    <a href="javascript:;" onclick="document.getElementById('servicos').submit();" data-clone="IT"> TI</a>
 									    <input type="hidden" name="key" value="1">
 								    </form>
 							    </li>
 							    <li>
 								    <form id="adm" action="construcao.aspx" method="post">
-									    <a href="javascript:;" onclick="document.getElementById('adm').submit();" data-clone="Manage">Gerência</a>
+									    <a href="javascript:;" onclick="document.getElementById('adm').submit();" data-clone="Management">Gerência</a>
 									    <input type="hidden" name="key" value="1">
 								    </form>
 							    </li>
@@ -97,10 +97,10 @@
     <br /><font color=white><%=Session["nome"] %></font><hr />
 
     <br /><br />
-    <!-- GRAFICO -->
+    <!-- GRAFICO 
     <div id="piechart" style="width: 65%; height: 250px; color:white;"></div>
     <hr /><br />
-    <!-- /GRAFICO -->
+     /GRAFICO -->
 
 
     

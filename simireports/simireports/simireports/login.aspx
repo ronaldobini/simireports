@@ -16,15 +16,15 @@
 
   		<!-- LOGO TOP -->
 		<div style="text-align: center; height: 110px; background-color:white; padding-top: 10px;">
-			 <a href="index.php"><img src = "img/simireportslogo.png" width="250"></a>
+			 <a href="index.php"><img src = "img/logoSimi.png" width="250"></a>
 		</div>
 
 	    <div class="container" style="margin-top:70px; width:25%;">
 
 	     <form runat="server" class="form-signin" method="post" action="#">
-            <h3 class="form-signin-heading" style="color:white;">Login</h3>
+            <div class="form-signin-heading" style="color:white; font-size:18px;"><b>Login</b></div>
 	        <input runat="server" type="text" name="login" id="login" class="form-control" placeholder="Login" required="" style="font-size: 15px;">
-	        <h3 class="form-signin-heading" style="color:white;">Senha</h3>
+	        <div class="form-signin-heading" style="color:white;font-size:18px; margin-top:20px;"><b>Senha</b></div>
 	        <input runat="server" type="password" name="pass" id="senha" class="form-control" placeholder="Senha" required="" style="font-size: 15px;">
 	        <br>
                <center> 
@@ -43,7 +43,7 @@
                     {
              %>
                     <center><h3 style="color:white;"><%=Session["Nome"] %> entrando...</h3></p></center>
-                    <meta http-equiv="refresh" content="0; URL=index.aspx" />
+                    <meta http-equiv="refresh" content="0; URL=Relatorios.aspx" />
              <%     
                     }
 

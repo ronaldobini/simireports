@@ -40,11 +40,14 @@ namespace simireports.simireports
             anteontem = m.configDataHuman2Banco(anteontem);
             ontem = m.configDataHuman2Banco(ontem);
             //Necessario por o nome dos representantes em maiuscula, toUpper nao funciona dentro do for each porque nao pode mudar variavel de iteraçao
-            List<RepresEmails> represEmails = new List<RepresEmails>{/*
-                new RepresEmails("VENDAINT","vanessa.boumer@similar.ind.br"),
-                new RepresEmails("VANESSA","vanessa.boumer@similar.ind.br"),
-                new RepresEmails("VANESSA,","ti@similar.ind.br"),*/
-                new RepresEmails("VENDAINT,","ti@similar.ind.br")
+            List<RepresEmails> represEmails = new List<RepresEmails>{
+                //new RepresEmails("VENDAINT","vanessa.boumer@similar.ind.br"),
+                //new RepresEmails("VANESSA","vanessa.boumer@similar.ind.br"),
+                //new RepresEmails("VINICIUS","vinicius.lima@similar.ind.br"),
+                //new RepresEmails("FELIPE","felipe.thomaz@similar.ind.br"),
+
+
+                new RepresEmails("","ti@similar.ind.br")
             };
 
             foreach (var re in represEmails)
@@ -193,54 +196,54 @@ namespace simireports.simireports
                 }
                 new BancoAzure().fechar(conn);
 
-                corpoEmail = "<body style=\"background-color:#fff; color:white;\"><div style=\"background-color:#222;\">Mostrando " + pedsEfets.Count + " resultados, de " + m.configDataBanco2Human(ontem) + " a " + m.configDataBanco2Human(ontem) + " -Total R$ " + totGeralS + "<br/>" +
-                    "<table style = \"max-width:100%;background-color:#222; color:white; font-size: 12px;\">";
+                corpoEmail = "<body style=\"background-color:#fff; color:#000;\"><div style=\"background-color:#fff;\">Mostrando " + pedsEfets.Count + " resultados, de " + m.configDataBanco2Human(ontem) + " a " + m.configDataBanco2Human(ontem) + " -Total R$ " + totGeralS + "<br/>" +
+                    "<table style = \"max-width:100%;background-color:#aaa; color:#000; font-size: 12px;\">";
 
                 foreach (var pedE in pedsEfets)
                 {
-                    corpoEmail += "<tr>" +
-                            "<td style=\"color:#222;\">" +
+                    corpoEmail += "<tr style=\"color:#aaa;\">" +
+                            "<td style=\"color:#aaa;\">" +
                                 "-" +
                             "</td>" +
-                            "<td style=\"color:#222;\">" +
+                            "<td style=\"color:#aaa;\">" +
                                 "-" +
                             "</td>" +
-                            "<td style=\"color:#222;\">" +
+                            "<td style=\"color:#aaa;\">" +
                                 "-" +
                             "</td>" +
                         "</tr>" +
-                        "<thead style = \"background-color: #222; color:white;\">" +
+                        "<thead style = \"background-color: #aaa; color:#000;\">" +
                     "<tr>" +
-                        //"<th scope = \"col\"style = \"width: 5%; text-align:center;background-color: #070a0e;\"> Data </th>" +
-                        //"<th scope = \"col\"style = \"width: 5%; text-align:center;background-color: #070a0e;\"> Unidade </th>" +
-                        "<th scope = \"col\"style = \"width: 33%; text-align:center;background-color: #070a0e;\"> Pedido </th>" +
-                        //"<th scope = \"col\"style = \"width: 5%; text-align:center;background-color: #070a0e;\"> CNPJ </th>" +
-                        "<th scope = \"col\"style = \"width: 33%; text-align:center;background-color: #070a0e;\"> Cliente </th>" +
-                        "<th scope = \"col\"style = \"width: 33%; text-align:center;background-color: #070a0e;\"> Representante </th>" +
+                        //"<td scope = \"col\"style = \"width: 5%; text-align:center;background-color: #fff;\"> Data </th>" +
+                        //"<td scope = \"col\"style = \"width: 5%; text-align:center;background-color: #fff;\"> Unidade </th>" +
+                        "<td scope = \"col\"style = \"width: 33%; text-align:center;color:#aaa;background-color: #fff;\"> Pedido </th>" +
+                        //"<td scope = \"col\"style = \"width: 5%; text-align:center;background-color: #fff;\"> CNPJ </th>" +
+                        "<td scope = \"col\"style = \"width: 33%; text-align:center;color:#aaa;background-color: #fff;\"> Cliente </th>" +
+                        "<td scope = \"col\"style = \"width: 33%; text-align:center;color:#aaa;background-color: #fff;\"> Representante </th>" +
                     "</tr>" +
                     "</thead>" +
                     "<tr>" +
-                        //"<td style = \"text-align:center;\"><b>" + pedE.Dat + "</b></td>" +
-                        //"<td style = \"text-align:center;\"><b>" + pedE.CodEmpresa + "</b></td>" +
-                        "<td style = \"text-align:center;\"><b>" + pedE.NumPed + "</b></td>" +
-                        //"<td style = \"text-align:center;\"><b>" + pedE.CodCliente + "</b></td>" +
-                        "<td style = \"text-align:center;\"><b>" + pedE.Cliente + "</b></td>" +
-                        "<td style = \"text-align:center;\"><b>" + pedE.Repres + "</b></td>" +
+                        //"<td style = \"text-align:center;\">" + pedE.Dat + "</td>" +
+                        //"<td style = \"text-align:center;\">" + pedE.CodEmpresa + "</td>" +
+                        "<td style = \"text-align:center;\">" + pedE.NumPed + "</td>" +
+                        //"<td style = \"text-align:center;\">" + pedE.CodCliente + "</td>" +
+                        "<td style = \"text-align:center;\">" + pedE.Cliente + "</td>" +
+                        "<td style = \"text-align:center;\">" + pedE.Repres + "</td>" +
                     "</tr>" +
                     "<tr>" +
                         "<td colspan = \"3\">" +
-                        "<table style=\"background-color:#3f4142; width:100%; color:white; font-size: 12px;\">" +
+                        "<table border=\"1\" style=\"background-color:#fff; width:100%; color:#000; font-size: 12px;\">" +
                             "<tr>" +
-                                "<th style =\"text-align:left;width: 20%;\" > Cod. do Item</th>" +
-                                "<th style=\"text-align:left;width: 60%;\">Desc.Item</th>" +
-                                //"<th style = \"width: 5%;\" > Solic </th>" +
-                                //"<th style=\"width: 5%;\">Cancel</th>" +
-                                //"<th style = \"width: 5%;\" > Atend </th>" +
-                                "<th style = \"text-align:right;width: 10%;\" > Desconto</th>" +
-                                "<th style = \"text-align:right;width: 10%;\" > Preço Unit $</th>" +
-                            //"<th style=\"width:10%;\">Preço Total Atend</th>" +
-                            //"<th style=\"width:10%;\">Preço Total Solic</th>" +
-                            //"<th style = \"width: 20%;\" > Prazo </th>" +
+                                "<td style =\"text-align:left;color:#aaa;width: 20%;\" > Cod. do Item</th>" +
+                                "<td style=\"text-align:left;color:#aaa;width: 55%;\">Desc.Item</th>" +
+                                "<td style = \"text-align:right;color:#aaa;width: 5%;\" > Solic </th>" +
+                                //"<td style=\"color:#aaa;width: 5%;\">Cancel</th>" +
+                                //"<td style = \"color:#aaa;width: 5%;\" > Atend </th>" +
+                                "<td style = \"text-align:right;color:#aaa;width: 10%;\" > Desconto</th>" +
+                                "<td style = \"text-align:right;color:#aaa;width: 10%;\" > Preço Unit $</th>" +
+                            //"<td style=\"color:#aaa;width:10%;\">Preço Total Atend</th>" +
+                            //"<td style=\"color:#aaa;width:10%;\">Preço Total Solic</th>" +
+                            //"<td style = \"color:#aaa;width: 20%;\" > Prazo </th>" +
                             "</tr>";
 
                     totPed = 0.0m;
@@ -277,7 +280,7 @@ namespace simireports.simireports
                         corpoEmail += "<tr>" +
                             "<td style=\"text-align:left;\">" + itemV.CodItem + " </td>" +
                             "<td style=\"text-align:left;\">" + itemV.NomeItem + " </td>" +
-                            //"<td style = \"text-align:center;\">" + qtdSolicD + " </td>" +
+                            "<td style = \"text-align:right;\">" + qtdSolicD + " </td>" +
                             //"<td style = \"text-align:center;\">" + qtdCancelD + " </td>" +
                             //"<td style = \"text-align:center;\">" + qtdAtendD + " </td>" +
                             "<td style=\"text-align:right;\">" + desconto + "%</td>" +
@@ -289,17 +292,17 @@ namespace simireports.simireports
                     }
                     corpoEmail += "<tr>" +
 
-                                    "<td colspan = \"3\" style=\"background-color: #070a0e; color:white;\"><b>Total Pedido: </td>" +
-                                    //"<td colspan = \"1\" style=\"background-color: #070a0e; color:white;\"></td>" +
-                                    //"<td colspan = \"1\" style=\"background-color: #070a0e;\"> </td>" +
-                                    "<td colspan = \"1\" style=\"background-color: #070a0e; text-align:right; color:white;\"><b>R$" + totPedS + "</td>" +
+                                    "<td colspan = \"2\" style=\"background-color: #fff; color:#000;\">Total Pedido: </td>" +
+                                    //"<td colspan = \"1\" style=\"background-color: #fff; color:#000;\"></td>" +
+                                    //"<td colspan = \"1\" style=\"background-color: #fff;\"> </td>" +
+                                    "<td colspan = \"3\" style=\"background-color: #fff; text-align:right; color:#000;\">R$" + totPedS + "</td>" +
                                 "</tr>" +
                             "</table>" +
                         "</td>" +
                     "</tr>";
                 }
                 totGeralS = m.formatarDecimal(totGeral);
-                corpoEmail += "</table>za</div></body>brivun</div>";
+                corpoEmail += "</table></div></body></div>";
 
 
                 // Command line argument must the the SMTP host.
@@ -311,7 +314,7 @@ namespace simireports.simireports
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
                 client.Credentials = new System.Net.NetworkCredential("ti@similar.ind.br", "Simi1717");
-                MailMessage mm = new MailMessage("ti@similar.ind.br", re.email, "Relatorio CRM", corpoEmail);
+                MailMessage mm = new MailMessage("ti@similar.ind.br", re.email, "Rel. Pedidos CRM - "+re.nome, corpoEmail);
                 mm.BodyEncoding = UTF8Encoding.UTF8;
                 mm.IsBodyHtml = true;
                 mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
