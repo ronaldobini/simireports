@@ -41,10 +41,10 @@ namespace simireports.simireports
             ontem = m.configDataHuman2Banco(ontem);
             //Necessario por o nome dos representantes em maiuscula, toUpper nao funciona dentro do for each porque nao pode mudar variavel de iteraçao
             List<RepresEmails> represEmails = new List<RepresEmails>{
-                //new RepresEmails("VENDAINT","vanessa.boumer@similar.ind.br"),
-                //new RepresEmails("VANESSA","vanessa.boumer@similar.ind.br"),
-                //new RepresEmails("VINICIUS","vinicius.lima@similar.ind.br"),
-                //new RepresEmails("FELIPE","felipe.thomaz@similar.ind.br"),
+                new RepresEmails("VENDAINT,","vanessa.boumer@similar.ind.br"),
+                new RepresEmails("VANESSA,","vanessa.boumer@similar.ind.br"),
+                new RepresEmails("VINICIUS,","vinicius.lima@similar.ind.br"),
+                new RepresEmails("FELIPE,","felipe.thomaz@similar.ind.br"),
 
 
                 new RepresEmails("","ti@similar.ind.br")
@@ -69,7 +69,7 @@ namespace simireports.simireports
                 SqlConnection conn = new BancoAzure().abrir();
                 string sql = "SELECT a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante," +
 
-                               " b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.Seq " +
+                               " b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.Seq, b.Comis " +
 
                                         " FROM PrePEDIDOS a" +
 
@@ -97,7 +97,7 @@ namespace simireports.simireports
 
                                         "" +
 
-                                        " GROUP BY a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante,b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.Seq" +
+                                        " GROUP BY a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante,b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.Seq, b.Comis" +
                                         " ORDER BY a.DataUlt desc, a.CodPed, b.Seq";
 
                 //sqlview = sql; //ativa a exibicao do sql na tela
@@ -201,46 +201,36 @@ namespace simireports.simireports
 
                 foreach (var pedE in pedsEfets)
                 {
-                    corpoEmail += "<tr style=\"color:#aaa;\">" +
-                            "<td style=\"color:#aaa;\">" +
-                                "-" +
-                            "</td>" +
-                            "<td style=\"color:#aaa;\">" +
-                                "-" +
-                            "</td>" +
-                            "<td style=\"color:#aaa;\">" +
-                                "-" +
-                            "</td>" +
-                        "</tr>" +
+                    corpoEmail += 
                         "<thead style = \"background-color: #aaa; color:#000;\">" +
                     "<tr>" +
                         //"<td scope = \"col\"style = \"width: 5%; text-align:center;background-color: #fff;\"> Data </th>" +
                         //"<td scope = \"col\"style = \"width: 5%; text-align:center;background-color: #fff;\"> Unidade </th>" +
-                        "<td scope = \"col\"style = \"width: 33%; text-align:center;color:#aaa;background-color: #fff;\"> Pedido </th>" +
+                        "<td scope = \"col\"style = \"width: 33%; text-align:left;color:#777;background-color: #aaa;\"> Pedido </th>" +
                         //"<td scope = \"col\"style = \"width: 5%; text-align:center;background-color: #fff;\"> CNPJ </th>" +
-                        "<td scope = \"col\"style = \"width: 33%; text-align:center;color:#aaa;background-color: #fff;\"> Cliente </th>" +
-                        "<td scope = \"col\"style = \"width: 33%; text-align:center;color:#aaa;background-color: #fff;\"> Representante </th>" +
+                        "<td scope = \"col\"style = \"width: 33%; text-align:left;color:#777;background-color: #aaa;\"> Cliente </th>" +
+                        "<td scope = \"col\"style = \"width: 33%; text-align:left;color:#777;background-color: #aaa;\"> Representante </th>" +
                     "</tr>" +
                     "</thead>" +
                     "<tr>" +
                         //"<td style = \"text-align:center;\">" + pedE.Dat + "</td>" +
                         //"<td style = \"text-align:center;\">" + pedE.CodEmpresa + "</td>" +
-                        "<td style = \"text-align:center;\">" + pedE.NumPed + "</td>" +
+                        "<td style = \"text-align:left;color:#000\">" + pedE.NumPed + "</td>" +
                         //"<td style = \"text-align:center;\">" + pedE.CodCliente + "</td>" +
-                        "<td style = \"text-align:center;\">" + pedE.Cliente + "</td>" +
-                        "<td style = \"text-align:center;\">" + pedE.Repres + "</td>" +
+                        "<td style = \"text-align:left;color:#000\">" + pedE.Cliente + "</td>" +
+                        "<td style = \"text-align:left;color:#000\">" + pedE.Repres + "</td>" +
                     "</tr>" +
                     "<tr>" +
                         "<td colspan = \"3\">" +
-                        "<table border=\"1\" style=\"background-color:#fff; width:100%; color:#000; font-size: 12px;\">" +
-                            "<tr>" +
-                                "<td style =\"text-align:left;color:#aaa;width: 20%;\" > Cod. do Item</th>" +
-                                "<td style=\"text-align:left;color:#aaa;width: 55%;\">Desc.Item</th>" +
-                                "<td style = \"text-align:right;color:#aaa;width: 5%;\" > Solic </th>" +
+                        "<table style=\"border: 1px solid #777;background-color:#fff; width:100%; color:#000; font-size: 12px;\">" +
+                            "<tr style=\"border: 1px solid #777;\">" +
+                                "<td style =\"border: 1px solid #777;text-align:left;color:#aaa;width: 20%;\" > Cod. do Item</th>" +
+                                "<td style=\"border: 1px solid #777;text-align:left;color:#aaa;width: 55%;\">Desc.Item</th>" +
+                                "<td style = \"border: 1px solid #777;text-align:right;color:#aaa;width: 5%;\" > Solic </th>" +
                                 //"<td style=\"color:#aaa;width: 5%;\">Cancel</th>" +
                                 //"<td style = \"color:#aaa;width: 5%;\" > Atend </th>" +
-                                "<td style = \"text-align:right;color:#aaa;width: 10%;\" > Desconto</th>" +
-                                "<td style = \"text-align:right;color:#aaa;width: 10%;\" > Preço Unit $</th>" +
+                                "<td style = \"border: 1px solid #777;text-align:right;color:#aaa;width: 10%;\" > Desconto</th>" +
+                                "<td style = \"border: 1px solid #777;text-align:right;color:#aaa;width: 10%;\" > Preço Unit R$</th>" +
                             //"<td style=\"color:#aaa;width:10%;\">Preço Total Atend</th>" +
                             //"<td style=\"color:#aaa;width:10%;\">Preço Total Solic</th>" +
                             //"<td style = \"color:#aaa;width: 20%;\" > Prazo </th>" +
@@ -267,6 +257,8 @@ namespace simireports.simireports
 
                         Decimal desconto = itemV.Desconto;
 
+                        //Decimal comis = itemV.Comis;
+
                         totPed += preUnit * qtdSolicD;
                         totAtend += preUnit * qtdAtendD;
 
@@ -278,13 +270,13 @@ namespace simireports.simireports
 
                         totPedS = m.formatarDecimal(totPed);
                         corpoEmail += "<tr>" +
-                            "<td style=\"text-align:left;\">" + itemV.CodItem + " </td>" +
-                            "<td style=\"text-align:left;\">" + itemV.NomeItem + " </td>" +
-                            "<td style = \"text-align:right;\">" + qtdSolicD + " </td>" +
+                            "<td style=\"border: 1px solid #777;text-align:left;\">" + itemV.CodItem + " </td>" +
+                            "<td style=\"border: 1px solid #777;text-align:left;\">" + itemV.NomeItem + " </td>" +
+                            "<td style = \"border: 1px solid #777;text-align:right;\">" + qtdSolicD + " </td>" +
                             //"<td style = \"text-align:center;\">" + qtdCancelD + " </td>" +
                             //"<td style = \"text-align:center;\">" + qtdAtendD + " </td>" +
-                            "<td style=\"text-align:right;\">" + desconto + "%</td>" +
-                            "<td style=\"text-align:right;\">" + preUnitS + "</td>" +
+                            "<td style=\"border: 1px solid #777;text-align:right;\">" + desconto + "%</td>" +
+                            "<td style=\"border: 1px solid #777;text-align:right;\">" + preUnitS + "</td>" +
                         //"<td>R$" + totAtend + "</td>" +
                         //"<td>R$" + totPed + "</td>" +
                         //"<td style = \"text-align:right;\">" + itemV.PrzEntrega + "</td>" +
@@ -292,10 +284,10 @@ namespace simireports.simireports
                     }
                     corpoEmail += "<tr>" +
 
-                                    "<td colspan = \"2\" style=\"background-color: #fff; color:#000;\">Total Pedido: </td>" +
+                                    "<td colspan = \"2\" style=\"border: 1px solid #777;background-color: #fff; color:#000;\">Total Pedido: </td>" +
                                     //"<td colspan = \"1\" style=\"background-color: #fff; color:#000;\"></td>" +
                                     //"<td colspan = \"1\" style=\"background-color: #fff;\"> </td>" +
-                                    "<td colspan = \"3\" style=\"background-color: #fff; text-align:right; color:#000;\">R$" + totPedS + "</td>" +
+                                    "<td colspan = \"3\" style=\"border: 1px solid #777;background-color: #fff; text-align:right; color:#000;\">" + totPedS + "</td>" +
                                 "</tr>" +
                             "</table>" +
                         "</td>" +
