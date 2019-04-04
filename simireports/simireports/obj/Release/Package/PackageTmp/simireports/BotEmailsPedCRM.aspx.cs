@@ -41,12 +41,12 @@ namespace simireports.simireports
             ontem = m.configDataHuman2Banco(ontem);
             //Necessario por o nome dos representantes em maiuscula, toUpper nao funciona dentro do for each porque nao pode mudar variavel de iteraçao
             List<RepresEmails> represEmails = new List<RepresEmails>{
-                new RepresEmails("VENDAINT","vanessa.boumer@similar.ind.br"),
-                new RepresEmails("VANESSA","vanessa.boumer@similar.ind.br"),
-                new RepresEmails("VINICIUS","vinicius.lima@similar.ind.br"),
-                new RepresEmails("FELIPE","felipe.thomaz@similar.ind.br"),
-
-
+                new RepresEmails("VENDAINT,","vanessa.boumer@similar.ind.br"),
+                new RepresEmails("VANESSA,","vanessa.boumer@similar.ind.br"),
+                new RepresEmails("VINICIUS,","vinicius.lima@similar.ind.br"),
+                new RepresEmails("FELIPE,","felipe.thomaz@similar.ind.br"),
+                
+                new RepresEmails("","alberto.riter@similar.ind.br"),
                 new RepresEmails("","ti@similar.ind.br")
             };
 
@@ -171,7 +171,9 @@ namespace simireports.simireports
                         totGeral += ((Decimal)qtdSolic * preUnit);
                         totGeralS = m.formatarDecimal(totGeral);
                         Double desconto = reader.GetDouble(13);
-                        item = new Item(qtdSolic.ToString(), qtdCancel.ToString(), qtdAtend.ToString(), nomeItem, przEntregaS, codItem, preUnit, Decimal.Round((((Decimal)desconto) * 100m)));
+                        Double comiss = reader.GetDouble(15);
+                        comiss *= 100;
+                        item = new Item(qtdSolic.ToString(), qtdCancel.ToString(), qtdAtend.ToString(), nomeItem, przEntregaS, codItem, preUnit, Decimal.Round((((Decimal)desconto) * 100m)),(Decimal)comiss);
 
                     }
 
@@ -197,19 +199,19 @@ namespace simireports.simireports
                 new BancoAzure().fechar(conn);
 
                 corpoEmail = "<body style=\"background-color:#fff; color:#000;\"><div style=\"background-color:#fff;\">Mostrando " + pedsEfets.Count + " resultados, de " + m.configDataBanco2Human(ontem) + " a " + m.configDataBanco2Human(ontem) + " -Total R$ " + totGeralS + "<br/>" +
-                    "<table style = \"max-width:100%;background-color:#aaa; color:#000; font-size: 12px;\">";
+                    "<table style = \"max-width:100%;background-color:#ccc; color:#000; font-size: 12px;\">";
 
                 foreach (var pedE in pedsEfets)
                 {
                     corpoEmail += 
-                        "<thead style = \"background-color: #aaa; color:#000;\">" +
+                        "<thead style = \"background-color: #ccc; color:#000;\">" +
                     "<tr>" +
                         //"<td scope = \"col\"style = \"width: 5%; text-align:center;background-color: #fff;\"> Data </th>" +
                         //"<td scope = \"col\"style = \"width: 5%; text-align:center;background-color: #fff;\"> Unidade </th>" +
-                        "<td scope = \"col\"style = \"width: 33%; text-align:left;color:#777;background-color: #aaa;\"> Pedido </th>" +
+                        "<td scope = \"col\"style = \"width: 20%; text-align:left;color:#777;background-color: #ccc;\"> Pedido </th>" +
                         //"<td scope = \"col\"style = \"width: 5%; text-align:center;background-color: #fff;\"> CNPJ </th>" +
-                        "<td scope = \"col\"style = \"width: 33%; text-align:left;color:#777;background-color: #aaa;\"> Cliente </th>" +
-                        "<td scope = \"col\"style = \"width: 33%; text-align:left;color:#777;background-color: #aaa;\"> Representante </th>" +
+                        "<td scope = \"col\"style = \"width: 45%; text-align:left;color:#777;background-color: #ccc;\"> Cliente </th>" +
+                        "<td scope = \"col\"style = \"width: 35%; text-align:left;color:#777;background-color: #ccc;\"> Representante </th>" +
                     "</tr>" +
                     "</thead>" +
                     "<tr>" +
@@ -222,15 +224,16 @@ namespace simireports.simireports
                     "</tr>" +
                     "<tr>" +
                         "<td colspan = \"3\">" +
-                        "<table style=\"border: 1px solid #777;background-color:#fff; width:100%; color:#000; font-size: 12px;\">" +
-                            "<tr style=\"border: 1px solid #777;\">" +
-                                "<td style =\"border: 1px solid #777;text-align:left;color:#aaa;width: 20%;\" > Cod. do Item</th>" +
-                                "<td style=\"border: 1px solid #777;text-align:left;color:#aaa;width: 55%;\">Desc.Item</th>" +
-                                "<td style = \"border: 1px solid #777;text-align:right;color:#aaa;width: 5%;\" > Solic </th>" +
+                        "<table style=\"border: 1px solid #ccc;border-collapse: collapse; background-color:#fff; width:100%; color:#000; font-size: 12px;\">" +
+                            "<tr style=\"border: 1px solid #ccc;\">" +
+                                "<td style =\"border: 1px solid #ccc;text-align:left;color:#aaa;width: 20%;\" > Cod. do Item</th>" +
+                                "<td style=\"border: 1px solid #ccc;text-align:left;color:#aaa;width: 45%;\">Desc.Item</th>" +
+                                "<td style = \"border: 1px solid #ccc;text-align:center;color:#aaa;width: 5%;\" > Solic </th>" +
                                 //"<td style=\"color:#aaa;width: 5%;\">Cancel</th>" +
                                 //"<td style = \"color:#aaa;width: 5%;\" > Atend </th>" +
-                                "<td style = \"border: 1px solid #777;text-align:right;color:#aaa;width: 10%;\" > Desconto</th>" +
-                                "<td style = \"border: 1px solid #777;text-align:right;color:#aaa;width: 10%;\" > Preço Unit R$</th>" +
+                                "<td style = \"border: 1px solid #ccc;text-align:center;color:#aaa;width: 10%;\" > Desconto</th>" +
+                                "<td style = \"border: 1px solid #ccc;text-align:center;color:#aaa;width: 10%;\" > Comiss</th>" +
+                                "<td style = \"border: 1px solid #ccc;text-align:right;color:#aaa;width: 10%;\" > Preço Unit R$</th>" +
                             //"<td style=\"color:#aaa;width:10%;\">Preço Total Atend</th>" +
                             //"<td style=\"color:#aaa;width:10%;\">Preço Total Solic</th>" +
                             //"<td style = \"color:#aaa;width: 20%;\" > Prazo </th>" +
@@ -256,6 +259,7 @@ namespace simireports.simireports
                         String preUnitS = m.formatarDecimal(preUnit);
 
                         Decimal desconto = itemV.Desconto;
+                        Decimal comiss = itemV.Comiss;
 
                         //Decimal comis = itemV.Comis;
 
@@ -269,14 +273,16 @@ namespace simireports.simireports
                         totPendS = m.formatarDecimal(totPend);
 
                         totPedS = m.formatarDecimal(totPed);
+                        
                         corpoEmail += "<tr>" +
-                            "<td style=\"border: 1px solid #777;text-align:left;\">" + itemV.CodItem + " </td>" +
-                            "<td style=\"border: 1px solid #777;text-align:left;\">" + itemV.NomeItem + " </td>" +
-                            "<td style = \"border: 1px solid #777;text-align:right;\">" + qtdSolicD + " </td>" +
+                            "<td style=\"border: 1px solid #ccc;text-align:left;\">" + itemV.CodItem + " </td>" +
+                            "<td style=\"border: 1px solid #ccc;text-align:left;\">" + itemV.NomeItem + " </td>" +
+                            "<td style = \"border: 1px solid #ccc;text-align:center;\">" + qtdSolicD + " </td>" +
                             //"<td style = \"text-align:center;\">" + qtdCancelD + " </td>" +
                             //"<td style = \"text-align:center;\">" + qtdAtendD + " </td>" +
-                            "<td style=\"border: 1px solid #777;text-align:right;\">" + desconto + "%</td>" +
-                            "<td style=\"border: 1px solid #777;text-align:right;\">" + preUnitS + "</td>" +
+                            "<td style=\"border: 1px solid #ccc;text-align:center;\">" + desconto + "%</td>" +
+                            "<td style=\"border: 1px solid #ccc;text-align:center;\">" + comiss + "%</td>" +
+                            "<td style=\"border: 1px solid #ccc;text-align:right;\">" + preUnitS + "</td>" +
                         //"<td>R$" + totAtend + "</td>" +
                         //"<td>R$" + totPed + "</td>" +
                         //"<td style = \"text-align:right;\">" + itemV.PrzEntrega + "</td>" +
@@ -284,10 +290,10 @@ namespace simireports.simireports
                     }
                     corpoEmail += "<tr>" +
 
-                                    "<td colspan = \"2\" style=\"border: 1px solid #777;background-color: #fff; color:#000;\">Total Pedido: </td>" +
+                                    "<td colspan = \"2\" style=\"border: 1px solid #ccc;background-color: #fff; color:#000;\">Total Pedido R$: </td>" +
                                     //"<td colspan = \"1\" style=\"background-color: #fff; color:#000;\"></td>" +
                                     //"<td colspan = \"1\" style=\"background-color: #fff;\"> </td>" +
-                                    "<td colspan = \"3\" style=\"border: 1px solid #777;background-color: #fff; text-align:right; color:#000;\">" + totPedS + "</td>" +
+                                    "<td colspan = \"4\" style=\"border: 1px solid #ccc;background-color: #fff; text-align:right; color:#000;\">" + totPedS + "</td>" +
                                 "</tr>" +
                             "</table>" +
                         "</td>" +
@@ -306,7 +312,7 @@ namespace simireports.simireports
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
                 client.Credentials = new System.Net.NetworkCredential("ti@similar.ind.br", "Simi1717");
-                MailMessage mm = new MailMessage("ti@similar.ind.br", re.email, "Rel. Pedidos CRM - "+re.nome, corpoEmail);
+                MailMessage mm = new MailMessage("ti@similar.ind.br", re.email, "Rel. Pedidos Ontem - "+re.nome, corpoEmail);
                 mm.BodyEncoding = UTF8Encoding.UTF8;
                 mm.IsBodyHtml = true;
                 mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;

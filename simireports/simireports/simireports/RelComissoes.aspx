@@ -51,18 +51,16 @@
             <form runat="server" id="filtrosComissoes" action="#" method="post">
                 <table>
                     <tr style="color:white;">
-                        <th style="width:100px;">Data Inicio</th>
-                        <th style="width:100px;">Data Fim</th>
                         <th style="width:100px;">Unidade</th>
                         <th style="width:100px;">Cliente</th>
 <%--                        <th style="width:100px; text-align:center;">% Comiss</th>
                         <th style="width:100px; text-align:center;">Valor</th>--%>
-                        <th style="width:100px;">Representante </th>
-                        <th>Detalhes</th>
+                        <th style="width:130px;">Representante </th>
+                        <th style="width:100px;">Data Inicio</th>
+                        <th style="width:120px;">Data Fim</th>
+                        <th style="width:100px;text-align:center;">Detalhes</th>
                     </tr>
                     <tr>
-                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datInicio" autocomplete="off"/></td>
-                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"  autocomplete="off"/></td>
                         <td style="width:120px;">
                             <select class="form-control" style="width:100px;" id="unidade" runat="server">
                                 <option value="">Todas</option>
@@ -74,7 +72,9 @@
 <%--                        <td><input runat="server" type="text" id="pctComiss"/></td>
                         <td><input runat="server" type="text" id="valor"/></td>--%>
                         <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="repres"  autocomplete="off"/></td>
-                        <td><input type="checkbox" id="detalhes" value="Detalhes" runat="server"> </td>
+                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datInicio" autocomplete="off"/></td>
+                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"  autocomplete="off"/></td>
+                        <td style="text-align:center"><input type="checkbox" id="detalhes" value="Detalhes" runat="server"> </td>
                     </tr>
                 </table>
                 <br />

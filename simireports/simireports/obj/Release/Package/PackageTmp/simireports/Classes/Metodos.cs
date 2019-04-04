@@ -37,6 +37,7 @@ namespace simireports.simireports.Classes
             }
             else
             {
+                nF += "00,";
                 inicio = nS.Length - 1;
             }
             for (int i = inicio, j = 0; i >= 0; --i, ++j)
@@ -50,6 +51,10 @@ namespace simireports.simireports.Classes
             }
 
             nF = new string(nF.Reverse().ToArray());
+            if ((nF.Length - (nF.IndexOf(",")+1)) == 1)
+            {
+                nF += "0";
+            }
             return nF;
         }
         public String pontoPorVirgula(String s)

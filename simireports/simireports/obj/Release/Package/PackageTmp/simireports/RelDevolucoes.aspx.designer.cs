@@ -49,6 +49,15 @@ namespace simireports {
         protected global::System.Web.UI.HtmlControls.HtmlInputText avisoRec;
         
         /// <summary>
+        /// Controle codItem.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText codItem;
+        
+        /// <summary>
         /// Controle datIni.
         /// </summary>
         /// <remarks>
@@ -65,15 +74,6 @@ namespace simireports {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText datFim;
-        
-        /// <summary>
-        /// Controle codItem.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText codItem;
         
         /// <summary>
         /// Controle codOper.
