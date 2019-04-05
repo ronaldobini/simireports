@@ -95,6 +95,12 @@ namespace simireports.simireports
 
                                         //" AND a.CLProp NOT like 'E%'"+
 
+                                        " AND a.CLProp NOT like 'E%'" +
+                                        " AND a.CLProp NOT like 'LAC'" +
+                                        " AND a.CLProp NOT like 'LBq'" +
+                                        " AND a.CLProp NOT like 'LCd'" +
+                                        " AND a.CLProp NOT like 'LEP'" +
+
                                         "" +
 
                                         " GROUP BY a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante,b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.Seq, b.Comis" +
