@@ -120,7 +120,7 @@ namespace simireports
             //SqlConnection conn2 = new BancoAzure().abrir();
             postDatFim = m.configDataHuman2Banco(postDatFim);
             postDatInicio = m.configDataHuman2Banco(postDatInicio);
-            string sql = "SELECT a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante," +
+            string sql = "SELECT a.Unidade, a.dat_pedido, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante," +
 
                                " b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.LgxPedNum, b.Seq" +
 
@@ -136,10 +136,10 @@ namespace simireports
 
                                         " AND a.Representante LIKE '%" + postRepres + "%'" +
 
-                                        " AND a.DataUlt >= '" + postDatInicio + " 00:00:00'" +
+                                        " AND a.dat_pedido >= '" + postDatInicio + "'" +
                                         //" AND a.DataUlt >= '2019-03-25 00:00:00'" +
 
-                                        " AND a.DataUlt <= '" + postDatFim + " 23:59:59'" +
+                                        " AND a.dat_pedido <= '" + postDatFim + "'" +
                                         //" AND a.DataUlt <= '2019-03-26 23:59:59'" +
 
                                         " AND b.cod_item like '%" + postCodItem + "%'" +
@@ -154,8 +154,8 @@ namespace simireports
 
                                         postNumPed +
 
-                                        " GROUP BY a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante,b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.LgxPedNum, b.Seq " +
-                                        " ORDER BY a.DataUlt desc, a.CodPed, b.Seq";
+                                        " GROUP BY a.Unidade, a.dat_pedido, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante,b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.LgxPedNum, b.Seq " +
+                                        " ORDER BY a.dat_pedido desc, a.CodPed, b.Seq";
 
             sqlview = sql; //ativa a exibicao do sql na tela
             //String errosql = new BancoAzure().consultarErros(sql,conn);

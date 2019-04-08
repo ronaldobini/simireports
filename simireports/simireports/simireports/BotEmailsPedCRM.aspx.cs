@@ -67,7 +67,7 @@ namespace simireports.simireports
                 String corpoEmail = "";
 
                 SqlConnection conn = new BancoAzure().abrir();
-                string sql = "SELECT a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante," +
+                string sql = "SELECT a.Unidade, a.dat_pedido, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante," +
 
                                " b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.Seq, b.Comis " +
 
@@ -83,17 +83,13 @@ namespace simireports.simireports
 
                                         " AND a.Representante LIKE '%" + re.nome + "%'" +
 
-                                        " AND a.DataUlt >= '" + ontem + " 00:00:00'" +
-                                        //" AND a.DataUlt >= '2019-03-25 00:00:00'" +
+                                        " AND a.dat_pedido >= '" + ontem + "'" +
 
-                                        " AND a.DataUlt <= '" + ontem + " 23:59:59'" +
-                                        //" AND a.DataUlt <= '2019-03-26 23:59:59'" +
+                                        " AND a.dat_pedido <= '" + ontem + "'" +
 
                                         " AND b.cod_item like '%" + "" + "%'" +
 
                                         " AND a.Unidade LIKE '%" + "" + "%'" +
-
-                                        //" AND a.CLProp NOT like 'E%'"+
 
                                         " AND a.CLProp NOT like 'E%'" +
                                         " AND a.CLProp NOT like 'LAC'" +
@@ -103,16 +99,16 @@ namespace simireports.simireports
 
                                         "" +
 
-                                        " GROUP BY a.Unidade, a.DataUlt, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante,b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.Seq, b.Comis" +
-                                        " ORDER BY a.DataUlt desc, a.CodPed, b.Seq";
+                                        " GROUP BY a.Unidade, a.dat_pedido, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante,b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.Seq, b.Comis" +
+                                        " ORDER BY a.dat_pedido desc, a.CodPed, b.Seq";
 
                 //sqlview = sql; //ativa a exibicao do sql na tela
 
                 SqlDataReader reader = new BancoAzure().consultar(sql, conn);
                 List<Item> itens = new List<Item>();
-                string pedAnt = "zaburska";
+                string pedAnt = "";
 
-
+                //String errosql = new BancoAzure().consultarErros(sql,conn);
 
                 string codEmpresa = "";
                 DateTime dat = new DateTime();
