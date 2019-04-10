@@ -26,7 +26,7 @@
                         <th>CodItem</th>
                         <th>Data Inicio</th>
                         <th>Data Final</th>
-                        <th>CodOperacao</th>
+                        <!--<th>CodOperacao</th>-->
                     </tr>
                     <tr>
                         <td style="width:120px;">
@@ -44,7 +44,7 @@
                         <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="codItem"/></td>
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datIni"/></td>
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"/></td>
-                        <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="codOper" value="DEVC"/></td>
+                        <!--<td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="codOper" value="DEVC"/></td>-->
                     </tr>
                 </table>
                 <br>
@@ -56,13 +56,13 @@
             <font color=white>Mostrando <%=devolucoes.Count%> resultados, de <%=dataPesqIni%> a <%=dataPesqFim%></font><br/>
             <table class="table table-striped table-dark" style = "max-width:95%; color:white; font-size: 12px;">
                 <tr>
-                    <th style="width: 10%; text-align:center;">Data Emiss</th>
+                    <th style="width: 10%; text-align:center;">Data Entrada</th>
                     <th style="width: 5%; text-align:center;">Unidade</th>
                     <th style="width: 5%; text-align:center;">Num NF</th>
                     <th style="width: 5%; text-align:center;">Aviso Rec</th>
                     <th style="width: 10%; text-align:center;">Cod. Item</th>
-                    <th style="width: 10%; text-align:center;">Pre Unit</th>
-                    <th style="width: 10%; text-align:center;">Valor</th>
+                    <th style="width: 10%; text-align:right;">Valor Liq (R$)</th>
+                    <th style="width: 10%; text-align:right;">Valor Contabil (R$)</th>
                 </tr>
                 
                 <% 
@@ -84,8 +84,8 @@
                         <td style="text-align:center;"><%= numDocum %></td>
                         <td style="text-align:center;"><%= avisoRec %></td>
                         <td style="text-align:center;"><%= codItem %></td>
-                        <td style="text-align:right;"><%= "R$ "+preUnitS %></td>
-                        <td style="text-align:right;"><%= "R$ "+valorS %></td>
+                        <td style="text-align:right;"><%= preUnitS %></td>
+                        <td style="text-align:right;"><%= valorS %></td>
                     </tr>
                 <%
                     }%>

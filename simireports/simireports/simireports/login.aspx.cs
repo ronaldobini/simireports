@@ -25,6 +25,7 @@ namespace simireports.simireports
             if (Session["key"] == null)
             {
                 Session["key"] = 0;
+                Session["tries"] = 0;
             }
             else
             {
@@ -52,40 +53,53 @@ namespace simireports.simireports
 
 
             reader.Read();
-            if (reader.HasRows)
+            if ((int)Session["tries"] < 5)
             {
-                String senha = reader.GetString(0);
-                if(senha == senhaPost)
+                if (reader.HasRows)
                 {
-                    string nome = reader.GetString(1);
-                    double idx = reader.GetDouble(2);
-                    string codRepres = reader.GetString(3);
+                    String senha = reader.GetString(0);
+                    if (senha == senhaPost)
+                    {
+                        string nome = reader.GetString(1);
+                        double idx = reader.GetDouble(2);
+                        string codRepres = reader.GetString(3);
 
-                    Session["nome"] = nome;
-                    Session["idx"] = idx;
-                    Session["codRepres"] = codRepres;
+                        Session["nome"] = nome;
+                        Session["idx"] = idx;
+                        Session["codRepres"] = codRepres;
 
-                    //DEFINE A KEY DO USUARIO
-                    int key = 1;
-                    if (idx <= 25) key = 2;
-                    if (idx <= 24) key = 3;
-                    if (idx <= 20) key = 4;
+                        Session["firstJ"] = 1;
+                        Session["first"] = 1;
 
-                    if (idx <= 15) key = 7;
-                    if (idx <= 10) key = 8;
+                        //DEFINE A KEY DO USUARIO
+                        int key = 1;
+                        if (idx <= 25) key = 2;
+                        if (idx <= 24) key = 3;
+                        if (idx <= 20) key = 5;
 
-                    if (nome == "SimiSys") key = 11;
+                        if (idx <= 15) key = 7;
+                        if (idx <= 10) key = 8;
 
-                    Session["key"] = key;
+                        if (nome == "SimiSys") key = 11;
+
+                        Session["key"] = key;
+                    }
+                    else
+                    {
+                        Session["tries"] = (int)Session["tries"] + 1;
+                        erro = "Dados de login incorretos (" + Session["tries"] + "/5)";
+
+                    }
                 }
                 else
                 {
-                    erro = "Dados de login incorretos (2)";
+                    Session["tries"] = (int)Session["tries"] + 1;
+                    erro = "Dados de login incorretos (" + Session["tries"] + "/5)";
                 }
             }
             else
             {
-                erro = "Dados de login incorretos (1)";
+                erro = "Tentativas excedidas";
             }
         }
 

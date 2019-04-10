@@ -25,15 +25,21 @@ namespace simireports
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            getp = Request.QueryString["p"];
+
+            if ((int)Session["key"] <= 0 || Session["key"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
+
+
+            //getp = Request.QueryString["p"];
             //postp = Request.Form["p"];
 
-            Session["firstJ"] = 1; 
-            Session["first"] = 1; 
-            
 
 
-            
+
+
+
         }
     }
 }

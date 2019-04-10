@@ -38,7 +38,7 @@ namespace simireports
         protected void Page_Load(object sender, EventArgs e)
         {
             //VERIFICACAO DE SESSAO E NIVEL
-            if (Session["key"] == null)
+            if ((int)Session["key"] <= 0)
             {
                 Response.Redirect("login.aspx");
             }

@@ -45,7 +45,7 @@
     <center>
     <div id="titulo" style="margin-top:40px; margin-right:70px; color:white; font-size:30px;">003 - Pedidos Efetivados CRM</div>
     <br />
-    <p><%=sqlview %></p>
+    <p><%//=sqlview %></p>
        
         <div id="filtros" style="margin-bottom:40px;">
             <form runat="server" id="filtrosPedEfet" action="#" method="post">

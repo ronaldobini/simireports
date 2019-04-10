@@ -42,7 +42,7 @@ namespace simireports
         {
             
             //VERIFICACAO DE SESSAO E NIVEL
-            if (Session["key"] == null)
+            if ((int)Session["key"] <= 0)
             {
                 Response.Redirect("login.aspx");
             }
@@ -179,10 +179,7 @@ namespace simireports
                     if (!pctComissaoS.Equals(""))
                     {
                         pctComissao = Decimal.Parse(pctComissaoS);
-                        if (pctComissao == 3.8m)
-                        {
-                            //pctComissao = 1.5m;
-                        }
+                        if (pctComissao == 0.145M) pctComissao = 0.0M;                       
                         comiss = valBruto * (pctComissao / 100);
                     }
                     else

@@ -12,6 +12,11 @@ namespace simireports.simireports
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if ((int)Session["key"] <= 0 || Session["key"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
+
         }
     }
 }

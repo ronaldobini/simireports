@@ -34,7 +34,7 @@ namespace simireports
         protected void Page_Load(object sender, EventArgs e)
         {
             //VERIFICACAO DE SESSAO E NIVEL
-            if (Session["key"] == null)
+            if ((int)Session["key"] <= 0)
             {
                 Response.Redirect("login.aspx");
             }
@@ -74,11 +74,12 @@ namespace simireports
             }
             postCodItem = codItem.Value.ToUpper();
             postCodItem = m.configCoringas(postCodItem);
-            postCodOper = codOper.Value.ToUpper();
+            //postCodOper = codOper.Value.ToUpper();
+            postCodOper = "DEVC";
             postDatInicio = datIni.Value;
             if (!postDatInicio.Equals(""))
             {
-                postDatInicio = "AND ns.dat_emis_nf >= '" + postDatInicio + "' ";
+                postDatInicio = "AND ns.dat_entrada_nf >= '" + postDatInicio + "' ";
                 dataPesqIni = datIni.Value;
             }
             else
@@ -88,7 +89,7 @@ namespace simireports
             postDatFim = datFim.Value;
             if (!postDatFim.Equals(""))
             {
-                postDatFim = "AND ns.dat_emis_nf <= '" + postDatFim + "' ";
+                postDatFim = "AND ns.dat_entrada_nf <= '" + postDatFim + "' ";
                 dataPesqFim = datFim.Value;
             }
             else
@@ -101,7 +102,7 @@ namespace simireports
         protected void executarRelatorio()
         {
             IfxConnection conn = new BancoLogix().abrir();
-            string sql = "select ns.cod_empresa, ns.num_nf, ns.num_aviso_rec, ns.val_tot_nf_c, ns.dat_emis_nf, ar.cod_item, ar.pre_unit_nf, arc.cod_operacao " +
+            string sql = "select ns.cod_empresa, ns.num_nf, ns.num_aviso_rec, ns.val_tot_nf_c, ns.dat_entrada_nf, ar.cod_item, ar.pre_unit_nf, arc.cod_operacao " +
                             "from nf_sup ns " +
                             "JOIN aviso_rec ar ON(ns.cod_empresa = ar.cod_empresa and ns.num_aviso_rec = ar.num_aviso_rec) " +
                             "JOIN aviso_rec_compl arc ON(ar.cod_empresa = arc.cod_empresa and ar.num_aviso_rec = arc.num_aviso_rec) " +
@@ -112,7 +113,7 @@ namespace simireports
                             postDatInicio +
                             postDatFim +
                             "AND ar.cod_item like  '%" + postCodItem + "%' " +
-                            "order by dat_emis_nf desc";
+                            "order by dat_entrada_nf desc";
 
             IfxDataReader reader = new BancoLogix().consultar(sql, conn);
             
