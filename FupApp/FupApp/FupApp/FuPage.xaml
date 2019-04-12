@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FupApp.FuPage">
+    <StackLayout Padding="10">
+        <!--<TableView>-->
+        <!--<TableRoot>
+                <TableSection  Title="Follow Up">-->
+        <!--<EntryCell x:Name="quem" Label ="Quem" Text=""></EntryCell>
+                    <EntryCell x:Name="sup" Label ="Sup" Text=""></EntryCell>
+                    <EntryCell x:Name="propec" Label ="Proposta" Text="" ></EntryCell>
+                    <EntryCell x:Name="fup" Placeholder="Informe o FUP"></EntryCell>-->
+        <Label Text="FUP" VerticalOptions="CenterAndExpand" FontSize="30"/>
+        <StackLayout>
+            <StackLayout Padding="30" Spacing="2" VerticalOptions="CenterAndExpand" 
+                             HorizontalOptions="FillAndExpand">
+
+                <Label x:Name="quemLabel" Text="Quem" TextColor="#555" FontSize="20"/>
+                <!--<Entry x:Name="quem" FontSize="20" TextColor="#555" />-->
+
+            </StackLayout>
+            <StackLayout Padding="30" Spacing="2" VerticalOptions="CenterAndExpand" 
+                             HorizontalOptions="FillAndExpand">
+                <Label Text="Sup" TextColor="#555" FontSize="20"/>
+                <Picker x:Name="pickerSup" SelectedIndexChanged="pickerSelected" HorizontalOptions="FillAndExpand"/>
+                <!--<Entry x:Name="sup" FontSize="20" TextColor="#555" />-->
+
+                <Label Text="Proposta" TextColor="#555" FontSize="20"/>
+                <Entry x:Name="propec" FontSize="20" TextColor="#555" />
+
+                <Label Text="Follow-Up" TextColor="#555" FontSize="20"/>
+                <Entry x:Name="fup" FontSize="20" TextColor="#555"/>
+
+            </StackLayout>
+            <StackLayout Padding="30" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                <Button x:Name="btnProximo" Text="Registrar" Clicked="clicadoBotao" BorderColor="#012f8c" BackgroundColor="#399bfc"></Button>
+            </StackLayout>
+        </StackLayout>
+        <!--</TableSection>-->
+        <!--</TableRoot>
+        </TableView>-->
+    </StackLayout>
+</ContentPage>
