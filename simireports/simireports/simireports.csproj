@@ -10,7 +10,7 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>simiweb</RootNamespace>
+    <RootNamespace>simireports</RootNamespace>
     <AssemblyName>simireports</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
@@ -143,9 +143,9 @@
     <Content Include="simireports\img\wait.png" />
     <Content Include="simireports\img\x.png" />
     <Content Include="simireports\Logout.aspx" />
-    <Content Include="simireports\RelatoriosEspec.aspx" />
     <Content Include="simireports\RelComissoes.aspx" />
     <Content Include="simireports\BotEmailsPedCRM.aspx" />
+    <Content Include="simireports\RelComissoesEspec.aspx" />
     <Content Include="simireports\RelOMsPendentes.aspx" />
     <Content Include="simireports\RelPedidosEfetivadosCRM.aspx" />
     <Content Include="simireports\index.aspx" />
@@ -183,13 +183,6 @@
     <Compile Include="simireports\Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
-    <Compile Include="simireports\RelatoriosEspec.aspx.cs">
-      <DependentUpon>RelatoriosEspec.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="simireports\RelatoriosEspec.aspx.designer.cs">
-      <DependentUpon>RelatoriosEspec.aspx</DependentUpon>
-    </Compile>
     <Compile Include="simireports\RelComissoes.aspx.cs">
       <DependentUpon>RelComissoes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -203,6 +196,13 @@
     </Compile>
     <Compile Include="simireports\BotEmailsPedCRM.aspx.designer.cs">
       <DependentUpon>BotEmailsPedCRM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simireports\RelComissoesEspec.aspx.cs">
+      <DependentUpon>RelComissoesEspec.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\RelComissoesEspec.aspx.designer.cs">
+      <DependentUpon>RelComissoesEspec.aspx</DependentUpon>
     </Compile>
     <Compile Include="simireports\RelOMsPendentes.aspx.cs">
       <DependentUpon>RelOMsPendentes.aspx</DependentUpon>

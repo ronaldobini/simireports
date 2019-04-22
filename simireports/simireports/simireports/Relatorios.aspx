@@ -56,19 +56,19 @@
 							    </li>
 							    <li>
 								    <form id="upload" action="construcao.aspx" method="post">
-									    <a href="javascript:;" onclick="document.getElementById('upload').submit();" data-clone="Solicitations">Solicitações</a>
+									    <a href="javascript:;" onclick="document.getElementById('upload').submit();" data-clone="Requests">Solicitações</a>
 									    <input type="hidden" name="key" value="1">
 								    </form>
 							    </li>							
 							    <li>
 								    <form id="servicos" action="construcao.aspx" method="post">
-									    <a href="javascript:;" onclick="document.getElementById('servicos').submit();" data-clone="TI"> TI</a>
+									    <a href="javascript:;" onclick="document.getElementById('servicos').submit();" data-clone="IT"> TI</a>
 									    <input type="hidden" name="key" value="1">
 								    </form>
 							    </li>
 							    <li>
 								    <form id="adm" action="construcao.aspx" method="post">
-									    <a href="javascript:;" onclick="document.getElementById('adm').submit();" data-clone="Manage">Gerência</a>
+									    <a href="javascript:;" onclick="document.getElementById('adm').submit();" data-clone="Management">Gerência</a>
 									    <input type="hidden" name="key" value="1">
 								    </form>
 							    </li>
@@ -102,7 +102,7 @@
                     <th style="width:33%;">Administrativo</th>
                 </tr>
                 <tr>
-                    <td><a href="RelComissoes.aspx">001 - Comissoes</a></td>
+                    <td><a href="RelComissoes.aspx">001 - Comissões</a></td>
                     <td><a href="RelDevolucoes.aspx">004 - Devoluções</td>
                     <td><a href="RelOMsPendentes.aspx">005 - OMs Pendentes</a></td>
                 </tr>           
@@ -113,8 +113,13 @@
                 </tr>
                 <tr>
                     <td><a href="RelPedidosEfetivadosCRM.aspx">003 - Pedidos Efetivados CRM</a></td>
-                    <td><!--<a href="BotEmailsPedCRM.aspx">Email CRM</a>--></td>
                     <td></td>
+                    <td></td>
+                </tr>
+                 <tr>
+                    <td><a href="RelComissoesEspec.aspx">006 - Comissões Especiais</a></td>
+                    <td></td>
+                    <td><!--<a href="BotEmailsPedCRM.aspx">Email CRM</a>--></td>
                 </tr>
              </table>
         </center>
