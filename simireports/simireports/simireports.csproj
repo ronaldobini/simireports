@@ -143,6 +143,7 @@
     <Content Include="simireports\img\wait.png" />
     <Content Include="simireports\img\x.png" />
     <Content Include="simireports\Logout.aspx" />
+    <Content Include="simireports\RelatoriosEspec.aspx" />
     <Content Include="simireports\RelComissoes.aspx" />
     <Content Include="simireports\BotEmailsPedCRM.aspx" />
     <Content Include="simireports\RelOMsPendentes.aspx" />
@@ -181,6 +182,13 @@
     </Compile>
     <Compile Include="simireports\Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simireports\RelatoriosEspec.aspx.cs">
+      <DependentUpon>RelatoriosEspec.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\RelatoriosEspec.aspx.designer.cs">
+      <DependentUpon>RelatoriosEspec.aspx</DependentUpon>
     </Compile>
     <Compile Include="simireports\RelComissoes.aspx.cs">
       <DependentUpon>RelComissoes.aspx</DependentUpon>
