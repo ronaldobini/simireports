@@ -29,7 +29,7 @@ namespace FupApp
         private string erro;
         private void BtnLogin_Clicked(object sender, EventArgs e)
         {
-            /*
+
 
             senhaPost = senha.Text;
             loginPost = login.Text;
@@ -51,16 +51,16 @@ namespace FupApp
                     string nome = reader.GetString(1);
                     double idx = reader.GetDouble(2);
                     string codRepres = reader.GetString(3);
-                    
-            login = nome;
-                    */
 
-            this.IsBusy = true;
-            //MainPage page = new MainPage(nome);
-            MainPage page = new MainPage("SimiSys");
-            Application.Current.MainPage = new NavigationPage(page);
+                    //login = nome;
 
-            /*
+
+                    this.IsBusy = true;
+                    MainPage page = new MainPage(nome);
+                    //MainPage page = new MainPage("SimiSys");
+                    Application.Current.MainPage = new NavigationPage(page);
+
+
 
                     //Session["nome"] = nome;
                     //Session["idx"] = idx;
@@ -87,7 +87,7 @@ namespace FupApp
                     //Session["tries"] = (int)Session["tries"] + 1;
                     //erro = "Dados de login incorretos (" + Session["tries"] + "/5)";
                     erro = "Dados de login incorretos.";
-
+                    DisplayAlert("Erro", erro, "OK");
                 }
             }
             else
@@ -95,6 +95,7 @@ namespace FupApp
                 //Session["tries"] = (int)Session["tries"] + 1;
                 //erro = "Dados de login incorretos (" + Session["tries"] + "/5)";
                 erro = "Dados de login incorretos.";
+                DisplayAlert("Erro", erro, "OK");
             }
             Console.Write(erro);
         }
@@ -108,7 +109,6 @@ namespace FupApp
             await Task.Delay(valor);
         }
 
-    */
-        }
+
     }
 }

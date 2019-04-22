@@ -3,6 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FupApp.App">
     <Application.Resources>
+        <ResourceDictionary>
 
+            <Style TargetType="NavigationPage">
+                <!--<Setter Property="Title" Value="SimiApp"/>-->
+                <!--<Setter Property="BarTextColor" Value="White"/>-->
+                <Setter Property="BackgroundImage" Value="imgs/similarLogo.jpg"/>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

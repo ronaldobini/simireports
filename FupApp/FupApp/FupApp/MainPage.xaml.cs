@@ -14,6 +14,7 @@ namespace FupApp
         public MainPage(string login)
         {
             InitializeComponent();
+            //NavigationPage.SetTitleIcon(this, "imgs/syss.png");
             listView.ItemsSource = menu;
             listView.ItemSelected += OnItemSelected;
             this.login = login;
@@ -49,7 +50,7 @@ namespace FupApp
                 }
             }
         }
-
+        
 
 
         async Task DandoUmTempo(int valor)
