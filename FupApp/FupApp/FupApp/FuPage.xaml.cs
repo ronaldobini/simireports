@@ -24,17 +24,19 @@ namespace FupApp
         public FuPage()
         {
             InitializeComponent();
+            //NavigationPage.SetTitleIcon(this, "imgs/syss.png");
         }
 
         public FuPage(string login)
         {
             InitializeComponent();
+            //NavigationPage.SetTitleIcon(this, "imgs/syss.png");
             this.login = login;
             //this.prop = prop;
             quem = login;
 
             pickerSup.Title = "Selecione um Representante";
-            quemLabel.Text = "Quem: " + login;
+            quemLabel.Text = login;
             List<String> represes = new List<String>();
 
             SqlConnection conn = new BancoAzure().abrir();
@@ -91,7 +93,9 @@ namespace FupApp
                 {
                     prop = prop.ToUpper();
                     string str = DateTime.Now.ToString();
-                    DateTime dataFup = DateTime.Parse(str, new CultureInfo("en-US"));
+                    //DateTime dataFup = DateTime.Parse(str, new CultureInfo("en-US"));
+                    string[] strA = str.Split('/');
+                    string dataFup = strA[1]+"/"+strA[0]+"/"+strA[2];
 
                     sql = "INSERT INTO PropostasFUP" +
                         "(CodProp,DataFUP,DataAlarme,SetAlarme,FUP,Quem,QuemSup,cod_cliente,UFO,UFD,Representante,nom_cliente)" +
@@ -114,5 +118,51 @@ namespace FupApp
             //++count;
             //((Button)sender).Text = $"{count}";
         }
+
+
+
+        private void pesqFups(object sender, EventArgs e)
+        {
+            string prop = propec.Text;
+            SqlConnection conn = new BancoAzure().abrir();
+            string sql = "SELECT CodProp,FUP,DataFUP,Quem,QuemSup " +
+                "from PropostasFUP where CodProp = '" + prop + "'";
+            SqlDataReader reader = new BancoAzure().consultar(sql, conn);
+            string errosql = new BancoAzure().consultarErros(sql, conn);
+
+            if (reader != null && reader.HasRows)
+            {
+                List<FollowUp> fupa = new List<FollowUp>();
+                FollowUp fup = null;
+                while (reader.Read())
+                {
+                    string codProp = reader.GetString(0);
+                    string fups = reader.GetString(1);
+                    DateTime dataFup = reader.GetDateTime(2);
+                    string quem = reader.GetString(3);
+                    string quemSup = reader.GetString(4);
+                    codProp += ", " + dataFup.ToString() + ", Quem:" + quem + ", QuemSup:" + quemSup;
+                    fup = new FollowUp(codProp, fups, dataFup, quem, quemSup);
+                    fupa.Add(fup);
+                }
+                reader.Close();
+                if (fup != null)
+                {
+                    listViewFUPS.ItemsSource = fupa;
+                }
+                
+            }
+            else
+            {
+                erro = "Proposta invalida";
+                DisplayAlert("", erro, "OK");
+            }
+            new BancoAzure().fechar(conn);
+            //++count;
+            //((Button)sender).Text = $"{count}";
+        }
+
+
+
     }
 }
