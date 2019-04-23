@@ -10,12 +10,17 @@
 <body>
     <form id="form1" runat="server">
         <div>
-
+            <br /><br /><br />
             <table>
                 <tr>
                     <td style="width:140px">Alterar Pedidos</td><td><a href="pedidos.aspx">>>>>>>>>>>>></a></td>
-                    <td style="width:140px">SQL</td><td><a href="sql.aspx">>>>>>>>>>>>></a></td>
+                    
                 </tr>
+                 <tr>
+                    <td style="width:140px">SQL</td><td><a href="sql.aspx">>>>>>>>>>>>></a></td>
+                    
+                </tr>
+                
             </table>
 
         </div>
