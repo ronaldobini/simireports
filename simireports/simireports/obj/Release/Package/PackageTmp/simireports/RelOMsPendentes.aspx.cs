@@ -36,7 +36,7 @@ namespace simireports
                 }
                 else
                 {                    
-                    Response.Redirect("index.aspx");
+                    Response.Redirect("Relatorios.aspx");
                 }
             }
         }

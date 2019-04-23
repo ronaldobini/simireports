@@ -10,7 +10,7 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>simiweb</RootNamespace>
+    <RootNamespace>simireports</RootNamespace>
     <AssemblyName>simireports</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
@@ -86,6 +86,8 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\simireports - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\simireports - Web Deploy1.pubxml" />
+    <Content Include="simiMaster\index.aspx" />
+    <Content Include="simiMaster\sql.aspx" />
     <Content Include="simireports\construcao.aspx" />
     <Content Include="simireports\css\design.css" />
     <Content Include="simireports\img\simireportslogo.png" />
@@ -145,6 +147,7 @@
     <Content Include="simireports\Logout.aspx" />
     <Content Include="simireports\RelComissoes.aspx" />
     <Content Include="simireports\BotEmailsPedCRM.aspx" />
+    <Content Include="simireports\RelComissoesEspec.aspx" />
     <Content Include="simireports\RelOMsPendentes.aspx" />
     <Content Include="simireports\RelPedidosEfetivadosCRM.aspx" />
     <Content Include="simireports\index.aspx" />
@@ -160,12 +163,26 @@
     <Compile Include="simiMaster\Classes\ItemPedido.cs" />
     <Compile Include="simiMaster\Classes\Item.cs" />
     <Compile Include="simiMaster\Classes\Pedido.cs" />
+    <Compile Include="simiMaster\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simiMaster\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="simiMaster\PageAlterarPedido.aspx.cs">
       <DependentUpon>PageAlterarPedido.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="simiMaster\PageAlterarPedido.aspx.designer.cs">
       <DependentUpon>PageAlterarPedido.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simiMaster\sql.aspx.cs">
+      <DependentUpon>sql.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simiMaster\sql.aspx.designer.cs">
+      <DependentUpon>sql.aspx</DependentUpon>
     </Compile>
     <Compile Include="simireports\Classes\Comissao.cs" />
     <Compile Include="simireports\Classes\Devolucao.cs" />
@@ -195,6 +212,13 @@
     </Compile>
     <Compile Include="simireports\BotEmailsPedCRM.aspx.designer.cs">
       <DependentUpon>BotEmailsPedCRM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simireports\RelComissoesEspec.aspx.cs">
+      <DependentUpon>RelComissoesEspec.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\RelComissoesEspec.aspx.designer.cs">
+      <DependentUpon>RelComissoesEspec.aspx</DependentUpon>
     </Compile>
     <Compile Include="simireports\RelOMsPendentes.aspx.cs">
       <DependentUpon>RelOMsPendentes.aspx</DependentUpon>

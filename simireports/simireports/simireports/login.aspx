@@ -54,7 +54,7 @@
          
 		 <center>
 			 <font color="green" style = "margin-bottom: -1px;">
-				 	Desenvolvido por Similar Tecnologia e Automação Ltda - 2019
+				 	v0.17.3 - Desenvolvido por Similar Tecnologia e Automação Ltda - 2019
 			 </font>
 			 <br />
 	 	</center>

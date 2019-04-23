@@ -40,7 +40,7 @@ namespace simireports.simireports
                 else
                 {
                     //VERFICA NIVEL
-                    if ((int)Session["key"] >= 4)
+                    if ((int)Session["key"] >= 7)
                     {
                         //OK PERMANECE NA PAGINA
                     }

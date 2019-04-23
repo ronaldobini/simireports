@@ -58,6 +58,7 @@
                         <th style="width:130px;">Representante </th>
                         <th style="width:100px;">Data Inicio</th>
                         <th style="width:120px;">Data Fim</th>
+                        <th style="width:100px;">Situação</th>
                         <th style="width:100px;text-align:center;">Detalhes</th>
                     </tr>
                     <tr>
@@ -74,6 +75,12 @@
                         <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="repres"  autocomplete="off"/></td>
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datInicio" autocomplete="off"/></td>
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"  autocomplete="off"/></td>
+                        <td style="width:100px;">
+                            <select class="form-control" style="width:100px;" id="sitPgto" runat="server">                                
+                                <option value="T">Pago</option>
+                                <option value="A">Aberto</option>
+                            </select>
+                        </td>
                         <td style="text-align:center"><input type="checkbox" id="detalhes" value="Detalhes" runat="server"> </td>
                     </tr>
                 </table>

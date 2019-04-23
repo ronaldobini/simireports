@@ -20,7 +20,7 @@ namespace simireports
         public string postValor = "";
         public string postUnidade = "";
         public string postRepres = "";
-        public string postSitPgto = "T";
+        public string postSitPgto = "";
         public int postDetalhes = 0;
         public string sqlview = "";
 
@@ -110,7 +110,7 @@ namespace simireports
             postUnidade = unidade.Value;
 
 
-            //postSitPgto = sitPgto.Value.ToUpper();
+            postSitPgto = sitPgto.Value.ToUpper();
             executarRelatorio();
         }
         
@@ -119,7 +119,18 @@ namespace simireports
             Session["firstJ"] = "0";
             postCliente = m.configCoringas(postCliente);
             postRepres = m.configCoringas(postRepres);
-            
+
+            string datas = "";
+            if (postSitPgto == "T")
+            {
+                datas = "AND dp.dat_pgto >= '" + postDatInicio + "' " +
+                        "AND dp.dat_pgto <= '" + postDatFim + "' ";
+            }
+            else
+            {
+                datas = "";
+            }
+
             IfxConnection conn = new BancoLogix().abrir();    
             string sql = "SELECT d.cod_empresa," +
                                         "d.num_docum," +
@@ -138,16 +149,15 @@ namespace simireports
                                         "JOIN representante r on r.cod_repres = d.cod_repres_1 " +
                                         "JOIN clientes cl on cl.cod_cliente = d.cod_cliente " +
                                         "LEFT JOIN docum_pgto dp on d.num_docum = dp.num_docum and d.cod_empresa = dp.cod_empresa " +
-                                        "WHERE r.nom_repres like '%" + postRepres + "%' " +
-                                        "AND dp.dat_pgto >= '" + postDatInicio + "' " +
-                                        "AND dp.dat_pgto <= '" + postDatFim + "' " +
-                                        "AND ies_pgto_docum = '" + postSitPgto + "' " +
+                                        "WHERE r.nom_repres like '%" + postRepres + "' " +
+                                         datas +
+                                        "AND ies_pgto_docum like '%" + postSitPgto + "%' " +
                                         "AND cl.nom_cliente like '%" + postCliente + "%' " +
                                         //"AND d.pct_comis_1 = " + postPctComiss + " " +
                                         //"AND d.val_bruto like " + postValor + " " +
                                         "AND d.cod_empresa like '%" + postUnidade + "%' " +
                                         "AND d.ies_situa_docum = 'N' AND d.ies_tip_docum = 'DP' " +
-                                        "AND d.pct_comis_1 <> 0.14 " +
+                                        //"AND d.pct_comis_1 <> 0.145 " +
                                         "ORDER BY d.cod_repres_1 ";
 
             //sqlview = sql; //ativa a exibicao do sql na tela
