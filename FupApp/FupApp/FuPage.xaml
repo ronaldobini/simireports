@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FupApp.FuPage">
+    
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" Spacing="10">
+            <Label Text="SimiApp" FontSize="20" TextColor="White" HorizontalTextAlignment="Center"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    
+        <ScrollView>
+        <StackLayout Padding="10">
+            <!--<TableView>-->
+            <!--<TableRoot>
+                <TableSection  Title="Follow Up">-->
+            <!--<EntryCell x:Name="quem" Label ="Quem" Text=""></EntryCell>
+                    <EntryCell x:Name="sup" Label ="Sup" Text=""></EntryCell>
+                    <EntryCell x:Name="propec" Label ="Proposta" Text="" ></EntryCell>
+                    <EntryCell x:Name="fup" Placeholder="Informe o FUP"></EntryCell>-->
+            <Label Text="FUP" VerticalOptions="CenterAndExpand" FontSize="30" TextColor="#399bfc"/>
+            <StackLayout>
+                <StackLayout>
+                    <Label Text="Quem: " TextColor="#777" FontSize="15"/>
+                    <Label x:Name="quemLabel" TextColor="#555" FontSize="20"/>
+                    <!--<Entry x:Name="quem" FontSize="20" TextColor="#555" />-->
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Sup" TextColor="#777" FontSize="15"/>
+                    <Picker x:Name="pickerSup" SelectedIndexChanged="pickerSelected" HorizontalOptions="FillAndExpand" TextColor="#555"/>
+                    <!--<Entry x:Name="sup" FontSize="20" TextColor="#555" />-->
+
+                    <Label Text="Proposta" TextColor="#777" FontSize="15"/>
+                    <Entry x:Name="propec"  FontSize="20" TextColor="#555"/>
+
+                    <Label Text="Follow-Up" TextColor="#777" FontSize="15"/>
+                    <Editor x:Name="fup" AutoSize="TextChanges" FontSize="20" TextColor="#555"/>
+
+                </StackLayout>
+                <StackLayout Padding="10" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                    <Button x:Name="btnClicadoBtn" Text="Registrar" TextColor="White" Clicked="clicadoBotao" BorderColor="#012f8c" BackgroundColor="#399bfc"></Button>
+                </StackLayout>
+                <StackLayout Padding="10" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                    <Button x:Name="btnPesqFup" Text="Pesquisar Fups" TextColor="White" Clicked="pesqFups" BorderColor="#012f8c" BackgroundColor="#399bfc"></Button>
+                </StackLayout>
+                
+                    <StackLayout x:Name="fupsProp">
+                </StackLayout>
+                <!--<ListView x:Name="listViewFUPS">
+                    --><!--<ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Height" Value="50" />
+                        </Style>
+                    </ListView.ItemContainerStyle>--><!--
+                    <ListView.ItemTemplate >
+                        
+                        <DataTemplate>
+                            --><!--<TextCell Text="{Binding}" TextColor="#399bfc"/>--><!--
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="Start">
+                                        <Label Text="{Binding Proposta}" Font="10" TextColor="#777" />
+                                        --><!--<Label Text="{Binding Quem}" Font="20" TextColor="#777" />-->
+                                        <!--<Label Text="{Binding QuemSup}" Font="20" TextColor="#777" />
+                                        <Label Text="{Binding Data}" Font="20" TextColor="#777" />--><!--
+                                        <Label Text="{Binding Fup}" LineBreakMode="CharacterWrap" Font="20" TextColor="#777" />
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>-->
+                
+            </StackLayout>
+            <!--</TableSection>-->
+            <!--</TableRoot>
+        </TableView>-->
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
