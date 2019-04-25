@@ -140,7 +140,7 @@ namespace simireports
                                         "d.num_docum_origem," +
                                         "d.num_pedido," +
                                         "cl.nom_cliente," +
-                                        "d.val_bruto," +
+                                        "dp.val_pago," +
                                         "d.pct_comis_1," +
                                         "r.nom_repres," +
                                         "d.dat_emis," +
@@ -192,7 +192,8 @@ namespace simireports
                     if (!pctComissaoS.Equals(""))
                     {
                         pctComissao = Decimal.Parse(pctComissaoS);
-                        if (pctComissao == 0.145M) pctComissao = 0.0M;                       
+                        if (pctComissao == 0.145M) pctComissao = 0.0M;
+                        if (pctComissao == 0.14M) pctComissao = 0.0M;
                         comiss = valBruto * (pctComissao / 100);
                     }
                     else

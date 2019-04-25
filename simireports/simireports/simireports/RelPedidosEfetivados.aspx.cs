@@ -114,10 +114,10 @@ namespace simireports
             string sql = "SELECT a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres, " +
                 " b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, b.pre_unit, b.num_sequencia "+
                                    " FROM pedidos a" +
-                                    " JOIN ped_itens b on a.num_pedido = b.num_pedido AND a.cod_empresa = b.cod_empresa" +
+                                    " RIGHT JOIN ped_itens b on a.num_pedido = b.num_pedido AND a.cod_empresa = b.cod_empresa and b.cod_item like '%" + postCodItem + "%'" +
                                     " JOIN clientes c on c.cod_cliente = a.cod_cliente" +
-                                    " join item i on i.cod_item = b.cod_item and i.cod_empresa = b.cod_empresa " +
-                                   " JOIN representante r on r.cod_repres = a.cod_repres " +
+                                    " JOIN item i on i.cod_item = b.cod_item and i.cod_empresa = b.cod_empresa " +
+                                    " JOIN representante r on r.cod_repres = a.cod_repres " +
 
                                    " WHERE c.cod_cliente LIKE '%" + postCodCliente + "%'" +
 
@@ -128,8 +128,6 @@ namespace simireports
                                    " AND a.dat_alt_sit >= '" + postDatInicio + "'" +
 
                                    " AND a.dat_alt_sit <= '" + postDatFim + "'" +
-
-                                   " AND b.cod_item like '%" + postCodItem + "%'" +
 
                                    " AND a.cod_empresa LIKE '%" + postUnidade +"%'" +
 
