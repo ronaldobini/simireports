@@ -9,7 +9,7 @@ namespace FupApp
 {
     public partial class MainPage : ContentPage
     {
-        private String[] menu = {"FUP","Sair"};
+        private String[] menu = {"FUP","Estoque","Sair"};
         private string login;
         public MainPage(string login)
         {
@@ -31,9 +31,14 @@ namespace FupApp
                 return;
             }
 
-            else if(tools.Equals("FUP"))
+            else if (tools.Equals("FUP"))
             {
                 page = new FuPage(login);
+            }
+
+            else if (tools.Equals("Estoque"))
+            {
+                page = new EstoquePage();
             }
 
             else if(tools.Equals("Sair"))

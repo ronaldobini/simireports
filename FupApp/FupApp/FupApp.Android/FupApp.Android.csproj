@@ -20,7 +20,7 @@
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidKeyStore>false</AndroidKeyStore>
     <AndroidSigningKeyStore>C:\Users\simi_bini\AppData\Local\Xamarin\Mono for Android\Keystore\FollowApp\FollowApp.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>damxd043</AndroidSigningStorePass>
   </PropertyGroup>

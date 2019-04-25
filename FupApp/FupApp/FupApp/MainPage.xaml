@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:FupApp"
              x:Class="FupApp.MainPage">
-    
+
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal" Spacing="10">
             <!--<Image Source="imgs/angryasf.png" HorizontalOptions="Center">
@@ -12,19 +12,21 @@
         </StackLayout>
     </NavigationPage.TitleView>
 
-    <ListView x:Name="listView">
+    <ScrollView>
+        <ListView x:Name="listView">
 
-        <ListView.ItemTemplate >
-            <DataTemplate>
-                <!--<TextCell Text="{Binding}" TextColor="#399bfc"/>-->
-                <ViewCell>
-                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="Center">
-                        <Label Text="{Binding}" Font="30" TextColor="#399bfc" />
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
+            <ListView.ItemTemplate >
+                <DataTemplate>
+                    <!--<TextCell Text="{Binding}" TextColor="#399bfc"/>-->
+                    <ViewCell>
+                        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="Center">
+                            <Label Text="{Binding}" Font="30" TextColor="#399bfc" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
 
-    </ListView>
+        </ListView>
 
+    </ScrollView>
 </ContentPage>

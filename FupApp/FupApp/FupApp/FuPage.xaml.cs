@@ -13,9 +13,9 @@ namespace FupApp
 {
     public partial class FuPage : ContentPage
     {
-        private Picker picker;
+        //private Picker picker;
         private string login;
-        private int count = 0;
+        //private int count = 0;
         private string erro;
         private string quem;
         private string sup;
@@ -148,6 +148,7 @@ namespace FupApp
                     fupa.Add(fup);
                 }
                 reader.Close();
+                new BancoAzure().fechar(conn);
                 if (fupa.Count > 0)
                 {
                     foreach (FollowUp f in fupa)
@@ -223,7 +224,6 @@ namespace FupApp
                 erro = "Proposta invalida";
                 DisplayAlert("", erro, "OK");
             }
-            new BancoAzure().fechar(conn);
             //++count;
             //((Button)sender).Text = $"{count}";
         }
