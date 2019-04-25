@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FupApp.EstoquePage">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" Spacing="10">
+            <Label Text="SimiApp" FontSize="20" TextColor="White" HorizontalTextAlignment="Center"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Label Text="Estoque" FontSize="30" TextColor="#399bfc"/>
+            <StackLayout>
+                <StackLayout>
+                    <Label Text="Produto" TextColor="#777" FontSize="15"/>
+                    <Entry x:Name="prod"  FontSize="20" TextColor="#555"/>
+                </StackLayout>
+                <StackLayout Padding="10" HorizontalOptions="FillAndExpand">
+                    <Button x:Name="botaoPesqEstoque" Text="Pesquisar Estoque" TextColor="White" Clicked="pesqEstoque" BorderColor="#012f8c" BackgroundColor="#399bfc"></Button>
+                </StackLayout>
+                <StackLayout x:Name="estoque">
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

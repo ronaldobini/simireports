@@ -994,11 +994,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\simi_bini\\source\\repos\\FupApp\\FupApp\\FupApp\\FupApp.csproj",
+      "projectUniqueName": "C:\\Users\\simi_bini\\Documents\\GitHub\\simireports\\FupApp\\FupApp\\FupApp\\FupApp.csproj",
       "projectName": "FupApp",
-      "projectPath": "C:\\Users\\simi_bini\\source\\repos\\FupApp\\FupApp\\FupApp\\FupApp.csproj",
+      "projectPath": "C:\\Users\\simi_bini\\Documents\\GitHub\\simireports\\FupApp\\FupApp\\FupApp\\FupApp.csproj",
       "packagesPath": "C:\\Users\\simi_bini\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\simi_bini\\source\\repos\\FupApp\\FupApp\\FupApp\\obj\\",
+      "outputPath": "C:\\Users\\simi_bini\\Documents\\GitHub\\simireports\\FupApp\\FupApp\\FupApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

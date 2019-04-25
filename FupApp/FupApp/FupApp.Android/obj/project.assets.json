@@ -897,11 +897,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\simi_bini\\source\\repos\\FupApp\\FupApp\\FupApp.Android\\FupApp.Android.csproj",
+      "projectUniqueName": "C:\\Users\\simi_bini\\Documents\\GitHub\\simireports\\FupApp\\FupApp\\FupApp.Android\\FupApp.Android.csproj",
       "projectName": "FupApp.Android",
-      "projectPath": "C:\\Users\\simi_bini\\source\\repos\\FupApp\\FupApp\\FupApp.Android\\FupApp.Android.csproj",
+      "projectPath": "C:\\Users\\simi_bini\\Documents\\GitHub\\simireports\\FupApp\\FupApp\\FupApp.Android\\FupApp.Android.csproj",
       "packagesPath": "C:\\Users\\simi_bini\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\simi_bini\\source\\repos\\FupApp\\FupApp\\FupApp.Android\\obj\\",
+      "outputPath": "C:\\Users\\simi_bini\\Documents\\GitHub\\simireports\\FupApp\\FupApp\\FupApp.Android\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
@@ -918,8 +918,8 @@
       "frameworks": {
         "monoandroid81": {
           "projectReferences": {
-            "C:\\Users\\simi_bini\\source\\repos\\FupApp\\FupApp\\FupApp\\FupApp.csproj": {
-              "projectPath": "C:\\Users\\simi_bini\\source\\repos\\FupApp\\FupApp\\FupApp\\FupApp.csproj"
+            "C:\\Users\\simi_bini\\Documents\\GitHub\\simireports\\FupApp\\FupApp\\FupApp\\FupApp.csproj": {
+              "projectPath": "C:\\Users\\simi_bini\\Documents\\GitHub\\simireports\\FupApp\\FupApp\\FupApp\\FupApp.csproj"
             }
           }
         }

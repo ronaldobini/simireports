@@ -846,11 +846,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\simi_bini\\source\\repos\\FupApp\\FupApp\\FupApp.iOS\\FupApp.iOS.csproj",
+      "projectUniqueName": "C:\\Users\\simi_bini\\Documents\\GitHub\\simireports\\FupApp\\FupApp\\FupApp.iOS\\FupApp.iOS.csproj",
       "projectName": "FupApp.iOS",
-      "projectPath": "C:\\Users\\simi_bini\\source\\repos\\FupApp\\FupApp\\FupApp.iOS\\FupApp.iOS.csproj",
+      "projectPath": "C:\\Users\\simi_bini\\Documents\\GitHub\\simireports\\FupApp\\FupApp\\FupApp.iOS\\FupApp.iOS.csproj",
       "packagesPath": "C:\\Users\\simi_bini\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\simi_bini\\source\\repos\\FupApp\\FupApp\\FupApp.iOS\\obj\\",
+      "outputPath": "C:\\Users\\simi_bini\\Documents\\GitHub\\simireports\\FupApp\\FupApp\\FupApp.iOS\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
@@ -867,8 +867,8 @@
       "frameworks": {
         "xamarinios10": {
           "projectReferences": {
-            "C:\\Users\\simi_bini\\source\\repos\\FupApp\\FupApp\\FupApp\\FupApp.csproj": {
-              "projectPath": "C:\\Users\\simi_bini\\source\\repos\\FupApp\\FupApp\\FupApp\\FupApp.csproj"
+            "C:\\Users\\simi_bini\\Documents\\GitHub\\simireports\\FupApp\\FupApp\\FupApp\\FupApp.csproj": {
+              "projectPath": "C:\\Users\\simi_bini\\Documents\\GitHub\\simireports\\FupApp\\FupApp\\FupApp\\FupApp.csproj"
             }
           }
         }
