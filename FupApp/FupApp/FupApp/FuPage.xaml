@@ -9,7 +9,7 @@
         </StackLayout>
     </NavigationPage.TitleView>
     
-    <ScrollView>
+        <ScrollView>
         <StackLayout Padding="10">
             <!--<TableView>-->
             <!--<TableRoot>
@@ -37,30 +37,32 @@
                     <Editor x:Name="fup" AutoSize="TextChanges" FontSize="20" TextColor="#555"/>
 
                 </StackLayout>
-                <StackLayout Padding="30" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                <StackLayout Padding="10" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
                     <Button x:Name="btnClicadoBtn" Text="Registrar" TextColor="White" Clicked="clicadoBotao" BorderColor="#012f8c" BackgroundColor="#399bfc"></Button>
                 </StackLayout>
-
-                <StackLayout Padding="30" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                <StackLayout Padding="10" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
                     <Button x:Name="btnPesqFup" Text="Pesquisar Fups" TextColor="White" Clicked="pesqFups" BorderColor="#012f8c" BackgroundColor="#399bfc"></Button>
                 </StackLayout>
-                <ListView x:Name="listViewFUPS">
-                    <!--<ListView.ItemContainerStyle>
+                
+                    <StackLayout x:Name="fupsProp">
+                </StackLayout>
+                <!--<ListView x:Name="listViewFUPS">
+                    --><!--<ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Height" Value="50" />
                         </Style>
-                    </ListView.ItemContainerStyle>-->
+                    </ListView.ItemContainerStyle>--><!--
                     <ListView.ItemTemplate >
                         
                         <DataTemplate>
-                            <!--<TextCell Text="{Binding}" TextColor="#399bfc"/>-->
+                            --><!--<TextCell Text="{Binding}" TextColor="#399bfc"/>--><!--
                             <ViewCell>
                                 <ViewCell.View>
                                     <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="Start">
                                         <Label Text="{Binding Proposta}" Font="10" TextColor="#777" />
-                                        <!--<Label Text="{Binding Quem}" Font="20" TextColor="#777" />-->
+                                        --><!--<Label Text="{Binding Quem}" Font="20" TextColor="#777" />-->
                                         <!--<Label Text="{Binding QuemSup}" Font="20" TextColor="#777" />
-                                        <Label Text="{Binding Data}" Font="20" TextColor="#777" />-->
+                                        <Label Text="{Binding Data}" Font="20" TextColor="#777" />--><!--
                                         <Label Text="{Binding Fup}" LineBreakMode="CharacterWrap" Font="20" TextColor="#777" />
                                     </StackLayout>
                                 </ViewCell.View>
@@ -68,7 +70,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
 
-                </ListView>
+                </ListView>-->
                 
             </StackLayout>
             <!--</TableSection>-->
