@@ -40,7 +40,9 @@ namespace simireports.simireports
                 else
                 {
                     //VERFICA NIVEL
-                    if ((int)Session["key"] >= 7)
+                    string postRepres = (string)Session["nome"];
+                    if ((int)Session["key"] >= 7 || postRepres == "Karolline" || postRepres == "Dayane" || postRepres == "Luana" || postRepres == "Danieli" || postRepres == "Luciana" || postRepres == "Priscila" || postRepres == "Rafaella" || postRepres == "Rosilaine" || postRepres == "Vanessa")
+                    
                     {
                         //OK PERMANECE NA PAGINA
                     }

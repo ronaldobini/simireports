@@ -4,8 +4,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link rel="icon" type="image/png" href="img/syss.png">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Relatorio de Pedidos Efetivados CRM</title>
+     <title>SimiWeb - <%=Session["swver"] %></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
     <script>
@@ -140,11 +141,11 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 10%;">Cod. do Item</th>
+                                            <th style="text-align:left;width: 45%;">Desc. Item</th>
                                             <th  style="text-align:center;width: 5%;">Solic</th>
                                             <th style="text-align:center;width: 5%;">Cancel</th>
                                             <th style="text-align:center;width: 5%;">Atend</th>
-                                            <th style="text-align:center;width: 45%;">Desc. Item</th>
-                                            <th style="width: 10%;">Preço Unit</th>
+                                            <th style="text-align:right;width: 10%;">Preço Unit</th>
                                             <th style="text-align:center;width: 10%;">Desconto</th>
                                             <th style="text-align:center;width: 10%;">PedLogix</th>
                                             <%--<th style="text-align:center;width: 30%;">Prazo</th>--%>
@@ -194,11 +195,11 @@
                                     %>
                                             <tr>
                                                 <td><%= codItem %></td>
+                                                <td style="text-align:left;"><%= nomeItem %></td>
                                                 <td style="text-align:center;"><%= qtdSolic %></td>
                                                 <td style="text-align:center;"><%= qtdCancel %></td>
                                                 <td style="text-align:center;"><%= qtdAtend %></td>
-                                                <td style="text-align:center;"><%= nomeItem %></td>
-                                                <td><%= "R$ "+preUnitS %></td>
+                                                <td style="text-align:right;"><%= "R$ "+preUnitS %></td>
                                                 <td style="text-align:center;"><%= desconto +"%" %></td>
                                                 <td style="text-align:center;"><%= pedLogix %></td>
                                                 <%--<td><%= przEntrega %></td>--%>
@@ -206,11 +207,11 @@
                                                 
                                     <% } %>
                                     <tr>
-                                        <td colspan="4" style="background-color: #070a0e; color:white;"><b>Total Pedido: R$ <%= totPedS %></td>
-                                        <td colspan="2" style="background-color: #070a0e; color:white;"><div style="float:left;"><b>Total Atendido: R$ <%= totAtendS %></div>
-                                            <div style="float:right;">Total Cancelado: R$ <%= totCancelS %></div></td>
+                                        <td colspan="8" style="background-color: #070a0e; color:white;"><b>Total Pedido: R$ <%= totPedS %></td>
+                                        <%--<td colspan="2" style="background-color: #070a0e; color:white;"><div style="float:left;"><b>Total Atendido: R$ <%= totAtendS %></div>
+                                            <div style="float:right;">Total Cancelado: R$ <%= totCancelS %></div></td>--%>
                                         <%--<td colspan="2" style="background-color: #070a0e; color:white;"><b>Total Cancelado: R$ <%= totCancelS %></td>--%>
-                                        <td colspan="2" style="background-color: #070a0e; color:white;text-align:right;"><b>Total Pendente: R$ <%= totPendS %></td>
+                                        <%--<td colspan="2" style="background-color: #070a0e; color:white;text-align:right;"><b>Total Pendente: R$ <%= totPendS %></td>--%>
                                     </tr>
                                 </table>
                             </td>

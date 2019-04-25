@@ -46,7 +46,7 @@ namespace simireports
                 //VERFICA NIVEL
                 if ((int)Session["key"] >= 1)
                 {
-                    if ((int)Session["key"] >= 3)
+                    if ((int)Session["key"] >= 2)
                     {
                         represChange = "sim";
                     }
@@ -94,7 +94,7 @@ namespace simireports
             postDatFim = datFim.Value;
             if (postDatFim == "") postDatFim = hoje;
 
-            if ((int)Session["key"] >= 4)
+            if ((int)Session["key"] >= 2)
             {
                 postRepres = repres.Value.ToUpper();
             }

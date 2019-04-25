@@ -4,8 +4,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link rel="icon" type="image/png" href="img/syss.png">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Relatorio de Pedidos Efetivados Logix</title>
+     <title>SimiWeb - <%=Session["swver"] %></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     
    <script>
@@ -133,15 +134,14 @@
                                 <table class="table table-sm table-dark" style="background-color:#3f4142; width:100%; color:white; font-size: 12px;">
                                     <thead>
                                         <tr>
-                                            <th style="width: 5%;">Cod. do Item</th>
-                                            <th style="width: 40%;">Desc. Item</th>
+                                            <th style="width: 10%;">Cod. do Item</th>
+                                            <th style="width: 35%;">Desc. Item</th>
                                             <th style="width: 5%; text-align:center;"">Solic</th>
                                             <th style="width: 5%; text-align:center;">Cancel</th>
                                             <th style="width: 5%; text-align:center;"">Atend</th>
-                                            <th style="width: 10%;">Preço Unit</th>
-                                            <th style="width: 10%;">Preço Total Atend</th>
-                                            <th style="width: 10%;">Preço Total Solic</th>
-                                            <th style="width: 20%;">Prazo</th>
+                                            <th style="text-align:right;width: 10%;">Preço Unit</th>
+                                            <th style="text-align:right;width: 10%;">Preço Total Atend</th>
+                                            <th style="text-align:right;width: 20%;">Prazo</th>
                                         </tr>
                                     </thead>
                                     <%
@@ -185,10 +185,9 @@
                                                 <td style="text-align:center;"><%= qtdSolicD %></td>
                                                 <td style="text-align:center;"><%= qtdCancelD %></td>
                                                 <td style="text-align:center;"><%= qtdAtendD %></td>
-                                                <td><%= "R$"+preUnitS %></td>
-                                                <td><%= "R$"+preUnit*qtdAtendD %></td>
-                                                <td><%= "R$"+preUnit*qtdSolicD %></td>
-                                                <td><%= przEntrega %></td>
+                                                <td style="text-align:right;"><%= "R$"+preUnitS %></td>
+                                                <td style="text-align:right;"><%= "R$"+preUnit*qtdAtendD %></td>
+                                                <td style="text-align:right;"><%= przEntrega %></td>
                                             </tr>
                                                 
                                     <% } %>

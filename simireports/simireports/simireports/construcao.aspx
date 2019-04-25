@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+     <title>SimiWeb - <%=Session["swver"] %></title>
 </head>
 <body style="background-color:#2a2d33;">
     <center>

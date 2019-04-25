@@ -1,10 +1,12 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="login.aspx.cs" Inherits="simireports.simireports.WebForm1" %>
 
+
+<% Session["swver"] = swver; %>
 <html lang="en">
 	<head>
 	    <link rel="icon" type="image/png" href="img/syss.png">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	    <title>SimiReports</title>
+	    <title>SimiWeb - <%=Session["swver"] %></title>
 
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -36,11 +38,11 @@
 
 
              <% //VERIFICA SESSAO E REDIRECIONA
-
-                if(Session["key"]!= null) { 
-                    int key = (int) Session["key"];
-                    if (key >= 1)
-                    {
+                 
+                 if(Session["key"]!= null) {
+                     int key = (int) Session["key"];
+                     if (key >= 1)
+                     {
              %>
                     <center><h3 style="color:white;"><%=Session["Nome"] %> entrando...</h3></p></center>
                     <meta http-equiv="refresh" content="0; URL=Relatorios.aspx" />
@@ -54,7 +56,7 @@
          
 		 <center>
 			 <font color="green" style = "margin-bottom: -1px;">
-				 	v0.17.4 - Desenvolvido por Similar Tecnologia e Automação Ltda - 2019
+				 	SimiWeb - <%=Session["swver"] %> - Desenvolvido por Similar Tecnologia e Automação Ltda - 2019
 			 </font>
 			 <br />
 	 	</center>

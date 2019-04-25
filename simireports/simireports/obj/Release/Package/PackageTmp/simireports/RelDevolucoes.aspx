@@ -4,8 +4,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link rel="icon" type="image/png" href="img/syss.png">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Relatorio de Devoluções</title>
+     <title>SimiWeb - <%=Session["swver"] %></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
 <body style="background-color:#222;">

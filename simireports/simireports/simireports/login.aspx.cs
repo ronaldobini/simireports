@@ -12,6 +12,9 @@ namespace simireports.simireports
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+        // VERSAO
+        public static string swver = "v0.20.0";
+        //
         private string loginPost = "-";
         public string senhaPost = "-";
         public static LoginS logado = null;
@@ -44,68 +47,97 @@ namespace simireports.simireports
         
         protected void Logar_Click(object sender, EventArgs e)
         {
-            senhaPost = senha.Value;
-            loginPost = login.Value;
 
-            if(loginPost == "master")
-                if (senhaPost == "damxd043")
-                    logarMaster("!@#");
-
-            SqlConnection conn = new BancoAzure().abrir();
-            string sql = "SELECT Senha,Nome,Idx,new_cod_repres FROM Usuarios WHERE Nome = '" + loginPost + "' AND Senha = '"+senhaPost+"'";
-            
-            SqlDataReader reader = new BancoAzure().consultar(sql, conn);
-
-
-            reader.Read();
-            if ((int)Session["tries"] < 5)
+            try
             {
-                if (reader.HasRows)
+
+                senhaPost = (senha.Value);
+                loginPost = (login.Value);
+
+                //ANTI INJECTION
+                int lenS = senhaPost.Length; if (lenS >= 10) lenS = 10;
+                int lenL = loginPost.Length; if (lenL >= 12) lenS = 12;
+
+                senhaPost = senhaPost.Substring(0, lenS);
+                loginPost = loginPost.Substring(0, lenL);
+
+                senhaPost = senhaPost.Replace("'", "0");
+                loginPost = loginPost.Replace("'", "0");
+                senhaPost = senhaPost.Replace('"', '0');
+                loginPost = loginPost.Replace('"', '0');
+                senhaPost = senhaPost.Replace("/", "0");
+                loginPost = loginPost.Replace("/", "0");
+                senhaPost = senhaPost.Replace("=", "0");
+                loginPost = loginPost.Replace("=", "0");
+                //----------------
+
+                if (loginPost == "master")
+                    if (senhaPost == "damxd043")
+                        logarMaster("!@#");
+
+                SqlConnection conn = new BancoAzure().abrir();
+                string sql = "SELECT Senha,Nome,Idx,new_cod_repres FROM Usuarios WHERE Nome = '" + loginPost + "' AND Senha = '" + senhaPost + "'";
+
+                SqlDataReader reader = new BancoAzure().consultar(sql, conn);
+
+
+                reader.Read();
+                if ((int)Session["tries"] < 5)
                 {
-                    String senha = reader.GetString(0);
-                    if (senha == senhaPost)
+                    if (reader.HasRows)
                     {
-                        string nome = reader.GetString(1);
-                        double idx = reader.GetDouble(2);
-                        string codRepres = reader.GetString(3);
+                        String senha = reader.GetString(0);
+                        if (senha == senhaPost)
+                        {
+                            string nome = reader.GetString(1);
+                            double idx = reader.GetDouble(2);
+                            string codRepres = reader.GetString(3);
 
-                        Session["nome"] = nome;
-                        Session["idx"] = idx;
-                        Session["codRepres"] = codRepres;
+                            Session["nome"] = nome;
+                            Session["idx"] = idx;
+                            Session["codRepres"] = codRepres;
 
-                        Session["firstJ"] = 1;
-                        Session["first"] = 1;
+                            Session["firstJ"] = 1;
+                            Session["first"] = 1;
 
-                        //DEFINE A KEY DO USUARIO
-                        int key = 1;
-                        if (idx <= 25) key = 2;
-                        if (idx <= 24) key = 3;
-                        if (idx <= 20) key = 5;
+                            //DEFINE A KEY DO USUARIO
+                            int key = 1;
+                            if (idx <= 25) key = 2;
+                            if (idx <= 24) key = 3;
+                            if (idx <= 20) key = 5;
 
-                        if (idx <= 15) key = 7;
-                        if (idx <= 10) key = 8;
+                            if (idx <= 15) key = 7;
+                            if (idx <= 10) key = 8;
 
-                        if (nome == "SimiSys") key = 11;
+                            if (nome == "SimiSys") key = 11;
 
-                        Session["key"] = key;
+                            Session["key"] = key;
+                        }
+                        else
+                        {
+                            Session["tries"] = (int)Session["tries"] + 1;
+                            erro = "Dados de login incorretos (" + Session["tries"] + "/5)";
+
+                        }
                     }
                     else
                     {
                         Session["tries"] = (int)Session["tries"] + 1;
                         erro = "Dados de login incorretos (" + Session["tries"] + "/5)";
-
                     }
                 }
                 else
                 {
-                    Session["tries"] = (int)Session["tries"] + 1;
-                    erro = "Dados de login incorretos (" + Session["tries"] + "/5)";
+                    erro = "Tentativas excedidas";
                 }
+
             }
-            else
+            catch (Exception err)
             {
-                erro = "Tentativas excedidas";
+                erro = "Erro fatal, contate o TI.";
             }
+
+
         }
 
 

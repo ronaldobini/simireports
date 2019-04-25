@@ -51,7 +51,7 @@ namespace simireports
                 //VERFICA NIVEL
                 if ((int)Session["key"] >= 1)
                 {
-                    if ((int)Session["key"] >= 4)
+                    if ((int)Session["key"] >= 7)
                     {
                         represChange = "sim";
                     }
@@ -96,14 +96,17 @@ namespace simireports
             postDatFim = datFim.Value;
             if (postDatFim == "") postDatFim = hoje;
 
-            if ((int)Session["key"] >= 4)
+            if ((int)Session["key"] >= 7)
             {
                 postRepres = repres.Value.ToUpper();
             }
             else
             {
                 postRepres = (string)Session["nome"];
+                if (postRepres == "Karolline" || postRepres == "Dayane" || postRepres == "Luana" || postRepres == "Danieli" || postRepres == "Luciana" || postRepres == "Priscila" || postRepres == "Rafaella" || postRepres == "Rosilaine")
+                    postRepres = "VendaInt";
                 postRepres = postRepres.ToUpper();
+
             }
             
             postCliente = cliente.Value.ToUpper();
