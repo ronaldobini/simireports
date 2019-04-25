@@ -23,7 +23,7 @@ namespace FupApp
         {
             estoque.Children.Clear();
             string erro = "";
-            if (prod.Text != null && !prod.Text.Equals(""))
+            if (prod.Text != null && prod.Text.Length > 4)
             {
                 string codItem = prod.Text;
                 codItem = m.configCoringas(codItem);
@@ -181,7 +181,7 @@ namespace FupApp
             }
             else
             {
-                erro = "Entre com um produto";
+                erro = "Mínimo de 5 caracteres.";
                 DisplayAlert("", erro, "OK");
             }
     

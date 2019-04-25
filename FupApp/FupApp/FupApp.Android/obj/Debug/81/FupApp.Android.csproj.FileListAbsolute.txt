@@ -116,7 +116,6 @@ C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\FupApp.Android.csprojAssemblyReference.cache
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\libraryimports.cache.stamp
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\res.flag
-C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\ListViewPage1.xaml.g.cs
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\FupApp.Android.csproj.CoreCompileInputs.cache
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\XamlC.stamp
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\FupApp.Android.csproj.CopyComplete

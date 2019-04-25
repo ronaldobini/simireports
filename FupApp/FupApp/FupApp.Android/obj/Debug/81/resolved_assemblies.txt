@@ -31,7 +31,6 @@ C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\android\assets\Xamarin.Forms.Platform.Android.dll
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\android\assets\Xamarin.Forms.Platform.dll
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\android\assets\Xamarin.Forms.Xaml.dll
-C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\android\assets\netstandard.dll
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\android\assets\System.Data.dll
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\android\assets\System.Numerics.dll
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\android\assets\System.Transactions.dll
@@ -42,5 +41,4 @@ C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\android\assets\System.Runtime.Serialization.dll
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\android\assets\System.ServiceModel.Internals.dll
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\android\assets\System.Web.Services.dll
-C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\android\assets\System.Data.SqlClient.dll
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\android\assets\Mono.Security.dll
