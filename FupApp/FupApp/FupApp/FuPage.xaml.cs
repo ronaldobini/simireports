@@ -117,16 +117,18 @@ namespace FupApp
             new BancoAzure().fechar(conn);
             //++count;
             //((Button)sender).Text = $"{count}";
+            pesqFups( sender,  e);
         }
 
 
 
         private void pesqFups(object sender, EventArgs e)
         {
+            fupsProp.Children.Clear();
             string prop = propec.Text;
             SqlConnection conn = new BancoAzure().abrir();
             string sql = "SELECT CodProp,FUP,DataFUP,Quem,QuemSup " +
-                "from PropostasFUP where CodProp = '" + prop + "'";
+                "from PropostasFUP where CodProp = '" + prop + "' order by DataFUP desc";
             SqlDataReader reader = new BancoAzure().consultar(sql, conn);
             string errosql = new BancoAzure().consultarErros(sql, conn);
 
@@ -141,14 +143,78 @@ namespace FupApp
                     DateTime dataFup = reader.GetDateTime(2);
                     string quem = reader.GetString(3);
                     string quemSup = reader.GetString(4);
-                    codProp += ", " + dataFup.ToString() + ", Quem:" + quem + ", QuemSup:" + quemSup;
+                    //codProp += ", " + dataFup.ToString() + ", Quem:" + quem + ", QuemSup:" + quemSup;
                     fup = new FollowUp(codProp, fups, dataFup, quem, quemSup);
                     fupa.Add(fup);
                 }
                 reader.Close();
-                if (fup != null)
+                if (fupa.Count > 0)
                 {
-                    listViewFUPS.ItemsSource = fupa;
+                    foreach (FollowUp f in fupa)
+                    {
+                        Grid gridFups = new Grid
+                        {
+                            //BackgroundColor = Color.FromHex("#222")
+                            ColumnSpacing = 1,
+                            RowSpacing = 1
+                        };
+                        gridFups.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) });
+                        gridFups.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+                        gridFups.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                        gridFups.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                        gridFups.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                        Label ldata = new Label
+                        {
+                            Text = f.Data.ToString(),
+                            FontSize = 15,
+                            //BackgroundColor = Color.FromHex("#777")
+                            Margin = new Thickness(3, 3, 0, 0),
+                            HorizontalTextAlignment = TextAlignment.Center
+                        };
+                        gridFups.Children.Add(ldata, 0, 0);
+                        //Grid.SetColumnSpan(ldata, 2);
+
+                        Label lquem = new Label
+                        {
+                            Text = "Quem: " + f.Quem,
+                            FontSize = 15,
+                            //BackgroundColor = Color.FromHex("#777")
+                            Margin = new Thickness(3, 3, 0, 0)
+                        };
+                        gridFups.Children.Add(lquem, 1, 0);
+                        //Grid.SetColumnSpan(lquem, 2);
+
+                        Label lquemsup = new Label
+                        {
+                            Text = "Sup: " + f.QuemSup,
+                            FontSize = 15,
+                            //BackgroundColor = Color.FromHex("#777")
+                            Margin = new Thickness(3, 3, 0, 0)
+                        };
+                        gridFups.Children.Add(lquemsup, 2, 0);
+                        //Grid.SetColumnSpan(lquemsup, 2);
+
+                        Label lfup = new Label
+                        {
+                            Text = f.Fup,
+                            FontSize = 20,
+                            //TextColor = Color.FromHex(""),
+                            //BackgroundColor = Color.FromHex("#777"),
+                            Margin = new Thickness(10, 10, 10, 20)
+                        };
+                        gridFups.Children.Add(lfup, 0, 1);
+                        Grid.SetColumnSpan(lfup, 3);
+
+                        Label line = new Label
+                        {
+                            HorizontalOptions = LayoutOptions.Fill,
+                            FontSize = 1,
+                            BackgroundColor = Color.FromHex("#888")
+                        };
+                        
+                        fupsProp.Children.Add(line);
+                        fupsProp.Children.Add(gridFups);
+                    }
                 }
                 
             }
