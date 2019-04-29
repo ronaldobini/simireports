@@ -50,51 +50,66 @@
                 <th style="width:100px;text-align:right;">Total (R$)</th>
 
             </tr>
-            
+            <% if ((string)Session["nome"] == "Karolline" || (int)Session["key"] >= 7 || (string)Session["nome"] == "Vanessa") { %>
             <tr>
                 <td style="text-align:left;">Karol</td>
                 <td style="text-align:right;"> <%=comissVendin8 %> + <%=comissSimilar8 %> + <%=comissKarolS %> </td>
-                <td style="text-align:right;"><%=(Double.Parse(comissKarolS)+Double.Parse(comissVendin8)+Double.Parse(comissSimilar8)) %></td>
+                <td style="text-align:right;"><%=(Double.Parse(comissKarolS) + Double.Parse(comissVendin8) + Double.Parse(comissSimilar8)) %></td>
 
             </tr>
+            <%} %>
+            <% if ((string)Session["nome"] == "Dayane" || (int)Session["key"] >= 7 || (string)Session["nome"] == "Vanessa") { %>
             <tr>
                 <td style="text-align:left;">Dayane</td>
                 <td style="text-align:right;"><%=comissVendin8 %> + <%=comissSimilar8 %> + <%=comissDayaneS %></td>
                 <td style="text-align:right;"><%=(Double.Parse(comissDayaneS)+Double.Parse(comissVendin8)+Double.Parse(comissSimilar8)) %></td>
 
             </tr>
+            <%} %>
+            <% if ((string)Session["nome"] == "Luana" || (int)Session["key"] >= 7 || (string)Session["nome"] == "Vanessa") { %>
             <tr>
                 <td style="text-align:left;">Luana</td>
                 <td style="text-align:right;"><%=comissVendin8 %> + <%=comissSimilar8 %> + <%=comissLuanaS %></td>
                 <td style="text-align:right;"><%=(Double.Parse(comissLuanaS)+Double.Parse(comissVendin8)+Double.Parse(comissSimilar8)) %></td>
 
             </tr>
+            <%} %>
+            <% if ((string)Session["nome"] == "Danielli" || (int)Session["key"] >= 7 || (string)Session["nome"] == "Vanessa") { %>
             <tr>
                 <td style="text-align:left;">Danielli</td>
                 <td style="text-align:right;"><%=comissVendin8 %> + <%=comissSimilar8 %> + <%=comissDanielliS %></td>
                 <td style="text-align:right;"><%=(Double.Parse(comissDanielliS)+Double.Parse(comissVendin8)+Double.Parse(comissSimilar8)) %></td>
             </tr>
+            <%} %>
+            <% if ((string)Session["nome"] == "Rafaella" || (int)Session["key"] >= 7 || (string)Session["nome"] == "Vanessa") { %>
             <tr>
                 <td style="text-align:left;">Rafaella</td>
                 <td style="text-align:right;"><%=comissVendin8 %>  + <%=comissSimilar8 %> + <%=comissRafaS %></td>
                 <td style="text-align:right;"><%=(Double.Parse(comissRafaS)+Double.Parse(comissVendin8)+Double.Parse(comissSimilar8)) %></td>
 
             </tr>
+             <%} %>
+            <% if ((string)Session["nome"] == "Rosilaine" || (int)Session["key"] >= 7 || (string)Session["nome"] == "Vanessa") { %>
             <tr>
                 <td style="text-align:left;">Rosilaine</td>
                 <td style="text-align:right;"> <%=comissVendin8 %> + <%=comissSimilar8 %> + <%=comissLaineS %></td>
                 <td style="text-align:right;"><%=(Double.Parse(comissLaineS)+Double.Parse(comissVendin8)+Double.Parse(comissSimilar8)) %></td>
             </tr>
+            <%} %>
+            <% if ((string)Session["nome"] == "Luciana" || (int)Session["key"] >= 7 || (string)Session["nome"] == "Vanessa") { %>
             <tr>
                 <td style="text-align:left;">Luciana</td>
                 <td style="text-align:right;"><%=comissVendin8 %> + <%=comissSimilar8 %> + <%=comissLucianaS %></td>
                 <td style="text-align:right;"><%=(Double.Parse(comissLucianaS)+Double.Parse(comissVendin8)+Double.Parse(comissSimilar8)) %></td>
             </tr>
+            <%} %>
+            <% if ((string)Session["nome"] == "Priscila" || (int)Session["key"] >= 7 || (string)Session["nome"] == "Vanessa") { %>
             <tr>
                 <td style="text-align:left;">Priscila</td>
                 <td style="text-align:right;"><%=comissVendin8 %> + <%=comissSimilar8 %> + <%=comissPriscilaS %></td>
                 <td style="text-align:right;"><%=(Double.Parse(comissPriscilaS)+Double.Parse(comissVendin8)+Double.Parse(comissSimilar8)) %></td>
             </tr>
+            <%} %>
 
         </table>
 
@@ -107,15 +122,18 @@
                 <th style="width:100px;text-align:right;">Total (R$)</th>
 
             </tr>
-            
+            <% if ((string)Session["nome"] == "Vanessa" || (int)Session["key"] >= 7) { %>
             <tr>
                 <td style="text-align:left;">Vanessa</td>
                 <td style="text-align:right;"><%=comissVanessaS %></td>
             </tr>
+            <%} %>
+            <% if ((string)Session["nome"] == "Fabiano" || (int)Session["key"] >= 7) { %>
             <tr>
                 <td style="text-align:left;">Fabiano</td>
                 <td style="text-align:right;"><%=comissFabianoS %></td>
             </tr>
+            <%} %>
 
         
         <%--<font color="green"><%=sqlview %></font>--%>

@@ -13,33 +13,39 @@ namespace simireports
     public partial class Index : System.Web.UI.Page
     {
 
-        public string result;
-        public string result2 = "-";
-        public string result3 = "-";
-        public string result4 = "-";
-        public string result5 = "-";
-        public string result6 = "-";
-
-        public string getp = "index";
+       
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
 
-            if ((int)Session["key"] <= 0 || Session["key"] == null)
+            if (Session["key"] == null)
             {
                 Response.Redirect("login.aspx");
             }
-
-
-            //getp = Request.QueryString["p"];
-            //postp = Request.Form["p"];
-
-
-
-
-
+            else
+            {
+                if ((int)Session["key"] <= 0)
+                {
+                    Response.Redirect("login.aspx");
+                }
+            }            
+                
+                    
+            
 
         }
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
