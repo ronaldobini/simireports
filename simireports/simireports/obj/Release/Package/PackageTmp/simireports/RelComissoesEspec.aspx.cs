@@ -194,6 +194,7 @@ namespace simireports.simireports
                 string erros = "erro: " + errs;
             }
 
+            new BancoLogix().fechar(conn);
             return totComiss;
         }
 
@@ -272,6 +273,7 @@ namespace simireports.simireports
                 string erros = "erro: " + errs;
             }
 
+            new BancoLogix().fechar(conn);
             return totComiss;
         }
 

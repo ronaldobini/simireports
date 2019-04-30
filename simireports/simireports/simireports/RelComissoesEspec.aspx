@@ -74,9 +74,9 @@
 
             </tr>
             <%} %>
-            <% if ((string)Session["nome"] == "Danielli" || (int)Session["key"] >= 7 || (string)Session["nome"] == "Vanessa") { %>
+            <% if ((string)Session["nome"] == "Danieli" || (int)Session["key"] >= 7 || (string)Session["nome"] == "Vanessa") { %>
             <tr>
-                <td style="text-align:left;">Danielli</td>
+                <td style="text-align:left;">Danieli</td>
                 <td style="text-align:right;"><%=comissVendin8 %> + <%=comissSimilar8 %> + <%=comissDanielliS %></td>
                 <td style="text-align:right;"><%=(Double.Parse(comissDanielliS)+Double.Parse(comissVendin8)+Double.Parse(comissSimilar8)) %></td>
             </tr>
