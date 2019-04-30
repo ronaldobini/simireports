@@ -23,21 +23,30 @@ namespace simireports
         protected void Page_Load(object sender, EventArgs e)
         {
             //VERIFICACAO DE SESSAO E NIVEL
-            if ((int)Session["key"] <= 0)
+            if (Session["key"] != null)
             {
-                Response.Redirect("login.aspx");
+                if ((int)Session["key"] <= 0)
+                {
+                    Response.Redirect("login.aspx");
+                }
+                else
+                {
+                    //VERFICA NIVEL
+                    if ((int)Session["key"] >= 5 || (string)Session["nome"] == "Dayane")
+                    {
+                        //OK
+                        
+                    }
+                    else
+                    {
+                        Session["erro"] = "Você não tem permissão para acessar este relatório.";
+                        Response.Redirect("Relatorios.aspx");
+                    }
+                }
             }
             else
             {
-                //VERFICA NIVEL
-                if ((int)Session["key"] >= 2)
-                {
-                    //OK
-                }
-                else
-                {                    
-                    Response.Redirect("Relatorios.aspx");
-                }
+                Response.Redirect("login.aspx");
             }
         }
 
@@ -90,6 +99,7 @@ namespace simireports
             //IfxConnection conn2;
             if (reader != null)
             {
+                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel Comissoes", (string)Session["nome"], " ");
                 while (reader.Read())
                 {
                     string codEmpresa = reader.GetString(0);

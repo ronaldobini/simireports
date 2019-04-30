@@ -25,8 +25,10 @@ namespace simireports
         public string sqlview = "";
 
         public Metodos m = new Metodos();
-        public String mesPassado = DateTime.Today.AddMonths(-1).ToString("d");
-        public String hoje = DateTime.Today.ToString("d");
+        //public String mesPassado = DateTime.Today.AddMonths(-1).ToString("d");
+        //public String hoje = DateTime.Today.ToString("d");
+        public String mesPassado = "26/03/2019";
+        public String hoje = "24/04/2019";
         public string represChange = "nao";
         
 
@@ -72,6 +74,8 @@ namespace simireports
                 Session["first"] = 0;
                 //executarRelatorio();
             }
+
+
         }
 
         protected void detalhes_Click(object sender, EventArgs e)
@@ -154,6 +158,7 @@ namespace simireports
                                         "LEFT JOIN docum_pgto dp on d.num_docum = dp.num_docum and d.cod_empresa = dp.cod_empresa " +
                                         "WHERE r.nom_repres like '%" + postRepres + "' " +
                                          datas +
+                                        "AND d.dat_emis > '01/01/2018' " +
                                         "AND ies_pgto_docum like '%" + postSitPgto + "%' " +
                                         "AND cl.nom_cliente like '%" + postCliente + "%' " +
                                         //"AND d.pct_comis_1 = " + postPctComiss + " " +
@@ -169,6 +174,7 @@ namespace simireports
             totComiss = 0.0M;
             if (reader != null && reader.HasRows)
             {
+                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel Comissoes", (string)Session["nome"], postRepres);
                 while (reader.Read())
                 {
                     string codEmpresa = reader.GetString(0);

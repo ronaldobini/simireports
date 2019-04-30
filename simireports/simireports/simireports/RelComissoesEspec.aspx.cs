@@ -1,4 +1,5 @@
 ﻿using IBM.Data.Informix;
+using simireports.simireports.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,8 @@ namespace simireports.simireports
         protected void Page_Load(object sender, EventArgs e)
         {
 
+
+
             try
             {
                 //VERIFICACAO DE SESSAO E NIVEL
@@ -48,10 +51,11 @@ namespace simireports.simireports
                     
                     {
                         //OK PERMANECE NA PAGINA
+                        string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel Comissoes Espec", (string)Session["nome"], " ");
                     }
                     else
                     {
-
+                        Session["erro"] = "Você não tem permissão para acessar este relatório.";
                         Response.Redirect("Relatorios.aspx");
                     }
                 }

@@ -38,24 +38,31 @@ namespace simireports
         protected void Page_Load(object sender, EventArgs e)
         {
             //VERIFICACAO DE SESSAO E NIVEL
-            if ((int)Session["key"] <= 0)
+            if (Session["key"] != null)
             {
-                Response.Redirect("login.aspx");
-            }
-            else
-            {
-                //VERFICA NIVEL
-                if ((int)Session["key"] >= 1)
+                if ((int)Session["key"] <= 0)
                 {
-                    if ((int)Session["key"] >= 2)
-                    {
-                        represChange = "sim";
-                    }
+                    Response.Redirect("login.aspx");
                 }
                 else
                 {
-                    Response.Redirect("index.aspx");
+                    //VERFICA NIVEL
+                    if ((int)Session["key"] >= 1)
+                    {
+                        if ((int)Session["key"] >= 2)
+                        {
+                            represChange = "sim";
+                        }
+                    }
+                    else
+                    {
+                        Response.Redirect("index.aspx");
+                    }
                 }
+            }
+            else
+            {
+                Response.Redirect("login.aspx");
             }
 
 
@@ -66,6 +73,8 @@ namespace simireports
                 Session["first"] = 0;
                 //executarRelatorio();
             }
+
+
         }
 
 
@@ -175,6 +184,7 @@ namespace simireports
 
             if (reader != null && reader.HasRows)
             {
+                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel PedEfetiv CRM", (string)Session["nome"], postRepres);
                 while (reader.Read())
                 {
                     numPed = reader.GetString(3);

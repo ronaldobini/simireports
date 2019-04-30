@@ -44,11 +44,12 @@ namespace simireports
                 if ((int)Session["key"] >= 3)
                 {
                     //OK
+                    
                 }
                 else
                 {
-                    
-                    Response.Redirect("index.aspx");
+                    Session["erro"] = "Você não tem permissão para acessar este relatório.";
+                    Response.Redirect("Relatorios.aspx");
                 }
             }
 
@@ -119,6 +120,7 @@ namespace simireports
             
             if (reader != null && reader.HasRows)
             {
+                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel Devolucoes", (string)Session["nome"], " ");
                 while (reader.Read())
                 {
                     string codEmpresa = reader.GetString(0);

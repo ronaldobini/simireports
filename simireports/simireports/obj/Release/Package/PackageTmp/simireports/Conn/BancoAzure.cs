@@ -69,7 +69,7 @@ using System.Data.SqlClient;
                 SqlCommand command =
                     new SqlCommand(sql, conn);
                 command.ExecuteNonQuery();
-                result = "OK";
+                result = "OK comando sql executado com sussesso";
             }
             catch (Exception e)
             {
@@ -77,21 +77,24 @@ using System.Data.SqlClient;
             }
             return result;
         }
-    public String consultarErros(string sql, SqlConnection conn)
-    {
-        string result = "Sem Erros";
-        SqlDataReader reader = null;
-        try
+
+
+
+        public String consultarErros(string sql, SqlConnection conn)
         {
-            SqlCommand command = new SqlCommand(sql, conn);
-            reader = command.ExecuteReader();
+            string result = "Sem Erros";
+            SqlDataReader reader = null;
+            try
+            {
+                SqlCommand command = new SqlCommand(sql, conn);
+                reader = command.ExecuteReader();
+            }
+            catch (Exception e)
+            {
+                result = "ERRO: " + e;
+            }
+            return result;
         }
-        catch (Exception e)
-        {
-            result = "ERRO: " + e;
-        }
-        return result;
-    }
 
 
 

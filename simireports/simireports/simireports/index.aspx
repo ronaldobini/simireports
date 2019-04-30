@@ -95,9 +95,12 @@
            
     <center>    
     
-    <br /><font color=white><%=Session["nome"] %></font><hr />
+    <br /><font color="silver">Bem vindo <%=Session["nome"] %></font><font color=white></font><hr />
 
-    <br /><br />
+    
+
+    <img src = "img/simiweb1.png" style="width:65%;"/>
+
     <!-- GRAFICO 
     <div id="piechart" style="width: 65%; height: 250px; color:white;"></div>
     <hr /><br />

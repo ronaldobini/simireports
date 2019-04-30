@@ -10,9 +10,11 @@
 <body>
     <form id="formsql" runat="server" action="#" method="post">
         <div>
-            <input type="text" name="sqlExe" id="sqlExe" style="width:560px;"/>
+            <input type="text" name="sqlExe" id="sqlExe" style="width:560px;" runat="server"/>
             <input type="submit" value="Executar" runat="server" onserverclick="exe_Click" />
         </div>
     </form>
+    <br /><br /><br />
+    <font color="green"><%=result %></font>
 </body>
 </html>

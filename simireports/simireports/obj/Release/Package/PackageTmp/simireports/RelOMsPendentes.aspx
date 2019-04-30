@@ -66,13 +66,14 @@
                 <% 
                     foreach (var omsp in omsps)
                     {
-                        %> <tr>
-                    <th style="width: 5%;">Empresa</th>
-                    <th style="width: 10%;">Efetiv</th>
-                    <th style="width: 10%;">Cod Cliente</th>
-                    <th style="width: 20%;">Cliente</th>
-                    <th style="width: 5%;">Pedido</th>
-                    <th style="width: 5%;">Tipo Entrega</th>
+                        %> 
+                    <tr style="background-color: #070a0e; color:white;">
+                        <th style="width: 5%;">Empresa</th>
+                        <th style="width: 10%;">Efetiv</th>
+                        <th style="width: 10%;">Cod Cliente</th>
+                        <th style="width: 20%;">Cliente</th>
+                        <th style="width: 5%;">Pedido</th>
+                        <th style="width: 5%;">Tipo Entrega</th>
                     </tr><%
                              string empresa = omsp.Empresa;
                              DateTime datAltSit = omsp.DatAltSit;
@@ -91,7 +92,7 @@
                                     <td><%= tipoEntrega %></td>
                                 </tr>
                                 <tr>
-                                    <td colspan ="6"><table class="table table-striped table-dark" style="background-color:#3f4142; width:100%; color:white; font-size: 12px;">
+                                    <td colspan ="6"><table class="table table-sm table-dark" style="background-color:#3f4142; width:100%; color:white; font-size: 12px;">
                                         <tbody>
                                             <tr>
                                                 <th style="width: 15%;">Cod Item</th>
@@ -120,6 +121,7 @@
                                             </tr>
                                           <%
                                               }%>
+                                            <tr><td colspan="6" style="background-color: #070a0e; color:white;"></td></tr>
                                         </tbody></table></td>
                                     </tr><%
                                              }

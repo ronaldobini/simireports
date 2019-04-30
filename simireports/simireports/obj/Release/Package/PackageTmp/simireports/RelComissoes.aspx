@@ -57,7 +57,7 @@
 <%--                        <th style="width:100px; text-align:center;">% Comiss</th>
                         <th style="width:100px; text-align:center;">Valor</th>--%>
                         <th style="width:130px;">Representante </th>
-                        <th style="width:100px;">Data Inicio</th>
+                        <th style="width:100px;">Data Inicio <br />  (Min: 2018)</th>
                         <th style="width:120px;">Data Fim</th>
                         <th style="width:100px;">Situação</th>
                         <th style="width:100px;text-align:center;">Detalhes</th>

@@ -95,30 +95,30 @@
             <div id="chart_div" style="width: 65%; height: 300px; color:white;"></div>
             <hr /><br />
             /GRAFICO -->
-
-            <table class="table table-dark" style = "text-align: center; width:50%; color:white; font-size: 14px;">
+            <font color="red"><%=Session["erro"] %></font>
+            <table class="table table-dark" style = "text-align: left; width:50%; color:white; font-size: 14px;">
                 <tr>
                     <th style="width:33%;">Comercial</th>
                     <th style="width:33%;">Fiscal</th>
                     <th style="width:33%;">Administrativo</th>
                 </tr>
                 <tr>
-                    <td><a href="RelComissoes.aspx">001 - Comissões</a></td>
-                    <td><a href="RelDevolucoes.aspx">004 - Devoluções</td>
-                    <td><a href="RelOMsPendentes.aspx">005 - OMs Pendentes</a></td>
+                    <td><a style="color:#399bfc;" href="RelComissoes.aspx">001 - Comissões</a></td>
+                    <td><a style="color:#399bfc;" href="RelDevolucoes.aspx">004 - Devoluções</td>
+                    <td><a style="color:#399bfc;" href="RelOMsPendentes.aspx">005 - OMs Pendentes</a></td>
                 </tr>           
                 <tr>
-                    <td><a href="RelPedidosEfetivados.aspx">002 - Pedidos Efetivados Logix </a></td>
+                    <td><a style="color:#399bfc;" href="RelPedidosEfetivados.aspx">002 - Pedidos Efetivados Logix </a></td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td><a href="RelPedidosEfetivadosCRM.aspx">003 - Pedidos Efetivados CRM</a></td>
+                    <td><a style="color:#399bfc;" href="RelPedidosEfetivadosCRM.aspx">003 - Pedidos Efetivados CRM</a></td>
                     <td></td>
                     <td></td>
                 </tr>
                  <tr>
-                    <td><a href="RelComissoesEspec.aspx">006 - Comissões Especiais</a></td>
+                    <td><a style="color:#399bfc;" href="RelComissoesEspec.aspx">006 - Comissões Especiais</a></td>
                     <td></td>
                     <td><!--<a href="BotEmailsPedCRM.aspx">Email CRM</a>--></td>
                 </tr>
@@ -127,3 +127,6 @@
     </div>
 </body>
 </html>
+
+
+<% Session["erro"] = " "; %>

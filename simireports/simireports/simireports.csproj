@@ -140,6 +140,7 @@
     <Content Include="simireports\img\similogo.png" />
     <Content Include="simireports\img\simisys1.1controle1.35.png" />
     <Content Include="simireports\img\simisyslogo.png" />
+    <Content Include="simireports\img\simiweb1.png" />
     <Content Include="simireports\img\syss.png" />
     <Content Include="simireports\img\trash.png" />
     <Content Include="simireports\img\up.png" />

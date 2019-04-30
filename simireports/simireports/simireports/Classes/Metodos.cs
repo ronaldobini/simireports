@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Web;
 
 namespace simireports.simireports.Classes
@@ -109,5 +111,54 @@ namespace simireports.simireports.Classes
                 return "";
             }
         }
+
+
+
+        public static string pegarIP()
+        {
+            string url = "http://checkip.dyndns.org";
+            System.Net.WebRequest req = System.Net.WebRequest.Create(url);
+            System.Net.WebResponse resp = req.GetResponse();
+            System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
+            string response = sr.ReadToEnd().Trim();
+            string[] a = response.Split(':');
+            string a2 = a[1].Substring(1);
+            string[] a3 = a2.Split('<');
+            string a4 = a3[0];
+            return a4;
+        }
+
+
+
+
+        public static string inserirLog(int idUser, string acao, string obs1, string obs2)
+        {
+            //string ip = pegarIP();
+            //string pc = Dns.GetHostName();
+
+            string ip = "-";
+            string pc = "-";
+
+            string tempo = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"); //  30/04/2019 15:20:00
+
+            SqlConnection conn = new BancoAzure().abrir();
+
+            obs2 = pc + "|" + obs2;
+            
+            string sql = "INSERT INTO sw_log (ip,id_user,tempo,acao,obs1,obs2) VALUES ('"+ip+ "', " + idUser + ", '"+ tempo + "', '" + acao + "', '" + obs1 + "', '" + obs2 + "')";
+
+            string result = new BancoAzure().executar(sql, conn);
+
+            new BancoAzure().fechar(conn);
+            return result;
+        }
+
+
+
+
+
+
+
+
     }
 }

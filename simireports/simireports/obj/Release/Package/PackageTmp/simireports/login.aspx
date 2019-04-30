@@ -45,7 +45,7 @@
                      {
              %>
                     <center><h3 style="color:white;"><%=Session["Nome"] %> entrando...</h3></p></center>
-                    <meta http-equiv="refresh" content="0; URL=Relatorios.aspx" />
+                    <meta http-equiv="refresh" content="0; URL=index.aspx" />
              <%     
                     }
 

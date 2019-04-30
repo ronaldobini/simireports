@@ -76,7 +76,7 @@ namespace simireports.simireports
                         logarMaster("!@#");
 
                 SqlConnection conn = new BancoAzure().abrir();
-                string sql = "SELECT Senha,Nome,Idx,new_cod_repres FROM Usuarios WHERE Nome = '" + loginPost + "' AND Senha = '" + senhaPost + "'";
+                string sql = "SELECT Senha,Nome,Idx,new_cod_repres,userID FROM Usuarios WHERE Nome = '" + loginPost + "' AND Senha = '" + senhaPost + "'";
 
                 SqlDataReader reader = new BancoAzure().consultar(sql, conn);
 
@@ -92,13 +92,17 @@ namespace simireports.simireports
                             string nome = reader.GetString(1);
                             double idx = reader.GetDouble(2);
                             string codRepres = reader.GetString(3);
+                            int idUser = reader.GetInt32(4);
 
                             Session["nome"] = nome;
                             Session["idx"] = idx;
                             Session["codRepres"] = codRepres;
+                            Session["codRepres"] = codRepres;
+                            Session["idd"] = idUser;
 
                             Session["firstJ"] = 1;
                             Session["first"] = 1;
+                            Session["erro"] = " ";
 
                             //DEFINE A KEY DO USUARIO
                             int key = 1;
@@ -112,6 +116,9 @@ namespace simireports.simireports
                             if (nome == "SimiSys") key = 11;
 
                             Session["key"] = key;
+
+                            string resultLog = Metodos.inserirLog(idUser,"Login",nome," ");
+                            
                         }
                         else
                         {
@@ -131,6 +138,8 @@ namespace simireports.simireports
                     erro = "Tentativas excedidas";
                 }
 
+
+                new BancoAzure().fechar(conn);
             }
             catch (Exception err)
             {

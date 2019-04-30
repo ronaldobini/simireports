@@ -58,8 +58,9 @@
                         <th>Representante</th>
                         <th>Pedido</th>
                         <th>Cod. do Item</th>
-                        <th>Data Inicio</th>
+                        <th>Data Inicio <br /> (Min: 2016)</th>
                         <th>Data Fim</th>
+                        <th>Sit.</th>
                     </tr>
                     <tr>
                         <td style="width:120px;">
@@ -79,6 +80,13 @@
                         <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="codItem"/></td>
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datIni"/></td>
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"/></td>
+                        <td style="width:120px;">
+                            <select class="form-control" style="width:120px;" id="openclose" runat="server">
+                                <option value="0">Todas</option>
+                                <option value="1">Abertos</option>
+                                <option value="2">Fechados</option>
+                            </select>
+                        </td>
                     </tr>
                 </table>
                 <br>

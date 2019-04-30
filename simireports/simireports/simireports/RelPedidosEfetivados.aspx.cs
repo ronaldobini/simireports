@@ -25,6 +25,7 @@ namespace simireports
         public string sqlview = "";
         public decimal totGeral = 0.0m;
         public string totGeralS = "0,00";
+        public string postSit = "";
 
 
         public Metodos m = new Metodos();
@@ -37,24 +38,31 @@ namespace simireports
         protected void Page_Load(object sender, EventArgs e)
         {
             //VERIFICACAO DE SESSAO E NIVEL
-            if ((int)Session["key"] <= 0)
+            if (Session["key"] != null)
             {
-                Response.Redirect("login.aspx");
-            }
-            else
-            {
-                //VERFICA NIVEL
-                if ((int)Session["key"] >= 1)
+                if ((int)Session["key"] <= 0)
                 {
-                    if ((int)Session["key"] >= 2)
-                    {
-                        represChange = "sim";
-                    }
+                    Response.Redirect("login.aspx");
                 }
                 else
                 {
-                    Response.Redirect("index.aspx");
+                    //VERFICA NIVEL
+                    if ((int)Session["key"] >= 1)
+                    {
+                        if ((int)Session["key"] >= 2)
+                        {
+                            represChange = "sim";
+                        }
+                    }
+                    else
+                    {
+                        Response.Redirect("index.aspx");
+                    }
                 }
+            }
+            else
+            {
+                Response.Redirect("login.aspx");
             }
                             
 
@@ -65,6 +73,8 @@ namespace simireports
                     Session["first"] = 0;
                     //executarRelatorio();
                 }
+
+
         }
 
         
@@ -104,11 +114,26 @@ namespace simireports
                 postRepres = postRepres.ToUpper();
             }
 
+            postSit = openclose.Value;
+            if (postSit == "0")
+            {
+                postSit = "";
+            }
+            else if (postSit == "1")
+            {
+                postSit = " AND b.qtd_pecas_solic > (b.qtd_pecas_atend+b.qtd_pecas_cancel)";
+            }
+            else if (postSit == "2")
+            {
+                postSit = " AND b.qtd_pecas_solic = (b.qtd_pecas_atend+b.qtd_pecas_cancel)";
+            }
+
             executarRelatorio();
         }
 
         protected void executarRelatorio()
         {
+
             Session["firstJ"] = "0";
             IfxConnection conn = new BancoLogix().abrir();
             string sql = "SELECT a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres, " +
@@ -129,11 +154,15 @@ namespace simireports
 
                                    " AND a.dat_alt_sit <= '" + postDatFim + "'" +
 
+                                   " AND a.dat_alt_sit >= 01/01/2016" +
+
                                    " AND a.cod_empresa LIKE '%" + postUnidade +"%'" +
 
                                    " AND ies_sit_pedido = 'N' AND cod_nat_oper<> 9001" +
 
                                    postNumPed + 
+
+                                   postSit +
 
                                    " AND a.num_pedido = b.num_pedido AND a.cod_empresa = b.cod_empresa AND c.cod_cliente = a.cod_cliente" +
                                    " GROUP BY a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres, b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, b.pre_unit,b.num_sequencia" +
@@ -161,6 +190,7 @@ namespace simireports
 
             if (reader != null && reader.HasRows)
             {
+                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel PedEfetiv", (string)Session["nome"], postRepres);
                 while (reader.Read())
                 {
 
