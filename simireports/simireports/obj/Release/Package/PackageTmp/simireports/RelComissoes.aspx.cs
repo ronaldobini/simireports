@@ -138,7 +138,7 @@ namespace simireports
                 datas = "";
             }
 
-            IfxConnection conn = new BancoLogix().abrir();    
+            IfxConnection conn = new BancoLogix().abrir();
             string sql = "SELECT d.cod_empresa," +
                                         "d.num_docum," +
                                         "d.num_docum_origem," +

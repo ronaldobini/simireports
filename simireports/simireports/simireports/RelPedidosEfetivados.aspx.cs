@@ -136,6 +136,7 @@ namespace simireports
 
             Session["firstJ"] = "0";
             IfxConnection conn = new BancoLogix().abrir();
+            
             string sql = "SELECT a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres, " +
                 " b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, b.pre_unit, b.num_sequencia "+
                                    " FROM pedidos a" +
@@ -190,7 +191,7 @@ namespace simireports
 
             if (reader != null && reader.HasRows)
             {
-                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel PedEfetiv", (string)Session["nome"], postRepres);
+                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel PedEfetiv", (string)Session["nome"], postRepres+" | "+postDatInicio+" | "+postCliente);
                 while (reader.Read())
                 {
 

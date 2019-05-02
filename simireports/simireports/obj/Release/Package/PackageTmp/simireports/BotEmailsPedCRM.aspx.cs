@@ -27,16 +27,11 @@ namespace simireports.simireports
             String ontem;
 
             DayOfWeek dow = DateTime.Now.DayOfWeek;
-            if (dow == DayOfWeek.Monday)
-            {
-                anteontem = DateTime.Today.AddDays(-3).ToString("d");
-                ontem = DateTime.Today.AddDays(-3).ToString("d");
-            }
-            else
-            {
+            
+               
                 anteontem = DateTime.Today.AddDays(-2).ToString("d");
                 ontem = DateTime.Today.AddDays(-1).ToString("d");
-            }
+            
             anteontem = m.configDataHuman2Banco(anteontem);
             ontem = m.configDataHuman2Banco(ontem);
             //Necessario por o nome dos representantes em maiuscula, toUpper nao funciona dentro do for each porque nao pode mudar variavel de iteraçao
@@ -46,7 +41,16 @@ namespace simireports.simireports
                 new RepresEmails("VINICIUS,","vinicius.lima@similar.ind.br"),
                 new RepresEmails("FELIPE,","felipe.thomaz@similar.ind.br"),
 
+                new RepresEmails("MARCOS,","marcos.riter@similar.ind.br"),                
+                new RepresEmails("RAFAEL,","rafael.moraes@similar.ind.br"),
+                new RepresEmails("VOLPI,","rafael.volpi@similar.ind.br"),
+                new RepresEmails("LARSEN,","emerson.larsen@similar.ind.br"),
+                new RepresEmails("GUSTAVO P,","gustavo.brettas@similar.ind.br"),
+                new RepresEmails("EDUARDO,","eduardo.rost@lsbrasil.com.br"),
 
+                new RepresEmails("VENDAINT","vendas@similar.ind.br"),
+                new RepresEmails("","vendas@similar.ind.br"),
+                new RepresEmails("","jorge.isaka@similar.ind.br"),
                 new RepresEmails("","kyung.choi@lsbrasil.com.br"),
                 new RepresEmails("","alberto.riter@similar.ind.br"),
                 new RepresEmails("","ti@similar.ind.br")
@@ -69,6 +73,7 @@ namespace simireports.simireports
                 String corpoEmail = "";
 
                 SqlConnection conn = new BancoAzure().abrir();
+
                 string sql = "SELECT a.Unidade, a.dat_pedido, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante," +
 
                                " b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.Seq, b.Comis " +
@@ -317,7 +322,7 @@ namespace simireports.simireports
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
                 client.Credentials = new System.Net.NetworkCredential("ti@similar.ind.br", "Simi1717");
-                MailMessage mm = new MailMessage("ti@similar.ind.br", re.email, "Rel. Pedidos Ontem - "+re.nome, corpoEmail);
+                MailMessage mm = new MailMessage("ti@similar.ind.br", re.email, "SimiWeb - Pedidos Ontem - "+re.nome, corpoEmail);
                 mm.BodyEncoding = UTF8Encoding.UTF8;
                 mm.IsBodyHtml = true;
                 mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;

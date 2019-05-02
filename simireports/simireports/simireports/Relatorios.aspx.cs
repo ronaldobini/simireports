@@ -28,7 +28,7 @@ namespace simireports.simireports
                 Response.Redirect("login.aspx");
             }
 
-            string resultLog = Metodos.inserirLog((int)Session["idd"], "Entrou Page Relatorios", (string)Session["nome"], " ");
+            
 
         }
     }
