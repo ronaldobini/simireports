@@ -27,8 +27,8 @@ namespace simireports
         public Metodos m = new Metodos();
         //public String mesPassado = DateTime.Today.AddMonths(-1).ToString("d");
         //public String hoje = DateTime.Today.ToString("d");
-        public String mesPassado = "26/03/2019";
-        public String hoje = "24/04/2019";
+        public String mesPassado = "25/04/2019";
+        public String hoje = "22/05/2019";
         public string represChange = "nao";
         
 
@@ -151,7 +151,8 @@ namespace simireports
                                         "d.dat_vencto_s_desc," +
                                         "dp.dat_pgto," +
                                         "d.ies_pgto_docum, " +
-                                        "d.cod_repres_1 " +
+                                        "d.cod_repres_1, " +
+                                        "d.val_bruto " +
                                         "FROM docum d " +
                                         "JOIN representante r on r.cod_repres = d.cod_repres_1 " +
                                         "JOIN clientes cl on cl.cod_cliente = d.cod_cliente " +
@@ -183,15 +184,28 @@ namespace simireports
                     string numPedido = reader.GetString(3);
                     string nomCliente = reader.GetString(4);
 
-                    string valBrutoS = reader.GetString(5);
-                    if (valBrutoS.Contains("."))
-                        valBrutoS = valBrutoS.Replace(".", ",");
+                    Decimal valPago = 0.0m;
+
+                    if (postSitPgto == "T")
+                    {
+                        string valPagoS = reader.GetString(5);
+                        if (valPagoS.Contains("."))
+                            valPagoS = valPagoS.Replace(".", ",");
+                        valPago = Decimal.Parse(valPagoS);
+                    }
+                    else
+                    {
+                        string valBrutoS = reader.GetString(13);
+                        if (valBrutoS.Contains("."))
+                            valBrutoS = valBrutoS.Replace(".", ",");
+                        valPago = Decimal.Parse(valBrutoS);
+                    }
 
                     string pctComissaoS = reader.GetString(6);
                     if (pctComissaoS.Contains("."))
                         pctComissaoS = pctComissaoS.Replace(".", ",");
 
-                    Decimal valBruto = Decimal.Parse(valBrutoS);
+                    
                     Decimal pctComissao;
                     Decimal comiss;
                     
@@ -200,7 +214,7 @@ namespace simireports
                         pctComissao = Decimal.Parse(pctComissaoS);
                         if (pctComissao == 0.145M) pctComissao = 0.0M;
                         if (pctComissao == 0.14M) pctComissao = 0.0M;
-                        comiss = valBruto * (pctComissao / 100);
+                        comiss = valPago * (pctComissao / 100);
                     }
                     else
                     {
@@ -223,7 +237,9 @@ namespace simireports
                     char iesPgtoDocum = reader.GetChar(11);
                     string codRepres = reader.GetString(12);
 
-                    Comissao comissao = new Comissao(codEmpresa, numDocum, numDocumOrigem, numPedido, nomCliente, valBruto, pctComissao, comiss, nomRepres, datEmiss, datVcto, datPgto, iesPgtoDocum, codRepres);
+                    
+
+                    Comissao comissao = new Comissao(codEmpresa, numDocum, numDocumOrigem, numPedido, nomCliente, valPago, pctComissao, comiss, nomRepres, datEmiss, datVcto, datPgto, iesPgtoDocum, codRepres);
                     comissoes.Add(comissao);
 
                 }

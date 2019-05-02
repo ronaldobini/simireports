@@ -42,7 +42,7 @@
 
     <div id="resultados">
         <br /><br /><br />
-        26/03 - 24/04
+        <font color="white">24/04 - 22/05</font>
         <table class="table table-striped table-dark" style = "max-width:25%; color:white; font-size: 12px;">
             <tr>
                 <th style="width:80px; text-align:left;">Repres.</th>
