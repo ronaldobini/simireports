@@ -32,7 +32,7 @@ namespace simireports
                 else
                 {
                     //VERFICA NIVEL
-                    if ((int)Session["key"] >= 5 || (string)Session["nome"] == "Dayane")
+                    if ((int)Session["key"] >= 5 || (string)Session["nome"] == "Dayane" || (string)Session["nome"] == "Karolline")
                     {
                         //OK
                         

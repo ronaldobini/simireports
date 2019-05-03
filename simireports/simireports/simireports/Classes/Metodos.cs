@@ -142,13 +142,13 @@ namespace simireports.simireports.Classes
             string tempo = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"); //  30/04/2019 15:20:00
 
             SqlConnection conn = new BancoAzure().abrir();
-
+            string result = "-";
             obs2 = pc + "|" + obs2;
-            
-            string sql = "INSERT INTO sw_log (ip,id_user,tempo,acao,obs1,obs2) VALUES ('"+ip+ "', " + idUser + ", '"+ tempo + "', '" + acao + "', '" + obs1 + "', '" + obs2 + "')";
-
-            string result = new BancoAzure().executar(sql, conn);
-
+            if (idUser != 58)
+            {
+                string sql = "INSERT INTO sw_log (ip,id_user,tempo,acao,obs1,obs2) VALUES ('" + ip + "', " + idUser + ", '" + tempo + "', '" + acao + "', '" + obs1 + "', '" + obs2 + "')";
+                result = new BancoAzure().executar(sql, conn);
+            }
             new BancoAzure().fechar(conn);
             return result;
         }

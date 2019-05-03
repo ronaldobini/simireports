@@ -13,7 +13,7 @@ namespace simireports.simireports
     public partial class WebForm1 : System.Web.UI.Page
     {
         // VERSAO
-        public static string swver = "v1.0.3";
+        public static string swver = "v1.0.6";
         //
         private string loginPost = "-";
         public string senhaPost = "-";
@@ -117,7 +117,7 @@ namespace simireports.simireports
 
                             Session["key"] = key;
 
-                            string resultLog = Metodos.inserirLog(idUser,"Login",nome," ");
+                            string resultLog = Metodos.inserirLog(idUser,"Login",nome,""+swver);
                             
                         }
                         else

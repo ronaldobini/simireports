@@ -27,8 +27,8 @@
                         <td style="width:150px;text-align:center;">
                     Empresa
                             </td>
-                        <td style="width:150px;text-align:center;">
-                    Tipo
+                        <td style="width:200px;text-align:center;">
+                    Tipo de Entrega
                             </td>
 
                         </tr><tr>
@@ -110,14 +110,19 @@
                                                          string qtdAtend = item.QtdAtend;
                                                          string nomeItem = item.NomeItem;
                                                          string przEntrega = item.PrzEntrega;
+                                                         string cor = "#fff";
+                                                         if(Double.Parse(qtdSolic) == (Double.Parse(qtdAtend) + Double.Parse(qtdCancel)))
+                                                         {
+                                                             cor = "#666";
+                                                         }
                                           %>
                                             <tr>
-                                                <td><%= codItem %></td>
-                                                <td><%= qtdSolic %></td>
-                                                <td><%= qtdCancel %></td>
-                                                <td><%= qtdAtend %></td>
-                                                <td><%= nomeItem %></td>
-                                                <td><%= przEntrega %></td>
+                                                <td style="color:<%= cor %>;"><%= codItem %></td>
+                                                <td style="color:<%= cor %>;"><%= qtdSolic %></td>
+                                                <td style="color:<%= cor %>;"><%= qtdCancel %></td>
+                                                <td style="color:<%= cor %>;"><%= qtdAtend %></td>
+                                                <td style="color:<%= cor %>;"><%= nomeItem %></td>
+                                                <td style="color:<%= cor %>;"><%= przEntrega %></td>
                                             </tr>
                                           <%
                                               }%>
