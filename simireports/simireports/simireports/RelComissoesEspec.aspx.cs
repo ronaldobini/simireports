@@ -38,81 +38,87 @@ namespace simireports.simireports
 
             try
             {
-                //VERIFICACAO DE SESSAO E NIVEL
-                if ((int)Session["key"] <= 0)
+                if (Session["key"] != null)
                 {
-                    Response.Redirect("login.aspx");
-                }
-                else
-                {
-                    //VERFICA NIVEL
-                    string postRepres = (string)Session["nome"];
-                    if ((int)Session["key"] >= 7 || postRepres == "Karolline" || postRepres == "Dayane" || postRepres == "Luana" || postRepres == "Danieli" || postRepres == "Luciana" || postRepres == "Priscila" || postRepres == "Rafaella" || postRepres == "Rosilaine" || postRepres == "Vanessa")
-                    
+                    //VERIFICACAO DE SESSAO E NIVEL
+                    if ((int)Session["key"] <= 0)
                     {
-                        //OK PERMANECE NA PAGINA
-                        string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel Comissoes Espec", (string)Session["nome"], " ");
+                        Response.Redirect("login.aspx");
                     }
                     else
                     {
-                        Session["erro"] = "Você não tem permissão para acessar este relatório.";
-                        Response.Redirect("Relatorios.aspx");
+                        //VERFICA NIVEL
+                        string postRepres = (string)Session["nome"];
+                        if ((int)Session["key"] >= 7 || postRepres == "Karolline" || postRepres == "Dayane" || postRepres == "Luana" || postRepres == "Danieli" || postRepres == "Luciana" || postRepres == "Priscila" || postRepres == "Rafaella" || postRepres == "Rosilaine" || postRepres == "Vanessa")
+
+                        {
+                            //OK PERMANECE NA PAGINA
+                            string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel Comissoes Espec", (string)Session["nome"], " ");
+                        }
+                        else
+                        {
+                            Session["erro"] = "Você não tem permissão para acessar este relatório.";
+                            Response.Redirect("Relatorios.aspx");
+                        }
                     }
+
+                    double totSimilar = totComissRepresNew("SIMILAR", data1, data2, "");
+                    double similar8 = totSimilar / 8;
+                    comissSimilar8 = Math.Round(similar8, 2).ToString();
+
+                    double totVendin = totComissRepresNew("VENDAINT", data1, data2, "");
+                    double vendin8 = totVendin / 8;
+                    comissVendin8 = Math.Round(vendin8, 2).ToString();
+
+
+                    double comissKarol = (totComissRepresNew("RAFAEL", data1, data2, "") +
+                                         totComissRepresNew("VOLPI", data1, data2, "") +
+                                         totComissRepresNew("AGOSTINI", data1, data2, "") +
+                                         totComissRepresNew("THOME", data1, data2, "")) / 10;
+                    comissKarolS = Math.Round(comissKarol, 2).ToString();
+
+                    double comissLuana = (totComissRepresNew("VANESSA", data1, data2, "") +
+                                         totComissRepresNew("LARSEN", data1, data2, "")) / 10;
+                    comissLuanaS = Math.Round(comissLuana, 2).ToString();
+
+                    double comissDayane = (totComissRepresNew("VINICIUS", data1, data2, "")) / 10;
+                    comissDayaneS = Math.Round(comissDayane, 2).ToString();
+
+                    double comissDanielli = (totComissRepresNew("ALEX", data1, data2, "") +
+                                             totComissRepresNew("FELIPE", data1, data2, "")) / 10;
+                    comissDanielliS = Math.Round(comissDanielli, 2).ToString();
+
+                    double comissLuciana = (totComissRepresNew("FABIANO", data1, data2, "") +
+                                         totComissRepresNew("GUSTAVO P", data1, data2, "")) / 10;
+                    comissLucianaS = Math.Round(comissLuciana, 2).ToString();
+
+                    double comissPriscila = (totComissRepresNew("MARCELO", data1, data2, "") +
+                                         totComissRepresNew("EDUARDO", data1, data2, "")) / 10;
+                    comissPriscilaS = Math.Round(comissPriscila, 2).ToString();
+
+                    comissRafaS = "0,00";
+                    comissLaineS = "0,00";
+
+
+                    double comissVanessa = (totComissRepres("VANESSA", data1, data2, "") +
+                                            totComissRepres("FELIPE", data1, data2, "") +
+                                            totComissRepres("VINICIUS", data1, data2, "") +
+                                            totComissRepres("ALEX", data1, data2, "") +
+                                            totComissRepres("RAFAEL", data1, data2, "")) * 0.15;
+                    comissVanessaS = Math.Round(comissVanessa, 2).ToString();
+
+                    double comissFabiano = (totComissRepres("FABIANO", data1, data2, "") +
+                                            totComissRepres("GUSTAVO P", data1, data2, "") +
+                                            totComissRepres("VOLPI", data1, data2, "") +
+                                            totComissRepres("THOME", data1, data2, "") +
+                                            totComissRepres("AGOSTINI", data1, data2, "")) * 0.15;
+                    comissFabianoS = Math.Round(comissFabiano, 2).ToString();
+
                 }
-
-                double totSimilar = totComissRepresNew("SIMILAR", data1, data2, "");
-                double similar8 = totSimilar / 8;
-                comissSimilar8 = Math.Round(similar8, 2).ToString();
-
-                double totVendin = totComissRepresNew("VENDAINT", data1, data2, "");
-                double vendin8 = totVendin / 8;
-                comissVendin8 = Math.Round(vendin8,2).ToString();
-                
-
-                double comissKarol = (totComissRepresNew("RAFAEL", data1, data2, "") +
-                                     totComissRepresNew("VOLPI", data1, data2, "") +
-                                     totComissRepresNew("AGOSTINI", data1, data2, "") +
-                                     totComissRepresNew("THOME", data1, data2, "")) / 10;
-                comissKarolS = Math.Round(comissKarol,2).ToString();
-
-                double comissLuana = (totComissRepresNew("VANESSA", data1, data2, "") +
-                                     totComissRepresNew("LARSEN", data1, data2, "")) / 10;
-                comissLuanaS = Math.Round(comissLuana,2).ToString();
-
-                double comissDayane = (totComissRepresNew("VINICIUS", data1, data2, "")) / 10;
-                comissDayaneS = Math.Round(comissDayane,2).ToString();
-
-                double comissDanielli = (totComissRepresNew("ALEX", data1, data2, "")+
-                                         totComissRepresNew("FELIPE", data1, data2, "")) / 10;
-                comissDanielliS = Math.Round(comissDanielli,2).ToString();
-
-                double comissLuciana = (totComissRepresNew("FABIANO", data1, data2, "") +
-                                     totComissRepresNew("GUSTAVO P", data1, data2, "")) / 10;
-                comissLucianaS = Math.Round(comissLuciana,2).ToString();
-
-                double comissPriscila = (totComissRepresNew("MARCELO", data1, data2, "") +
-                                     totComissRepresNew("EDUARDO", data1, data2, "")) / 10;
-                comissPriscilaS = Math.Round(comissPriscila,2).ToString();
-
-                comissRafaS = "0,00";
-                comissLaineS = "0,00";
-
-
-                double comissVanessa = (totComissRepres("VANESSA", data1, data2, "") +
-                                        totComissRepres("FELIPE", data1, data2, "") +
-                                        totComissRepres("VINICIUS", data1, data2, "") +
-                                        totComissRepres("ALEX", data1, data2, "") +
-                                        totComissRepres("RAFAEL", data1, data2, "")) * 0.15;
-                comissVanessaS = Math.Round(comissVanessa, 2).ToString();
-
-                double comissFabiano = (totComissRepres("FABIANO", data1, data2, "") +
-                                        totComissRepres("GUSTAVO P", data1, data2, "") +
-                                        totComissRepres("VOLPI", data1, data2, "") +
-                                        totComissRepres("THOME", data1, data2, "") +
-                                        totComissRepres("AGOSTINI", data1, data2, "")) * 0.15;
-                comissFabianoS = Math.Round(comissFabiano, 2).ToString();
-
-
+                else
+                {
+                    Response.Redirect("login.aspx");
+                }
 
             }
             catch (Exception ex)

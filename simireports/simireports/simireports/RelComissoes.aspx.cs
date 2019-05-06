@@ -12,7 +12,7 @@ namespace simireports
 {
     public partial class PageComissoes : System.Web.UI.Page
     {
-                
+
         public string postDatInicio = "";
         public string postDatFim = "";
         public string postCliente = "";
@@ -30,7 +30,7 @@ namespace simireports
         public String mesPassado = "25/04/2019";
         public String hoje = "22/05/2019";
         public string represChange = "nao";
-        
+
 
 
         public static Decimal totComiss = 0.0M;
@@ -39,48 +39,54 @@ namespace simireports
 
 
         public List<Comissao> comissoes = new List<Comissao> { };
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            //VERIFICACAO DE SESSAO E NIVEL
-            if ((int)Session["key"] <= 0)
+            if (Session["key"]!=null)
             {
-                Response.Redirect("login.aspx");
+                //VERIFICACAO DE SESSAO E NIVEL
+                if ((int)Session["key"] <= 0)
+                {
+                    Response.Redirect("login.aspx");
+                }
+                else
+                {
+                    //VERFICA NIVEL
+                    if ((int)Session["key"] >= 1)
+                    {
+                        if ((int)Session["key"] >= 5)
+                        {
+                            represChange = "sim";
+                        }
+                    }
+                    else
+                    {
+                        erro = "Você não tem permissão para esta pagina";
+                        Response.Redirect("index.aspx");
+                    }
+                }
+
+
+                //first execution
+                if ((int)Session["first"] == 1)
+                {
+                    postRepres = (string)Session["nome"];
+                    postRepres = postRepres.ToUpper();
+                    Session["first"] = 0;
+                    //executarRelatorio();
+                }
             }
             else
             {
-                //VERFICA NIVEL
-                if ((int)Session["key"] >= 1)
-                {
-                    if ((int)Session["key"] >= 5)
-                    {
-                        represChange = "sim";
-                    }
-                }                
-                else
-                {
-                    erro = "Você não tem permissão para esta pagina";
-                    Response.Redirect("index.aspx");
-                }
-            }
 
-            
-            //first execution
-            if ((int)Session["first"] == 1)
-            {
-                postRepres = (string)Session["nome"];
-                postRepres = postRepres.ToUpper();
-                Session["first"] = 0;
-                //executarRelatorio();
+                Response.Redirect("login.aspx");
             }
-
 
         }
 
         protected void detalhes_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void filtrarComiss_Click(object sender, EventArgs e)
@@ -96,7 +102,7 @@ namespace simireports
 
             postDatInicio = datInicio.Value;
             if (postDatInicio == "") postDatInicio = mesPassado;
-            
+
             postDatFim = datFim.Value;
             if (postDatFim == "") postDatFim = hoje;
 
@@ -112,7 +118,7 @@ namespace simireports
                 postRepres = postRepres.ToUpper();
 
             }
-            
+
             postCliente = cliente.Value.ToUpper();
             postUnidade = unidade.Value;
 
@@ -120,7 +126,7 @@ namespace simireports
             postSitPgto = sitPgto.Value.ToUpper();
             executarRelatorio();
         }
-        
+
         protected void executarRelatorio()
         {
             Session["firstJ"] = "0";
@@ -205,10 +211,10 @@ namespace simireports
                     if (pctComissaoS.Contains("."))
                         pctComissaoS = pctComissaoS.Replace(".", ",");
 
-                    
+
                     Decimal pctComissao;
                     Decimal comiss;
-                    
+
                     if (!pctComissaoS.Equals(""))
                     {
                         pctComissao = Decimal.Parse(pctComissaoS);
@@ -237,9 +243,9 @@ namespace simireports
                     char iesPgtoDocum = reader.GetChar(11);
                     string codRepres = reader.GetString(12);
 
-                    
 
-                    Comissao comissao = new Comissao(codEmpresa, numDocum, numDocumOrigem, numPedido, nomCliente, valPago, pctComissao, comiss, nomRepres, datEmiss, datVcto, datPgto, iesPgtoDocum, codRepres);
+
+                    Comissao comissao = new Comissao(codEmpresa, numDocum, numDocumOrigem, numPedido, nomCliente, valPago, pctComissao, Decimal.Round(comiss,3), nomRepres, datEmiss, datVcto, datPgto, iesPgtoDocum, codRepres);
                     comissoes.Add(comissao);
 
                 }
@@ -258,18 +264,18 @@ namespace simireports
                         comissoes.Add(comissao);
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     erro = "---" + ex;
                     Comissao comissao = new Comissao("NULL", erro, "-", "-", "-", 0, 0, 0, "-", new DateTime(), new DateTime(), new DateTime(), 'T', "-");
                     comissoes.Add(comissao);
                 }
-                
+
             }
 
             new BancoLogix().fechar(conn);
 
         }
-        
+
     }
 }

@@ -33,24 +33,31 @@ namespace simireports
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //VERIFICACAO DE SESSAO E NIVEL
-            if ((int)Session["key"] <= 0)
+            if (Session["key"] != null)
             {
-                Response.Redirect("login.aspx");
-            }
-            else
-            {
-                //VERFICA NIVEL
-                if ((int)Session["key"] >= 3)
+                //VERIFICACAO DE SESSAO E NIVEL
+                if ((int)Session["key"] <= 0)
                 {
-                    //OK
-                    
+                    Response.Redirect("login.aspx");
                 }
                 else
                 {
-                    Session["erro"] = "Você não tem permissão para acessar este relatório.";
-                    Response.Redirect("Relatorios.aspx");
+                    //VERFICA NIVEL
+                    if ((int)Session["key"] >= 3)
+                    {
+                        //OK
+
+                    }
+                    else
+                    {
+                        Session["erro"] = "Você não tem permissão para acessar este relatório.";
+                        Response.Redirect("Relatorios.aspx");
+                    }
                 }
+            }
+            else
+            {
+                Response.Redirect("login.aspx");
             }
 
             if (first == 1)

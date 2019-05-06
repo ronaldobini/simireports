@@ -183,7 +183,7 @@ namespace simireports.simireports
                         Double comiss = reader.GetDouble(15);
                         //if (comiss == 0.145) comiss = 0.0;
                         comiss *= 100;
-                        item = new Item(qtdSolic.ToString(), qtdCancel.ToString(), qtdAtend.ToString(), nomeItem, przEntregaS, codItem, preUnit, Decimal.Round((((Decimal)desconto) * 100m)),(Decimal)comiss);
+                        item = new Item(qtdSolic.ToString(), qtdCancel.ToString(), qtdAtend.ToString(), nomeItem, przEntregaS, codItem, preUnit, Decimal.Round((((Decimal)desconto) * 100m)), Decimal.Round((Decimal)comiss,3));
 
                     }
 

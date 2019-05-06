@@ -12,24 +12,31 @@
         //bloqueia campo repres
         //VERIFICACAO DE SESSAO E NIVEL
         string senhaNivel = "";
-        if ((int)Session["key"] <= 0)
+        if (Session["key"] != null)
         {
-            Response.Redirect("login.aspx");
+            if ((int)Session["key"] <= 0)
+            {
+                Response.Redirect("login.aspx");
+            }
+            else
+            {
+                //VERFICA NIVEL
+                if ((int)Session["key"] < 5)
+                {
+                    Session["erro"] = "Você não tem permissão para acessar esta função.";
+                    Response.Redirect("index.aspx");
+                }
+            }
         }
         else
         {
-            //VERFICA NIVEL
-            if ((int)Session["key"] < 5)
-            {
-                Session["erro"] = "Você não tem permissão para acessar esta função.";
-                Response.Redirect("Relatorios.aspx");
-            }
+            Response.Redirect("login.aspx");
         }
     %>
 </head>
 <body style="background-color: #222;" onload="onload();">
     <div id="logo" style="margin-left: 20px; float: left;">
-        <a title="Voltar ao Inicio" href=" Relatorios.aspx">
+        <a title="Voltar ao Inicio" href=" index.aspx">
             <img style="width: 50px;" src="img/syss.png" /></a>
     </div>
     <center>
