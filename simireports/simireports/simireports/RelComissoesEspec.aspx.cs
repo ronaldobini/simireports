@@ -158,8 +158,6 @@ namespace simireports.simireports
                 {
                     while (reader.Read())
                     {
-
-
                         string pctComissaoS = reader.GetString(2);
                         if (pctComissaoS.Contains("."))
                             pctComissaoS = pctComissaoS.Replace(".", ",");

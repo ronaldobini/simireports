@@ -108,10 +108,10 @@ namespace simireports.simireports
                             int key = 1;
                             if (idx <= 25) key = 2;
                             if (idx <= 24) key = 3;
-                            if (idx <= 20) key = 5;
+                            if (idx <= 20) key = 5; // senha 2.0
 
-                            if (idx <= 15) key = 7;
-                            if (idx <= 10) key = 8;
+                            if (idx <= 15) key = 7; // senha 1.5
+                            if (idx <= 10) key = 8; // senha 1.0
 
                             if (nome == "SimiSys") key = 11;
 
