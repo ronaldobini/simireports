@@ -13,7 +13,7 @@ namespace simireports.simireports
     public partial class WebForm1 : System.Web.UI.Page
     {
         // VERSAO
-        public static string swver = "v1.0.6";
+        public static string swver = "v1.0.7";
         //
         private string loginPost = "-";
         public string senhaPost = "-";
@@ -108,10 +108,10 @@ namespace simireports.simireports
                             int key = 1;
                             if (idx <= 25) key = 2;
                             if (idx <= 24) key = 3;
-                            if (idx <= 20) key = 5;
+                            if (idx <= 20) key = 5; // senha 2.0
 
-                            if (idx <= 15) key = 7;
-                            if (idx <= 10) key = 8;
+                            if (idx <= 15) key = 7; // senha 1.5
+                            if (idx <= 10) key = 8; // senha 1.0
 
                             if (nome == "SimiSys") key = 11;
 

@@ -159,7 +159,7 @@ namespace simireports
 
                                    " AND a.cod_empresa LIKE '%" + postUnidade +"%'" +
 
-                                   " AND ies_sit_pedido = 'N' AND cod_nat_oper<> 9001" +
+                                   " AND ies_sit_pedido = 'N' " + // AND cod_nat_oper<> 9001
 
                                    postNumPed + 
 

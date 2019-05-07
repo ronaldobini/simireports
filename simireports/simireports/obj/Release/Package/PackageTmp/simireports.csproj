@@ -91,6 +91,7 @@
     <Content Include="simireports\construcao.aspx" />
     <Content Include="simireports\css\design.css" />
     <Content Include="simireports\erro.html" />
+    <Content Include="simireports\img\key.png" />
     <Content Include="simireports\img\simireportslogo.png" />
     <Content Include="simireports\img\simisyslogo.psd" />
     <None Include="Web.Debug.config">
@@ -147,6 +148,7 @@
     <Content Include="simireports\img\wait.png" />
     <Content Include="simireports\img\x.png" />
     <Content Include="simireports\Logout.aspx" />
+    <Content Include="simireports\PageSenhas.aspx" />
     <Content Include="simireports\RelComissoes.aspx" />
     <Content Include="simireports\BotEmailsPedCRM.aspx" />
     <Content Include="simireports\RelComissoesEspec.aspx" />
@@ -200,6 +202,13 @@
     </Compile>
     <Compile Include="simireports\Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simireports\PageSenhas.aspx.cs">
+      <DependentUpon>PageSenhas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\PageSenhas.aspx.designer.cs">
+      <DependentUpon>PageSenhas.aspx</DependentUpon>
     </Compile>
     <Compile Include="simireports\RelComissoes.aspx.cs">
       <DependentUpon>RelComissoes.aspx</DependentUpon>

@@ -95,10 +95,11 @@
            
     <center>    
     
-    <br /><font color="silver">Bem vindo <%=Session["nome"] %>  
-        <% if ((int)Session["key"] >= 5) {
+    <br /><font color="silver">Bem vindo <%=Session["nome"] %> 
+        
+        <%--<% if ((int)Session["key"] >= 5) {
                 %> <a href="PageSenhas.aspx"> <img src = "img/key.png" style="width:30px;"/></a> <%
-            }%>
+            }%>--%>
 
           </font><font color=white></font><hr />
 

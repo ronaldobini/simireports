@@ -131,7 +131,7 @@ namespace simireports
             postDatInicio = m.configDataHuman2Banco(postDatInicio);
             string sql = "SELECT a.Unidade, a.dat_pedido, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante," +
 
-                               " b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.LgxPedNum, b.Seq" +
+                               " b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.LgxPedNum, b.Seq, b.Comis " +
 
                                         " FROM PrePEDIDOS a" +
 
@@ -163,7 +163,7 @@ namespace simireports
 
                                         postNumPed +
 
-                                        " GROUP BY a.Unidade, a.dat_pedido, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante,b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.LgxPedNum, b.Seq " +
+                                        " GROUP BY a.Unidade, a.dat_pedido, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante,b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.LgxPedNum, b.Seq, b.Comis  " +
                                         " ORDER BY a.dat_pedido desc, a.CodPed, b.Seq";
 
             sqlview = sql; //ativa a exibicao do sql na tela
@@ -257,7 +257,8 @@ namespace simireports
                     {
                         pedLogix = reader.GetInt32(14);
                     }
-                    
+
+                    Decimal comiss;
                     item = new Item(qtdSolic.ToString(), qtdCancel.ToString(), qtdAtend.ToString(), nomeItem, przEntregaS, codItem, preUnit, Decimal.Round((((Decimal)desconto)*100m)),pedLogix);
 
                     //    itens.Add(item);
