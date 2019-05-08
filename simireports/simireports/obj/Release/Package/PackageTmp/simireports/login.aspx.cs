@@ -13,7 +13,7 @@ namespace simireports.simireports
     public partial class WebForm1 : System.Web.UI.Page
     {
         // VERSAO
-        public static string swver = "v1.0.8";
+        public static string swver = "v1.0.9";
         //
         private string loginPost = "-";
         public string senhaPost = "-";
@@ -100,31 +100,38 @@ namespace simireports.simireports
                                 block = reader.GetInt32(5);
                             }
 
-                            Session["nome"] = nome;
-                            Session["idx"] = idx;
-                            Session["codRepres"] = codRepres;
-                            Session["codRepres"] = codRepres;
-                            Session["idd"] = idUser;
+                            if (block == 0)
+                            {
+                                Session["nome"] = nome;
+                                Session["idx"] = idx;
+                                Session["codRepres"] = codRepres;
+                                Session["codRepres"] = codRepres;
+                                Session["idd"] = idUser;
 
-                            Session["firstJ"] = 1;
-                            Session["first"] = 1;
-                            Session["erro"] = " ";
+                                Session["firstJ"] = 1;
+                                Session["first"] = 1;
+                                Session["erro"] = " ";
 
-                            //DEFINE A KEY DO USUARIO
-                            int key = 1;
-                            if (idx <= 25) key = 2;
-                            if (idx <= 24) key = 3;
-                            if (idx <= 20) key = 5; // senha 2.0
+                                //DEFINE A KEY DO USUARIO
+                                int key = 1;
+                                if (idx <= 25) key = 2;
+                                if (idx <= 24) key = 3;
+                                if (idx <= 20) key = 5; // senha 2.0
 
-                            if (idx <= 15) key = 7; // senha 1.5
-                            if (idx <= 10) key = 8; // senha 1.0
+                                if (idx <= 15) key = 7; // senha 1.5
+                                if (idx <= 10) key = 8; // senha 1.0
 
-                            if (nome == "SimiSys") key = 11;
+                                if (nome == "SimiSys") key = 11;
 
-                            Session["key"] = key;
+                                Session["key"] = key;
 
-                            string resultLog = Metodos.inserirLog(idUser,"Login",nome,""+swver);
-                            Metodos.linkarTabelasUser(idUser, key);
+                                string resultLog = Metodos.inserirLog(idUser, "Login", nome, "" + swver);
+                                Metodos.linkarTabelasUser(idUser, key);
+                            }
+                            else
+                            {
+                                erro = "Não foi possivel efetuar o login. Código: b1";
+                            }
                             
                         }
                         else

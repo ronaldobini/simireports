@@ -308,12 +308,13 @@ namespace simireports.simireports.Classes
                 if (reader.HasRows)
                 {
                     int idsw = reader.GetInt32(0);
-                    new BancoAzure().executar("UPDATE sw_usuarios SET ult_login = '" + tempo + "' where id = " + idsw, conn2);
+                    new BancoAzure().executar("UPDATE sw_usuarios SET ult_login = '" + tempo + "', nivel = "+nivel+" where id = " + idsw, conn2);
                 }
                 else
                 {
                     string vazio = "-";
-                    string randSenha = senhaAleatoria();
+                    //string randSenha = senhaAleatoria();
+                    string randSenha = " ";
                     string result = new BancoAzure().executar("INSERT INTO sw_usuarios (id_crm, funcao, grupo, nivel, ult_login, erros_senha, gerenciados, senha_rand, avisos, block) " +
                                                                 "VALUES (" + idUser + ",'" + vazio + "','" + vazio + "'," + nivel + ",'" + tempo + "', 0" +
                                                                 ",'" + vazio + "','" + randSenha + "','" + vazio + "',0)", conn2);

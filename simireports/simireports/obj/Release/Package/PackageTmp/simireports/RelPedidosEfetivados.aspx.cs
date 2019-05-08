@@ -25,7 +25,12 @@ namespace simireports
         public string sqlview = "";
         public decimal totGeral = 0.0m;
         public string totGeralS = "0,00";
+        public decimal totGeralP = 0.0m;
+        public string totGeralPS = "0,00";
+        public decimal totGeralA = 0.0m;
+        public string totGeralAS = "0,00";
         public string postSit = "";
+        public string postFam = "";
 
 
         public Metodos m = new Metodos();
@@ -128,6 +133,46 @@ namespace simireports
                 postSit = " AND b.qtd_pecas_solic = (b.qtd_pecas_atend+b.qtd_pecas_cancel)";
             }
 
+
+            postFam = familia.Value;
+            if (postFam == "00")
+            {
+                postFam = "";
+            }
+            else if (postFam == "01")
+            {
+                postFam = " AND i.cod_familia = '01'";
+            }
+            else if (postFam == "02")
+            {
+                postFam = " AND i.cod_familia = '02'";
+            }
+            else if (postFam == "03")
+            {
+                postFam = " AND (i.cod_familia = '03' or i.cod_familia = '30' or i.cod_familia = '31' or " +
+                                "i.cod_familia = '32' or i.cod_familia = '33' or i.cod_familia = '97')";
+            }
+            else if (postFam == "09")
+            {
+                postFam = " AND i.cod_familia = '09'";
+            }
+            else if (postFam == "34")
+            {
+                postFam = " AND i.cod_familia = '34'";
+            }
+            else if (postFam == "50")
+            {
+                postFam = " AND i.cod_familia = '50'";
+            }
+            else if (postFam == "99")
+            {
+                postFam = " AND i.cod_familia = '99'";
+            }
+            else
+            {
+                postFam = "";
+            }
+
             executarRelatorio();
         }
 
@@ -163,7 +208,9 @@ namespace simireports
 
                                    postNumPed + 
 
-                                   postSit +
+                                   postSit + 
+                                   
+                                   postFam +
 
                                    " AND a.num_pedido = b.num_pedido AND a.cod_empresa = b.cod_empresa AND c.cod_cliente = a.cod_cliente" +
                                    " GROUP BY a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres, b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, b.pre_unit,b.num_sequencia" +
@@ -245,9 +292,14 @@ namespace simireports
                             preUnitS = m.pontoPorVirgula(preUnitS);                            
                             Decimal preUnit = Decimal.Round(Decimal.Parse(preUnitS),2);
                             qtdSolic = m.pontoPorVirgula(qtdSolic);
+                            qtdCancel = m.pontoPorVirgula(qtdCancel);
+                            qtdAtend = m.pontoPorVirgula(qtdAtend);
                             Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
+                            Decimal qtdCancelD = Decimal.Round(Decimal.Parse(qtdCancel), 0);
+                            Decimal qtdAtendD = Decimal.Round(Decimal.Parse(qtdAtend), 0);
                             totGeral += (qtdSolicD * preUnit);
-                            totGeralS = m.formatarDecimal(totGeral);
+                            totGeralP += ((qtdSolicD-qtdCancelD-qtdAtendD) * preUnit);
+                            totGeralA += (qtdAtendD * preUnit);
                             item = new Item(qtdSolic, qtdCancel, qtdAtend, nomeItem, przEntregaS, codItem, preUnit);
 
 
@@ -257,6 +309,10 @@ namespace simireports
                     //reader2.Close();
 
                 }
+                totGeralS = m.formatarDecimal(totGeral);
+                totGeralPS = m.formatarDecimal(totGeralP);
+                totGeralAS = m.formatarDecimal(totGeralA);
+
                 itens.Add(item);
                 pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres);
                 pedsEfets.Add(pedEfet);
