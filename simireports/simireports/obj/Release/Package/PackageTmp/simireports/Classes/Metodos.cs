@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 
 namespace simireports.simireports.Classes
@@ -12,6 +13,9 @@ namespace simireports.simireports.Classes
         public Metodos()
         {
         }
+
+
+
         public String formatarDecimal(Decimal n)
         {
             //nS - numero string
@@ -53,24 +57,30 @@ namespace simireports.simireports.Classes
             }
 
             nF = new string(nF.Reverse().ToArray());
-            if ((nF.Length - (nF.IndexOf(",")+1)) == 1)
+            if ((nF.Length - (nF.IndexOf(",") + 1)) == 1)
             {
                 nF += "0";
             }
             return nF;
         }
+
+
         public String pontoPorVirgula(String s)
         {
             if (s.Contains("."))
                 s = s.Replace(".", ",");
             return s;
         }
+
+
         public String virgulaPorPonto(String s)
         {
             if (s.Contains(","))
                 s = s.Replace(",", ".");
             return s;
         }
+
+
 
         public String configCoringas(String s)
         {
@@ -81,6 +91,8 @@ namespace simireports.simireports.Classes
             }
             return s;
         }
+
+
         public String configDataHuman2Banco(String data)
         {
             if (!data.Equals(""))
@@ -96,6 +108,8 @@ namespace simireports.simireports.Classes
                 return "";
             }
         }
+
+
         public String configDataBanco2Human(String data)
         {
             if (!data.Equals(""))
@@ -139,7 +153,7 @@ namespace simireports.simireports.Classes
             string ip = "-";
             string pc = "-";
 
-            string tempo = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"); //  30/04/2019 15:20:00
+            string tempo = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             SqlConnection conn = new BancoAzure().abrir();
             string result = "-";
@@ -152,6 +166,8 @@ namespace simireports.simireports.Classes
             new BancoAzure().fechar(conn);
             return result;
         }
+
+
 
         public string senhaNv1p0(string aa)
         {
@@ -170,6 +186,8 @@ namespace simireports.simireports.Classes
             }
             return resultado;
         }
+
+
         public string senhaNv1p5(string aa)
         {
             string resultado = "";
@@ -187,6 +205,8 @@ namespace simireports.simireports.Classes
             }
             return resultado;
         }
+
+
         public string senhaNv2p0(string aa)
         {
             string resultado = "";
@@ -238,6 +258,72 @@ namespace simireports.simireports.Classes
                 }
             }
             return resultado;
+        }
+
+
+
+        public static int numAleatorio(int min, int max)
+        {
+            Random random = new Random();
+            return random.Next(min, max);
+        }
+
+        public static string stringAleatoria(int size, bool lowerCase)
+        {
+            StringBuilder builder = new StringBuilder();
+            Random random = new Random();
+            char ch;
+            for (int i = 0; i < size; i++)
+            {
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+                builder.Append(ch);
+            }
+            if (lowerCase)
+                return builder.ToString().ToLower();
+            return builder.ToString();
+        }
+
+        public static string senhaAleatoria()
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append(stringAleatoria(1, false));
+            builder.Append(stringAleatoria(5, true));
+            builder.Append(numAleatorio(1000, 9999));
+            return builder.ToString();
+        }
+
+
+        public static void linkarTabelasUser(int idUser, int nivel)
+        {
+            try
+            {
+                SqlConnection conn = new BancoAzure().abrir();
+                SqlConnection conn2 = new BancoAzure().abrir();
+                string sql = "SELECT * from sw_usuarios where id_crm = " + idUser;
+
+                SqlDataReader reader = new BancoAzure().consultar(sql, conn);
+                string tempo = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                reader.Read();
+                if (reader.HasRows)
+                {
+                    int idsw = reader.GetInt32(0);
+                    new BancoAzure().executar("UPDATE sw_usuarios SET ult_login = '" + tempo + "' where id = " + idsw, conn2);
+                }
+                else
+                {
+                    string vazio = "-";
+                    string randSenha = senhaAleatoria();
+                    string result = new BancoAzure().executar("INSERT INTO sw_usuarios (id_crm, funcao, grupo, nivel, ult_login, erros_senha, gerenciados, senha_rand, avisos, block) " +
+                                                                "VALUES (" + idUser + ",'" + vazio + "','" + vazio + "'," + nivel + ",'" + tempo + "', 0" +
+                                                                ",'" + vazio + "','" + randSenha + "','" + vazio + "',0)", conn2);
+                }
+            }
+            catch (Exception ex)
+            {
+                string erro = "erro linkar tabelas users: " + ex;
+            }
+
         }
 
 

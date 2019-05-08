@@ -13,7 +13,7 @@ namespace simireports.simireports
     public partial class WebForm1 : System.Web.UI.Page
     {
         // VERSAO
-        public static string swver = "v1.0.7";
+        public static string swver = "v1.0.8";
         //
         private string loginPost = "-";
         public string senhaPost = "-";
@@ -76,7 +76,8 @@ namespace simireports.simireports
                         logarMaster("!@#");
 
                 SqlConnection conn = new BancoAzure().abrir();
-                string sql = "SELECT Senha,Nome,Idx,new_cod_repres,userID FROM Usuarios WHERE Nome = '" + loginPost + "' AND Senha = '" + senhaPost + "'";
+                string sql = "SELECT u.Senha,u.Nome,u.Idx,u.new_cod_repres,u.userID,su.block FROM Usuarios u LEFT JOIN sw_usuarios su on (u.userID = su.id_crm)" +
+                    " WHERE u.Nome = '" + loginPost + "' AND u.Senha = '" + senhaPost + "'";
 
                 SqlDataReader reader = new BancoAzure().consultar(sql, conn);
 
@@ -93,6 +94,11 @@ namespace simireports.simireports
                             double idx = reader.GetDouble(2);
                             string codRepres = reader.GetString(3);
                             int idUser = reader.GetInt32(4);
+                            int block = 0;
+                            if (!reader.IsDBNull(5))
+                            {
+                                block = reader.GetInt32(5);
+                            }
 
                             Session["nome"] = nome;
                             Session["idx"] = idx;
@@ -118,6 +124,7 @@ namespace simireports.simireports
                             Session["key"] = key;
 
                             string resultLog = Metodos.inserirLog(idUser,"Login",nome,""+swver);
+                            Metodos.linkarTabelasUser(idUser, key);
                             
                         }
                         else
