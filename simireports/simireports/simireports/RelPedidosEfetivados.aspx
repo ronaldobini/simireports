@@ -58,6 +58,7 @@
                         <th>Representante</th>
                         <th>Pedido</th>
                         <th>Cod. do Item</th>
+                        <th>Fam.</th>
                         <th>Data Inicio <br /> (Min: 2016)</th>
                         <th>Data Fim</th>
                         <th>Sit.</th>
@@ -78,6 +79,18 @@
                         <td style="width:130px;"><input class="form-control" style="width:110px; text-align:center;" runat="server" type="text" id="repres"/></td>
                         <td style="width:100px;"><input class="form-control" style="width:80px; text-align:center;" runat="server" type="text" id="numPed"/></td>
                         <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="codItem"/></td>
+                        <td style="width:140px;">
+                            <select class="form-control" style="width:120px;" id="familia" runat="server">
+                                <option value="00">Todas</option>
+                                <option value="01">SICK</option>
+                                <option value="02">LS</option>
+                                <option value="03">BRADY</option>
+                                <option value="09">BELDEN</option>
+                                <option value="34">GREENPROCESS</option>
+                                <option value="50">SERVICOS</option>
+                                <option value="99">DIVERSOS04</option>
+                            </select>
+                        </td>
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datIni"/></td>
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"/></td>
                         <td style="width:120px;">
@@ -96,7 +109,8 @@
 
         <div id="resultados">
             
-            <font color=white>Mostrando <%=pedsEfets.Count%> resultados, de <%=postDatInicio %> a <%=postDatFim %> - Total R$ <%=totGeralS %></font><br/>
+            <font color=white>Mostrando <%=pedsEfets.Count%> resultados, de <%=postDatInicio %> a <%=postDatFim %> <br />
+                Total Pedidos: R$ <%=totGeralS %> | Total Atendido: R$ <%=totGeralAS %> | Total Pendente: R$ <%=totGeralPS %> </font><br/>
             <table class="table table-hover table-dark" style = "max-width:95%; color:white; font-size: 12px;">
                 
                 
@@ -208,7 +222,7 @@
                             </td>
                         </tr>
                                 <%
-                                    } totGeralS = m.formatarDecimal(totGeral);
+                                    } 
                                 %>
             </table>
         </div>
