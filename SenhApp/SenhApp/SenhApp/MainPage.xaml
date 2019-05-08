@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SenhApp"
+             x:Class="SenhApp.MainPage">
+
+    <StackLayout>
+        
+        <!-- Place new controls here -->
+        <!--<Label Text="Entre com a senha" 
+           HorizontalOptions="Center"
+           VerticalOptions="CenterAndExpand" />-->
+
+        <Image Source="similarLogo.jpg"
+               Margin="30,10,30,30"
+               />
+
+        <Label x:Name="titulo"
+                HorizontalOptions="Center"
+                FontSize="50"/>
+        <Editor x:Name="entrada" Placeholder="Codigo"
+                HorizontalOptions="Center" 
+                AutoSize="TextChanges"
+                MaxLength="6"
+                FontSize="30"
+                Keyboard="Numeric"/>
+
+        <Button x:Name="botao" Text="Gerar Senha"
+                HorizontalOptions="Center"
+                BackgroundColor="#3197fc"
+                FontSize="30"
+                TextColor="White"
+                Clicked="Matemagica"/>
+        <Label/>
+        <Label x:Name="result" Text=""
+                HorizontalOptions="Center"
+                FontSize="50"/>
+        
+    </StackLayout>
+
+</ContentPage>
