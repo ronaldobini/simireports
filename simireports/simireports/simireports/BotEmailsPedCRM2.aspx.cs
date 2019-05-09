@@ -10,12 +10,11 @@ using System.Data.SqlClient;
 using IBM.Data.Informix;
 using simireports.simireports.Classes;
 
+
 namespace simireports.simireports
 {
-    
-    public partial class PageEmailsCRM : System.Web.UI.Page
+    public partial class BotEmailsPedCRM2 : System.Web.UI.Page
     {
-
         public string resultado = "-";
 
         protected void Page_Load(object sender, EventArgs e)
@@ -27,25 +26,32 @@ namespace simireports.simireports
             String ontem;
 
             DayOfWeek dow = DateTime.Now.DayOfWeek;
-            
-               
-                anteontem = DateTime.Today.AddDays(-2).ToString("d");
-                ontem = DateTime.Today.AddDays(-1).ToString("d");
-            
+
+
+            anteontem = DateTime.Today.AddDays(-2).ToString("d");
+            ontem = DateTime.Today.AddDays(-1).ToString("d");
+
             anteontem = m.configDataHuman2Banco(anteontem);
             ontem = m.configDataHuman2Banco(ontem);
             //Necessario por o nome dos representantes em maiuscula, toUpper nao funciona dentro do for each porque nao pode mudar variavel de iteraçao
             List<RepresEmails> represEmails = new List<RepresEmails>{
-                new RepresEmails("VENDAINT,","vanessa.boumer@similar.ind.br"),
-                new RepresEmails("VANESSA,","vanessa.boumer@similar.ind.br"),
-                new RepresEmails("VINICIUS,","vinicius.lima@similar.ind.br"),
-                new RepresEmails("FELIPE,","felipe.thomaz@similar.ind.br"),
-                new RepresEmails("MARCOS,","marcos.riter@similar.ind.br"),
 
-                new RepresEmails("","jorge.isaka@similar.ind.br"),
-                new RepresEmails("","kyung.choi@lsbrasil.com.br"),
-                new RepresEmails("","alberto.riter@similar.ind.br"),
-                new RepresEmails("","ti@similar.ind.br")
+                new RepresEmails("VENDAINT","karolline.costa@similar.ind.br," +
+                "priscila.rodrigues@lsbrasil.com.br," +
+                "luana.lima@similar.ind.br," +
+                "danieli.gnap@similar.ind.br," +
+                "dayane.paula@similar.ind.br," +
+                "rosilaine.rosa@similar.ind.br," +
+                "rafaella.morais@similar.ind.br," +
+                "luciana.cacin@similar.ind.br"),
+
+                new RepresEmails("RAFAEL,","rafael.moraes@similar.ind.br"),
+                new RepresEmails("VOLPI,","rafael.volpi@similar.ind.br"),
+                new RepresEmails("LARSEN,","emerson.larsen@similar.ind.br"),
+                new RepresEmails("GUSTAVO P,","gustavo.brettas@similar.ind.br"),
+                new RepresEmails("EDUARDO,","eduardo.rost@lsbrasil.com.br"),
+
+                new RepresEmails("","vendas@similar.ind.br")
             };
 
             foreach (var re in represEmails)
@@ -139,7 +145,7 @@ namespace simireports.simireports
                             else
                             {
                                 itens.Add(item);
-                                repres = repres.Substring(0,repres.IndexOf(","));
+                                repres = repres.Substring(0, repres.IndexOf(","));
                                 pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres);
                                 pedsEfets.Add(pedEfet);
                                 itens = new List<Item>();
@@ -153,7 +159,7 @@ namespace simireports.simireports
                         cliente = reader.GetString(4);
                         repres = reader.GetString(5);
 
-                        Double qtdSolic = reader.GetDouble(6); 
+                        Double qtdSolic = reader.GetDouble(6);
                         Double qtdCancel = reader.GetDouble(7);
                         Double qtdAtend = reader.GetDouble(8);
                         string nomeItem = reader.GetString(9);
@@ -168,14 +174,14 @@ namespace simireports.simireports
                         Double preUnitD = reader.GetDouble(12);
                         string preUnitS = Math.Round(preUnitD, 2).ToString();
                         Decimal preUnit = Decimal.Parse(preUnitS);
-                        
+
                         totGeral += ((Decimal)qtdSolic * preUnit);
                         totGeralS = m.formatarDecimal(totGeral);
                         Double desconto = reader.GetDouble(13);
                         Double comiss = reader.GetDouble(15);
                         //if (comiss == 0.145) comiss = 0.0;
                         comiss *= 100;
-                        item = new Item(qtdSolic.ToString(), qtdCancel.ToString(), qtdAtend.ToString(), nomeItem, przEntregaS, codItem, preUnit, Decimal.Round((((Decimal)desconto) * 100m)), Decimal.Round((Decimal)comiss,3));
+                        item = new Item(qtdSolic.ToString(), qtdCancel.ToString(), qtdAtend.ToString(), nomeItem, przEntregaS, codItem, preUnit, Decimal.Round((((Decimal)desconto) * 100m)), Decimal.Round((Decimal)comiss, 3));
 
                     }
 
@@ -190,7 +196,7 @@ namespace simireports.simireports
                     String erro = "null";
                     try
                     {
-                        erro = new BancoAzure().consultarErros(sql,conn);
+                        erro = new BancoAzure().consultarErros(sql, conn);
                     }
                     catch (Exception ex)
                     {
@@ -205,7 +211,7 @@ namespace simireports.simireports
 
                 foreach (var pedE in pedsEfets)
                 {
-                    corpoEmail += 
+                    corpoEmail +=
                         "<thead style = \"background-color: #ccc; color:#000;\">" +
                     "<tr>" +
                         //"<td scope = \"col\"style = \"width: 5%; text-align:center;background-color: #fff;\"> Data </th>" +
@@ -275,7 +281,7 @@ namespace simireports.simireports
                         totPendS = m.formatarDecimal(totPend);
 
                         totPedS = m.formatarDecimal(totPed);
-                        
+
                         corpoEmail += "<tr>" +
                             "<td style=\"border: 1px solid #ccc;text-align:left;\">" + itemV.CodItem + " </td>" +
                             "<td style=\"border: 1px solid #ccc;text-align:left;\">" + itemV.NomeItem + " </td>" +
@@ -314,7 +320,7 @@ namespace simireports.simireports
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
                 client.Credentials = new System.Net.NetworkCredential("ti@similar.ind.br", "Simi1717");
-                MailMessage mm = new MailMessage("ti@similar.ind.br", re.email, "SimiWeb - Pedidos Ontem - "+re.nome, corpoEmail);
+                MailMessage mm = new MailMessage("ti@similar.ind.br", re.email, "SimiWeb - Pedidos Ontem - " + re.nome, corpoEmail);
                 mm.BodyEncoding = UTF8Encoding.UTF8;
                 mm.IsBodyHtml = true;
                 mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;

@@ -40,16 +40,8 @@ namespace simireports.simireports
                 new RepresEmails("VANESSA,","vanessa.boumer@similar.ind.br"),
                 new RepresEmails("VINICIUS,","vinicius.lima@similar.ind.br"),
                 new RepresEmails("FELIPE,","felipe.thomaz@similar.ind.br"),
+                new RepresEmails("MARCOS,","marcos.riter@similar.ind.br"),
 
-                new RepresEmails("MARCOS,","marcos.riter@similar.ind.br"),                
-                new RepresEmails("RAFAEL,","rafael.moraes@similar.ind.br"),
-                new RepresEmails("VOLPI,","rafael.volpi@similar.ind.br"),
-                new RepresEmails("LARSEN,","emerson.larsen@similar.ind.br"),
-                new RepresEmails("GUSTAVO P,","gustavo.brettas@similar.ind.br"),
-                new RepresEmails("EDUARDO,","eduardo.rost@lsbrasil.com.br"),
-
-                new RepresEmails("VENDAINT","vendas@similar.ind.br"),
-                new RepresEmails("","vendas@similar.ind.br"),
                 new RepresEmails("","jorge.isaka@similar.ind.br"),
                 new RepresEmails("","kyung.choi@lsbrasil.com.br"),
                 new RepresEmails("","alberto.riter@similar.ind.br"),

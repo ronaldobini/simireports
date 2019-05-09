@@ -88,6 +88,7 @@
     <None Include="Properties\PublishProfiles\simireports - Web Deploy1.pubxml" />
     <Content Include="simiMaster\index.aspx" />
     <Content Include="simiMaster\sql.aspx" />
+    <Content Include="simireports\BotEmailsPedCRM2.aspx" />
     <Content Include="simireports\construcao.aspx" />
     <Content Include="simireports\css\design.css" />
     <Content Include="simireports\erro.html" />
@@ -187,6 +188,13 @@
     </Compile>
     <Compile Include="simiMaster\sql.aspx.designer.cs">
       <DependentUpon>sql.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simireports\BotEmailsPedCRM2.aspx.cs">
+      <DependentUpon>BotEmailsPedCRM2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\BotEmailsPedCRM2.aspx.designer.cs">
+      <DependentUpon>BotEmailsPedCRM2.aspx</DependentUpon>
     </Compile>
     <Compile Include="simireports\Classes\Comissao.cs" />
     <Compile Include="simireports\Classes\Devolucao.cs" />
