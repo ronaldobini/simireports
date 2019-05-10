@@ -199,6 +199,7 @@
     </Compile>
     <Compile Include="simireports\Classes\Comissao.cs" />
     <Compile Include="simireports\Classes\Devolucao.cs" />
+    <Compile Include="simireports\Classes\Faturamento.cs" />
     <Compile Include="simireports\Classes\Item.cs" />
     <Compile Include="simireports\Classes\LoginS.cs" />
     <Compile Include="simireports\Classes\Metodos.cs" />

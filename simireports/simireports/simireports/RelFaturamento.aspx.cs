@@ -34,8 +34,8 @@ namespace simireports
 
 
 
-        public static Decimal totFat = 0.0M;
-        public static String totFatS = "";
+        public static Decimal totFaturamento = 0.0M;
+        public static String totFaturamentoS = "";
         public String erro = " ";
 
 
@@ -81,7 +81,7 @@ namespace simireports
 
         }
 
-        protected void filtrarComiss_Click(object sender, EventArgs e)
+        protected void filtrarFat_Click(object sender, EventArgs e)
         {
             postDatInicio = datInicio.Value;
             if (postDatInicio == "") postDatInicio = mesPassado;
@@ -89,25 +89,39 @@ namespace simireports
             postDatFim = datFim.Value;
             if (postDatFim == "") postDatFim = hoje;
 
+            postDatInicio = m.configDataHuman2Banco(postDatInicio);
+            postDatFim = m.configDataHuman2Banco(postDatFim);
             postUnidade = empresa.Value;
             postNota = nota.Value;
-            postItem = codItem.Value;
-            postDesc = descItem.Value;
-            postCliente = cliente.Value;
-            postNomCli = nomCli.Value;
-            postNatur = natureza.Value;
-            postPed = pedido.Value;
-            postPedCli = pedCli.Value;
-            postTrans = trans.Value;
-
-            if (!postNatur.Equals("Todas"))
+            if (!postNota.Equals(""))
             {
-                postNatur = " AND nfi.natureza_operacao = " + postNatur + " ";
+                postNota = " AND nota_fiscal = " + postNota + " ";
+            }
+            postItem = codItem.Value;
+            postItem = postItem.ToUpper();
+            postDesc = descItem.Value;
+            postDesc = postDesc.ToUpper();
+            postCliente = cliente.Value;
+            postCliente = postCliente.ToUpper();
+            postNomCli = nomCli.Value;
+            postNomCli = postNomCli.ToUpper();
+            postNatur = natureza.Value;
+            if (postNatur.Equals(""))
+            {
+                postNatur = " AND nfi.natureza_operacao in(2001,2021,4001,4021,7000,9001) ";
             }
             else
             {
-                postNatur = " AND nfi.natureza_operacao in (2001,2021,4001,4021,7000,9001) ";
+                postNatur = " AND nfi.natureza_operacao = " + postNatur + " ";
             }
+
+            postPed = pedido.Value;
+            if (!postPed.Equals(""))
+            {
+                postPed = " AND nfi.pedido = " + postPed + "";
+            }
+            postPedCli = pedCli.Value;
+            postTrans = trans.Value;
 
             executarRelatorio();
         }
@@ -127,7 +141,7 @@ namespace simireports
                 " nf.nota_fiscal," +
                 " nfi.item," +
                 " it.den_item_reduz," +
-                " cli.cliente, " +
+                " cli.cod_cliente, " +
                 " cli.nom_cliente, " +
                 " nfi.preco_unit_liquido as valor_unit," +
                 " nfi.qtd_item," +
@@ -141,24 +155,25 @@ namespace simireports
                 " JOIN item it ON(nfi.item = it.cod_item and nfi.empresa = it.cod_empresa)" +
                 " JOIN pedidos ped ON(nfi.pedido = ped.num_pedido and nfi.empresa = ped.cod_empresa)" +
                 " JOIN clientes cli on(nf.cliente = cli.cod_cliente)" +
-                " where nf.dat_hor_emissao >= '"+ postDatInicio +
-                " AND nf.dat_hor_emissao <= '" + postDatFim +
+                " where nf.dat_hor_emissao >= '"+ postDatInicio + " 00:00:00' " +
+                " AND nf.dat_hor_emissao <= '" + postDatFim + " 00:00:00' " +
                 " AND nf.sit_nota_fiscal = 'N'" +
-                " AND nfi.empresa = " + postUnidade + " " +
-                " AND nfi.item like'" + postItem + "' " +
-                " AND nfi.den_item_reduz like'" + postDesc + "' " +
-                " AND cli.cod_cliente like'" + postCliente + "' " +
-                " AND cli.nom_cliente like'" + postNomCli + "' " +
-                postNatur + 
-                " AND nfi.pedido like '" + postPed + "' " +
-                " AND ped.num_pedido_cli like '" + postPedCli + "' " +
-                " AND pped.cod_transpor like '" + postTrans + "' " +
+                " AND nfi.empresa like '%" + postUnidade + "%' " +
+                " AND nfi.item like '%" + postItem + "%' " +
+                " AND it.den_item_reduz like '%" + postDesc + "%' " +
+                " AND cli.cod_cliente like '%" + postCliente + "%' " +
+                " AND cli.nom_cliente like '%" + postNomCli + "%' " +
+                " " + postNota + " " +
+                " " + postNatur + " " +
+                " " + postPed + " " +
+                " AND ped.num_pedido_cli like '%" + postPedCli + "%' " +
+                " AND ped.cod_transpor like '%" + postTrans + "%' " +
                 " ORDER BY nf.dat_hor_emissao, empresa, nota_fiscal desc ";
 
             //sqlview = sql; //ativa a exibicao do sql na tela
             IfxDataReader reader = new BancoLogix().consultar(sql, conn);
 
-            totFat = 0.0M;
+            totFaturamento = 0.0M;
 
             DateTime dat = new DateTime();
             string empresa = "";
@@ -167,6 +182,9 @@ namespace simireports
             string descItem = "";
             string cpfCli = "";
             string cliente = "";
+            string preUnitS = "";
+            string qtdItem = "";
+            string totalS = "";
             string nat = "";
             string pedido = "";
             string pedCli = "";
@@ -177,6 +195,7 @@ namespace simireports
             Faturamento fat = null;
             bool primeiro = true;
             string notAnt = "";
+            string errosql = new BancoLogix().consultarErros(sql,conn);
 
             if (reader != null && reader.HasRows)
             {
@@ -200,32 +219,41 @@ namespace simireports
                         else
                         {
                             itens.Add(item);
-                            fat = new Faturamento(empresa,nota,itens,natureza,pedido,pedCli,cliente,nomCli,trans);
+                            fat = new Faturamento(dat, empresa, nota, cpfCli, cliente, itens, nat, pedido, pedCli, trans);
                             fats.Add(fat);
                             itens = new List<Item>();
                             notAnt = nota;
                         }
                     }
-                    //" nfi.preco_unit_liquido as valor_unit," +
-                    //" nfi.qtd_item," +
-                    //" nfi.val_bruto_item as valor_total," +
                     dat = new DateTime();
-                    empresa = "";
-                    nota = "";
-                    codItem = "";
-                    descItem = "";
-                    cpfCli = "";
-                    cliente = "";
-                    nat = "";
-                    pedido = "";
-                    pedCli = "";
-                    trans = "";
-                    item = new Item(qtdSolic, qtdCancel, qtdAtend, nomeItem, przEntregaS, codItem, preUnit);
+                    dat = reader.GetDateTime(0);
+                    empresa = reader.GetString(1);
+                    nota = reader.GetString(2);
+                    codItem = reader.GetString(3);
+                    descItem = reader.GetString(4);
+                    cpfCli = reader.GetString(5);
+                    cliente = reader.GetString(6);
+                    preUnitS = reader.GetString(7);
+                    preUnitS = m.pontoPorVirgula(preUnitS);
+                    Decimal preUnit = Decimal.Round(Decimal.Parse(preUnitS), 2);
+                    qtdItem = reader.GetString(8);
+                    qtdItem = m.pontoPorVirgula(qtdItem);
+                    qtdItem = Convert.ToString(Decimal.Round(Decimal.Parse(qtdItem), 0));
+                    totalS = reader.GetString(9);
+                    totalS = m.pontoPorVirgula(totalS);
+                    Decimal total = Decimal.Round(Decimal.Parse(totalS), 2);
+                    nat = reader.GetString(10);
+                    pedido = reader.GetString(11);
+                    pedCli = reader.GetString(12);
+                    trans = reader.GetString(13);
+                    item = new Item(qtdItem, descItem, codItem, preUnit);
+
+                    totFaturamento += total;
                 }
-                totGeralS = m.formatarDecimal(totGeral);
+                totFaturamentoS = m.formatarDecimal(totFaturamento);
 
                 itens.Add(item);
-                fat = new Faturamento(empresa, nota, itens, natureza, pedido, pedCli, cliente, nomCli, trans);
+                fat = new Faturamento(dat,empresa, nota, cpfCli,cliente, itens, nat, pedido, pedCli, trans);
                 fats.Add(fat);
             }
             else

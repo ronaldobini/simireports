@@ -46,7 +46,7 @@ namespace simireports {
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText empresa;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect empresa;
         
         /// <summary>
         /// Controle nota.
@@ -100,7 +100,7 @@ namespace simireports {
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText natureza;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect natureza;
         
         /// <summary>
         /// Controle pedido.

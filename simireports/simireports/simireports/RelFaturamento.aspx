@@ -21,13 +21,33 @@
         <p><%=sqlview %></p>
         <div id="filtros" style="margin-bottom:40px;">
             <form runat="server" id="filtrosComissoes" action="#" method="post">
-                <table>
-                    <tr style="color:white;">
-                        <th style="width:100px;">Data</th>
+                <table style="color:white;">
+                    <tr>
+                        <th style="width:100px;">Data Inicio</th>
+                        <th style="width:100px;">Data Fim</th>
                         <th style="width:100px;">Empresa</th>
                         <th style="width:100px;">Nota</th>
                         <th style="width:130px;">Item</th>
                         <th style="width:100px;">Nome Item</th>
+                    </tr>
+                    <tr>
+                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datInicio" autocomplete="off"/></td>
+                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"  autocomplete="off"/></td>
+                        <td style="width:120px;">
+                            <select class="form-control" style="width:100px;" id="empresa" runat="server">
+                                <option value="">Todas</option>
+                                <option value="2">02</option>
+                                <option value="3">03</option>
+                                <option value="4">04</option>
+                                <option value="5">05</option>
+                                <option value="6">06</option>
+                            </select>
+                        </td>
+                        <td style="width:150px;"><input class="form-control" style="width:130px;" runat="server" type="text" id="nota" autocomplete="off"/></td>
+                        <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="codItem"  autocomplete="off"/></td>
+                        <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="descItem"  autocomplete="off"/></td>
+                    </tr>
+                    <tr>
                         <th style="width:100px;">CPF Cliente</th>
                         <th style="width:100px;">Nome Cliente</th>
                         <th style="width:120px;">Natureza</th>
@@ -36,15 +56,19 @@
                         <th style="width:100px;">Transportadora</th>
                     </tr>
                     <tr>
-                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datInicio" autocomplete="off"/></td>
-                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"  autocomplete="off"/></td>
-                        <td style="width:120px;"><input class="form-control" style="width:130px;" runat="server" type="text" id="empresa" autocomplete="off"/></td>
-                        <td style="width:150px;"><input class="form-control" style="width:130px;" runat="server" type="text" id="nota" autocomplete="off"/></td>
-                        <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="codItem"  autocomplete="off"/></td>
-                        <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="descItem"  autocomplete="off"/></td>
                         <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="cliente"  autocomplete="off"/></td>
                         <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="nomCli"  autocomplete="off"/></td>
-                        <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="natureza"  autocomplete="off"/></td>
+                        <td style="width:120px;">
+                            <select class="form-control" style="width:100px;" id="natureza" runat="server">
+                                <option value="">Todas</option>
+                                <option value="2001">2001</option>
+                                <option value="2021">2021</option>
+                                <option value="4001">4001</option>
+                                <option value="4021">4021</option>
+                                <option value="7000">7000</option>
+                                <option value="9001">9001</option>
+                            </select>
+                        </td>
                         <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="pedido"  autocomplete="off"/></td>
                         <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="pedCli"  autocomplete="off"/></td>
                         <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="trans"  autocomplete="off"/></td>
@@ -55,78 +79,87 @@
             </form>
         </div>
 
-        <div style="color:white; margin-bottom:30px;">Total Faturamentos: R$ <%=totFat %></div>
 
         <div id="resultados">
-            <font color=white>Mostrando <%=fats.Count%> resultados, de <%=postDatInicio%> a <%=postDatFim%></font><br/>
+        <div style="color:white; margin-bottom:30px;">Total Faturamentos: R$ <%= m.formatarDecimal(totFaturamento) %></div>
+            <font color=white>Mostrando <%=fats.Count%> resultados, de <%=m.configDataBanco2Human(postDatInicio)%> a <%=m.configDataBanco2Human(postDatFim)%></font><br/>
             <table class="table table-striped table-dark" style = "max-width:95%; color:white; font-size: 12px;">
-                <tr>
-                    <th style="width:100px;">Data</th>
-                        <th style="width:100px;">Empresa</th>
-                        <th style="width:100px;">Nota</th>
-                        <th style="width:130px;">Item</th>
-                        <th style="width:100px;">Nome Item</th>
-                        <th style="width:100px;">Valor Unit</th>
-                        <th style="width:100px;">Quantidade</th>
-                        <th style="width:100px;">Valor Total</th>
-                        <th style="width:120px;">Natureza</th>
-                        <th style="width:100px;">Pedido</th>
-                        <th style="width:100px;">Pedido Cliente</th>
-                        <th style="width:100px;">Transportadora</th>
-                </tr>
-                
-                <% 
-                    string uCodRepres = "";
-                    string uNomRepres = "";
-                    Decimal totRepres = 0.0m;
-                    string totRepresS = "";
-                    
+                <%
+                    Decimal totFat = 0.0m;
+                    string totFatS = "";
 
                     foreach (var fat in fats) {
 
-                        
+                     %> 
+                        <thead style="background-color: #070a0e; color:white;">
+                            <tr>
+                                <th style="width:100px;">Data</th>
+                                <th style="width:100px;">Empresa</th>
+                                <th style="width:100px;">Nota</th>
+                                <th style="width:100px;">CPF Cliente</th>
+                                <th style="width:100px;">Nome Cliente</th>
+                                <th style="width:120px;">Natureza</th>
+                                <th style="width:100px;">Pedido</th>
+                                <th style="width:100px;">Pedido Cliente</th>
+                                <th style="width:100px;">Transportadora</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td style="text-align:left;"><b><%= fat.Data %></b></td>
+                            <td style="text-align:left;"><b><%= fat.Empresa %></b></td>
+                            <td style="text-align:left;"><b><%= fat.Nota %></b></td>
+                            <td style="text-align:left;"><b><%= fat.ClienteCPF %></b></td>
+                            <td style="text-align:left;"><b><%= fat.NomeCliente %></b></td>
+                            <td style="text-align:left;"><b><%= fat.Natureza %></b></td>
+                            <td style="text-align:left;"><b><%= fat.Pedido %></b></td>
+                            <td style="text-align:left;"><b><%= fat.PedCli %></b></td>
+                            <td style="text-align:left;"><b><%= fat.Trans %></b></td>
+                        </tr>
+                        <tr>
+                            <td colspan ="9">
+                                <table class="table table-sm table-dark" style="background-color:#3f4142; width:100%; color:white; font-size: 12px;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10%;">Cod. do Item</th>
+                                            <th style="width: 35%;">Desc. Item</th>
+                                            <th style="width: 5%; text-align:center;"">Quantidade</th>
+                                            <th style="text-align:right;width: 10%;">Preço Unit</th>
+                                            <th style="text-align:right;width: 10%;">Preço Total</th>
+                                        </tr>
+                                    </thead>
+                                    <%
+                                        totFat = 0.0m;
+                                        totFatS = m.formatarDecimal(totFat);
+                                        foreach (var item in fat.Itens)
+                                        {
+                                            string codItem = item.CodItem;
+                                            string nomeItem = item.NomeItem;
+                                            int qtd = Convert.ToInt32(item.QtdAtend);
+                                            
+                                            String preUnitS = m.formatarDecimal(item.PrecoUnit);
 
-                        if(uCodRepres != "" && uCodRepres != codRepres)
-                        {
-                            totRepresS = m.formatarDecimal(totRepres);
-                            %>
-                                <tr><td colspan="4" style="background-color:black; color:white;"><b><% = uNomRepres %>(<% = uCodRepres %>) Total Comiss: R$ <% = totRepresS %></td><td colspan="6"></td><td colspan="4"></td></tr>
-                            <%
-                                    totRepres = 0.0m;
-                                }
-                                totRepres = totRepres + comiss;
-
-                                uCodRepres = codRepres;
-                                uNomRepres = nomRepres;
-                                //valBruto = 100000000.00M;
-                                string valBrutoS = m.formatarDecimal(valBruto);
-
-                                string comissaoS = comiss.ToString();
-                                comissaoS = m.pontoPorVirgula(comissaoS);
-
-                                if(postDetalhes == 1) { 
-                %> 
-                    <tr>
-                        <td style="text-align:center;"><%= codRepres %></td>
-                        <td style="text-align:center;"><%= codEmpresa %></td>
-                        <td style="text-align:center;"><%= numDocum %></td>
-                        <td style="text-align:center;"><%= numDocumOrigem %></td>
-                        <td style="text-align:center;"><%= numPedido %></td>
-                        <td style="text-align:center;"><%= nomCliente %></td>
-                        <td style="text-align:right;"><%= "R$ "+valBrutoS %></td>
-                        <td style="text-align:center;"><%= pctComissao %></td>
-                        <td style="text-align:right;"><%= "R$ "+comissaoS %></td>
-                        <td style="text-align:center;"><%= nomRepres %></td>
-                        <td style="text-align:center;"><%= datEmiss %></td>
-                        <td style="text-align:center;"><%= datPgto %></td>
-                        <td style="text-align:center;"><%= iesPgtoDocum %></td>
-                    </tr>
-                <%
-                               }
-                    }
-                totRepresS = m.formatarDecimal(totRepres);
-                %>
-                <tr><td colspan="4" style="background-color:black; color:white;"><b><% = uNomRepres %>(<% = uCodRepres %>) Total Comiss: R$ <% = totRepresS %></td><td colspan="6"></td><td colspan="4"></td></tr>
+                                            totFat += item.PrecoUnit*Convert.ToInt32(item.QtdAtend);
+                                            totFatS = m.formatarDecimal(totFat);
+                                            
+                                    %>
+                                            <tr>
+                                                <td><%= codItem %></td>
+                                                <td><%= nomeItem %></td>
+                                                <td style="text-align:center;"><%= qtd %></td>
+                                                <td style="text-align:right;"><%= "R$"+preUnitS %></td>
+                                                <td style="text-align:right;"><%= "R$"+m.formatarDecimal(item.PrecoUnit*qtd) %></td>
+                                            </tr>
+                                                
+                                    <% } %>
+                                    <tr>
+                                        <td colspan="8" style="background-color: #070a0e; color:white;"><b>Total Faturamento: R$ <%= totFatS %></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                                <%
+                                    } 
+                                %>
             </table>
         </div>
     
