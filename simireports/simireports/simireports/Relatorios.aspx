@@ -109,7 +109,7 @@
                 </tr>           
                 <tr>
                     <td><a style="color:#399bfc;" href="RelPedidosEfetivados.aspx">002 - Pedidos Efetivados Logix </a></td>
-                    <td><a style="color:#399bfc;" href="RelFaturamento.aspx">000 - Faturamento</a></td>
+                    <td><a style="color:#399bfc;" href="RelFaturamento.aspx">007 - Faturamento</a></td>
                     <td></td>
                 </tr>
                 <tr>
