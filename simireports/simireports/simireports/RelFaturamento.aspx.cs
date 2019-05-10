@@ -108,7 +108,7 @@ namespace simireports
             postNatur = natureza.Value;
             if (postNatur.Equals(""))
             {
-                postNatur = " AND nfi.natureza_operacao in(2001,2021,4001,4021,7000,9001) ";
+                postNatur = " AND nfi.natureza_operacao <> 9001 ";
             }
             else
             {
@@ -156,7 +156,7 @@ namespace simireports
                 " JOIN pedidos ped ON(nfi.pedido = ped.num_pedido and nfi.empresa = ped.cod_empresa)" +
                 " JOIN clientes cli on(nf.cliente = cli.cod_cliente)" +
                 " where nf.dat_hor_emissao >= '"+ postDatInicio + " 00:00:00' " +
-                " AND nf.dat_hor_emissao <= '" + postDatFim + " 00:00:00' " +
+                " AND nf.dat_hor_emissao <= '" + postDatFim + " 23:59:59' " +
                 " AND nf.sit_nota_fiscal = 'N'" +
                 " AND nfi.empresa like '%" + postUnidade + "%' " +
                 " AND nfi.item like '%" + postItem + "%' " +
@@ -168,7 +168,7 @@ namespace simireports
                 " " + postPed + " " +
                 " AND ped.num_pedido_cli like '%" + postPedCli + "%' " +
                 " AND ped.cod_transpor like '%" + postTrans + "%' " +
-                " ORDER BY nf.dat_hor_emissao, empresa, nota_fiscal desc ";
+                " ORDER BY nota_fiscal, empresa ";
 
             //sqlview = sql; //ativa a exibicao do sql na tela
             IfxDataReader reader = new BancoLogix().consultar(sql, conn);
