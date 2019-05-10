@@ -153,6 +153,7 @@
     <Content Include="simireports\RelComissoes.aspx" />
     <Content Include="simireports\BotEmailsPedCRM.aspx" />
     <Content Include="simireports\RelComissoesEspec.aspx" />
+    <Content Include="simireports\RelFaturamento.aspx" />
     <Content Include="simireports\RelOMsPendentes.aspx" />
     <Content Include="simireports\RelPedidosEfetivadosCRM.aspx" />
     <Content Include="simireports\index.aspx" />
@@ -238,6 +239,13 @@
     </Compile>
     <Compile Include="simireports\RelComissoesEspec.aspx.designer.cs">
       <DependentUpon>RelComissoesEspec.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simireports\RelFaturamento.aspx.cs">
+      <DependentUpon>RelFaturamento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\RelFaturamento.aspx.designer.cs">
+      <DependentUpon>RelFaturamento.aspx</DependentUpon>
     </Compile>
     <Compile Include="simireports\RelOMsPendentes.aspx.cs">
       <DependentUpon>RelOMsPendentes.aspx</DependentUpon>

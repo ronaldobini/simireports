@@ -162,7 +162,7 @@
                                             <th style="width: 5%; text-align:center;">Cancel</th>
                                             <th style="width: 5%; text-align:center;"">Atend</th>
                                             <th style="text-align:right;width: 10%;">Preço Unit</th>
-                                            <th style="text-align:right;width: 10%;">Preço Total Atend</th>
+                                            <th style="text-align:right;width: 10%;">Preço Total</th>
                                             <th style="text-align:right;width: 20%;">Prazo</th>
                                         </tr>
                                     </thead>
@@ -208,7 +208,7 @@
                                                 <td style="text-align:center;"><%= qtdCancelD %></td>
                                                 <td style="text-align:center;"><%= qtdAtendD %></td>
                                                 <td style="text-align:right;"><%= "R$"+preUnitS %></td>
-                                                <td style="text-align:right;"><%= "R$"+preUnit*qtdAtendD %></td>
+                                                <td style="text-align:right;"><%= "R$"+preUnit*qtdSolicD %></td>
                                                 <td style="text-align:right;"><%= przEntrega %></td>
                                             </tr>
                                                 
