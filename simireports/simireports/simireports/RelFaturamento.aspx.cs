@@ -219,7 +219,7 @@ namespace simireports
                         else
                         {
                             itens.Add(item);
-                            fat = new Faturamento(dat, empresa, nota, cpfCli, cliente, itens, nat, pedido, pedCli, trans);
+                            fat = new Faturamento(dat, empresa, notAnt, cpfCli, cliente, itens, nat, pedido, pedCli, trans);
                             fats.Add(fat);
                             itens = new List<Item>();
                             notAnt = nota;
@@ -228,7 +228,6 @@ namespace simireports
                     dat = new DateTime();
                     dat = reader.GetDateTime(0);
                     empresa = reader.GetString(1);
-                    nota = reader.GetString(2);
                     codItem = reader.GetString(3);
                     descItem = reader.GetString(4);
                     cpfCli = reader.GetString(5);
