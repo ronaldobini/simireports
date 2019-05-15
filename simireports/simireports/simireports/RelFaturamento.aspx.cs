@@ -80,14 +80,18 @@ namespace simireports
 
             //PEDIDO GET
             getPedido = Request.QueryString["getPedido"];
-            if (getPedido.Length > 0)
+            if(getPedido != null)
             {
-                postPed = " AND nfi.pedido = " + getPedido + "";
-                postDatInicio = "2016-01-01";
-                postDatFim = hoje;
-                postDatFim = m.configDataHuman2Banco(postDatFim);
-                executarRelatorio();
+                if (getPedido.Length > 0)
+                {
+                    postPed = " AND nfi.pedido = " + getPedido + "";
+                    postDatInicio = "2016-01-01";
+                    postDatFim = hoje;
+                    postDatFim = m.configDataHuman2Banco(postDatFim);
+                    executarRelatorio();
+                }
             }
+            
 
         }
 
