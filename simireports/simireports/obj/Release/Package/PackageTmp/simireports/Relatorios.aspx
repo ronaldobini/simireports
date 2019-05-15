@@ -108,12 +108,12 @@
                     <td><a style="color:#399bfc;" href="RelOMsPendentes.aspx">005 - OMs Pendentes</a></td>
                 </tr>           
                 <tr>
-                    <td><a style="color:#399bfc;" href="RelPedidosEfetivados.aspx">002 - Pedidos Efetivados Logix </a></td>
-                    <td></td>
+                    <td><a style="color:#399bfc;" href="RelPedidosEfetivados.aspx">002 - Pedidos Logix </a></td>
+                    <td><a style="color:#399bfc;" href="RelFaturamento.aspx">007 - Faturamento</a></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td><a style="color:#399bfc;" href="RelPedidosEfetivadosCRM.aspx">003 - Pedidos Efetivados CRM</a></td>
+                    <td><a style="color:#399bfc;" href="RelPedidosEfetivadosCRM.aspx">003 - Pedidos CRM</a></td>
                     <td></td>
                     <td></td>
                 </tr>

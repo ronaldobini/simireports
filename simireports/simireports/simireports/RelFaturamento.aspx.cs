@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -27,10 +29,12 @@ namespace simireports
         public string postTrans = "";
         public string sqlview = "";
 
+        public string getPedido = "";
+
         public Metodos m = new Metodos();
-        public String mesPassado = "25/04/2019";
-        public String hoje = "22/05/2019";
+        public String hoje = DateTime.Today.ToString("d");
         public string represChange = "nao";
+
 
 
 
@@ -74,6 +78,17 @@ namespace simireports
                 Response.Redirect("login.aspx");
             }
 
+            //PEDIDO GET
+            getPedido = Request.QueryString["getPedido"];
+            if (getPedido.Length > 0)
+            {
+                postPed = " AND nfi.pedido = " + getPedido + "";
+                postDatInicio = "2016-01-01";
+                postDatFim = hoje;
+                postDatFim = m.configDataHuman2Banco(postDatFim);
+                executarRelatorio();
+            }
+
         }
 
         protected void detalhes_Click(object sender, EventArgs e)
@@ -83,8 +98,9 @@ namespace simireports
 
         protected void filtrarFat_Click(object sender, EventArgs e)
         {
+            
             postDatInicio = datInicio.Value;
-            if (postDatInicio == "") postDatInicio = mesPassado;
+            if (postDatInicio == "") postDatInicio = hoje;
 
             postDatFim = datFim.Value;
             if (postDatFim == "") postDatFim = hoje;
@@ -106,9 +122,11 @@ namespace simireports
             postNomCli = nomCli.Value;
             postNomCli = postNomCli.ToUpper();
             postNatur = natureza.Value;
+           
+            
             if (postNatur.Equals(""))
             {
-                postNatur = " AND nfi.natureza_operacao <> 9001 ";
+                postNatur = " AND nfi.natureza_operacao > 1000 ";
             }
             else
             {
@@ -120,10 +138,16 @@ namespace simireports
             {
                 postPed = " AND nfi.pedido = " + postPed + "";
             }
+
+           
+
+
+
             postPedCli = pedCli.Value;
             postTrans = trans.Value;
 
             executarRelatorio();
+
         }
 
         protected void executarRelatorio()
@@ -157,6 +181,7 @@ namespace simireports
                 " JOIN clientes cli on(nf.cliente = cli.cod_cliente)" +
                 " where nf.dat_hor_emissao >= '"+ postDatInicio + " 00:00:00' " +
                 " AND nf.dat_hor_emissao <= '" + postDatFim + " 23:59:59' " +
+                " AND nf.dat_hor_emissao >= '2016-01-01 00:00:00'" +
                 " AND nf.sit_nota_fiscal = 'N'" +
                 " AND nfi.empresa like '%" + postUnidade + "%' " +
                 " AND nfi.item like '%" + postItem + "%' " +

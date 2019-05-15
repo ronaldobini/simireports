@@ -44,7 +44,7 @@
             <img style="width: 50px;" src="img/syss.png" /></a>
     </div>
     <center>
-    <div id="titulo" style="margin-top:40px; margin-right:70px; color:white; font-size:30px;">003 - Pedidos Efetivados CRM</div>
+    <div id="titulo" style="margin-top:40px; margin-right:70px; color:white; font-size:30px;">003 - Pedidos CRM</div>
     <br />
     <p><%//=sqlview %></p>
        

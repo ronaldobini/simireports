@@ -13,7 +13,7 @@ namespace simireports.simireports
     public partial class WebForm1 : System.Web.UI.Page
     {
         // VERSAO
-        public static string swver = "v1.0.9";
+        public static string swver = "v1.1.2";
         //
         private string loginPost = "-";
         public string senhaPost = "-";
@@ -102,14 +102,18 @@ namespace simireports.simireports
 
                             if (block == 0)
                             {
+                                //Geral
                                 Session["nome"] = nome;
                                 Session["idx"] = idx;
                                 Session["codRepres"] = codRepres;
                                 Session["codRepres"] = codRepres;
                                 Session["idd"] = idUser;
 
+                                //Relatorios
                                 Session["firstJ"] = 1;
                                 Session["first"] = 1;
+
+                                //Login
                                 Session["erro"] = " ";
 
                                 //DEFINE A KEY DO USUARIO

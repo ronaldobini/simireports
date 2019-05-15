@@ -15,7 +15,7 @@
         <a  title="Voltar ao Inicio" href=" Relatorios.aspx"><img style=" width:50px;" src="img/syss.png" /></a>
     </div>
     <center>
-    <div id="titulo" style="margin-top:40px; margin-right:70px; color:white; font-size:30px;">000 - Faturamento</div>
+    <div id="titulo" style="margin-top:40px; margin-right:70px; color:white; font-size:30px;">007 - Faturamento</div>
     <br />
 
         <p><%=sqlview %></p>
@@ -23,7 +23,7 @@
             <form runat="server" id="filtrosComissoes" action="#" method="post">
                 <table style="color:white;">
                     <tr>
-                        <th style="width:100px;">Data Inicio</th>
+                        <th style="width:100px;">Data Inicio<br /> (Min: 2016)</th>
                         <th style="width:100px;">Data Fim</th>
                         <th style="width:100px;">Empresa</th>
                         <th style="width:100px;">Nota</th>
@@ -93,9 +93,9 @@
                      %> 
                         <thead style="background-color: #070a0e; color:white;">
                             <tr>
-                                <th style="width:100px;">Data</th>
-                                <th style="width:100px;">Empresa</th>
                                 <th style="width:100px;">Nota</th>
+                                <th style="width:100px;">Empresa</th>
+                                <th style="width:100px;">Data</th>
                                 <th style="width:100px;">CPF Cliente</th>
                                 <th style="width:100px;">Nome Cliente</th>
                                 <th style="width:120px;">Natureza</th>
@@ -105,9 +105,9 @@
                             </tr>
                         </thead>
                         <tr>
-                            <td style="text-align:left;"><b><%= fat.Data %></b></td>
-                            <td style="text-align:left;"><b><%= fat.Empresa %></b></td>
                             <td style="text-align:left;"><b><%= fat.Nota %></b></td>
+                            <td style="text-align:left;"><b><%= fat.Empresa %></b></td>
+                            <td style="text-align:left;"><b><%= fat.Data %></b></td>
                             <td style="text-align:left;"><b><%= fat.ClienteCPF %></b></td>
                             <td style="text-align:left;"><b><%= fat.NomeCliente %></b></td>
                             <td style="text-align:left;"><b><%= fat.Natureza %></b></td>

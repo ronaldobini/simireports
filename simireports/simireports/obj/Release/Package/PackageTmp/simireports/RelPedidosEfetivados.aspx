@@ -25,7 +25,7 @@
             var first = <%=Session["firstJ"] %>;
             if (first == 1) {
                 var inicio = document.getElementById('datIni');
-                inicio.value = "<%=ontem %>";
+                inicio.value = "<%=hoje %>";
 
                 var fim = document.getElementById('datFim');
                 fim.value = "<%=hoje %>";
@@ -38,12 +38,12 @@
         
     </script>
 </head>
-<body style="background-color:#222;" onload="onload();">
+<body style="background-color:#222;" onload="onload();" >
     <div id="logo" style="margin-left:20px; float:left;">
         <a  title="Voltar ao Inicio" href=" Relatorios.aspx"><img style=" width:50px;" src="img/syss.png" /></a>
     </div>
     <center>
-    <div id="titulo" style="margin-top:40px; margin-right:70px; color:white; font-size:30px;">002 - Pedidos Efetivados</div>
+    <div id="titulo" style="margin-top:40px; margin-right:70px; color:white; font-size:30px;">002 - Pedidos Logix</div>
     <br />
     <p><%=sqlview %></p>
        
@@ -95,9 +95,13 @@
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"/></td>
                         <td style="width:120px;">
                             <select class="form-control" style="width:120px;" id="openclose" runat="server">
-                                <option value="0">Todas</option>
+                                <option value="-1">Todos</option>
+                                <option value="0">Efetivados</option>
                                 <option value="1">Abertos</option>
                                 <option value="2">Fechados</option>
+                                <option value="3">Atrasados</option>
+                                <option value="4">Reprovados</option>
+                                <option value="5">Cancelados</option>
                             </select>
                         </td>
                     </tr>
@@ -133,6 +137,7 @@
                                 <th scope="col" style="width: 5%; text-align:center;">CNPJ</th>
                                 <th scope="col" style="width: 10%; text-align:center;">Cliente</th>
                                 <th scope="col" style="width: 10%; text-align:center;">Representante</th>
+                                <th scope="col" style="width: 10%; text-align:center;">Ped. Cliente</th>
                             </tr>
                         </thead>
                      <%
@@ -142,6 +147,7 @@
                         String numPed = pedEfet.NumPed;
                         string cliente = pedEfet.Cliente;
                         string repres = pedEfet.Repres;
+                        string pedCli = pedEfet.PedCli;
                      %> 
                         <tr>
                             <td style="text-align:center;"><b><%= dat %></b></td>
@@ -150,9 +156,10 @@
                             <td style="text-align:center;"><b><%= codCliente %></b></td>
                             <td style="text-align:center;"><b><%= cliente %></b></td>
                             <td style="text-align:center;"><b><%= repres %></b></td>
+                            <td style="text-align:center;"><b><%= pedCli %></b></td>
                         </tr>
                         <tr>
-                            <td colspan ="6">
+                            <td colspan ="7">
                                 <table class="table table-sm table-dark" style="background-color:#3f4142; width:100%; color:white; font-size: 12px;">
                                     <thead>
                                         <tr>
@@ -161,14 +168,14 @@
                                             <th style="width: 5%; text-align:center;"">Solic</th>
                                             <th style="width: 5%; text-align:center;">Cancel</th>
                                             <th style="width: 5%; text-align:center;"">Atend</th>
-                                            <th style="text-align:right;width: 10%;">Preço Unit</th>
-                                            <th style="text-align:right;width: 10%;">Preço Total Atend</th>
+                                            <th style="text-align:right;width: 10%;">Preço Unit (R$)</th>
+                                            <th style="text-align:right;width: 10%;">Valor Total (R$)</th>
                                             <th style="text-align:right;width: 20%;">Prazo</th>
                                         </tr>
                                     </thead>
                                     <%
-                                    totPed = 0.0m;
-                                    totAtend = 0.0m;
+                                        totPed = 0.0m;
+                                        totAtend = 0.0m;
                                         totPedS = m.formatarDecimal(totPed);
                                         totAtendS = m.formatarDecimal(totPed);
                                         foreach (var item in pedEfet.Itens)
@@ -200,15 +207,38 @@
 
                                             totPend = totPed - totAtend;
                                             totPendS =  m.formatarDecimal(totPend);
+
+                                            string cor = "red";
+                                            if(qtdSolicD == (qtdAtendD + qtdCancelD))
+                                            {
+                                                cor = "#fff";
+                                            }
+
+                                            string link = "";
+                                            string link2 = "";
+                                            if (qtdAtendD > 0m)
+                                            {
+                                                link = "<a href='RelFaturamento.aspx?getPedido="+numPed+"' style='color:"+cor+";'>";
+                                                link2 = "</a>";
+                                            }
+                                            else
+                                            {
+                                                link = "";
+                                                link2 = "";
+                                            }
+
+
                                     %>
                                             <tr>
-                                                <td><%= codItem %></td>
-                                                <td><%= nomeItem %></td>
+                                                <td style="text-align:center;color:<%= cor %>;"><%= codItem %></td>
+                                                <td style="text-align:center;"><%= nomeItem %></td>
                                                 <td style="text-align:center;"><%= qtdSolicD %></td>
                                                 <td style="text-align:center;"><%= qtdCancelD %></td>
-                                                <td style="text-align:center;"><%= qtdAtendD %></td>
-                                                <td style="text-align:right;"><%= "R$"+preUnitS %></td>
-                                                <td style="text-align:right;"><%= "R$"+preUnit*qtdAtendD %></td>
+                                                <td style="text-align:center;color:<%= cor %>;">
+                                                    <%=link %><%= qtdAtendD %><%=link2 %>
+                                                </td>
+                                                <td style="text-align:right;"><%= preUnitS %></td>
+                                                <td style="text-align:right;"><%= preUnit*qtdSolicD %></td>
                                                 <td style="text-align:right;"><%= przEntrega %></td>
                                             </tr>
                                                 

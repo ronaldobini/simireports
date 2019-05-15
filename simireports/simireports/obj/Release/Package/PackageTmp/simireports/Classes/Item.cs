@@ -15,6 +15,14 @@ namespace simireports.simireports.Classes
         private int pedLogix;
         private Decimal comiss;
 
+        public Item(string qtdSolic, string descItem, string codItem, Decimal preUnit)
+        {
+            this.qtdAtend = qtdSolic;
+            this.nomeItem = descItem;
+            this.codItem = codItem;
+            this.precoUnit = preUnit;
+        }
+
         public Item(string qtdSolic, string qtdCancel, string qtdAtend, string nomeItem, string przEntrega, string codItem)
         {
             this.qtdSolic = qtdSolic;
