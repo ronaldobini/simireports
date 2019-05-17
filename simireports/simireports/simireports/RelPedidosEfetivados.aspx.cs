@@ -219,13 +219,14 @@ namespace simireports
             IfxConnection conn = new BancoLogix().abrir();
 
             string sql = "SELECT a.cod_empresa, a."+ tipoData + ", a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres, " +
-                " b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, b.pre_unit, b.num_sequencia, a.num_pedido_cli " +
-                                   " FROM pedidos a" +
+                " b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, b.pre_unit, b.num_sequencia, a.num_pedido_cli, " +
+                " b.qtd_pecas_romaneio, e.qtd_liberada, e.qtd_reservada " +
+                                   " FROM pedidos a" + 
                                     " JOIN ped_itens b on a.num_pedido = b.num_pedido AND a.cod_empresa = b.cod_empresa " +
                                     " JOIN clientes c on c.cod_cliente = a.cod_cliente" +
                                     " JOIN item i on i.cod_item = b.cod_item and i.cod_empresa = b.cod_empresa " +
                                     " JOIN representante r on r.cod_repres = a.cod_repres " +
-
+                                    " JOIN estoque e on e.cod_item = b.cod_item and e.cod_empresa = b.cod_empresa " +
                                    " WHERE c.cod_cliente LIKE '%" + postCodCliente + "%'" +
 
                                    " AND c.nom_cliente LIKE '%" + postCliente + "%'" +
@@ -249,7 +250,7 @@ namespace simireports
                                    postFam +
 
                                    " AND a.num_pedido = b.num_pedido AND a.cod_empresa = b.cod_empresa AND c.cod_cliente = a.cod_cliente" +
-                                   " GROUP BY a.cod_empresa, a." + tipoData + ", a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres, b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, b.pre_unit,b.num_sequencia,a.num_pedido_cli" +
+                                   " GROUP BY a.cod_empresa, a." + tipoData + ", a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres, b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, b.pre_unit,b.num_sequencia,a.num_pedido_cli, b.qtd_pecas_romaneio, e.qtd_liberada, e.qtd_reservada " +
                                    " ORDER BY a." + tipoData + " desc, a.num_pedido,b.num_sequencia";
 
             //sqlview = sql; //ativa a exibicao do sql na tela
@@ -275,7 +276,7 @@ namespace simireports
 
             if (reader != null && reader.HasRows)
             {
-                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel PedEfetiv", (string)Session["nome"], postRepres + " | " + postDatInicio + " | " + postCliente);
+                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel PedEfetiv", (string)Session["nome"], postRepres + " | " + postDatInicio + " | " + postCliente + " | " + postSit);
                 while (reader.Read())
                 {
 
@@ -330,6 +331,9 @@ namespace simireports
                     string przEntregaS = reader.GetString(10);
                     string codItem = reader.GetString(11);
                     string preUnitS = reader.GetString(12);
+                    string qtdRom = reader.GetString(15);
+                    string qtdLib = reader.GetString(16);
+                    string qtdRes = reader.GetString(17);
 
 
                     preUnitS = m.pontoPorVirgula(preUnitS);
@@ -340,6 +344,9 @@ namespace simireports
                     Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
                     Decimal qtdCancelD = Decimal.Round(Decimal.Parse(qtdCancel), 0);
                     Decimal qtdAtendD = Decimal.Round(Decimal.Parse(qtdAtend), 0);
+                    Decimal qtdRomD = Decimal.Round(Decimal.Parse(qtdRom), 0);
+                    Decimal qtdLibD = Decimal.Round(Decimal.Parse(qtdLib), 0);
+                    Decimal qtdResD = Decimal.Round(Decimal.Parse(qtdRes), 0);
                     totGeral += (qtdSolicD * preUnit);
                     totGeralP += ((qtdSolicD - qtdCancelD - qtdAtendD) * preUnit);
                     totGeralA += (qtdAtendD * preUnit);
@@ -355,7 +362,7 @@ namespace simireports
                         fItem = true;
                     }
 
-                    item = new Item(qtdSolic, qtdCancel, qtdAtend, nomeItem, przEntregaS, codItem, preUnit);
+                    item = new Item(qtdSolic, qtdCancel, qtdAtend, nomeItem, przEntregaS, codItem, preUnit, qtdRom, qtdLib, qtdRes);
 
 
                 }

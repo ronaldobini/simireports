@@ -8,7 +8,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
      <title>SimiWeb - <%=Session["swver"] %></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
    <script>
         //onload
         function onload() {
@@ -18,7 +19,7 @@
             if (represChange != "sim") {
                 var repres = document.getElementById('repres');
                 repres.disabled = true;
-                repres.value = "<%=postRepres %>";
+                repres.value = "<%=Session["nome"] %>";
             }
 
             //first
@@ -31,9 +32,27 @@
                 fim.value = "<%=hoje %>";
 
                 var repres = document.getElementById('repres');
-                repres.value = "<%=postRepres %>";
             }
-        }
+       }
+
+
+       $(document).ready(function () {
+
+           $(".mostrar").click(function () {
+            $(".mostrar").hide();
+            $(".espacoBotao").hide();
+            $(".qtdOcultos").show(500);
+            $(".ocultar").show(500);
+           });
+
+           $(".ocultar").click(function () {
+            $(".qtdOcultos").hide();
+            $(".ocultar").hide();
+            $(".mostrar").show(500);
+            $(".espacoBotao").show(500);
+           });
+
+        });
 
         
     </script>
@@ -166,9 +185,13 @@
                                             <th style="width: 10%;">Cod. do Item</th>
                                             <th style="width: 35%;">Desc. Item</th>
                                             <th style="width: 5%; text-align:center;"">Solic</th>
-                                            <th style="width: 5%; text-align:center;">Cancel</th>
+                                            <th  style="width: 5%; text-align:center;">Cancel</th>
                                             <th style="width: 5%; text-align:center;"">Atend</th>
-                                            <th style="text-align:right;width: 10%;">Preço Unit (R$)</th>
+                                            <th class="espacoBotao" colspan="3" style="width: 5%; text-align:center;"><button style="background-color:#222; color:white; font-size:10px;" class="mostrar">></button></th>
+                                            <th class="qtdOcultos" style="width: 5%; text-align:center;display:none;">Rom</th>
+                                            <th class="qtdOcultos" style="width: 5%; text-align:center;display:none;">Lib</th>
+                                            <th class="qtdOcultos" style="width: 5%; text-align:center;display:none;">Res</th>
+                                            <th style="text-align:right;width: 10%;"><button style="background-color:#222;color:white;font-size:10px;display:none;" class="ocultar"><</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Preço Unit (R$)</th>
                                             <th style="text-align:right;width: 10%;">Valor Total (R$)</th>
                                             <th style="text-align:right;width: 20%;">Prazo</th>
                                         </tr>
@@ -192,6 +215,18 @@
                                             string qtdAtend = item.QtdAtend;
                                             qtdAtend = m.pontoPorVirgula(qtdAtend);
                                             Decimal qtdAtendD = Decimal.Round(Decimal.Parse(qtdAtend),0);
+
+                                            string qtdRom = item.QtdRom;
+                                            qtdRom = m.pontoPorVirgula(qtdRom);
+                                            Decimal qtdRomD = Decimal.Round(Decimal.Parse(qtdRom),0);
+
+                                            string qtdLib = item.QtdLib;
+                                            qtdLib = m.pontoPorVirgula(qtdLib);
+                                            Decimal qtdLibD = Decimal.Round(Decimal.Parse(qtdLib),0);
+
+                                            string qtdRes = item.QtdRes;
+                                            qtdRes = m.pontoPorVirgula(qtdRes);
+                                            Decimal qtdResD = Decimal.Round(Decimal.Parse(qtdRes),0);
 
                                             string nomeItem = item.NomeItem;
                                             string przEntrega = item.PrzEntrega;
@@ -237,14 +272,18 @@
                                                 <td style="text-align:center;color:<%= cor %>;">
                                                     <%=link %><%= qtdAtendD %><%=link2 %>
                                                 </td>
+                                                <td class="espacoBotao" colspan="3"></td>
+                                                <td class="qtdOcultos" style="text-align:center;display:none;"><%= qtdRomD %></td>
+                                                <td class="qtdOcultos" style="text-align:center;display:none;"><%= qtdLibD %></td>
+                                                <td class="qtdOcultos" style="text-align:center;display:none;"><%= qtdResD %></td>
                                                 <td style="text-align:right;"><%= preUnitS %></td>
                                                 <td style="text-align:right;"><%= preUnit*qtdSolicD %></td>
-                                                <td style="text-align:right;"><%= przEntrega %></td>
+                                                <td style="text-align:right;"><%= m.configDataBanco2Human(przEntrega) %></td>
                                             </tr>
                                                 
                                     <% } %>
                                     <tr>
-                                        <td colspan="3" style="background-color: #070a0e; color:white;"><b>Total Pedido: R$ <%= totPedS %></td>
+                                        <td colspan="6" style="background-color: #070a0e; color:white;"><b>Total Pedido: R$ <%= totPedS %></td>
                                         <td colspan="3" style="background-color: #070a0e; color:white;"><b>Total Atendido: R$ <%= totAtendS %></td>
                                         <td colspan="3" style="background-color: #070a0e; color:white;"><b>Total Pendente: R$ <%= totPendS %></td>
                                     </tr>

@@ -53,7 +53,7 @@ namespace simireports.simireports
 
                         {
                             //OK PERMANECE NA PAGINA
-                            string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel Comissoes Espec", (string)Session["nome"], " ");
+                            string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel Comissoes Espec", (string)Session["nome"], data1);
                         }
                         else
                         {

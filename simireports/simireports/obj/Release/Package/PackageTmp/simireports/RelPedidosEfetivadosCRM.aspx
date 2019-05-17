@@ -18,20 +18,19 @@
             if (represChange != "sim") {
                 var repres = document.getElementById('repres');
                 repres.disabled = true;
-                repres.value = "<%=postRepres %>";
+                repres.value = "<%=Session["nome"] %>";
             }
 
             //first
             var first = <%=Session["firstJ"] %>;
             if (first == 1) {
                 var inicio = document.getElementById('datIni');
-                inicio.value = "<%=ontem %>";
+                inicio.value = "<%=hoje %>";
 
                 var fim = document.getElementById('datFim');
                 fim.value = "<%=hoje %>";
 
                 var repres = document.getElementById('repres');
-                repres.value = "<%=postRepres %>";
             }
         }
 

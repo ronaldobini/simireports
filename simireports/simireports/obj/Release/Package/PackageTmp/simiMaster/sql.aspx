@@ -7,11 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
 </head>
-<body>
+<body style="background-color:black; color:white;">
+    <center>
     <form id="formsql" runat="server" action="#" method="post">
         <div>
             <input type="text" name="sqlExe" id="sqlExe" style="width:560px;" runat="server"/>
-            <input type="submit" value="Executar" runat="server" onserverclick="exe_Click" />
+            <input style="background-color:black; color:white;" type="submit" value="Executar" runat="server" onserverclick="exe_Click" />
         </div>
     </form>
     <br /><br /><br />

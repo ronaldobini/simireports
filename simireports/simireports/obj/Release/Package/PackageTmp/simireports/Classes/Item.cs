@@ -14,6 +14,10 @@ namespace simireports.simireports.Classes
         private Decimal desconto;
         private int pedLogix;
         private Decimal comiss;
+        private string qtdRom;
+        private string qtdLib;
+        private string qtdRes;
+
 
         public Item(string qtdSolic, string descItem, string codItem, Decimal preUnit)
         {
@@ -42,6 +46,21 @@ namespace simireports.simireports.Classes
             this.codItem = codItem;
             this.precoUnit = precoUnit;
         }
+        public Item(string qtdSolic, string qtdCancel, string qtdAtend, string nomeItem, string przEntrega, string codItem, Decimal precoUnit, string qtdRom, string qtdLib, string qtdRes)
+        {
+            this.qtdSolic = qtdSolic;
+            this.qtdCancel = qtdCancel;
+            this.qtdAtend = qtdAtend;
+            this.nomeItem = nomeItem;
+            this.przEntrega = przEntrega;
+            this.codItem = codItem;
+            this.precoUnit = precoUnit;
+            this.qtdRom = qtdRom;
+            this.qtdLib = qtdLib;
+            this.qtdRes = qtdRes;
+        }
+
+        
         public Item(string qtdSolic, string qtdCancel, string qtdAtend, string nomeItem, string przEntrega, string codItem, Decimal precoUnit, Decimal desconto)
         {
             this.qtdSolic = qtdSolic;
@@ -78,6 +97,12 @@ namespace simireports.simireports.Classes
             this.pedLogix = pedLogix;
             this.comiss = comiss;
         }
+
+
+       
+
+
+
         public string QtdSolic { get => qtdSolic; set => qtdSolic = value; }
         public string QtdCancel { get => qtdCancel; set => qtdCancel = value; }
         public string QtdAtend { get => qtdAtend; set => qtdAtend = value; }
@@ -88,5 +113,8 @@ namespace simireports.simireports.Classes
         public decimal Desconto { get => desconto; set => desconto = value; }
         public int PedLogix { get => pedLogix; set => pedLogix = value; }
         public decimal Comiss { get => comiss; set => comiss = value; }
+        public string QtdRom { get => qtdRom; set => qtdRom = value; }
+        public string QtdLib { get => qtdLib; set => qtdLib = value; }
+        public string QtdRes { get => qtdRes; set => qtdRes = value; }
     }
 }

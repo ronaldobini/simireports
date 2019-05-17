@@ -181,7 +181,7 @@ namespace simireports
             totComiss = 0.0M;
             if (reader != null && reader.HasRows)
             {
-                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel Comissoes", (string)Session["nome"], postRepres);
+                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel Comissoes", (string)Session["nome"], postRepres + " | " + postDatInicio + " | " + postDatFim);
                 while (reader.Read())
                 {
                     string codEmpresa = reader.GetString(0);

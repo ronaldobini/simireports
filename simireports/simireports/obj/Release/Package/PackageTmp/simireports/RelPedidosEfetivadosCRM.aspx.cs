@@ -99,7 +99,7 @@ namespace simireports
             postCodItem = m.configCoringas(postCodItem);
 
             postDatInicio = datIni.Value;
-            if (postDatInicio == "") postDatInicio = ontem;
+            if (postDatInicio == "") postDatInicio = hoje;
 
             postDatFim = datFim.Value;
             if (postDatFim == "") postDatFim = hoje;

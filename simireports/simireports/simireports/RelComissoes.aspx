@@ -17,8 +17,8 @@
             var represChange = "<%=represChange %>";
             if (represChange != "sim") {
                 var repres = document.getElementById('repres');
+                repres.value = "<%=Session["nome"] %>";
                 repres.disabled = true;
-                repres.value = "<%=postRepres %>";
             }
 
             //first
@@ -31,7 +31,6 @@
                 fim.value = "<%=hoje %>";
 
                 var repres = document.getElementById('repres');
-                repres.value = "<%=postRepres %>";
             }
         }
 

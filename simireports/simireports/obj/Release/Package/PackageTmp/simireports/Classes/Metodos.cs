@@ -299,7 +299,7 @@ namespace simireports.simireports.Classes
             {
                 SqlConnection conn = new BancoAzure().abrir();
                 SqlConnection conn2 = new BancoAzure().abrir();
-                string sql = "SELECT * from sw_usuarios where id_crm = " + idUser;
+                string sql = "SELECT id,senha_rand from sw_usuarios where id_crm = " + idUser;
 
                 SqlDataReader reader = new BancoAzure().consultar(sql, conn);
                 string tempo = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -308,13 +308,21 @@ namespace simireports.simireports.Classes
                 if (reader.HasRows)
                 {
                     int idsw = reader.GetInt32(0);
-                    new BancoAzure().executar("UPDATE sw_usuarios SET ult_login = '" + tempo + "', nivel = "+nivel+" where id = " + idsw, conn2);
+                    string randSenha = "";
+                    if (reader.IsDBNull(1)) 
+                    {
+                        randSenha = senhaAleatoria();
+                    }
+                    else
+                    {
+                        randSenha = reader.GetString(1);
+                    }
+                    new BancoAzure().executar("UPDATE sw_usuarios SET ult_login = '" + tempo + "', nivel = "+nivel+ ", senha_rand = '"+randSenha+"' where id = " + idsw, conn2);
                 }
                 else
                 {
                     string vazio = "-";
-                    //string randSenha = senhaAleatoria();
-                    string randSenha = " ";
+                    string randSenha = senhaAleatoria();
                     string result = new BancoAzure().executar("INSERT INTO sw_usuarios (id_crm, funcao, grupo, nivel, ult_login, erros_senha, gerenciados, senha_rand, avisos, block) " +
                                                                 "VALUES (" + idUser + ",'" + vazio + "','" + vazio + "'," + nivel + ",'" + tempo + "', 0" +
                                                                 ",'" + vazio + "','" + randSenha + "','" + vazio + "',0)", conn2);
