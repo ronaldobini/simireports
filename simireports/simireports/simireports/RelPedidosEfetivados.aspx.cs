@@ -347,7 +347,7 @@ namespace simireports
                     //Decimal qtdRomD = Decimal.Round(Decimal.Parse(qtdRom), 0);
                     //Decimal qtdLibD = Decimal.Round(Decimal.Parse(qtdLib), 0);
                     //Decimal qtdResD = Decimal.Round(Decimal.Parse(qtdRes), 0);
-                    totGeral += (qtdSolic * preUnit);
+                    totGeral += ((qtdSolic - qtdCancel) * preUnit);
                     totGeralP += ((qtdSolic - qtdCancel - qtdAtend) * preUnit);
                     totGeralA += (qtdAtend * preUnit);
 

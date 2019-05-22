@@ -212,7 +212,7 @@ namespace simireports
             string cpfCli = "";
             string cliente = "";
             string preUnitS = "";
-            string qtdItem = "";
+            int qtdItem = 0;
             string totalS = "";
             string nat = "";
             string pedido = "";
@@ -264,9 +264,9 @@ namespace simireports
                     preUnitS = reader.GetString(7);
                     preUnitS = m.pontoPorVirgula(preUnitS);
                     Decimal preUnit = Decimal.Round(Decimal.Parse(preUnitS), 2);
-                    qtdItem = reader.GetString(8);
-                    qtdItem = m.pontoPorVirgula(qtdItem);
-                    qtdItem = Convert.ToString(Decimal.Round(Decimal.Parse(qtdItem), 0));
+                    qtdItem = m.qtdLogixToInt(reader.GetString(8));
+                    //qtdItem = m.pontoPorVirgula(qtdItem);
+                    //qtdItem = Convert.ToString(Decimal.Round(Decimal.Parse(qtdItem), 0));
                     totalS = reader.GetString(9);
                     totalS = m.pontoPorVirgula(totalS);
                     Decimal total = Decimal.Round(Decimal.Parse(totalS), 2);
@@ -274,7 +274,8 @@ namespace simireports
                     pedido = reader.GetString(11);
                     pedCli = reader.GetString(12);
                     trans = reader.GetString(13);
-                    item = new Item(qtdItem, descItem, codItem, preUnit);
+                    //item = new Item(qtdItem, descItem, codItem, preUnit);
+                    item = new Item(codItem,0,0,qtdItem,descItem,preUnit,"",0,0,0,0,0,0);
 
                     totFaturamento += total;
                 }

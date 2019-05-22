@@ -114,13 +114,13 @@
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"/></td>
                         <td style="width:120px;">
                             <select class="form-control" style="width:120px;" id="openclose" runat="server">
-                                <option value="-1">Todos</option>
                                 <option value="0">Efetivados</option>
+                                <option value="-1">Todos</option>
                                 <option value="1">Abertos</option>
                                 <option value="2">Fechados</option>
-                                <option value="3">Atrasados</option>
                                 <option value="4">Reprovados</option>
                                 <option value="5">Cancelados</option>
+                                <option value="3">Atrasados</option>
                             </select>
                         </td>
                     </tr>
@@ -133,7 +133,7 @@
         <div id="resultados">
             
             <font color=white>Mostrando <%=pedsEfets.Count%> resultados, de <%=postDatInicio %> a <%=postDatFim %> <br />
-                Total Pedidos: R$ <%=totGeralS %> | Total Atendido: R$ <%=totGeralAS %> | Total Pendente: R$ <%=totGeralPS %> </font><br/>
+                Total Efetivado: R$ <%=totGeralS %> | Total Atendido: R$ <%=totGeralAS %> | Total Pendente: R$ <%=totGeralPS %> </font><br/>
             <table class="table table-hover table-dark" style = "max-width:95%; color:white; font-size: 12px;">
                 
                 
@@ -211,7 +211,7 @@
                                             Decimal preUnit = Decimal.Round(item.PrecoUnit,2);
                                             String preUnitS = m.formatarDecimal(preUnit);
 
-                                            totPed += preUnit*item.QtdSolic;
+                                            totPed += preUnit*(item.QtdSolic-item.QtdCancel);
                                             totAtend += preUnit*item.QtdAtend;
 
                                             totPedS = m.formatarDecimal(totPed);
@@ -219,6 +219,7 @@
 
                                             totPend = totPed - totAtend;
                                             totPendS =  m.formatarDecimal(totPend);
+
 
                                             string cor = "red";
                                             if(item.QtdSolic == (item.QtdAtend + item.QtdCancel))

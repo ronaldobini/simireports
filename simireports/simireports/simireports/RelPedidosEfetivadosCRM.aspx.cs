@@ -248,7 +248,7 @@ namespace simireports
 
                     //qtdSolic = m.pontoPorVirgula(qtdSolic);
                     //Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
-                    totGeral += ((Decimal)qtdSolic * preUnit);
+                    totGeral += (((Decimal)qtdSolic - (Decimal)qtdCancel) * preUnit);
                     totGeralS = m.formatarDecimal(totGeral);
                     Double desconto = reader.GetDouble(13);
 

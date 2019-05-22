@@ -114,13 +114,13 @@
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"/></td>
                         <td style="width:120px;">
                             <select class="form-control" style="width:120px;" id="openclose" runat="server">
-                                <option value="-1">Todos</option>
                                 <option value="0">Efetivados</option>
+                                <option value="-1">Todos</option>
                                 <option value="1">Abertos</option>
                                 <option value="2">Fechados</option>
-                                <option value="3">Atrasados</option>
                                 <option value="4">Reprovados</option>
                                 <option value="5">Cancelados</option>
+                                <option value="3">Atrasados</option>
                             </select>
                         </td>
                     </tr>
@@ -133,7 +133,7 @@
         <div id="resultados">
             
             <font color=white>Mostrando <%=pedsEfets.Count%> resultados, de <%=postDatInicio %> a <%=postDatFim %> <br />
-                Total Pedidos: R$ <%=totGeralS %> | Total Atendido: R$ <%=totGeralAS %> | Total Pendente: R$ <%=totGeralPS %> </font><br/>
+                Total Efetivado: R$ <%=totGeralS %> | Total Atendido: R$ <%=totGeralAS %> | Total Pendente: R$ <%=totGeralPS %> </font><br/>
             <table class="table table-hover table-dark" style = "max-width:95%; color:white; font-size: 12px;">
                 
                 
@@ -204,29 +204,6 @@
                                         foreach (var item in pedEfet.Itens)
                                         {
                                             string codItem = item.CodItem;
-                                            string qtdSolic = item.QtdSolic;
-                                            qtdSolic = m.pontoPorVirgula(qtdSolic);
-                                            Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic),0);
-
-                                            string qtdCancel = item.QtdCancel;
-                                            qtdCancel = m.pontoPorVirgula(qtdCancel);
-                                            Decimal qtdCancelD = Decimal.Round(Decimal.Parse(qtdCancel),0);
-
-                                            string qtdAtend = item.QtdAtend;
-                                            qtdAtend = m.pontoPorVirgula(qtdAtend);
-                                            Decimal qtdAtendD = Decimal.Round(Decimal.Parse(qtdAtend),0);
-
-                                            string qtdRom = item.QtdRom;
-                                            qtdRom = m.pontoPorVirgula(qtdRom);
-                                            Decimal qtdRomD = Decimal.Round(Decimal.Parse(qtdRom),0);
-
-                                            string qtdLib = item.QtdLib;
-                                            qtdLib = m.pontoPorVirgula(qtdLib);
-                                            Decimal qtdLibD = Decimal.Round(Decimal.Parse(qtdLib),0);
-
-                                            string qtdRes = item.QtdRes;
-                                            qtdRes = m.pontoPorVirgula(qtdRes);
-                                            Decimal qtdResD = Decimal.Round(Decimal.Parse(qtdRes),0);
 
                                             string nomeItem = item.NomeItem;
                                             string przEntrega = item.PrzEntrega;
@@ -234,8 +211,8 @@
                                             Decimal preUnit = Decimal.Round(item.PrecoUnit,2);
                                             String preUnitS = m.formatarDecimal(preUnit);
 
-                                            totPed += preUnit*qtdSolicD;
-                                            totAtend += preUnit*qtdAtendD;
+                                            totPed += preUnit*(item.QtdSolic-item.QtdCancel);
+                                            totAtend += preUnit*item.QtdAtend;
 
                                             totPedS = m.formatarDecimal(totPed);
                                             totAtendS = m.formatarDecimal(totAtend);
@@ -243,15 +220,16 @@
                                             totPend = totPed - totAtend;
                                             totPendS =  m.formatarDecimal(totPend);
 
+
                                             string cor = "red";
-                                            if(qtdSolicD == (qtdAtendD + qtdCancelD))
+                                            if(item.QtdSolic == (item.QtdAtend + item.QtdCancel))
                                             {
                                                 cor = "#fff";
                                             }
 
                                             string link = "";
                                             string link2 = "";
-                                            if (qtdAtendD > 0m)
+                                            if (item.QtdAtend > 0m)
                                             {
                                                 link = "<a href='RelFaturamento.aspx?getPedido="+numPed+"' style='color:"+cor+";'>";
                                                 link2 = "</a>";
@@ -267,17 +245,17 @@
                                             <tr>
                                                 <td style="text-align:center;color:<%= cor %>;"><%= codItem %></td>
                                                 <td style="text-align:center;"><%= nomeItem %></td>
-                                                <td style="text-align:center;"><%= qtdSolicD %></td>
-                                                <td style="text-align:center;"><%= qtdCancelD %></td>
+                                                <td style="text-align:center;"><%= item.QtdSolic %></td>
+                                                <td style="text-align:center;"><%= item.QtdCancel %></td>
                                                 <td style="text-align:center;color:<%= cor %>;">
-                                                    <%=link %><%= qtdAtendD %><%=link2 %>
+                                                    <%=link %><%= item.QtdAtend %><%=link2 %>
                                                 </td>
                                                 <td class="espacoBotao" colspan="3"></td>
-                                                <td class="qtdOcultos" style="text-align:center;display:none;"><%= qtdRomD %></td>
-                                                <td class="qtdOcultos" style="text-align:center;display:none;"><%= qtdLibD %></td>
-                                                <td class="qtdOcultos" style="text-align:center;display:none;"><%= qtdResD %></td>
+                                                <td class="qtdOcultos" style="text-align:center;display:none;"><%= item.QtdRom %></td>
+                                                <td class="qtdOcultos" style="text-align:center;display:none;"><%= item.QtdLib %></td>
+                                                <td class="qtdOcultos" style="text-align:center;display:none;"><%= item.QtdRes %></td>
                                                 <td style="text-align:right;"><%= preUnitS %></td>
-                                                <td style="text-align:right;"><%= preUnit*qtdSolicD %></td>
+                                                <td style="text-align:right;"><%= preUnit*item.QtdSolic %></td>
                                                 <td style="text-align:right;"><%= m.configDataBanco2Human(przEntrega) %></td>
                                             </tr>
                                                 

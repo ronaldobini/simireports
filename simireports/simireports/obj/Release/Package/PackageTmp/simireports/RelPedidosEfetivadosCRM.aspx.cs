@@ -230,9 +230,9 @@ namespace simireports
                     //{
                     //    while (reader2.Read())
                     //    {
-                    Double qtdSolic = reader.GetDouble(6);
-                    Double qtdCancel = reader.GetDouble(7);
-                    Double qtdAtend = reader.GetDouble(8);
+                    int qtdSolic = Convert.ToInt32(reader.GetDouble(6));
+                    int qtdCancel = Convert.ToInt32(reader.GetDouble(7));
+                    int qtdAtend = Convert.ToInt32(reader.GetDouble(8));
                     string nomeItem = reader.GetString(9);
 
                     string przEntregaS = "";
@@ -248,7 +248,7 @@ namespace simireports
 
                     //qtdSolic = m.pontoPorVirgula(qtdSolic);
                     //Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
-                    totGeral += ((Decimal)qtdSolic * preUnit);
+                    totGeral += (((Decimal)qtdSolic - (Decimal)qtdCancel) * preUnit);
                     totGeralS = m.formatarDecimal(totGeral);
                     Double desconto = reader.GetDouble(13);
 
@@ -258,8 +258,10 @@ namespace simireports
                         pedLogix = reader.GetInt32(14);
                     }
 
-                    Decimal comiss;
-                    item = new Item(qtdSolic.ToString(), qtdCancel.ToString(), qtdAtend.ToString(), nomeItem, przEntregaS, codItem, preUnit, Decimal.Round((((Decimal)desconto)*100m)),pedLogix);
+                    Double comiss = reader.GetDouble(16);
+                    comiss *= 100;
+                    item = new Item(codItem, qtdSolic, qtdCancel, qtdAtend, nomeItem, preUnit, przEntregaS, Decimal.Round((((Decimal)desconto) * 100m)),
+                        pedLogix, Decimal.Round((Decimal)comiss, 3), 0, 0, 0);
 
                     //    itens.Add(item);
                     //}

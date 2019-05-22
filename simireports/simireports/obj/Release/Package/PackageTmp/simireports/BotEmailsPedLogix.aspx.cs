@@ -142,21 +142,20 @@ namespace simireports.simireports
                         codCliente = reader.GetString(2);
                         cliente = reader.GetString(4);
                         repres = reader.GetString(5);
-                        
-                        string qtdSolic = reader.GetString(6);
-                        string qtdCancel = reader.GetString(7);
-                        string qtdAtend = reader.GetString(8);
+
+                        int qtdSolic = Convert.ToInt32(reader.GetDouble(6));
+                        int qtdCancel = Convert.ToInt32(reader.GetDouble(7));
+                        int qtdAtend = Convert.ToInt32(reader.GetDouble(8));
+
                         string nomeItem = reader.GetString(9);
                         string przEntregaS = reader.GetString(10);
                         string codItem = reader.GetString(11);
                         string preUnitS = reader.GetString(12);
                         preUnitS = m.pontoPorVirgula(preUnitS);
                         Decimal preUnit = Decimal.Round(Decimal.Parse(preUnitS), 2);
-                        qtdSolic = m.pontoPorVirgula(qtdSolic);
-                        Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
-                        totGeral += (qtdSolicD * preUnit);
+                        totGeral += (qtdSolic * preUnit);
                         totGeralS = m.formatarDecimal(totGeral);
-                        item = new Item(qtdSolic, qtdCancel, qtdAtend, nomeItem, przEntregaS, codItem, preUnit);
+                        item = new Item(codItem,qtdSolic,qtdCancel,qtdAtend,nomeItem,preUnit,przEntregaS,0,0,0,0,0,0);
 
                     }
 
@@ -230,20 +229,12 @@ namespace simireports.simireports
                     totAtendS = m.formatarDecimal(totPed);
                     foreach (var itemV in pedE.Itens)
                     {
-                        string qtdSolic = m.pontoPorVirgula(itemV.QtdSolic);
-                        Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
-
-                        string qtdCancel = m.pontoPorVirgula(itemV.QtdCancel);
-                        Decimal qtdCancelD = Decimal.Round(Decimal.Parse(qtdCancel), 0);
-
-                        string qtdAtend = m.pontoPorVirgula(itemV.QtdAtend);
-                        Decimal qtdAtendD = Decimal.Round(Decimal.Parse(qtdAtend), 0);
 
                         Decimal preUnit = Decimal.Round(itemV.PrecoUnit, 2);
                         String preUnitS = m.formatarDecimal(preUnit);
 
-                        totPed += preUnit * qtdSolicD;
-                        totAtend += preUnit * qtdAtendD;
+                        totPed += preUnit * itemV.QtdSolic;
+                        totAtend += preUnit * itemV.QtdAtend;
 
                         totPedS = m.formatarDecimal(totPed);
                         totAtendS = m.formatarDecimal(totAtend);
@@ -255,9 +246,9 @@ namespace simireports.simireports
                         corpoEmail += "<tr>" +
                             "<td>" + itemV.CodItem + "</td>" +
                             "<td>" + itemV.NomeItem + " </td>" +
-                            "<td style = \"text-align:center;\">" + qtdSolicD + " </td>" +
-                            "<td style = \"text-align:center;\">" + qtdCancelD + " </td>" +
-                            "<td style = \"text-align:center;\">" + qtdAtendD + " </td>" +
+                            "<td style = \"text-align:center;\">" + itemV.QtdSolic + " </td>" +
+                            "<td style = \"text-align:center;\">" + itemV.QtdCancel + " </td>" +
+                            "<td style = \"text-align:center;\">" + itemV.QtdAtend + " </td>" +
                             "<td>R$" + preUnitS + "</td>" +
                             "<td>R$" + totAtend + "</td>" +
                             "<td>R$" + totPed + "</td>" +

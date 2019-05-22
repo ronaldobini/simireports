@@ -309,7 +309,7 @@ namespace simireports.simireports.Classes
                 {
                     int idsw = reader.GetInt32(0);
                     string randSenha = "";
-                    if (reader.IsDBNull(1)) 
+                    if (reader.IsDBNull(1))
                     {
                         randSenha = senhaAleatoria();
                     }
@@ -317,7 +317,7 @@ namespace simireports.simireports.Classes
                     {
                         randSenha = reader.GetString(1);
                     }
-                    new BancoAzure().executar("UPDATE sw_usuarios SET ult_login = '" + tempo + "', nivel = "+nivel+ ", senha_rand = '"+randSenha+"' where id = " + idsw, conn2);
+                    new BancoAzure().executar("UPDATE sw_usuarios SET ult_login = '" + tempo + "', nivel = " + nivel + ", senha_rand = '" + randSenha + "' where id = " + idsw, conn2);
                 }
                 else
                 {
@@ -335,9 +335,9 @@ namespace simireports.simireports.Classes
 
         }
 
-
-
-
-
+        public int qtdLogixToInt(string qtdS)
+        {
+            return Convert.ToInt32(Decimal.Parse(pontoPorVirgula(qtdS)));
+        }
     }
 }

@@ -42,7 +42,7 @@
 
     <div id="resultados">
         <br /><br /><br />
-        <font color="white">25/04 - 22/05</font>
+        <font color="white"><%=data1 %> - <%=data2 %></font>
         <table class="table table-striped table-dark" style = "max-width:25%; color:white; font-size: 12px;">
             <tr>
                 <th style="width:80px; text-align:left;">Repres.</th>

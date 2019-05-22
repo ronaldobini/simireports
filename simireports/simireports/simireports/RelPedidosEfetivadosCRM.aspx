@@ -88,7 +88,7 @@
 
         <div id="resultados">
             
-            <font color=white>Mostrando <%=pedsEfets.Count%> resultados, de <%=m.configDataBanco2Human(postDatInicio) %> a <%=m.configDataBanco2Human(postDatFim) %> - Total R$ <%=totGeralS %></font><br/>
+            <font color=white>Mostrando <%=pedsEfets.Count%> resultados, de <%=m.configDataBanco2Human(postDatInicio) %> a <%=m.configDataBanco2Human(postDatFim) %> - Total Efetivado R$ <%=totGeralS %></font><br/>
                     
         <font color=white>Carregamento: <%= demora.Seconds%>.<%= demora.Milliseconds%>s</font><br/>
             <table class="table table-hover table-dark" style = "max-width:95%; color:white; font-size: 12px;">
@@ -177,7 +177,7 @@
                                             Decimal comiss = item.Comiss;
                                             int pedLogix = item.PedLogix;
 
-                                            totPed += preUnit*qtdSolic;
+                                            totPed += preUnit*(qtdSolic-qtdCancel);
                                             totAtend += preUnit*qtdAtend;
                                             totCancel += preUnit*qtdCancel;
 
