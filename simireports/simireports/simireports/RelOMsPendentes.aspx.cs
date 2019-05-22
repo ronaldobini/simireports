@@ -16,6 +16,7 @@ namespace simireports
 
         public static string postTipoEntrega;
         public static string postEmpresa;
+        public static Metodos m = new Metodos();
         
 
         public List<OMPendente> omsps = new List<OMPendente>();
@@ -120,15 +121,16 @@ namespace simireports
                     {
                         while (reader2.Read())
                         {
-                            string qtdSolic = reader2.GetString(0);
-                            string qtdCancel = reader2.GetString(1);
-                            string qtdAtend = reader2.GetString(2);
+                            int qtdSolic = m.qtdLogixToInt(reader2.GetString(0));
+                            int qtdCancel = m.qtdLogixToInt(reader2.GetString(1));
+                            int qtdAtend = m.qtdLogixToInt(reader2.GetString(2));
                             string nomeItem = reader2.GetString(3);
                             //DateTime przEntregaS = reader.GetDateTime(4);
                             string przEntregaS = reader2.GetString(4);
                             //DateTime przEntrega = Convert.ToDateTime(przEntregaS);
                             string codItem = reader2.GetString(5);
-                            Item item = new Item(qtdSolic, qtdCancel, qtdAtend, nomeItem, przEntregaS,codItem);
+                            //Item item = new Item(qtdSolic, qtdCancel, qtdAtend, nomeItem, przEntregaS,codItem);
+                            Item item = new Item(codItem,qtdSolic,qtdCancel,qtdAtend,nomeItem,0,przEntregaS,0,0,0,0,0,0);
                             itens.Add(item);
                         }
 

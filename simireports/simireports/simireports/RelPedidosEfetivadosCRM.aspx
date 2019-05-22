@@ -146,6 +146,7 @@
                                             <th style="text-align:center;width: 5%;">Atend</th>
                                             <th style="text-align:right;width: 10%;">Preço Unit</th>
                                             <th style="text-align:center;width: 10%;">Desconto</th>
+                                            <th style="text-align:center;width: 10%;">Comiss</th>
                                             <th style="text-align:center;width: 10%;">PedLogix</th>
                                             <%--<th style="text-align:center;width: 30%;">Prazo</th>--%>
                                         </tr>
@@ -160,17 +161,11 @@
                                         foreach (var item in pedEfet.Itens)
                                         {
                                             string codItem = item.CodItem;
-                                            string qtdSolic = item.QtdSolic;
-                                            qtdSolic = m.pontoPorVirgula(qtdSolic);
-                                            Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic),0);
-
-                                            string qtdCancel = item.QtdCancel;
-                                            qtdCancel = m.pontoPorVirgula(qtdCancel);
-                                            Decimal qtdCancelD = Decimal.Round(Decimal.Parse(qtdCancel),0);
-
-                                            string qtdAtend = item.QtdAtend;
-                                            qtdAtend = m.pontoPorVirgula(qtdAtend);
-                                            Decimal qtdAtendD = Decimal.Round(Decimal.Parse(qtdAtend),0);
+                                            int qtdSolic = item.QtdSolic;
+                                            int qtdCancel = item.QtdCancel;
+                                            int qtdAtend = item.QtdAtend;
+                                            //qtdAtend = m.pontoPorVirgula(qtdAtend);
+                                            //Decimal qtdAtendD = Decimal.Round(Decimal.Parse(qtdAtend),0);
 
                                             string nomeItem = item.NomeItem;
                                             string przEntrega = item.PrzEntrega;
@@ -179,11 +174,12 @@
                                             String preUnitS = m.formatarDecimal(preUnit);
                                             
                                             Decimal desconto = item.Desconto;
+                                            Decimal comiss = item.Comiss;
                                             int pedLogix = item.PedLogix;
 
-                                            totPed += preUnit*qtdSolicD;
-                                            totAtend += preUnit*qtdAtendD;
-                                            totCancel += preUnit*qtdCancelD;
+                                            totPed += preUnit*qtdSolic;
+                                            totAtend += preUnit*qtdAtend;
+                                            totCancel += preUnit*qtdCancel;
 
                                             totPedS = m.formatarDecimal(totPed);
                                             totAtendS = m.formatarDecimal(totAtend);
@@ -200,6 +196,7 @@
                                                 <td style="text-align:center;"><%= qtdAtend %></td>
                                                 <td style="text-align:right;"><%= "R$ "+preUnitS %></td>
                                                 <td style="text-align:center;"><%= desconto +"%" %></td>
+                                                <td style="text-align:center;"><%= comiss +"%" %></td>
                                                 <td style="text-align:center;"><%= pedLogix %></td>
                                                 <%--<td><%= przEntrega %></td>--%>
                                             </tr>

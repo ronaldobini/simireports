@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -322,37 +323,36 @@ namespace simireports
                     cliente = reader.GetString(4);
                     repres = reader.GetString(5);
                     pedCli = reader.GetString(14);
-
-
-                    string qtdSolic = reader.GetString(6);
-                    string qtdCancel = reader.GetString(7);
-                    string qtdAtend = reader.GetString(8);
+                    
+                    int qtdSolic = m.qtdLogixToInt(reader.GetString(6));
+                    int qtdCancel = m.qtdLogixToInt(reader.GetString(7));
+                    int qtdAtend = m.qtdLogixToInt(reader.GetString(8));
                     string nomeItem = reader.GetString(9);
                     string przEntregaS = reader.GetString(10);
                     string codItem = reader.GetString(11);
                     string preUnitS = reader.GetString(12);
-                    string qtdRom = reader.GetString(15);
-                    string qtdLib = reader.GetString(16);
-                    string qtdRes = reader.GetString(17);
+                    int qtdRom = m.qtdLogixToInt(reader.GetString(15));
+                    int qtdLib = m.qtdLogixToInt(reader.GetString(16));
+                    int qtdRes = m.qtdLogixToInt(reader.GetString(17));
 
 
                     preUnitS = m.pontoPorVirgula(preUnitS);
                     Decimal preUnit = Decimal.Round(Decimal.Parse(preUnitS), 2);
-                    qtdSolic = m.pontoPorVirgula(qtdSolic);
-                    qtdCancel = m.pontoPorVirgula(qtdCancel);
-                    qtdAtend = m.pontoPorVirgula(qtdAtend);
-                    Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
-                    Decimal qtdCancelD = Decimal.Round(Decimal.Parse(qtdCancel), 0);
-                    Decimal qtdAtendD = Decimal.Round(Decimal.Parse(qtdAtend), 0);
-                    Decimal qtdRomD = Decimal.Round(Decimal.Parse(qtdRom), 0);
-                    Decimal qtdLibD = Decimal.Round(Decimal.Parse(qtdLib), 0);
-                    Decimal qtdResD = Decimal.Round(Decimal.Parse(qtdRes), 0);
-                    totGeral += (qtdSolicD * preUnit);
-                    totGeralP += ((qtdSolicD - qtdCancelD - qtdAtendD) * preUnit);
-                    totGeralA += (qtdAtendD * preUnit);
+                    //qtdSolic = m.pontoPorVirgula(qtdSolic);
+                    //qtdCancel = m.pontoPorVirgula(qtdCancel);
+                    //qtdAtend = m.pontoPorVirgula(qtdAtend);
+                    //Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
+                    //Decimal qtdCancelD = Decimal.Round(Decimal.Parse(qtdCancel), 0);
+                    //Decimal qtdAtendD = Decimal.Round(Decimal.Parse(qtdAtend), 0);
+                    //Decimal qtdRomD = Decimal.Round(Decimal.Parse(qtdRom), 0);
+                    //Decimal qtdLibD = Decimal.Round(Decimal.Parse(qtdLib), 0);
+                    //Decimal qtdResD = Decimal.Round(Decimal.Parse(qtdRes), 0);
+                    totGeral += (qtdSolic * preUnit);
+                    totGeralP += ((qtdSolic - qtdCancel - qtdAtend) * preUnit);
+                    totGeralA += (qtdAtend * preUnit);
 
 
-                    if (qtdSolicD > (qtdAtendD + qtdCancelD))
+                    if (qtdSolic > (qtdAtend + qtdCancel))
                     {
                         fPedAberto = true;
                     }
@@ -362,8 +362,8 @@ namespace simireports
                         fItem = true;
                     }
 
-                    item = new Item(qtdSolic, qtdCancel, qtdAtend, nomeItem, przEntregaS, codItem, preUnit, qtdRom, qtdLib, qtdRes);
-
+                    //item = new Item(qtdSolic, qtdCancel, qtdAtend, nomeItem, przEntregaS, codItem, preUnit, qtdRom, qtdLib, qtdRes);
+                    item = new Item(codItem,qtdSolic,qtdCancel,qtdAtend,nomeItem,preUnit,przEntregaS,0,0,0,qtdRom,qtdLib,qtdRes);
 
                 }
                 totGeralS = m.formatarDecimal(totGeral);

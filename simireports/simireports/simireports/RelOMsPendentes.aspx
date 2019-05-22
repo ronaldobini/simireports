@@ -105,22 +105,19 @@
                                                      foreach (var item in omsp.Itens)
                                                      {
                                                          string codItem = item.CodItem;
-                                                         string qtdSolic = item.QtdSolic;
-                                                         string qtdCancel = item.QtdCancel;
-                                                         string qtdAtend = item.QtdAtend;
                                                          string nomeItem = item.NomeItem;
                                                          string przEntrega = item.PrzEntrega;
                                                          string cor = "#fff";
-                                                         if(Double.Parse(qtdSolic) == (Double.Parse(qtdAtend) + Double.Parse(qtdCancel)))
+                                                         if(item.QtdSolic == item.QtdAtend + item.QtdCancel)
                                                          {
                                                              cor = "#666";
                                                          }
                                           %>
                                             <tr>
                                                 <td style="color:<%= cor %>;"><%= codItem %></td>
-                                                <td style="color:<%= cor %>;"><%= qtdSolic %></td>
-                                                <td style="color:<%= cor %>;"><%= qtdCancel %></td>
-                                                <td style="color:<%= cor %>;"><%= qtdAtend %></td>
+                                                <td style="color:<%= cor %>;"><%= item.QtdSolic %></td>
+                                                <td style="color:<%= cor %>;"><%= item.QtdCancel %></td>
+                                                <td style="color:<%= cor %>;"><%= item.QtdAtend %></td>
                                                 <td style="color:<%= cor %>;"><%= nomeItem %></td>
                                                 <td style="color:<%= cor %>;"><%= przEntrega %></td>
                                             </tr>

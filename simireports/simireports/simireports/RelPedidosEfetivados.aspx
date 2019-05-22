@@ -204,29 +204,6 @@
                                         foreach (var item in pedEfet.Itens)
                                         {
                                             string codItem = item.CodItem;
-                                            string qtdSolic = item.QtdSolic;
-                                            qtdSolic = m.pontoPorVirgula(qtdSolic);
-                                            Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic),0);
-
-                                            string qtdCancel = item.QtdCancel;
-                                            qtdCancel = m.pontoPorVirgula(qtdCancel);
-                                            Decimal qtdCancelD = Decimal.Round(Decimal.Parse(qtdCancel),0);
-
-                                            string qtdAtend = item.QtdAtend;
-                                            qtdAtend = m.pontoPorVirgula(qtdAtend);
-                                            Decimal qtdAtendD = Decimal.Round(Decimal.Parse(qtdAtend),0);
-
-                                            string qtdRom = item.QtdRom;
-                                            qtdRom = m.pontoPorVirgula(qtdRom);
-                                            Decimal qtdRomD = Decimal.Round(Decimal.Parse(qtdRom),0);
-
-                                            string qtdLib = item.QtdLib;
-                                            qtdLib = m.pontoPorVirgula(qtdLib);
-                                            Decimal qtdLibD = Decimal.Round(Decimal.Parse(qtdLib),0);
-
-                                            string qtdRes = item.QtdRes;
-                                            qtdRes = m.pontoPorVirgula(qtdRes);
-                                            Decimal qtdResD = Decimal.Round(Decimal.Parse(qtdRes),0);
 
                                             string nomeItem = item.NomeItem;
                                             string przEntrega = item.PrzEntrega;
@@ -234,8 +211,8 @@
                                             Decimal preUnit = Decimal.Round(item.PrecoUnit,2);
                                             String preUnitS = m.formatarDecimal(preUnit);
 
-                                            totPed += preUnit*qtdSolicD;
-                                            totAtend += preUnit*qtdAtendD;
+                                            totPed += preUnit*item.QtdSolic;
+                                            totAtend += preUnit*item.QtdAtend;
 
                                             totPedS = m.formatarDecimal(totPed);
                                             totAtendS = m.formatarDecimal(totAtend);
@@ -244,14 +221,14 @@
                                             totPendS =  m.formatarDecimal(totPend);
 
                                             string cor = "red";
-                                            if(qtdSolicD == (qtdAtendD + qtdCancelD))
+                                            if(item.QtdSolic == (item.QtdAtend + item.QtdCancel))
                                             {
                                                 cor = "#fff";
                                             }
 
                                             string link = "";
                                             string link2 = "";
-                                            if (qtdAtendD > 0m)
+                                            if (item.QtdAtend > 0m)
                                             {
                                                 link = "<a href='RelFaturamento.aspx?getPedido="+numPed+"' style='color:"+cor+";'>";
                                                 link2 = "</a>";
@@ -267,17 +244,17 @@
                                             <tr>
                                                 <td style="text-align:center;color:<%= cor %>;"><%= codItem %></td>
                                                 <td style="text-align:center;"><%= nomeItem %></td>
-                                                <td style="text-align:center;"><%= qtdSolicD %></td>
-                                                <td style="text-align:center;"><%= qtdCancelD %></td>
+                                                <td style="text-align:center;"><%= item.QtdSolic %></td>
+                                                <td style="text-align:center;"><%= item.QtdCancel %></td>
                                                 <td style="text-align:center;color:<%= cor %>;">
-                                                    <%=link %><%= qtdAtendD %><%=link2 %>
+                                                    <%=link %><%= item.QtdAtend %><%=link2 %>
                                                 </td>
                                                 <td class="espacoBotao" colspan="3"></td>
-                                                <td class="qtdOcultos" style="text-align:center;display:none;"><%= qtdRomD %></td>
-                                                <td class="qtdOcultos" style="text-align:center;display:none;"><%= qtdLibD %></td>
-                                                <td class="qtdOcultos" style="text-align:center;display:none;"><%= qtdResD %></td>
+                                                <td class="qtdOcultos" style="text-align:center;display:none;"><%= item.QtdRom %></td>
+                                                <td class="qtdOcultos" style="text-align:center;display:none;"><%= item.QtdLib %></td>
+                                                <td class="qtdOcultos" style="text-align:center;display:none;"><%= item.QtdRes %></td>
                                                 <td style="text-align:right;"><%= preUnitS %></td>
-                                                <td style="text-align:right;"><%= preUnit*qtdSolicD %></td>
+                                                <td style="text-align:right;"><%= preUnit*item.QtdSolic %></td>
                                                 <td style="text-align:right;"><%= m.configDataBanco2Human(przEntrega) %></td>
                                             </tr>
                                                 
