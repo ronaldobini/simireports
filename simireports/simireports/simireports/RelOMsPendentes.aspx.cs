@@ -81,8 +81,8 @@ namespace simireports
             "                                    JOIN ped_itens b " +
             "                                        ON a.num_pedido = b.num_pedido" +
             "                                        AND a.cod_empresa = b.cod_empresa" +
-            "                                        AND(b.qtd_pecas_solic - b.qtd_pecas_cancel - b.qtd_pecas_atend) > 0" +
-            "                                        AND b.qtd_pecas_romaneio = 0" +
+            //"                                        AND(b.qtd_pecas_solic - b.qtd_pecas_cancel - b.qtd_pecas_atend) > 0" +
+            "                                        AND b.qtd_pecas_romaneio < b.qtd_pecas_solic-b.qtd_pecas_cancel-b.qtd_pecas_atend" +
             "                                    JOIN clientes c" +
             "                                        ON c.cod_cliente = a.cod_cliente" +
             "                                    JOIN estoque d" +
@@ -100,7 +100,7 @@ namespace simireports
             //IfxConnection conn2;
             if (reader != null)
             {
-                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel Comissoes", (string)Session["nome"], " ");
+                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel OMs Pendentes", (string)Session["nome"], " ");
                 while (reader.Read())
                 {
                     string codEmpresa = reader.GetString(0);

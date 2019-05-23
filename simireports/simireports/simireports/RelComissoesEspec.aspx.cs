@@ -12,8 +12,8 @@ namespace simireports.simireports
     public partial class RelComissoesEspec : System.Web.UI.Page
     {
 
-        public string data1 = "25/04/2019";
-        public string data2 = "23/05/2019";
+        public string data1 = "25/" + (DateTime.Now.Month-1) + "/2019";
+        public string data2 = "22/"+DateTime.Now.Month+"/2019";
 
         public string comissVendin8;
         public string comissSimilar8;
@@ -63,11 +63,11 @@ namespace simireports.simireports
                     }
 
                     double totSimilar = totComissRepresNew("SIMILAR", data1, data2, "");
-                    double similar8 = totSimilar / 8;
+                    double similar8 = totSimilar / 8.0;
                     comissSimilar8 = Math.Round(similar8, 2).ToString();
 
                     double totVendin = totComissRepresNew("VENDAINT", data1, data2, "");
-                    double vendin8 = totVendin / 8;
+                    double vendin8 = totVendin / 8.0;
                     comissVendin8 = Math.Round(vendin8, 2).ToString();
 
 
@@ -145,6 +145,7 @@ namespace simireports.simireports
                                         "WHERE r.nom_repres = '" + represNome + "' " +
                                         "AND dp.dat_pgto >= '" + datInicio + "' " +
                                         "AND dp.dat_pgto <= '" + datFim + "' " +
+                                        "AND d.dat_emis > '01/01/2018' " +
                                         "AND ies_pgto_docum = 'T' " +
                                         //"AND d.pct_comis_1 = " + postPctComiss + " " +
                                         //"AND d.val_bruto like " + postValor + " " +
