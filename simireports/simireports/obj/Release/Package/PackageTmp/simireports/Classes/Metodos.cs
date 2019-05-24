@@ -339,5 +339,6 @@ namespace simireports.simireports.Classes
         {
             return Convert.ToInt32(Decimal.Parse(pontoPorVirgula(qtdS)));
         }
+        
     }
 }

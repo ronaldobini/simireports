@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace simireports.simireports.Classes
 {
@@ -17,6 +18,7 @@ namespace simireports.simireports.Classes
         private int qtdRom;
         private int qtdLib;
         private int qtdRes;
+        private List<OrdemCompra> OCs;
 
         public Item(string codItem, int qtdSolic, int qtdCancel, int qtdAtend,
             string nomeItem, decimal precoUnit, string przEntrega, decimal desconto,
@@ -50,5 +52,6 @@ namespace simireports.simireports.Classes
         public int QtdSolic { get => qtdSolic; set => qtdSolic = value; }
         public int QtdCancel { get => qtdCancel; set => qtdCancel = value; }
         public int QtdAtend { get => qtdAtend; set => qtdAtend = value; }
+        public List<OrdemCompra> OCs1 { get => OCs; set => OCs = value; }
     }
 }

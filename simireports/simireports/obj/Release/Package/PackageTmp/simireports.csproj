@@ -204,6 +204,7 @@
     <Compile Include="simireports\Classes\LoginS.cs" />
     <Compile Include="simireports\Classes\Metodos.cs" />
     <Compile Include="simireports\Classes\OMPendente.cs" />
+    <Compile Include="simireports\Classes\OrdemCompra.cs" />
     <Compile Include="simireports\Classes\PedidoEfetivado.cs" />
     <Compile Include="simireports\Classes\PrePedido.cs" />
     <Compile Include="simireports\Logout.aspx.cs">
