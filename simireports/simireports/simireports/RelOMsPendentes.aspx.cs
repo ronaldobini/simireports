@@ -116,12 +116,10 @@ namespace simireports
 
                     //conn2 = new BancoLogix().abrir();
                     reader2 = new
-                    BancoLogix().consultar("SELECT b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item," +
-                    "                                                    oc.cod_empresa, oc.num_oc, oc.dat_entrega_prev, oc.num_docum, oc.qtd_solic " +
+                    BancoLogix().consultar("SELECT b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item " +
                     "                                                    FROM ped_itens b join item i on i.cod_item = b.cod_item and i.cod_empresa = b.cod_empresa" +
-                    "                                                    JOIN ordem_sup oc ON b.cod_item = oc.cod_item AND ies_versao_atual = 'S' AND ies_situa_oc = 'R'" +
                     "                                                    WHERE b.num_pedido = " + numPed + " " +
-                            "                                                    and b.cod_empresa = " + codEmpresa + " order by num_oc desc", conn);
+                            "                                                    and b.cod_empresa = " + codEmpresa, conn);
                     if (reader2 != null)
                     {
                         while (reader2.Read() && reader2.HasRows)
@@ -133,27 +131,30 @@ namespace simireports
                             string przEntregaS = reader2.GetString(4);
                             string codItem = reader2.GetString(5);
                             Item item = new Item(codItem,qtdSolic,qtdCancel,qtdAtend,nomeItem,0,przEntregaS,0,0,0,0,0,0);
-                            string sql = "SELECT oc.cod_empresa, oc.num_oc, oc.dat_entrega_prev, oc.num_docum, oc.qtd_solic " +
-                            "                                                    FROM ordem_sup oc " +
-                            "                                                    WHERE oc.cod_item = '" + codItem + "' AND ies_situa_oc = 'R'" +
-                            "                                                    AND ies_versao_atual = 'S'" +
-                            "                                                    order by num_oc desc ";
-                            reader3 = new BancoLogix().consultar(sql, conn);
-                            String errosql = new BancoLogix().consultarErros(sql, conn);
-                            if (reader3 != null)
+                            if (item.QtdSolic != item.QtdAtend + item.QtdCancel)
                             {
-                                while (reader3.Read() && reader3.HasRows)
+                                string sql = "SELECT oc.cod_empresa, oc.num_oc, oc.dat_entrega_prev, oc.num_docum, oc.qtd_solic " +
+                                "                                                    FROM ordem_sup oc " +
+                                "                                                    WHERE oc.cod_item = '" + codItem + "' AND ies_situa_oc = 'R'" +
+                                "                                                    AND ies_versao_atual = 'S'" +
+                                "                                                    order by num_oc desc ";
+                                reader3 = new BancoLogix().consultar(sql, conn);
+                                String errosql = new BancoLogix().consultarErros(sql, conn);
+                                if (reader3 != null)
                                 {
-                                    string codEmpresaOC = reader3.GetString(0);
-                                    string numOC = reader3.GetString(1);
-                                    string dataEntregaOC = reader3.GetString(2);
-                                    string numDocumOC = reader3.GetString(3);
-                                    int qtdOC = m.qtdLogixToInt(reader3.GetString(4));
-                                    OrdemCompra OC = new OrdemCompra(numOC, codItem, codEmpresaOC, DateTime.Parse(dataEntregaOC), qtdOC, numDocumOC);
-                                    OCs.Add(OC);
+                                    while (reader3.Read() && reader3.HasRows)
+                                    {
+                                        string codEmpresaOC = reader3.GetString(0);
+                                        string numOC = reader3.GetString(1);
+                                        string dataEntregaOC = reader3.GetString(2);
+                                        string numDocumOC = reader3.GetString(3);
+                                        int qtdOC = m.qtdLogixToInt(reader3.GetString(4));
+                                        OrdemCompra OC = new OrdemCompra(numOC, codItem, codEmpresaOC, DateTime.Parse(dataEntregaOC), qtdOC, numDocumOC);
+                                        OCs.Add(OC);
+                                    }
+                                    item.OCs1 = OCs;
+                                    reader3.Close();
                                 }
-                                item.OCs1 = OCs;
-                                reader3.Close();
                             }
                             itens.Add(item);
                         }

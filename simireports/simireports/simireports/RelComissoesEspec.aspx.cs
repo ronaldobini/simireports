@@ -12,8 +12,8 @@ namespace simireports.simireports
     public partial class RelComissoesEspec : System.Web.UI.Page
     {
 
-        public string data1 = "25/" + (DateTime.Now.Month-1) + "/2019";
-        public string data2 = "22/"+DateTime.Now.Month+"/2019";
+        public string data1 = "23/05/2019";
+        public string data2 = "22/06/2019";
 
         public string comissVendin8;
         public string comissSimilar8;

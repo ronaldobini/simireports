@@ -6,12 +6,13 @@
 <head runat="server">
     <link rel="icon" type="image/png" href="img/syss.png">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-     <title>SimiWeb - <%=Session["swver"] %></title>
+    <title>SimiWeb - <%=Session["swver"] %></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous" />
 </head>
 <body style="background-color: #222;">
-    <div id="logo" style="margin-left:20px; float:left;">
-        <a  title="Voltar ao Inicio" href=" Relatorios.aspx"><img style=" width:50px;" src="img/syss.png" /></a>
+    <div id="logo" style="margin-left: 20px; float: left;">
+        <a title="Voltar ao Inicio" href=" Relatorios.aspx">
+            <img style="width: 50px;" src="img/syss.png" /></a>
     </div>
     <center>
     <div id="titulo" style="margin-top:40px; margin-right:70px; color:white; font-size:30px;">005 - OM Pendentes</div>
@@ -92,8 +93,9 @@
                                     <td><%= tipoEntrega %></td>
                                 </tr>
                                 <tr>
-                                    <td colspan ="6"><table class="table table-sm table-dark" style="background-color:#3f4142; width:100%; color:white; font-size: 12px;">
-                                        <tbody>
+                                    <td colspan ="6">
+                                        <table class="table table-sm table-dark" style="background-color:#3f4142; width:100%; color:white; font-size: 12px;">
+                                       
                                             <tr>
                                                 <th style="width: 15%;">Cod Item</th>
                                                 <th style="width: 10%;">Solic</th>
@@ -102,16 +104,18 @@
                                                 <th style="width: 45%;">Descricao Item</th>
                                                 <th style="width: 20%;">Prazo</th>
                                             </tr><%
-    foreach (var item in omsp.Itens)
-    {
-        string codItem = item.CodItem;
-        string nomeItem = item.NomeItem;
-        string przEntrega = item.PrzEntrega;
-        string cor = "#fff";
-        if (item.QtdSolic == item.QtdAtend + item.QtdCancel)
-        {
-            cor = "#666";
-        }
+                                                     foreach (var item in omsp.Itens)
+                                                     {
+                                                         string codItem = item.CodItem;
+                                                         string nomeItem = item.NomeItem;
+                                                         string przEntrega = item.PrzEntrega;
+                                                         string cor = "#fff";
+                                                         bool mostraOC = true;
+                                                         if (item.QtdSolic == item.QtdAtend + item.QtdCancel)
+                                                         {
+                                                             cor = "#666";
+                                                             mostraOC = false;
+                                                         }
                                           %>
                                             <tr>
                                                 <td style="color:<%= cor %>;"><%= codItem %></td>
@@ -120,51 +124,56 @@
                                                 <td style="color:<%= cor %>;"><%= item.QtdAtend %></td>
                                                 <td style="color:<%= cor %>;"><%= nomeItem %></td>
                                                 <td style="color:<%= cor %>;"><%= m.configDataBanco2Human(przEntrega) %></td>
-                                            </tr>
+                                            </tr><% 
+                                                     if (mostraOC && item.OCs1 != null)
+                                                     {%>
                                             <tr>
+                                                <td></td>
                                                 <td colspan ="6">
-                                                    <table class="table table-sm table-white" style="background-color:#ff0000; width:100%; color:white; font-size: 12px;">
-                                                        <tbody>
+                                                    <table class="table table-sm table-dark" style="background-color:#3f4142; width:50%; color:white; font-size: 12px;">
+                                                       
                                                             <tr>
                                                                 
 
                                                                 
-                                                <th style="width: 15%;">Empresa</th>
                                                 <th style="width: 15%;">Num OC</th>
+                                                <th style="width: 45%;">Num Docum</th>
+                                                <th style="width: 15%;">Empresa</th>
                                                 <th style="width: 10%;">Cod Item</th>
                                                 <th style="width: 10%;">Previsao Chegada</th>
                                                 <th style="width: 10%;">Quantidade</th>
-                                                <th style="width: 45%;">Num Docum</th>
                                             </tr><%
-                                                if (item.OCs1 != null)
-                                                {
-                                                    foreach (var oc in item.OCs1)
-                                                    {
+
+                                                     foreach (var oc in item.OCs1)
+                                                     {
                                                                                       %>
                                                                                         <tr>
-                                                                                            <td style="color:<%= cor %>;"><%= oc.CodItem %></td>
                                                                                             <td style="color:<%= cor %>;"><%= oc.NumOc %></td>
+                                                                                            <td style="color:<%= cor %>;"><%= oc.NumDocum %></td>
+                                                                                            <td style="color:<%= cor %>;"><%= oc.Empresa %></td>
                                                                                             <td style="color:<%= cor %>;"><%= oc.CodItem %></td>
                                                                                             <td style="color:<%= cor %>;"><%= oc.PrevistaChegada %></td>
                                                                                             <td style="color:<%= cor %>;"><%= oc.Qtd %></td>
-                                                                                            <td style="color:<%= cor %>;"><%= oc.NumDocum %></td>
                                                                                         </tr>
                                                                                       <%
-                                                        }
-                                                    }
-                                                }%>
+                                                                                          } %>
+                                                        </table>
+                                                </td>
+                                                </tr><%
 
-                                                        </tbody>
+
+                                                             }
+                                                         }%>
+
                                                     </table>
                                                 </td>
+                                                </tr>
+                                            <%
+                                                }
+                %></table>
+                                    </td>
                                              </tr>
-                                        </tbody>
-
-                                    </table></td>
-                                    </tr>
-                <%
-                                             }
-                %>
+                
     </table>
         </div>
 </body>

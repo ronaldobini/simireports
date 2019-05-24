@@ -27,8 +27,8 @@ namespace simireports
         public Metodos m = new Metodos();
         //public String mesPassado = DateTime.Today.AddMonths(-1).ToString("d");
         //public String hoje = DateTime.Today.ToString("d");
-        public String mesPassado = "25/"+(DateTime.Now.Month-1)+"/2019";
-        public String hoje = "22/"+DateTime.Now.Month+"/2019";
+        public String mesPassado = "23/05/2019";
+        public String hoje = "22/06/2019";
         public string represChange = "nao";
 
 
