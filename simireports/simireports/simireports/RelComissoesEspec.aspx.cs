@@ -63,7 +63,7 @@ namespace simireports.simireports
                     }
 
                     double totSimilar = totComissRepresNew("SIMILAR", data1, data2, "");
-                    double similar8 = totSimilar / 8.0;
+                    double similar8 = /*(totSimilar/10)/ 8.0*/24.19;
                     comissSimilar8 = Math.Round(similar8, 2).ToString();
 
                     double totVendin = totComissRepresNew("VENDAINT", data1, data2, "");
@@ -137,7 +137,7 @@ namespace simireports.simireports
             double totComiss;
             IfxConnection conn = new BancoLogix().abrir();
             string sql = "SELECT d.cod_empresa," +
-                                        "d.val_bruto," +
+                                        "dp.val_pago," +
                                         "d.pct_comis_1 " +
                                         "FROM docum d " +
                                         "JOIN representante r on r.cod_repres = d.cod_repres_1 " +
@@ -214,7 +214,7 @@ namespace simireports.simireports
             double totComiss;
             IfxConnection conn = new BancoLogix().abrir();
             string sql = "SELECT d.cod_empresa," +
-                                        "d.val_bruto," +
+                                        "dp.val_pago," +
                                         "d.pct_comis_1 " +
                                         "FROM docum d " +
                                         "JOIN representante r on r.cod_repres = d.cod_repres_1 " +

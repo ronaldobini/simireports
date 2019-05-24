@@ -102,16 +102,16 @@
                                                 <th style="width: 45%;">Descricao Item</th>
                                                 <th style="width: 20%;">Prazo</th>
                                             </tr><%
-                                                     foreach (var item in omsp.Itens)
-                                                     {
-                                                         string codItem = item.CodItem;
-                                                         string nomeItem = item.NomeItem;
-                                                         string przEntrega = item.PrzEntrega;
-                                                         string cor = "#fff";
-                                                         if(item.QtdSolic == item.QtdAtend + item.QtdCancel)
-                                                         {
-                                                             cor = "#666";
-                                                         }
+    foreach (var item in omsp.Itens)
+    {
+        string codItem = item.CodItem;
+        string nomeItem = item.NomeItem;
+        string przEntrega = item.PrzEntrega;
+        string cor = "#fff";
+        if (item.QtdSolic == item.QtdAtend + item.QtdCancel)
+        {
+            cor = "#666";
+        }
                                           %>
                                             <tr>
                                                 <td style="color:<%= cor %>;"><%= codItem %></td>
@@ -119,13 +119,50 @@
                                                 <td style="color:<%= cor %>;"><%= item.QtdCancel %></td>
                                                 <td style="color:<%= cor %>;"><%= item.QtdAtend %></td>
                                                 <td style="color:<%= cor %>;"><%= nomeItem %></td>
-                                                <td style="color:<%= cor %>;"><%= przEntrega %></td>
+                                                <td style="color:<%= cor %>;"><%= m.configDataBanco2Human(przEntrega) %></td>
                                             </tr>
-                                          <%
-                                              }%>
-                                            <tr><td colspan="6" style="background-color: #070a0e; color:white;"></td></tr>
-                                        </tbody></table></td>
-                                    </tr><%
+                                            <tr>
+                                                <td colspan ="6">
+                                                    <table class="table table-sm table-white" style="background-color:#ff0000; width:100%; color:white; font-size: 12px;">
+                                                        <tbody>
+                                                            <tr>
+                                                                
+
+                                                                
+                                                <th style="width: 15%;">Empresa</th>
+                                                <th style="width: 15%;">Num OC</th>
+                                                <th style="width: 10%;">Cod Item</th>
+                                                <th style="width: 10%;">Previsao Chegada</th>
+                                                <th style="width: 10%;">Quantidade</th>
+                                                <th style="width: 45%;">Num Docum</th>
+                                            </tr><%
+                                                if (item.OCs1 != null)
+                                                {
+                                                    foreach (var oc in item.OCs1)
+                                                    {
+                                                                                      %>
+                                                                                        <tr>
+                                                                                            <td style="color:<%= cor %>;"><%= oc.CodItem %></td>
+                                                                                            <td style="color:<%= cor %>;"><%= oc.NumOc %></td>
+                                                                                            <td style="color:<%= cor %>;"><%= oc.CodItem %></td>
+                                                                                            <td style="color:<%= cor %>;"><%= oc.PrevistaChegada %></td>
+                                                                                            <td style="color:<%= cor %>;"><%= oc.Qtd %></td>
+                                                                                            <td style="color:<%= cor %>;"><%= oc.NumDocum %></td>
+                                                                                        </tr>
+                                                                                      <%
+                                                        }
+                                                    }
+                                                }%>
+
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                             </tr>
+                                        </tbody>
+
+                                    </table></td>
+                                    </tr>
+                <%
                                              }
                 %>
     </table>
