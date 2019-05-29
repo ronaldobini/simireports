@@ -81,6 +81,7 @@
 									    <input type="hidden" name="sair" value="1">
 								    </form>
 							    </li>
+                                
 						    </ul>
 					    </nav>
 				    </td>
@@ -106,6 +107,9 @@
     
 
     <img src = "img/simiweb1.png" style="width:65%;"/>
+    <br />
+
+    <font style="margin-top:40px;font-size:20px;" color=green> <%=Session["swver"] %></font>
 
     <!-- GRAFICO 
     <div id="piechart" style="width: 65%; height: 250px; color:white;"></div>
