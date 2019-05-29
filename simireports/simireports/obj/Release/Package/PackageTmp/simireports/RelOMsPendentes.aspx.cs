@@ -153,6 +153,7 @@ namespace simireports
                                         OCs.Add(OC);
                                     }
                                     item.OCs1 = OCs;
+                                    OCs = new List<OrdemCompra>();
                                     reader3.Close();
                                 }
                             }

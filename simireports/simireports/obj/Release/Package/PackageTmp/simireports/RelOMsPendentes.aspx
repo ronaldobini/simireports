@@ -124,18 +124,15 @@
                                                 <td style="color:<%= cor %>;"><%= item.QtdAtend %></td>
                                                 <td style="color:<%= cor %>;"><%= nomeItem %></td>
                                                 <td style="color:<%= cor %>;"><%= m.configDataBanco2Human(przEntrega) %></td>
-                                            </tr><% 
-                                                     if (mostraOC && item.OCs1 != null)
-                                                     {%>
+                                            </tr>
+                                            <% 
+                                                if (item.OCs1 != null)
+                                                {%>
                                             <tr>
                                                 <td></td>
                                                 <td colspan ="6">
                                                     <table class="table table-sm table-dark" style="background-color:#3f4142; width:50%; color:white; font-size: 12px;">
-                                                       
                                                             <tr>
-                                                                
-
-                                                                
                                                 <th style="width: 15%;">Num OC</th>
                                                 <th style="width: 45%;">Num Docum</th>
                                                 <th style="width: 15%;">Empresa</th>
@@ -171,10 +168,6 @@
                                             <%
                                                 }
                 %></table>
-                                    </td>
-                                             </tr>
-                
-    </table>
         </div>
 </body>
 </html>

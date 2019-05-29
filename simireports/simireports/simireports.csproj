@@ -92,9 +92,11 @@
     <Content Include="simireports\construcao.aspx" />
     <Content Include="simireports\css\design.css" />
     <Content Include="simireports\erro.html" />
+    <Content Include="simireports\img\help.PNG" />
     <Content Include="simireports\img\key.png" />
     <Content Include="simireports\img\simireportslogo.png" />
     <Content Include="simireports\img\simisyslogo.psd" />
+    <Content Include="simireports\help\ped_logix.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

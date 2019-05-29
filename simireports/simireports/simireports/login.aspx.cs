@@ -13,7 +13,7 @@ namespace simireports.simireports
     public partial class WebForm1 : System.Web.UI.Page
     {
         // VERSAO
-        public static string swver = "v1.1.29.1";
+        public static string swver = "v1.1.2.7";
         //
         private string loginPost = "-";
         public string senhaPost = "-";

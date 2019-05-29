@@ -59,10 +59,11 @@
 </head>
 <body style="background-color:#222;" onload="onload();" >
     <div id="logo" style="margin-left:20px; float:left;">
-        <a  title="Voltar ao Inicio" href=" Relatorios.aspx"><img style=" width:50px;" src="img/syss.png" /></a>
+        <a  title="Voltar ao Inicio" href=" Relatorios.aspx"><img style=" height:50px;" src="img/syss.png" /></a>
+       
     </div>
     <center>
-    <div id="titulo" style="margin-top:40px; margin-right:70px; color:white; font-size:30px;">002 - Pedidos Logix</div>
+    <div id="titulo" style="margin-top:40px; margin-right:70px; color:white; font-size:30px;">002 - Pedidos Logix  <a  title="Ajuda" href="help/ped_logix.pdf"><img style=" height:25px; margin-left:20px;" src="img/help.PNG" /></a></div>
     <br />
     <p><%=sqlview %></p>
        
@@ -127,6 +128,7 @@
                 </table>
                 <br>
                 <input class="btn btn-primary btn-xs" style="background-color:#126DBD" runat="server" type="submit" value="Filtrar" onserverclick="filtrarPedEfet_Click" />
+
             </form>
         </div>
 
