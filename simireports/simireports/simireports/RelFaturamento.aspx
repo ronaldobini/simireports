@@ -48,7 +48,7 @@
                         <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="descItem"  autocomplete="off"/></td>
                     </tr>
                     <tr>
-                        <th style="width:100px;">CPF Cliente</th>
+                        <th style="width:100px;">CNPJ Cliente</th>
                         <th style="width:100px;">Nome Cliente</th>
                         <th style="width:120px;">Natureza</th>
                         <th style="width:100px;">Pedido</th>
@@ -61,12 +61,8 @@
                         <td style="width:120px;">
                             <select class="form-control" style="width:100px;" id="natureza" runat="server">
                                 <option value="">Todas</option>
-                                <option value="2001">2001</option>
-                                <option value="2021">2021</option>
-                                <option value="4001">4001</option>
-                                <option value="4021">4021</option>
-                                <option value="7000">7000</option>
-                                <option value="9001">9001</option>
+                                <option value="9001">Serviço</option>
+                                <option value="1000">Produtos</option>
                             </select>
                         </td>
                         <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="pedido"  autocomplete="off"/></td>
@@ -96,7 +92,7 @@
                                 <th style="width:100px;">Nota</th>
                                 <th style="width:100px;">Empresa</th>
                                 <th style="width:100px;">Data</th>
-                                <th style="width:100px;">CPF Cliente</th>
+                                <th style="width:100px;">CNPJ Cliente</th>
                                 <th style="width:100px;">Nome Cliente</th>
                                 <th style="width:120px;">Natureza</th>
                                 <th style="width:100px;">Pedido</th>

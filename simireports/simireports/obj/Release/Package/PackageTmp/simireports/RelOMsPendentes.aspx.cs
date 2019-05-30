@@ -116,8 +116,11 @@ namespace simireports
 
                     //conn2 = new BancoLogix().abrir();
                     reader2 = new
-                    BancoLogix().consultar("SELECT b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item " +
-                    "                                                    FROM ped_itens b join item i on i.cod_item = b.cod_item and i.cod_empresa = b.cod_empresa" +
+                    BancoLogix().consultar("SELECT b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, " +
+                    "                                                    b.qtd_pecas_romaneio, e.qtd_liberada, e.qtd_reservada " +
+                    "                                                    FROM ped_itens b " +
+                    "                                                    join item i on i.cod_item = b.cod_item and i.cod_empresa = b.cod_empresa" +
+                    "                                                    JOIN estoque e on e.cod_item = b.cod_item and e.cod_empresa = b.cod_empresa " +
                     "                                                    WHERE b.num_pedido = " + numPed + " " +
                             "                                                    and b.cod_empresa = " + codEmpresa, conn);
                     if (reader2 != null)
@@ -130,7 +133,10 @@ namespace simireports
                             string nomeItem = reader2.GetString(3);
                             string przEntregaS = reader2.GetString(4);
                             string codItem = reader2.GetString(5);
-                            Item item = new Item(codItem,qtdSolic,qtdCancel,qtdAtend,nomeItem,0,przEntregaS,0,0,0,0,0,0);
+                            int qtdRoma = m.qtdLogixToInt(reader2.GetString(6));
+                            int qtdLib = m.qtdLogixToInt(reader2.GetString(7));
+                            int qtdReserv = m.qtdLogixToInt(reader2.GetString(8));
+                            Item item = new Item(codItem,qtdSolic,qtdCancel,qtdAtend,nomeItem,0,przEntregaS,0,0,0, qtdRoma, qtdLib, qtdReserv);
                             if (item.QtdSolic != item.QtdAtend + item.QtdCancel)
                             {
                                 string sql = "SELECT oc.cod_empresa, oc.num_oc, oc.dat_entrega_prev, oc.num_docum, oc.qtd_solic " +

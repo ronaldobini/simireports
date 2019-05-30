@@ -98,10 +98,13 @@
                                        
                                             <tr>
                                                 <th style="width: 15%;">Cod Item</th>
-                                                <th style="width: 10%;">Solic</th>
-                                                <th style="width: 10%;">Cancel</th>
-                                                <th style="width: 10%;">Atend</th>
                                                 <th style="width: 45%;">Descricao Item</th>
+                                                <th style="width: 5%;">Solic</th>
+                                                <th style="width: 5%;">Cancel</th>
+                                                <th style="width: 5%;">Atend</th>
+                                                <th style="width: 5%;">Roma</th>
+                                                <th style="width: 5%;">Lib</th>
+                                                <th style="width: 5%;">Reserv</th>
                                                 <th style="width: 20%;">Prazo</th>
                                             </tr><%
                                                      foreach (var item in omsp.Itens)
@@ -110,27 +113,30 @@
                                                          string nomeItem = item.NomeItem;
                                                          string przEntrega = item.PrzEntrega;
                                                          string cor = "#fff";
-                                                         bool mostraOC = true;
+                                                         //bool mostraOC = true;
                                                          if (item.QtdSolic == item.QtdAtend + item.QtdCancel)
                                                          {
                                                              cor = "#666";
-                                                             mostraOC = false;
+                                                             //mostraOC = false;
                                                          }
                                           %>
                                             <tr>
                                                 <td style="color:<%= cor %>;"><%= codItem %></td>
+                                                <td style="color:<%= cor %>;"><%= nomeItem %></td>
                                                 <td style="color:<%= cor %>;"><%= item.QtdSolic %></td>
                                                 <td style="color:<%= cor %>;"><%= item.QtdCancel %></td>
                                                 <td style="color:<%= cor %>;"><%= item.QtdAtend %></td>
-                                                <td style="color:<%= cor %>;"><%= nomeItem %></td>
+                                                <td style="color:<%= cor %>;"><%= item.QtdRom %></td>
+                                                <td style="color:<%= cor %>;"><%= item.QtdLib %></td>
+                                                <td style="color:<%= cor %>;"><%= item.QtdRes %></td>
                                                 <td style="color:<%= cor %>;"><%= m.configDataBanco2Human(przEntrega) %></td>
                                             </tr>
                                             <% 
-                                                if (item.OCs1 != null)
+                                                if (item.OCs1 != null && item.OCs1.Count > 0)
                                                 {%>
                                             <tr>
                                                 <td></td>
-                                                <td colspan ="6">
+                                                <td colspan ="9">
                                                     <table class="table table-sm table-dark" style="background-color:#3f4142; width:50%; color:white; font-size: 12px;">
                                                             <tr>
                                                 <th style="width: 15%;">Num OC</th>
