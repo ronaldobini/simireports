@@ -128,9 +128,13 @@ namespace simireports
             postNatur = natureza.Value;
            
             
-            if (postNatur.Equals(""))
+            if (postNatur.Equals("1000"))
             {
-                postNatur = " AND nfi.natureza_operacao > 1000 ";
+                postNatur = " AND nfi.natureza_operacao <> 9001 ";
+            }
+            else if (postNatur.Equals(""))
+            {
+                postNatur = " AND nfi.natureza_operacao > 1000 "; //todas
             }
             else
             {
@@ -177,13 +181,14 @@ namespace simireports
                 " nfi.natureza_operacao," +
                 " nfi.pedido," +
                 " ped.num_pedido_cli," +
-                " ped.cod_transpor " +
+                " cli2.nom_cliente" +
                 " from fat_nf_mestre nf" +
                 " JOIN fat_nf_item nfi ON(nf.trans_nota_fiscal = nfi.trans_nota_fiscal)" +
                 " JOIN item it ON(nfi.item = it.cod_item and nfi.empresa = it.cod_empresa)" +
                 " JOIN pedidos ped ON(nfi.pedido = ped.num_pedido and nfi.empresa = ped.cod_empresa)" +
                 " JOIN clientes cli on(nf.cliente = cli.cod_cliente)" +
-                " where nf.dat_hor_emissao >= '"+ postDatInicio + " 00:00:00' " +
+                " JOIN clientes cli2 on(nf.transportadora = cli2.cod_cliente)" +
+                " where nf.dat_hor_emissao >= '" + postDatInicio + " 00:00:00' " +
                 " AND nf.dat_hor_emissao <= '" + postDatFim + " 23:59:59' " +
                 " AND nf.dat_hor_emissao >= '2016-01-01 00:00:00'" +
                 " AND nf.sit_nota_fiscal = 'N'" +
@@ -196,7 +201,7 @@ namespace simireports
                 " " + postNatur + " " +
                 " " + postPed + " " +
                 " AND ped.num_pedido_cli like '%" + postPedCli + "%' " +
-                " AND ped.cod_transpor like '%" + postTrans + "%' " +
+                " AND nf.transportadora like '%" + postTrans + "%' " +
                 " ORDER BY nota_fiscal, empresa ";
 
             //sqlview = sql; //ativa a exibicao do sql na tela
