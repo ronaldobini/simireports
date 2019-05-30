@@ -14,6 +14,7 @@ namespace simireports.simireports.Classes
         private string cliente;
         private string numPed;
         private string tipoEntrega;
+        private string trans;
         private List<Item> itens;
 
         public OMPendente(string empresa, DateTime datAltSit, string codCliente, string cliente, string numPed, string tipoEntrega,List<Item> itens)
@@ -34,6 +35,6 @@ namespace simireports.simireports.Classes
         public string NumPed { get => numPed; set => numPed = value; }
         public string TipoEntrega { get => tipoEntrega; set => tipoEntrega = value; }
         public List<Item> Itens { get => itens; set => itens = value; }
-        
+        public string Trans { get => trans; set => trans = value; }
     }
 }

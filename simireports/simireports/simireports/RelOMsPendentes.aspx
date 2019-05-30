@@ -25,15 +25,15 @@
                 <h3><font color=white>
                     <table>
                         <tr>
-                        <td style="width:150px;text-align:center;">
-                    Empresa
-                            </td>
-                        <td style="width:200px;text-align:center;">
-                    Tipo de Entrega
-                            </td>
+                        <td style="width:150px;text-align:center;">Empresa</td>
+                        <%--<td style="width:150px;text-align:center;">Pedido</td>
+                        <td style="width:150px;text-align:center;">Item</td>
+                        <td style="width:150px;text-align:center;">CodCliente</td>
+                        <td style="width:150px;text-align:center;">Cliente</td>
+                        <td style="width:200px;text-align:center;">Situacao</td>--%>
+                        <td style="width:200px;text-align:center;">Tipo de Entrega</td>
 
                         </tr><tr>
-
                             <td>
                 <select class="form-control" id="empresa" runat="server">
                     <option value="0">Todas</option>
@@ -43,7 +43,14 @@
                     <option value="5">05</option>
                     <option value="6">06</option>
                 </select>
-                            </td><td>
+                            </td>
+                            
+<%--                        <td style="width:150px;"><input class="form-control" style="width:130px; text-align:center;" runat="server" type="text" id="pedido"/></td>
+                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="item"/></td>
+                        <td style="width:130px;"><input class="form-control" style="width:110px; text-align:center;" runat="server" type="text" id="codCliente"/></td>
+                        <td style="width:100px;"><input class="form-control" style="width:80px; text-align:center;" runat="server" type="text" id="cliente"/></td>
+                        --%>
+                            <td>
                 <select class="form-control" id="tipoEntrega" runat="server">
                     <option value="0">Todas</option>
                     <option value="1">1</option>
@@ -52,7 +59,15 @@
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-                            </td></tr>
+                            </td>
+                            <%--<td>
+                <select class="form-control" id="situacao" runat="server">
+                    <option value="0">Todos</option>
+                    <option value="1">Atrasados</option>
+                </select>
+                            </td>--%>
+
+                             </tr>
                         </table>
                             </font></h3>
                 <input class="btn btn-primary btn-xs" style="background-color:#126DBD" runat="server" type="submit" value="Filtrar" onserverclick="filtrarOMs_Click" />
@@ -75,6 +90,7 @@
                         <th style="width: 20%;">Cliente</th>
                         <th style="width: 5%;">Pedido</th>
                         <th style="width: 5%;">Tipo Entrega</th>
+                        <th style="width: 5%;">Transportadora</th>
                     </tr><%
                              string empresa = omsp.Empresa;
                              DateTime datAltSit = omsp.DatAltSit;
@@ -91,9 +107,10 @@
                                     <td><%= cliente %></td>
                                     <td><%= numPed %></td>
                                     <td><%= tipoEntrega %></td>
+                                    <td><%= omsp.Trans %></td>
                                 </tr>
                                 <tr>
-                                    <td colspan ="6">
+                                    <td colspan ="7">
                                         <table class="table table-sm table-dark" style="background-color:#3f4142; width:100%; color:white; font-size: 12px;">
                                        
                                             <tr>
