@@ -164,6 +164,7 @@
     <Content Include="simireports\RelPedidosEfetivados.aspx" />
     <Content Include="simireports\BotEmailsPedLogix.aspx" />
     <Content Include="simireports\Relatorios.aspx" />
+    <Content Include="simireports\RelReportBrady.aspx" />
     <Content Include="syss.ico" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -209,6 +210,7 @@
     <Compile Include="simireports\Classes\OrdemCompra.cs" />
     <Compile Include="simireports\Classes\PedidoEfetivado.cs" />
     <Compile Include="simireports\Classes\PrePedido.cs" />
+    <Compile Include="simireports\Classes\ReportBrady.cs" />
     <Compile Include="simireports\Logout.aspx.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -309,6 +311,13 @@
     </Compile>
     <Compile Include="simireports\Relatorios.aspx.designer.cs">
       <DependentUpon>Relatorios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simireports\RelReportBrady.aspx.cs">
+      <DependentUpon>RelReportBrady.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\RelReportBrady.aspx.designer.cs">
+      <DependentUpon>RelReportBrady.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />
