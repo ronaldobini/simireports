@@ -156,7 +156,7 @@ namespace simireports
             else if (postSit == "3") //ATRASADO
             {
                 fPostAberto = true;
-                postSit = " AND ies_sit_pedido = 'N' AND b.prz_entrega < '" + hoje+"'";
+                postSit = " AND ies_sit_pedido = 'N' AND b.prz_entrega < '" + hoje + "'";
                 tipoData = "dat_alt_sit";
             }
             else if (postSit == "4") //REPROVADO
@@ -219,22 +219,23 @@ namespace simireports
             Session["firstJ"] = "0";
             IfxConnection conn = new BancoLogix().abrir();
 
-            string sql = "SELECT a.cod_empresa, a."+ tipoData + ", a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres, " +
+            string sql = "SELECT a.cod_empresa, a." + tipoData + ", a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres, " +
                 " b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, b.pre_unit, b.num_sequencia, a.num_pedido_cli, " +
-                " b.qtd_pecas_romaneio, e.qtd_liberada, e.qtd_reservada " +
-                                   " FROM pedidos a" + 
+                " b.qtd_pecas_romaneio, e.qtd_liberada, e.qtd_reservada, a.ies_finalidade, f.den_cnd_pgto " +
+                                   " FROM pedidos a" +
                                     " JOIN ped_itens b on a.num_pedido = b.num_pedido AND a.cod_empresa = b.cod_empresa " +
                                     " JOIN clientes c on c.cod_cliente = a.cod_cliente" +
                                     " JOIN item i on i.cod_item = b.cod_item and i.cod_empresa = b.cod_empresa " +
                                     " JOIN representante r on r.cod_repres = a.cod_repres " +
-                                    " JOIN estoque e on e.cod_item = b.cod_item and e.cod_empresa = b.cod_empresa " +
+                                    " LEFT JOIN estoque e on e.cod_item = b.cod_item and e.cod_empresa = b.cod_empresa " +
+                                    " JOIN cond_pgto f on a.cod_cnd_pgto = f.cod_cnd_pgto " +
                                    " WHERE c.cod_cliente LIKE '%" + postCodCliente + "%'" +
 
                                    " AND c.nom_cliente LIKE '%" + postCliente + "%'" +
 
                                    " AND r.nom_repres LIKE '%" + postRepres + "%'" +
 
-                                   " AND a."+ tipoData + " >= '" + postDatInicio + "'" +
+                                   " AND a." + tipoData + " >= '" + postDatInicio + "'" +
 
                                    " AND a." + tipoData + " <= '" + postDatFim + "'" +
 
@@ -251,7 +252,7 @@ namespace simireports
                                    postFam +
 
                                    " AND a.num_pedido = b.num_pedido AND a.cod_empresa = b.cod_empresa AND c.cod_cliente = a.cod_cliente" +
-                                   " GROUP BY a.cod_empresa, a." + tipoData + ", a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres, b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, b.pre_unit,b.num_sequencia,a.num_pedido_cli, b.qtd_pecas_romaneio, e.qtd_liberada, e.qtd_reservada " +
+                                   " GROUP BY a.cod_empresa, a." + tipoData + ", a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres, b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, b.pre_unit,b.num_sequencia,a.num_pedido_cli, b.qtd_pecas_romaneio, e.qtd_liberada, e.qtd_reservada, a.ies_finalidade, f.den_cnd_pgto  " +
                                    " ORDER BY a." + tipoData + " desc, a.num_pedido,b.num_sequencia";
 
             //sqlview = sql; //ativa a exibicao do sql na tela
@@ -271,8 +272,10 @@ namespace simireports
             Item item = null;
             bool primeiro = true;
             PedidoEfetivado pedEfet = null;
+            string finalidade = "";
+            string condPgto = "";
 
-            //string errosql = new BancoLogix().consultarErros(sql,conn);
+            string errosql = new BancoLogix().consultarErros(sql, conn);
 
 
             if (reader != null && reader.HasRows)
@@ -301,14 +304,14 @@ namespace simireports
                             {
                                 if (fPedAberto) //ADD PEDIDO SÓ SE TIVER ABERTO
                                 {
-                                    pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres, pedCli);
+                                    pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres, pedCli, finalidade, condPgto);
                                     pedsEfets.Add(pedEfet);
                                     fPedAberto = false;
                                 }
                             }
                             else //FLUXO NORMAL
                             {
-                                pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres, pedCli);
+                                pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres, pedCli, finalidade, condPgto);
                                 pedsEfets.Add(pedEfet);
                             }
                             itens = new List<Item>();
@@ -323,7 +326,10 @@ namespace simireports
                     cliente = reader.GetString(4);
                     repres = reader.GetString(5);
                     pedCli = reader.GetString(14);
-                    
+                    finalidade = reader.GetString(18);
+                    condPgto = reader.GetString(19);
+
+
                     int qtdSolic = m.qtdLogixToInt(reader.GetString(6));
                     int qtdCancel = m.qtdLogixToInt(reader.GetString(7));
                     int qtdAtend = m.qtdLogixToInt(reader.GetString(8));
@@ -334,6 +340,8 @@ namespace simireports
                     int qtdRom = m.qtdLogixToInt(reader.GetString(15));
                     int qtdLib = m.qtdLogixToInt(reader.GetString(16));
                     int qtdRes = m.qtdLogixToInt(reader.GetString(17));
+
+
 
 
                     preUnitS = m.pontoPorVirgula(preUnitS);
@@ -363,7 +371,7 @@ namespace simireports
                     }
 
                     //item = new Item(qtdSolic, qtdCancel, qtdAtend, nomeItem, przEntregaS, codItem, preUnit, qtdRom, qtdLib, qtdRes);
-                    item = new Item(codItem,qtdSolic,qtdCancel,qtdAtend,nomeItem,preUnit,przEntregaS,0,0,0,qtdRom,qtdLib,qtdRes);
+                    item = new Item(codItem, qtdSolic, qtdCancel, qtdAtend, nomeItem, preUnit, przEntregaS, 0, 0, 0, qtdRom, qtdLib, qtdRes);
 
                 }
                 totGeralS = m.formatarDecimal(totGeral);
@@ -377,14 +385,14 @@ namespace simireports
                 {
                     if (fPedAberto) //ADD PEDIDO SÓ SE TIVER ABERTO
                     {
-                        pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres, pedCli);
+                        pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres, pedCli, finalidade, condPgto);
                         pedsEfets.Add(pedEfet);
                         fPedAberto = false;
                     }
                 }
                 else //FLUXO NORMAL
                 {
-                    pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres, pedCli);
+                    pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres, pedCli, finalidade, condPgto);
                     pedsEfets.Add(pedEfet);
                 }
                 //----------
@@ -408,5 +416,25 @@ namespace simireports
 
         }
 
+
+
+
+
+        protected void export_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("RelPedidosEfetivadosEx.aspx");
+
+        }
+
+
+
+
+
+
+
+
+
+
     }
+      
 }

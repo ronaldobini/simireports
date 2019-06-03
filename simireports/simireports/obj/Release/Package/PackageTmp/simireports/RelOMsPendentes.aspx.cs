@@ -75,8 +75,7 @@ namespace simireports
         protected void executarRelatorio()
         {
             IfxConnection conn = new BancoLogix().abrir();
-            IfxDataReader reader = new
-            BancoLogix().consultar("SELECT a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, a.ies_tip_entrega, c.nom_cliente " +
+            string sql = "SELECT a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, a.ies_tip_entrega, c.nom_cliente, c2.nom_cliente " +
             "                                    FROM pedidos a " +
             "                                    JOIN ped_itens b " +
             "                                        ON a.num_pedido = b.num_pedido" +
@@ -85,6 +84,8 @@ namespace simireports
             "                                        AND b.qtd_pecas_romaneio < b.qtd_pecas_solic-b.qtd_pecas_cancel-b.qtd_pecas_atend" +
             "                                    JOIN clientes c" +
             "                                        ON c.cod_cliente = a.cod_cliente" +
+            "                                    JOIN clientes c2" +
+            "                                        ON c2.cod_cliente = a.cod_transpor" +
             "                                    JOIN estoque d" +
             "                                        ON b.cod_item = d.cod_item" +
             "                                        AND b.cod_empresa = d.cod_empresa" +
@@ -92,12 +93,15 @@ namespace simireports
             "                                    WHERE a.ies_sit_pedido = 'N'" +
             "                                    AND a.cod_repres <> 9007 " +
             "                                    AND a.cod_nat_oper <> 9001" +
-            "                                    AND "+ postTipoEntrega +
-            "                                    AND "+ postEmpresa +
-            "                                    GROUP BY a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, a.ies_tip_entrega, c.nom_cliente" +
-            "                                    ORDER BY a.dat_alt_sit desc ", conn);
+            "                                    AND " + postTipoEntrega +
+            "                                    AND " + postEmpresa +
+            "                                    GROUP BY a.cod_empresa, a.dat_alt_sit, a.cod_cliente, a.num_pedido, a.ies_tip_entrega, c.nom_cliente, c2.nom_cliente" +
+            "                                    ORDER BY a.dat_alt_sit desc ";
+            IfxDataReader reader = new
+            BancoLogix().consultar(sql, conn);
             IfxDataReader reader2;
             IfxDataReader reader3;
+            string errosql = new BancoLogix().consultarErros(sql, conn);
             //IfxConnection conn2;
             if (reader != null)
             {
@@ -110,7 +114,7 @@ namespace simireports
                     string numPed = reader.GetString(3);
                     string tipoEntrega = reader.GetString(4);
                     string cliente = reader.GetString(5);
-
+                    string trans = reader.GetString(6);
                     List<Item> itens = new List<Item>();
                     List<OrdemCompra> OCs = new List<OrdemCompra>();
 
@@ -139,13 +143,12 @@ namespace simireports
                             Item item = new Item(codItem,qtdSolic,qtdCancel,qtdAtend,nomeItem,0,przEntregaS,0,0,0, qtdRoma, qtdLib, qtdReserv);
                             if (item.QtdSolic != item.QtdAtend + item.QtdCancel)
                             {
-                                string sql = "SELECT oc.cod_empresa, oc.num_oc, oc.dat_entrega_prev, oc.num_docum, oc.qtd_solic " +
+                                string sql2 = "SELECT oc.cod_empresa, oc.num_oc, oc.dat_entrega_prev, oc.num_docum, oc.qtd_solic " +
                                 "                                                    FROM ordem_sup oc " +
                                 "                                                    WHERE oc.cod_item = '" + codItem + "' AND ies_situa_oc = 'R'" +
                                 "                                                    AND ies_versao_atual = 'S'" +
                                 "                                                    order by num_oc desc ";
-                                reader3 = new BancoLogix().consultar(sql, conn);
-                                String errosql = new BancoLogix().consultarErros(sql, conn);
+                                reader3 = new BancoLogix().consultar(sql2, conn);
                                 if (reader3 != null)
                                 {
                                     while (reader3.Read() && reader3.HasRows)
@@ -167,6 +170,7 @@ namespace simireports
                         }
 
                         OMPendente omp = new OMPendente(codEmpresa, datAltSit, codCliente, cliente, numPed, tipoEntrega, itens);
+                        omp.Trans = trans;
                         omsps.Add(omp);
                     }
                     //new BancoLogix().fechar(conn2);

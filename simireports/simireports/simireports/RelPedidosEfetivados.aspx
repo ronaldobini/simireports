@@ -129,6 +129,7 @@
                 <br>
                 <input class="btn btn-primary btn-xs" style="background-color:#126DBD" runat="server" type="submit" value="Filtrar" onserverclick="filtrarPedEfet_Click" />
 
+
             </form>
         </div>
 
@@ -159,6 +160,7 @@
                                 <th scope="col" style="width: 10%; text-align:center;">Cliente</th>
                                 <th scope="col" style="width: 10%; text-align:center;">Representante</th>
                                 <th scope="col" style="width: 10%; text-align:center;">Ped. Cliente</th>
+                                <th scope="col" style="width: 10%; text-align:center;">Pgto</th>
                             </tr>
                         </thead>
                      <%
@@ -169,6 +171,8 @@
                         string cliente = pedEfet.Cliente;
                         string repres = pedEfet.Repres;
                         string pedCli = pedEfet.PedCli;
+                        string finalidade = pedEfet.Finalidade;                         
+                        string condPgto = pedEfet.CondPgto;
                      %> 
                         <tr>
                             <td style="text-align:center;"><b><%= dat %></b></td>
@@ -178,9 +182,10 @@
                             <td style="text-align:center;"><b><%= cliente %></b></td>
                             <td style="text-align:center;"><b><%= repres %></b></td>
                             <td style="text-align:center;"><b><%= pedCli %></b></td>
+                            <td style="text-align:center;"><b><%= condPgto %></b></td>
                         </tr>
                         <tr>
-                            <td colspan ="7">
+                            <td colspan ="8">
                                 <table class="table table-sm table-dark" style="background-color:#3f4142; width:100%; color:white; font-size: 12px;">
                                     <thead>
                                         <tr>

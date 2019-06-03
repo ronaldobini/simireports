@@ -63,7 +63,7 @@ namespace simireports.simireports
                     }
 
                     double totSimilar = totComissRepresNew("SIMILAR", data1, data2, "");
-                    double similar8 = /*(totSimilar/10)/ 8.0*/24.19;
+                    double similar8 = (totSimilar/10)/ 8.0;
                     comissSimilar8 = Math.Round(similar8, 2).ToString();
 
                     double totVendin = totComissRepresNew("VENDAINT", data1, data2, "");

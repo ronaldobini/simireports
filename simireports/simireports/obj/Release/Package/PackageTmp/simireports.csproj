@@ -164,6 +164,7 @@
     <Content Include="simireports\RelPedidosEfetivados.aspx" />
     <Content Include="simireports\BotEmailsPedLogix.aspx" />
     <Content Include="simireports\Relatorios.aspx" />
+    <Content Include="simireports\RelPedidosEfetivadosEx.aspx" />
     <Content Include="syss.ico" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -309,6 +310,13 @@
     </Compile>
     <Compile Include="simireports\Relatorios.aspx.designer.cs">
       <DependentUpon>Relatorios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simireports\RelPedidosEfetivadosEx.aspx.cs">
+      <DependentUpon>RelPedidosEfetivadosEx.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\RelPedidosEfetivadosEx.aspx.designer.cs">
+      <DependentUpon>RelPedidosEfetivadosEx.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />

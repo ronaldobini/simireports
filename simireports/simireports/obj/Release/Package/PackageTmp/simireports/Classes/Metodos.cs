@@ -337,7 +337,14 @@ namespace simireports.simireports.Classes
 
         public int qtdLogixToInt(string qtdS)
         {
-            return Convert.ToInt32(Decimal.Parse(pontoPorVirgula(qtdS)));
+            if(qtdS.Length > 0)
+            {
+                return Convert.ToInt32(Decimal.Parse(pontoPorVirgula(qtdS)));
+            }
+            else
+            {
+                return 0;
+            }
         }
         
     }
