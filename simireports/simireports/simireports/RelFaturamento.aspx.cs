@@ -313,5 +313,19 @@ namespace simireports
             new BancoLogix().fechar(conn);
         }
 
+
+
+        protected void export_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("RelFaturamentosEx.aspx");
+        }
+
+
+
+
+
+
+
+
     }
 }

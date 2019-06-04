@@ -13,13 +13,13 @@ namespace simireports {
     public partial class RelFaturamento {
         
         /// <summary>
-        /// Controle filtrosComissoes.
+        /// Controle filtrosFat.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm filtrosComissoes;
+        protected global::System.Web.UI.HtmlControls.HtmlForm filtrosFat;
         
         /// <summary>
         /// Controle datInicio.

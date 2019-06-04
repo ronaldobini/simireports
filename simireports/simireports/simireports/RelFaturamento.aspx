@@ -20,7 +20,7 @@
 
         <p><%=sqlview %></p>
         <div id="filtros" style="margin-bottom:40px;">
-            <form runat="server" id="filtrosComissoes" action="#" method="post">
+            <form runat="server" id="filtrosFat" action="#" method="post">
                 <table style="color:white;">
                     <tr>
                         <th style="width:100px;">Data Inicio<br /> (Min: 2016)</th>
@@ -72,6 +72,8 @@
                 </table>
                 <br />
                 <input class="btn btn-primary btn-xs" style="background-color:#126DBD" runat="server" type="submit" value="Filtrar" onserverclick="filtrarFat_Click" />
+                <input class="btn btn-primary btn-xs" style="background-color:#0a5e03; border-color:#0a5e03;" runat="server" type="submit" value="Exportar" onserverclick="export_Click" />
+
             </form>
         </div>
 

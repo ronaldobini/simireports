@@ -280,7 +280,7 @@ namespace simireports
 
             if (reader != null && reader.HasRows)
             {
-                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel PedEfetiv", (string)Session["nome"], postRepres + " | " + postDatInicio + " | " + postCliente + " | " + postSit);
+                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel PedEfetiv", (string)Session["nome"], postRepres + " | " + postDatInicio + " | " + postCliente);
                 while (reader.Read())
                 {
 
@@ -423,7 +423,6 @@ namespace simireports
         protected void export_Click(object sender, EventArgs e)
         {
             Response.Redirect("RelPedidosEfetivadosEx.aspx");
-
         }
 
 
