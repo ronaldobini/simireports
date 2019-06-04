@@ -45,7 +45,7 @@ namespace simireports
                 else
                 {
                     //VERFICA NIVEL
-                    if ((int)Session["key"] >= 1)
+                    if ((int)Session["key"] >= 5)
                     {
                         if ((int)Session["key"] >= 5)
                         {

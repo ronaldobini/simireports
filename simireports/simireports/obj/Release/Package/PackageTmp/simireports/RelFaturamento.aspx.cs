@@ -183,11 +183,11 @@ namespace simireports
                 " ped.num_pedido_cli," +
                 " cli2.nom_cliente" +
                 " from fat_nf_mestre nf" +
-                " JOIN fat_nf_item nfi ON(nf.trans_nota_fiscal = nfi.trans_nota_fiscal)" +
-                " JOIN item it ON(nfi.item = it.cod_item and nfi.empresa = it.cod_empresa)" +
-                " JOIN pedidos ped ON(nfi.pedido = ped.num_pedido and nfi.empresa = ped.cod_empresa)" +
-                " JOIN clientes cli on(nf.cliente = cli.cod_cliente)" +
-                " JOIN clientes cli2 on(nf.transportadora = cli2.cod_cliente)" +
+                "  JOIN fat_nf_item nfi ON (nf.trans_nota_fiscal = nfi.trans_nota_fiscal and nfi.empresa = nf.empresa)" +
+                "  JOIN item it ON(nfi.item = it.cod_item and nfi.empresa = it.cod_empresa)" +
+                "  JOIN pedidos ped ON(nfi.pedido = ped.num_pedido and nfi.empresa = ped.cod_empresa)" +
+                "  JOIN clientes cli on(nf.cliente = cli.cod_cliente)" +
+                "  JOIN clientes cli2 on(nf.transportadora = cli2.cod_cliente)" +
                 " where nf.dat_hor_emissao >= '" + postDatInicio + " 00:00:00' " +
                 " AND nf.dat_hor_emissao <= '" + postDatFim + " 23:59:59' " +
                 " AND nf.dat_hor_emissao >= '2016-01-01 00:00:00'" +
@@ -202,7 +202,7 @@ namespace simireports
                 " " + postPed + " " +
                 " AND ped.num_pedido_cli like '%" + postPedCli + "%' " +
                 " AND nf.transportadora like '%" + postTrans + "%' " +
-                " ORDER BY nota_fiscal, empresa ";
+                " ORDER BY nfi.pedido, nota_fiscal, empresa ";
 
             //sqlview = sql; //ativa a exibicao do sql na tela
             IfxDataReader reader = new BancoLogix().consultar(sql, conn);
