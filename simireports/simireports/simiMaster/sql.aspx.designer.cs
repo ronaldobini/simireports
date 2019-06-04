@@ -28,6 +28,6 @@ namespace simireports.simiMaster {
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText sqlExe;
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea sqlExe;
     }
 }

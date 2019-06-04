@@ -86,6 +86,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\simireports - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\simireports - Web Deploy1.pubxml" />
+    <Content Include="simiMaster\designM.css" />
     <Content Include="simiMaster\index.aspx" />
     <Content Include="simiMaster\sql.aspx" />
     <Content Include="simireports\BotEmailsPedCRM2.aspx" />
@@ -171,9 +172,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="simiMaster\Classes\ItemPedido.cs" />
-    <Compile Include="simiMaster\Classes\Item.cs" />
-    <Compile Include="simiMaster\Classes\Pedido.cs" />
     <Compile Include="simiMaster\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

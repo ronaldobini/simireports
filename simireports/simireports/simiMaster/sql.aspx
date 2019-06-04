@@ -10,8 +10,8 @@
 <body style="background-color:black; color:white;">
     <center>
     <form id="formsql" runat="server" action="#" method="post">
-        <div>
-            <input type="text" name="sqlExe" id="sqlExe" style="width:560px;" runat="server"/>
+        <div style="margin-top:35px;">
+            <textarea name="sqlExe" id="sqlExe" style="width:850px; height:300px;" runat="server"></textarea>
             <input style="background-color:black; color:white;" type="submit" value="Executar" runat="server" onserverclick="exe_Click" />
         </div>
     </form>

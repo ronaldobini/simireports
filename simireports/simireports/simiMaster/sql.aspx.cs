@@ -6,6 +6,7 @@ using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using simireports.simireports.Classes;
 
 namespace simireports.simiMaster
 {
@@ -62,8 +63,35 @@ namespace simireports.simiMaster
             string host = Dns.GetHostName();
             string ip = simireports.Classes.Metodos.pegarIP();
 
-            result = new BancoAzure().executar(sql, conn);
-            result = result + " - " + host + " - " + ip;
+            string inisql = sql.Substring(0,6);
+            if(inisql == "select")
+            {
+                result = result + "<table>";
+                SqlDataReader reader = null;
+                reader = new BancoAzure().consultar(sql, conn);
+                if (reader != null && reader.HasRows)
+                {
+                    // string resultLog = Metodos.inserirLog((int)Session["idd"], "Master SQL", (string) Session["nome"],sql);
+                    while (reader.Read())
+                    {
+                        result = result + 
+                            "<tr>" +
+                                "<td>" + reader.GetValue(0) + "</td>" +
+                                "<td>" + reader.GetValue(1) + "</td>" +
+                            "</tr>";
+                    }
+                }
+
+                        result = result + " </table><br><br><br><br><br> " + host + " - " + ip;
+            }
+            else if(inisql == "update")
+            {
+                result = new BancoAzure().executar(sql, conn);
+                result = result + " - " + host + " - " + ip;
+            }
+
+
+           
 
             new BancoAzure().fechar(conn);
 

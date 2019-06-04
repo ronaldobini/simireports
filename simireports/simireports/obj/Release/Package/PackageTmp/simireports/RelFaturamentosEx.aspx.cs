@@ -231,7 +231,7 @@ namespace simireports.simireports
 
             if (reader != null && reader.HasRows)
             {
-                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel Faturamento", (string)Session["nome"], postDatInicio + " | " + postCliente);
+                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel Faturamento Ex", (string)Session["nome"], postDatInicio + " | " + postCliente);
                 while (reader.Read())
                 {
 
