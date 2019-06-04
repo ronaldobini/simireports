@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Net;
-using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using IBM.Data.Informix;
 using simireports.simireports.Classes;
 
-namespace simireports
+
+namespace simireports.simireports
 {
-    public partial class RelFaturamento : System.Web.UI.Page
+    public partial class RelFaturamentosEx : System.Web.UI.Page
     {
 
         public string postDatInicio = "";
@@ -80,7 +78,7 @@ namespace simireports
 
             //PEDIDO GET
             getPedido = Request.QueryString["getPedido"];
-            if(getPedido != null)
+            if (getPedido != null)
             {
                 if (getPedido.Length > 0)
                 {
@@ -91,7 +89,7 @@ namespace simireports
                     executarRelatorio();
                 }
             }
-            
+
 
         }
 
@@ -102,7 +100,7 @@ namespace simireports
 
         protected void filtrarFat_Click(object sender, EventArgs e)
         {
-            
+
             postDatInicio = datInicio.Value;
             if (postDatInicio == "") postDatInicio = hoje;
 
@@ -126,8 +124,8 @@ namespace simireports
             postNomCli = nomCli.Value;
             postNomCli = postNomCli.ToUpper();
             postNatur = natureza.Value;
-           
-            
+
+
             if (postNatur.Equals("1000"))
             {
                 postNatur = " AND nfi.natureza_operacao <> 9001 ";
@@ -147,7 +145,7 @@ namespace simireports
                 postPed = " AND nfi.pedido = " + postPed + "";
             }
 
-           
+
 
 
 
@@ -229,7 +227,7 @@ namespace simireports
             Faturamento fat = null;
             bool primeiro = true;
             string notAnt = "";
-            string errosql = new BancoLogix().consultarErros(sql,conn);
+            string errosql = new BancoLogix().consultarErros(sql, conn);
 
             if (reader != null && reader.HasRows)
             {
@@ -280,14 +278,14 @@ namespace simireports
                     pedCli = reader.GetString(12);
                     trans = reader.GetString(13);
                     //item = new Item(qtdItem, descItem, codItem, preUnit);
-                    item = new Item(codItem,0,0,qtdItem,descItem,preUnit,"",0,0,0,0,0,0);
+                    item = new Item(codItem, 0, 0, qtdItem, descItem, preUnit, "", 0, 0, 0, 0, 0, 0);
 
                     totFaturamento += total;
                 }
                 totFaturamentoS = m.formatarDecimal(totFaturamento);
 
                 itens.Add(item);
-                fat = new Faturamento(dat,empresa, nota, cpfCli,cliente, itens, nat, pedido, pedCli, trans);
+                fat = new Faturamento(dat, empresa, nota, cpfCli, cliente, itens, nat, pedido, pedCli, trans);
                 fats.Add(fat);
             }
             else
@@ -315,10 +313,7 @@ namespace simireports
 
 
 
-        protected void export_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("RelFaturamentosEx.aspx");
-        }
+
 
 
 

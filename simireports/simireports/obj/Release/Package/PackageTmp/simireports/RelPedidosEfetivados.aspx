@@ -128,7 +128,7 @@
                 </table>
                 <br>
                 <input class="btn btn-primary btn-xs" style="background-color:#126DBD" runat="server" type="submit" value="Filtrar" onserverclick="filtrarPedEfet_Click" />
-
+                <input class="btn btn-primary btn-xs" style="background-color:#0a5e03; border-color:#0a5e03;" runat="server" type="submit" value="Exportar" onserverclick="export_Click" />
 
             </form>
         </div>

@@ -423,7 +423,6 @@ namespace simireports
         protected void export_Click(object sender, EventArgs e)
         {
             Response.Redirect("RelPedidosEfetivadosEx.aspx");
-
         }
 
 

@@ -7,19 +7,19 @@
 // </gerado automaticamente>
 //------------------------------------------------------------------------------
 
-namespace simireports {
+namespace simireports.simireports {
     
     
-    public partial class RelFaturamento {
+    public partial class RelFaturamentosEx {
         
         /// <summary>
-        /// Controle filtrosFat.
+        /// Controle filtrosFatEx.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm filtrosFat;
+        protected global::System.Web.UI.HtmlControls.HtmlForm filtrosFatEx;
         
         /// <summary>
         /// Controle datInicio.
