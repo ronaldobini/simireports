@@ -278,7 +278,7 @@ namespace simireports.simireports
 
             if (reader != null && reader.HasRows)
             {
-                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel PedEfetiv Ex", (string)Session["nome"], postRepres + " | " + postDatInicio + " | " + postCliente + " | " + postSit);
+                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel PedEfetiv Ex", (string)Session["nome"], postRepres + " | " + postDatInicio + " | " + postCliente);
                 while (reader.Read())
                 {
 

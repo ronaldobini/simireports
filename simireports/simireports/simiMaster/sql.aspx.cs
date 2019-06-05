@@ -23,27 +23,24 @@ namespace simireports.simiMaster
             {
                 if ((int)Session["key"] <= 0)
                 {
-                    Response.Redirect("login.aspx");
+                    Response.Redirect("../simireports/login.aspx");
                 }
                 else
                 {
                     //VERFICA NIVEL
-                    if ((int)Session["key"] >= 1)
+                    if ((int)Session["key"] >= 11)
                     {
-                        if ((int)Session["key"] >= 11)
-                        {
-                            //OK
-                        }
+                        //OK
                     }
                     else
                     {
-                        Response.Redirect("../index.aspx");
+                        Response.Redirect("../simireports/index.aspx");
                     }
                 }
             }
             else
             {
-                Response.Redirect("../index.aspx");
+                Response.Redirect("../simireports/index.aspx");
             }
 
 
@@ -66,7 +63,7 @@ namespace simireports.simiMaster
             string inisql = sql.Substring(0,6);
             if(inisql == "select")
             {
-                result = result + "<table>";
+                result = result + "<table style='white-space: nowrap;border-collapse: collapse;'>";
                 SqlDataReader reader = null;
                 reader = new BancoAzure().consultar(sql, conn);
                 if (reader != null && reader.HasRows)
@@ -74,17 +71,20 @@ namespace simireports.simiMaster
                     // string resultLog = Metodos.inserirLog((int)Session["idd"], "Master SQL", (string) Session["nome"],sql);
                     while (reader.Read())
                     {
-                        result = result + 
-                            "<tr>" +
-                                "<td>" + reader.GetValue(0) + "</td>" +
-                                "<td>" + reader.GetValue(1) + "</td>" +
-                            "</tr>";
+                        result = result + "<tr>";
+                        int i = 0;
+                        while (i < reader.FieldCount)
+                        {
+                            result = result + "<td style='border-style: solid; border-width: 1px;'>" + reader.GetValue(i) + "</td>";
+                            i++;
+                        }
+                        result = result + "</tr>";
                     }
                 }
 
                         result = result + " </table><br><br><br><br><br> " + host + " - " + ip;
             }
-            else if(inisql == "update")
+            else
             {
                 result = new BancoAzure().executar(sql, conn);
                 result = result + " - " + host + " - " + ip;

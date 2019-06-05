@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <link rel="stylesheet" href="designM.css" />
+    <link rel="stylesheet" href="css/designIndex.css" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <title>% SimiMaster %</title>
