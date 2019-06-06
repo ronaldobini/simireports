@@ -25,6 +25,7 @@ namespace simireports.simireports
         public string postPed = "";
         public string postPedCli = "";
         public string postTrans = "";
+        public string postFam = "";
         public string sqlview = "";
 
         public string getPedido = "";
@@ -146,7 +147,44 @@ namespace simireports.simireports
             }
 
 
-
+            postFam = familia.Value;
+            if (postFam == "00")
+            {
+                postFam = "";
+            }
+            else if (postFam == "01")
+            {
+                postFam = " AND it.cod_familia = '01'";
+            }
+            else if (postFam == "02")
+            {
+                postFam = " AND it.cod_familia = '02'";
+            }
+            else if (postFam == "03")
+            {
+                postFam = " AND (it.cod_familia = '03' or it.cod_familia = '30' or it.cod_familia = '31' or " +
+                                "it.cod_familia = '32' or it.cod_familia = '33' or it.cod_familia = '97')";
+            }
+            else if (postFam == "09")
+            {
+                postFam = " AND it.cod_familia = '09'";
+            }
+            else if (postFam == "34")
+            {
+                postFam = " AND it.cod_familia = '34'";
+            }
+            else if (postFam == "50")
+            {
+                postFam = " AND it.cod_familia = '50'";
+            }
+            else if (postFam == "99")
+            {
+                postFam = " AND it.cod_familia = '99'";
+            }
+            else
+            {
+                postFam = "";
+            }
 
 
             postPedCli = pedCli.Value;
@@ -198,9 +236,10 @@ namespace simireports.simireports
                 " " + postNota + " " +
                 " " + postNatur + " " +
                 " " + postPed + " " +
+                " " + postFam + " " +
                 " AND ped.num_pedido_cli like '%" + postPedCli + "%' " +
                 " AND nf.transportadora like '%" + postTrans + "%' " +
-                " ORDER BY nfi.pedido, nota_fiscal, empresa ";
+                " ORDER BY nota_fiscal ";
 
             //sqlview = sql; //ativa a exibicao do sql na tela
             IfxDataReader reader = new BancoLogix().consultar(sql, conn);

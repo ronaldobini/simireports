@@ -54,7 +54,7 @@
                     <tr>
                         <td style="text-align:center;"><%= rep.Cliente %></td>
                         <td style="text-align:center;"><%= rep.CodCliente %></td>
-                        <td style="text-align:center;"><%= rep.Valor %></td>
+                        <td style="text-align:center;"><%= m.formatarDecimal(rep.Valor) %></td>
                         <td style="text-align:center;"><%= rep.Pedido %></td>
                     </tr>
                 <%

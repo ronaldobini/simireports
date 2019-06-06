@@ -90,18 +90,21 @@ namespace simireports
             string datas = "";
 
             IfxConnection conn = new BancoLogix().abrir();
-            string sql = "select c.nom_cliente, nfm.cliente,c.cod_cidade,nfm.val_mercadoria, nf.pedido, nfm.nota_fiscal, nfm.empresa " +
-                " from fat_nf_mestre nfm" +
-                " join clientes c on nfm.cliente = c.cod_cliente" +
-                " join fat_nf_item nf on nf.trans_nota_fiscal = nfm.trans_nota_fiscal and nf.empresa = nfm.empresa" +
-                " join pedidos p on p.num_pedido = nf.pedido and nf.empresa = p.cod_empresa" +
-                " where c.cod_cidade like '%" +postDestino+"%'" +
-                " and dat_hor_emissao >= '" + m.configDataHuman2Banco(postDatInicio) + " 00:00:00' " +
-                " and dat_hor_emissao <= '" + m.configDataHuman2Banco(postDatFim) + " 23:59:59'" +
-                " and nf.natureza_operacao > 1000" +
+            string sql = "SELECT c.nom_cliente, nfm.cliente,c.cod_cidade,sum(nfi.val_bruto_item), nfi.pedido, nfm.nota_fiscal, nfm.empresa " +
+                " FROM fat_nf_mestre nfm" +
+                " JOIN clientes c on nfm.cliente = c.cod_cliente" +
+                " JOIN fat_nf_item nfi on nfi.trans_nota_fiscal = nfm.trans_nota_fiscal and nfi.empresa = nfm.empresa" +
+                " JOIN pedidos p on p.num_pedido = nfi.pedido and nfi.empresa = p.cod_empresa" +
+                " JOIN item it ON (nfi.item = it.cod_item and nfi.empresa = it.cod_empresa)" +
+                " WHERE c.cod_cidade like '%" +postDestino+"%'" +
+                " AND dat_hor_emissao >= '" + m.configDataHuman2Banco(postDatInicio) + " 00:00:00' " +
+                " AND dat_hor_emissao <= '" + m.configDataHuman2Banco(postDatFim) + " 23:59:59'" +
+                " AND nfi.natureza_operacao > 1000" +
                 " AND nfm.sit_nota_fiscal = 'N'" +
-                " group by c.nom_cliente, nfm.cliente,c.cod_cidade,nfm.val_mercadoria, nf.pedido, nfm.nota_fiscal, nfm.empresa " +
-                " order by nf.pedido desc";
+                " AND (it.cod_familia = '03' or it.cod_familia = '30' or it.cod_familia = '31' or " +
+                                "it.cod_familia = '32' or it.cod_familia = '33' or it.cod_familia = '97')" +
+                " GROUP BY c.nom_cliente, nfm.cliente,c.cod_cidade,nfm.val_mercadoria, nfi.pedido, nfm.nota_fiscal, nfm.empresa " +
+                " ORDER BY nfi.pedido desc";
             string errosql = new BancoLogix().consultarErros(sql, conn);
             //sqlview = sql; //ativa a exibicao do sql na tela
             IfxDataReader reader = new BancoLogix().consultar(sql, conn);

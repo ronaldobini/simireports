@@ -168,8 +168,6 @@
     <Content Include="simireports\Relatorios.aspx" />
     <Content Include="simireports\RelPedidosEfetivadosEx.aspx" />
     <Content Include="simireports\RelReportBrady.aspx" />
-    <Content Include="simireports\testeJS.aspx" />
-    <Content Include="simireports\testeJS.html" />
     <Content Include="syss.ico" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -334,13 +332,6 @@
     </Compile>
     <Compile Include="simireports\RelReportBrady.aspx.designer.cs">
       <DependentUpon>RelReportBrady.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="simireports\testeJS.aspx.cs">
-      <DependentUpon>testeJS.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="simireports\testeJS.aspx.designer.cs">
-      <DependentUpon>testeJS.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />

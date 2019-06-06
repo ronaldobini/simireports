@@ -29,6 +29,8 @@
                         <th style="width:100px;">Nota</th>
                         <th style="width:130px;">Item</th>
                         <th style="width:100px;">Nome Item</th>
+                        <th style="width:100px;">Fam. Item</th>
+
                     </tr>
                     <tr>
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datInicio" autocomplete="off"/></td>
@@ -46,6 +48,18 @@
                         <td style="width:150px;"><input class="form-control" style="width:130px;" runat="server" type="text" id="nota" autocomplete="off"/></td>
                         <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="codItem"  autocomplete="off"/></td>
                         <td style="width:120px;"><input class="form-control" style="width:110px;" runat="server" type="text" id="descItem"  autocomplete="off"/></td>
+                        <td style="width:140px;">
+                            <select class="form-control" style="width:120px;" id="familia" runat="server">
+                                <option value="00">Todas</option>
+                                <option value="01">SICK</option>
+                                <option value="02">LS</option>
+                                <option value="03">BRADY</option>
+                                <option value="09">BELDEN</option>
+                                <option value="34">GREENPROCESS</option>
+                                <option value="50">SERVICOS</option>
+                                <option value="99">DIVERSOS04</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <th style="width:100px;">CNPJ Cliente</th>
