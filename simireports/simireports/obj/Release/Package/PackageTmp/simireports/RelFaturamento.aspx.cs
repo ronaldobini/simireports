@@ -178,6 +178,10 @@ namespace simireports
             {
                 postFam = " AND it.cod_familia = '50'";
             }
+            else if (postFam == "98")
+            {
+                postFam = " AND it.cod_familia = '98'";
+            }
             else if (postFam == "99")
             {
                 postFam = " AND it.cod_familia = '99'";

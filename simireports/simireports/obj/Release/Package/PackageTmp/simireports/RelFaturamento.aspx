@@ -56,7 +56,8 @@
                                 <option value="09">BELDEN</option>
                                 <option value="34">GREENPROCESS</option>
                                 <option value="50">SERVICOS</option>
-                                <option value="99">DIVERSOS04</option>
+                                <option value="98">DIVERSOS IMP</option>
+                                <option value="99">DIVERSOS</option>
                             </select>
                         </td>
                     </tr>
