@@ -15,6 +15,8 @@ namespace simireports.simiMaster
 
         public string result = "...";
 
+        public int resCount;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -52,6 +54,7 @@ namespace simireports.simiMaster
         protected void exe_Click(object sender, EventArgs e)
         {
 
+
             string postSql = sqlExe.Value;
 
             SqlConnection conn = new BancoAzure().abrir();
@@ -61,9 +64,12 @@ namespace simireports.simiMaster
             string ip = simireports.Classes.Metodos.pegarIP();
 
             string inisql = sql.Substring(0,6);
-            if(inisql == "select")
+
+            if((inisql).Equals("select", StringComparison.OrdinalIgnoreCase))
             {
                 result = result + "<table style='white-space: nowrap;border-collapse: collapse;'>";
+                //String erro = new BancoAzure().consultarErros(sql, conn);
+                resCount = 0;
                 SqlDataReader reader = null;
                 reader = new BancoAzure().consultar(sql, conn);
                 if (reader != null && reader.HasRows)
@@ -79,10 +85,23 @@ namespace simireports.simiMaster
                             i++;
                         }
                         result = result + "</tr>";
+                        ++resCount;
                     }
                 }
-
-                        result = result + " </table><br><br><br><br><br> " + host + " - " + ip;
+                else
+                {
+                    if (reader != null)
+                    {
+                        reader.Close();
+                    }
+                    String erro = new BancoAzure().consultarErros(sql, conn);
+                    result = result + "<div style='color:red;'>" + erro +"</div>";
+                }
+                result = result + " </table><br><br><br><br><br> " + host + " - " + ip;
+                if (reader!= null)
+                {
+                    reader.Close();
+                }
             }
             else
             {
@@ -92,7 +111,7 @@ namespace simireports.simiMaster
 
 
            
-
+            
             new BancoAzure().fechar(conn);
 
         }

@@ -23,6 +23,6 @@
         </div>
     </form>
     <br /><br /><br />
-    <font color="green"><%=result %></font>
+    <font color="green"><%=resCount %><%=result %></font>
 </body>
 </html>

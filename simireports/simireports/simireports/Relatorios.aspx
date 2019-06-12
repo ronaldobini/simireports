@@ -113,7 +113,7 @@
                     <td><a style="color:#399bfc;" href="RelPedidosEfetivados.aspx">002 - Pedidos Logix </a></td>
                     <td><a style="color:#399bfc;" href="RelFaturamento.aspx">007 - Faturamento</a></td>
                     <td></td>
-                    <td></td>
+                    <td><a style="color:#399bfc;" href="RelReportBagio.aspx">009 - Reporte Baggio</a></td>
                 </tr>
                 <tr>
                     <td><a style="color:#399bfc;" href="RelPedidosEfetivadosCRM.aspx">003 - Pedidos CRM</a></td>
