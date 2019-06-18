@@ -22,6 +22,7 @@ namespace simireports
         public string postNumPed = "";
         public string postCodItem = "";
         public string postPreUnit = "";
+        public string postClass = "";
         public string sqlview = "";
         public decimal totGeral = 0.0m;
         public string totGeralS = "0,00";
@@ -115,6 +116,21 @@ namespace simireports
                 postRepres = postRepres.ToUpper();
             }
 
+            postClass = classprop.Value;
+            if(postClass == "1"){
+                postClass = " "; 
+            }else if(postClass == "2"){
+                postClass = " AND a.CLProp like 'AAC' ";
+            }else if(postClass == "3"){
+                postClass = " AND a.CLProp like 'AMC' ";            
+            }else if(postClass == "4"){
+                postClass = " AND a.CLProp like 'ABC' ";            
+            }
+            else if (postClass == "5")
+            {
+                postClass = " AND (a.CLProp like 'FTo' OR a.CLProp like 'FPa')";
+            }
+
             executarRelatorio();
         }
 
@@ -155,6 +171,10 @@ namespace simireports
                                         " AND a.Unidade LIKE '%" + postUnidade + "%'" +
 
                                         " AND a.CLProp NOT like 'E%'" +
+                                        " AND a.CLProp NOT like 'S%'" +
+                                        " AND a.CLProp NOT like 'P%'" +
+
+                                        postClass +
 
                                         postNumPed +
 
@@ -162,8 +182,8 @@ namespace simireports
                                         " b.Qtd, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.Seq, b.Comis " +
                                         " ORDER BY a.DataProp desc, a.CodProp, b.Seq";
 
-            sqlview = sql; //ativa a exibicao do sql na tela
-            errosql = new BancoAzure().consultarErros(sql,conn);
+            //sqlview = sql; //ativa a exibicao do sql na tela
+            //errosql = new BancoAzure().consultarErros(sql,conn);
             reader = new BancoAzure().consultar(sql, conn);
             List<Item> itens = new List<Item>();
             string pedAnt = "zaburska";
@@ -174,6 +194,7 @@ namespace simireports
             string cliente = "";
             string repres = "";
             string numPed = "";
+            string clprop = "";
             Item item = null;
             bool primeiro = true;
             PedidoEfetivado pedEfet = null;
@@ -199,7 +220,7 @@ namespace simireports
                         else
                         {
                             itens.Add(item);
-                            pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres);
+                            pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres, clprop);
                             pedsEfets.Add(pedEfet);
                             itens = new List<Item>();
                             pedAnt = numPed;
@@ -210,6 +231,8 @@ namespace simireports
                     codCliente = reader.GetString(2);
                     cliente = reader.GetString(3);
                     repres = reader.GetString(5);
+                    clprop = reader.GetString(6);
+
 
                     int qtdSolic = Convert.ToInt32(reader.GetDouble(7));
                     string nomeItem = reader.GetString(8);
@@ -231,12 +254,13 @@ namespace simireports
                     totGeralS = m.formatarDecimal(totGeral);
                     Double desconto = reader.GetDouble(12);
                     Double comiss = reader.GetDouble(14);
+                    if (comiss == 0.14) comiss = 0.0;
                     comiss *= 100;
                     item = new Item().itemPropostasCRM(qtdSolic,nomeItem,przEntregaS,codItem,preUnit,desconto,comiss);
                     
                 }
                 itens.Add(item);
-                pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, numPed, itens, cliente, repres);
+                pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, numPed, itens, cliente, repres, clprop);
                 pedsEfets.Add(pedEfet);
 
                 reader.Close();

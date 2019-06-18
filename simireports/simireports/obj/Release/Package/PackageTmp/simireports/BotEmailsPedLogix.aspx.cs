@@ -130,7 +130,7 @@ namespace simireports.simireports
                             else
                             {
                                 itens.Add(item);
-                                pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres);
+                                pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres,"");
                                 pedsEfets.Add(pedEfet);
                                 itens = new List<Item>();
                                 pedAnt = numPed;
@@ -160,7 +160,7 @@ namespace simireports.simireports
                     }
 
                     itens.Add(item);
-                    pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres);
+                    pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres,"");
                     pedsEfets.Add(pedEfet);
                 }
                 

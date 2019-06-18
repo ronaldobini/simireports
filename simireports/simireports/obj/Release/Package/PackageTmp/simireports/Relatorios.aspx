@@ -121,7 +121,7 @@
                     <td><a style="color:#399bfc;" href="RelReportBagio.aspx">009 - Reporte Baggio</a></td>
                 </tr>
                 <tr>
-                    <td><a style="color:#399bfc;" href="RelPedidosEfetivadosCRM.aspx">003 - Pedidos CRM</a></td>
+                    <td><a style="color:#399bfc;" href="RelPropostasCRM.aspx">003 - Propostas CRM <font color=yellow>(Renovado)</font></a></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -134,7 +134,7 @@
                     <%--<td><a href="BotEmailsPedCRM.aspx">Email CRM</a></td>--%>
                 </tr>
                 <tr>
-                    <td><a style="color:#399bfc;" href="RelResumoPedido.aspx">010 - Resumo Pedido</a></td>
+                    <td><a style="color:#399bfc;" href="RelResumoPedido.aspx">010 - Resumo Pedido <font color=yellow>(Novo)</font></a></td>
                     <td></td>
                     <td></td>
                     <td></td>

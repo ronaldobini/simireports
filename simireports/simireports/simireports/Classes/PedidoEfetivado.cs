@@ -17,9 +17,10 @@ namespace simireports.simireports.Classes
         private string pedCli;
         private string finalidade;
         private string condPgto;
+        private string clprop;
 
 
-        public PedidoEfetivado(string codEmpresa, DateTime dat, string codCliente, string numPed, List<Item> itens, string cliente, string repres)
+        public PedidoEfetivado(string codEmpresa, DateTime dat, string codCliente, string numPed, List<Item> itens, string cliente, string repres, string clprop)
         {
             this.codEmpresa = codEmpresa;
             this.dat = dat;
@@ -28,6 +29,7 @@ namespace simireports.simireports.Classes
             this.itens = itens;
             this.cliente = cliente;
             this.repres = repres;
+            this.clprop = clprop;
         }
 
         public PedidoEfetivado(string codEmpresa, DateTime dat, string codCliente, string numPed, List<Item> itens, string cliente, string repres, string pedCli, string finalidade, string condPgto)
@@ -54,5 +56,6 @@ namespace simireports.simireports.Classes
         public string PedCli { get => pedCli; set => pedCli = value; }
         public string Finalidade { get => finalidade; set => finalidade = value; }
         public string CondPgto { get => condPgto; set => condPgto = value; }
+        public string Clprop { get => clprop; set => clprop = value; }
     }
 }
