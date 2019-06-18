@@ -60,19 +60,23 @@
 									    <a href="javascript:;" onclick="document.getElementById('upload').submit();" data-clone="Requests">Solicitações</a>
 									    <input type="hidden" name="key" value="1">
 								    </form>
-							    </li>							
+							    </li>
+                                <% if ((int)Session["key"] >= 11){ %>
 							    <li>
-								    <form id="servicos" action="construcao.aspx" method="post">
+								    <form id="servicos" action="../simiMaster/index.aspx" method="post">
 									    <a href="javascript:;" onclick="document.getElementById('servicos').submit();" data-clone="IT"> TI</a>
 									    <input type="hidden" name="key" value="1">
 								    </form>
 							    </li>
+                                <% } %>
+                                <% if ((int)Session["key"] >= 7){ %>
 							    <li>
 								    <form id="adm" action="construcao.aspx" method="post">
 									    <a href="javascript:;" onclick="document.getElementById('adm').submit();" data-clone="Management">Gerência</a>
 									    <input type="hidden" name="key" value="1">
 								    </form>
 							    </li>
+                                <% } %>
 							    <li style="color:red;">
 								    <form id="sair" action="Logout.aspx" method="post">
 									    <a href="javascript:;" onclick="document.getElementById('sair').submit();" data-clone="Quit">Sair</a>
@@ -80,6 +84,7 @@
 									    <input type="hidden" name="sair" value="1">
 								    </form>
 							    </li>
+                                
 						    </ul>
 					    </nav>
 				    </td>
@@ -127,6 +132,12 @@
                     <td></td>
                     <td></td>
                     <%--<td><a href="BotEmailsPedCRM.aspx">Email CRM</a></td>--%>
+                </tr>
+                <tr>
+                    <td><a style="color:#399bfc;" href="RelResumoPedido.aspx">010 - Resumo Pedido</a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
              </table>
         </center>

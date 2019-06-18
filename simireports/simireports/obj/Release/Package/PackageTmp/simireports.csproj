@@ -169,6 +169,7 @@
     <Content Include="simireports\RelPedidosEfetivadosEx.aspx" />
     <Content Include="simireports\RelReportBagio.aspx" />
     <Content Include="simireports\RelReportBrady.aspx" />
+    <Content Include="simireports\RelResumoPedido.aspx" />
     <Content Include="syss.ico" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -340,6 +341,13 @@
     </Compile>
     <Compile Include="simireports\RelReportBrady.aspx.designer.cs">
       <DependentUpon>RelReportBrady.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simireports\RelResumoPedido.aspx.cs">
+      <DependentUpon>RelResumoPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\RelResumoPedido.aspx.designer.cs">
+      <DependentUpon>RelResumoPedido.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />

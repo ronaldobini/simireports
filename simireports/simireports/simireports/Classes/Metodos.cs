@@ -89,9 +89,23 @@ namespace simireports.simireports.Classes
             {
                 s = s.Replace("*", "%");
                 s = s.Replace("?", "%");
+                
             }
             return s;
         }
+
+        public String configCoringasCodPedCRM(String s)
+        {
+            if (s.Contains("*") || s.Contains("?") || s.Contains("S") || s.Contains("D"))
+            {
+                s = s.Replace("*", "%");
+                s = s.Replace("?", "%");
+                s = s.Replace("S", "Š");
+                s = s.Replace("D", "Ð");
+            }
+            return s;
+        }
+
 
 
         public String configDataHuman2Banco(String data)
