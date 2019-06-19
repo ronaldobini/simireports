@@ -44,7 +44,7 @@ namespace simireports.simireports
 
             if (postPedLogix.Length > 0)
             {                
-                string sql = "SELECT codped FROM prepedidositens WHERE lgxpednum like '%"+postPedLogix+"'%";
+                string sql = "SELECT codped FROM prepedidositens WHERE lgxpednum = "+postPedLogix+"";
                 SqlDataReader reader = new BancoAzure().consultar(sql, conn);
 
                 if (reader.Read())
