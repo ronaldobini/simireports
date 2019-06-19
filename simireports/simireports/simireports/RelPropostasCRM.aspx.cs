@@ -95,7 +95,7 @@ namespace simireports
             postNumPed = numPed.Value;
             if (!postNumPed.Equals(""))
             {
-                postNumPed = " AND a.CodProp = " + postNumPed + "";
+                postNumPed = " AND a.CodProp like '%" + postNumPed + "%'";
             }
             postCodItem = codItem.Value.ToUpper();
             postCodItem = m.configCoringas(postCodItem);
@@ -201,7 +201,7 @@ namespace simireports
 
             if (reader != null && reader.HasRows)
             {
-                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel PedEfetiv CRM", (string)Session["nome"], postRepres);
+                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel Prop CRM", (string)Session["nome"], postRepres);
                 while (reader.Read())
                 {
                     numPed = reader.GetString(4);

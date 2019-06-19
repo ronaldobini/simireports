@@ -110,7 +110,7 @@
 
     
 
-    <img src = "img/simiweb1.png" style="width:65%;"/>
+    <img src = "img/simiweb1.png" style="width:55%;"/>
     <br />
 
     <font style="margin-top:40px;font-size:20px;" color=green> <%=Session["swver"] %></font>

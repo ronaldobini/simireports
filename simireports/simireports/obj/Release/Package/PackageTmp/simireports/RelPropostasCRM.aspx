@@ -138,9 +138,9 @@
                         <tr>
                             <td style="text-align:center;"><b><%= dat %></b></td>
                             <td style="text-align:center;"><b><%= codEmpresa %></b></td>
-                            <td style="text-align:center;"><b><%= numPed %></b></td>
-                            <td style="text-align:center;"><b><%= codCliente %></b></td>
                             <td style="text-align:center;"><b><%= cliente %></b></td>
+                            <td style="text-align:center;"><b><%= codCliente %></b></td>
+                            <td style="text-align:center;"><b><%= numPed %></b></td>
                             <td style="text-align:center;"><b><%= repres %></b></td>
                             <td style="text-align:center;"><b><%= clprop %></b></td>
                         </tr>
