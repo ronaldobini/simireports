@@ -111,7 +111,7 @@
                 <tr>
                     <td><a style="color:#399bfc;" href="RelComissoes.aspx">001 - Comissões</a></td>
                     <td><a style="color:#399bfc;" href="RelDevolucoes.aspx">004 - Devoluções</td>
-                    <td><a style="color:#399bfc;" href="RelOMsPendentes.aspx">005 - OMs Pendentes</a></td>
+                    <td><a style="color:#399bfc;" href="RelOMsPendentes.aspx">005 - OMs Pendentes <font color=silver>(Em validação)</font></a></td>
                     <td><a style="color:#399bfc;" href="RelReportBrady.aspx">008 - Reporte Brady</a></td>
                 </tr>           
                 <tr>
@@ -121,7 +121,7 @@
                     <td><a style="color:#399bfc;" href="RelReportBagio.aspx">009 - Reporte Baggio</a></td>
                 </tr>
                 <tr>
-                    <td><a style="color:#399bfc;" href="RelPropostasCRM.aspx">003 - Propostas CRM <font color=yellow>(Renovado)</font></a></td>
+                    <td><a style="color:#399bfc;" href="RelPropostasCRM.aspx">003 - Propostas CRM <font color=yellow></font></a></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -134,7 +134,7 @@
                     <%--<td><a href="BotEmailsPedCRM.aspx">Email CRM</a></td>--%>
                 </tr>
                 <tr>
-                    <td><a style="color:#399bfc;" href="RelResumoPedido.aspx">010 - Resumo Pedido <font color=yellow>(Novo)</font></a></td>
+                    <td><a style="color:#399bfc;" href="RelResumoPedido.aspx">010 - Resumo Pedido <font color=yellow></font></a></td>
                     <td></td>
                     <td></td>
                     <td></td>

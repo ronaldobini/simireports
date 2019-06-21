@@ -51,6 +51,8 @@
             
     
         <table class="table table-hover table-dark" style = "max-width:95%; color:white; font-size: 12px;">
+            <tr><th>Cliente</th><th>Quem Criou</th><th>N. Pedido Cliente</th><th>Representante</th></tr>
+            <tr><td><%=resultado4 %></td><td><%=resultado5 %></td><td><%=resultado6 %></td><td><%=resultado7 %></td></tr>
         </table>
 
 
