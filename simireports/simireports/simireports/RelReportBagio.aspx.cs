@@ -15,6 +15,8 @@ namespace simireports
 
         public string postValorMenor = "";
         public string postValorMaior = "";
+        public string postDatInicio;
+        public string postDatFim;
         public string postChance = "";
 
         public Metodos m = new Metodos();
@@ -99,7 +101,24 @@ namespace simireports
             {
                 postChance = "AAC' or PROPOSTAS.CLProp like 'AMC' or PROPOSTAS.CLProp like 'ABC";
             }
-
+            postDatInicio = datInicio.Value;
+            if (!postDatInicio.Equals(""))
+            {
+                postDatInicio = " AND PROPOSTAS.DataEm >= '" + postDatInicio + "'";
+            }
+            else
+            {
+                postDatInicio = " AND PROPOSTAS.DataEm >= '" + m.configDataHuman2Banco(postDatInicio) + "'";
+            }
+            postDatFim = datFim.Value;
+            if (!postDatFim.Equals(""))
+            {
+                postDatFim = " AND PROPOSTAS.DataEm <= '" + m.configDataHuman2Banco(postDatFim) + "' ";
+            }
+            else
+            {
+                postDatFim = " AND PROPOSTAS.DataEm <= '" + DateTime.Now.ToString("d") + "' ";
+            }
             executarRelatorio();
         }
 
@@ -107,8 +126,7 @@ namespace simireports
         {
             Session["firstJ"] = "0";
             postChance = m.configCoringas(postChance);
-
-            string datas = "";
+            
 
             SqlConnection conn = new BancoAzure().abrir();
             string sql = "SELECT PROPOSTAS.DataEm, PROPOSTAS.CLProp, PROPOSTAS.CodProp, LgxCLIENTES.nom_cliente," +
@@ -123,6 +141,8 @@ namespace simireports
                 " and(LgxPRODUTOS.ELP Like '30%' Or LgxPRODUTOS.ELP Like '03%' Or LgxPRODUTOS.ELP Like '31%' Or LgxPRODUTOS.ELP Like '97%')" +
                 " AND PROPOSTAS.TotalProp > " + postValorMaior + "" +
                 " AND PROPOSTAS.Finalidade <> 'REVENDA'" +
+                postDatInicio +
+                postDatFim +
                 " ORDER BY PROPOSTAS.DataEm";
 
             string errosql = "mama mia";

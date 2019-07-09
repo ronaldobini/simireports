@@ -24,6 +24,8 @@
                         <th style="width:100px;">Chance</th>
                         <%--<th style="width:100px;">Valor menor que</th>--%>
                         <th style="width:120px;">Valor maior que</th>
+                        <th style="width:100px;">Data Inicio</th>
+                        <th style="width:120px;">Data Fim</th>
                     </tr>
                     <tr>
                         <td style="width:120px;">
@@ -36,7 +38,9 @@
                         </td>
 <%--                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="valorMenor" autocomplete="off"/></td>--%>
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="valorMaior"  autocomplete="off"/></td>
-                    </tr>
+                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datInicio" autocomplete="off"/></td>
+                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"  autocomplete="off"/></td>
+                   </tr>
                 </table>
                 <br />
                 <input class="btn btn-primary btn-xs" style="background-color:#126DBD" runat="server" type="submit" value="Filtrar" onserverclick="filtrarReportClick" />
