@@ -89,7 +89,7 @@ namespace simireports.simireports.Classes
             {
                 s = s.Replace("*", "%");
                 s = s.Replace("?", "%");
-                
+
             }
             return s;
         }
@@ -110,34 +110,48 @@ namespace simireports.simireports.Classes
 
         public String configDataHuman2Banco(String data)
         {
-            if (!data.Equals(""))
+            try
             {
-                DateTime dt = Convert.ToDateTime(data);
-                string dataConv = "";
-                dataConv = dt.ToString("yyyy-MM-dd"/* HH:mm:ss"*/);//mudei pra nao por hora pra por direto la no select, pra dai poder colocar 23:59:59
+                if (!data.Equals(""))
+                {
+                    DateTime dt = Convert.ToDateTime(data);
+                    string dataConv = "";
+                    dataConv = dt.ToString("yyyy-MM-dd"/* HH:mm:ss"*/);//mudei pra nao por hora pra por direto la no select, pra dai poder colocar 23:59:59
 
-                return dataConv;
+                    return dataConv;
+                }
+                else
+                {
+                    return "";
+                }
             }
-            else
+            catch (Exception e)
             {
-                return "";
+                return "erro";
             }
         }
 
 
         public String configDataBanco2Human(String data)
         {
-            if (!data.Equals(""))
+            try
             {
-                DateTime dt = Convert.ToDateTime(data);
-                string dataConv = "";
-                dataConv = dt.ToString("dd/MM/yyyy");
+                if (!data.Equals(""))
+                {
+                    DateTime dt = Convert.ToDateTime(data);
+                    string dataConv = "";
+                    dataConv = dt.ToString("dd/MM/yyyy");
 
-                return dataConv;
+                    return dataConv;
+                }
+                else
+                {
+                    return "";
+                }
             }
-            else
+            catch (Exception e)
             {
-                return "";
+                return "erro";
             }
         }
 
@@ -352,7 +366,7 @@ namespace simireports.simireports.Classes
 
         public int qtdLogixToInt(string qtdS)
         {
-            if(qtdS.Length > 0)
+            if (qtdS.Length > 0)
             {
                 return Convert.ToInt32(Decimal.Parse(pontoPorVirgula(qtdS)));
             }
@@ -361,6 +375,6 @@ namespace simireports.simireports.Classes
                 return 0;
             }
         }
-        
+
     }
 }

@@ -50,7 +50,7 @@
         <%--<div style="color:white; margin-bottom:30px;">Total Reportes: R$ <%=totNotaS %></div>--%>
 
         <div id="resultados">
-            <font color=white>Mostrando <%=dataEm.Count%> resultados</font><br/>
+            <font color=white>Mostrando <%=dataEm.Count%> resultados, de <%= postDatInicio %> a <%= postDatFim %></font><br/>
             <table class="table table-striped table-dark" style = "max-width:95%; color:white; font-size: 12px;">
                 <tr>
                     <th style="width: 5%; text-align:center;">Data Em</th>

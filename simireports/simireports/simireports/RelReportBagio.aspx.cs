@@ -18,7 +18,7 @@ namespace simireports
         public string postDatInicio;
         public string postDatFim;
         public string postChance = "";
-
+        
         public Metodos m = new Metodos();
         //public String mesPassado = DateTime.Today.AddMonths(-1).ToString("d");
         //public String hoje = DateTime.Today.ToString("d");
@@ -101,24 +101,13 @@ namespace simireports
             {
                 postChance = "AAC' or PROPOSTAS.CLProp like 'AMC' or PROPOSTAS.CLProp like 'ABC";
             }
+            
             postDatInicio = datInicio.Value;
-            if (!postDatInicio.Equals(""))
-            {
-                postDatInicio = " AND PROPOSTAS.DataEm >= '" + postDatInicio + "'";
-            }
-            else
-            {
-                postDatInicio = " AND PROPOSTAS.DataEm >= '" + m.configDataHuman2Banco(postDatInicio) + "'";
-            }
+            if (postDatInicio == "") postDatInicio = mesPassado;
+
             postDatFim = datFim.Value;
-            if (!postDatFim.Equals(""))
-            {
-                postDatFim = " AND PROPOSTAS.DataEm <= '" + m.configDataHuman2Banco(postDatFim) + "' ";
-            }
-            else
-            {
-                postDatFim = " AND PROPOSTAS.DataEm <= '" + DateTime.Now.ToString("d") + "' ";
-            }
+            if (postDatFim == "") postDatFim = hoje;
+
             executarRelatorio();
         }
 
@@ -140,10 +129,10 @@ namespace simireports
                 " WHERE (PROPOSTAS.CLProp like '"+postChance+"')" +
                 " and(LgxPRODUTOS.ELP Like '30%' Or LgxPRODUTOS.ELP Like '03%' Or LgxPRODUTOS.ELP Like '31%' Or LgxPRODUTOS.ELP Like '97%')" +
                 " AND PROPOSTAS.TotalProp > " + postValorMaior + "" +
-                " AND PROPOSTAS.Finalidade <> 'REVENDA'" +
-                postDatInicio +
-                postDatFim +
-                " ORDER BY PROPOSTAS.DataEm";
+                " AND PROPOSTAS.Finalidade <> 'REVENDA'" + 
+                " AND PROPOSTAS.DataEm >= '" + m.configDataHuman2Banco(postDatInicio) + " 00:00:00'" +
+                " AND PROPOSTAS.DataEm <= '" + m.configDataHuman2Banco(postDatFim) + " 23:59:59' " +
+                " ORDER BY PROPOSTAS.DataEm desc";
 
             string errosql = "mama mia";
             //errosql = errosql;

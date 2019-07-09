@@ -24,6 +24,8 @@
                         <th style="width:100px;">Chance</th>
                         <%--<th style="width:100px;">Valor menor que</th>--%>
                         <th style="width:120px;">Valor maior que</th>
+                        <th style="width:100px;">Data Inicio</th>
+                        <th style="width:120px;">Data Fim</th>
                     </tr>
                     <tr>
                         <td style="width:120px;">
@@ -36,7 +38,9 @@
                         </td>
 <%--                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="valorMenor" autocomplete="off"/></td>--%>
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="valorMaior"  autocomplete="off"/></td>
-                    </tr>
+                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datInicio" autocomplete="off"/></td>
+                        <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"  autocomplete="off"/></td>
+                   </tr>
                 </table>
                 <br />
                 <input class="btn btn-primary btn-xs" style="background-color:#126DBD" runat="server" type="submit" value="Filtrar" onserverclick="filtrarReportClick" />
@@ -46,7 +50,7 @@
         <%--<div style="color:white; margin-bottom:30px;">Total Reportes: R$ <%=totNotaS %></div>--%>
 
         <div id="resultados">
-            <font color=white>Mostrando <%=dataEm.Count%> resultados</font><br/>
+            <font color=white>Mostrando <%=dataEm.Count%> resultados, de <%= postDatInicio %> a <%= postDatFim %></font><br/>
             <table class="table table-striped table-dark" style = "max-width:95%; color:white; font-size: 12px;">
                 <tr>
                     <th style="width: 5%; text-align:center;">Data Em</th>
