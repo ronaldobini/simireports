@@ -20,6 +20,10 @@ namespace simireports.simireports.Classes
         private int qtdRes;
         private List<OrdemCompra> OCs;
 
+        public Item()
+        {
+        }
+
         public Item(string codItem, int qtdSolic, int qtdCancel, int qtdAtend,
             string nomeItem, decimal precoUnit, string przEntrega, decimal desconto,
             int pedLogix, decimal comiss, int qtdRom, int qtdLib, int qtdRes)
@@ -53,5 +57,19 @@ namespace simireports.simireports.Classes
         public int QtdCancel { get => qtdCancel; set => qtdCancel = value; }
         public int QtdAtend { get => qtdAtend; set => qtdAtend = value; }
         public List<OrdemCompra> OCs1 { get => OCs; set => OCs = value; }
+
+        public Item itemPropostasCRM(int qtdSolic, string nomeItem, string przEntregaS, string codItem, decimal preUnit, double desconto, double comiss)
+        {
+            Item i = new Item();
+            i.codItem = codItem;
+            i.qtdSolic = qtdSolic;
+            i.nomeItem = nomeItem;
+            i.precoUnit = preUnit;
+            i.przEntrega = przEntregaS;
+            i.desconto = (Decimal)desconto;
+            i.comiss = (Decimal)comiss;
+
+            return i;
+        }
     }
 }

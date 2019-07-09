@@ -102,15 +102,15 @@
     
     <br /><font color="silver">Bem vindo <%=Session["nome"] %> 
         
-        <%--<% if ((int)Session["key"] >= 5) {
+        <% if ((int)Session["key"] >= 11) {
                 %> <a href="PageSenhas.aspx"> <img src = "img/key.png" style="width:30px;"/></a> <%
-            }%>--%>
+            }%>
 
           </font><font color=white></font><hr />
 
     
 
-    <img src = "img/simiweb1.png" style="width:65%;"/>
+    <img src = "img/simiweb1.png" style="width:55%;"/>
     <br />
 
     <font style="margin-top:40px;font-size:20px;" color=green> <%=Session["swver"] %></font>

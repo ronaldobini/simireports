@@ -22,6 +22,7 @@ namespace simireports
         public string postNumPed = "";
         public string postCodItem = "";
         public string postPreUnit = "";
+        public string postClass = "";
         public string sqlview = "";
         public decimal totGeral = 0.0m;
         public string totGeralS = "0,00";
@@ -32,6 +33,7 @@ namespace simireports
         public String ontem = DateTime.Today.AddDays(-1).ToString("d");
         public String hoje = DateTime.Today.ToString("d");
         public string represChange = "nao";
+        public string errosql = "";
 
         public List<PedidoEfetivado> pedsEfets = new List<PedidoEfetivado> { };
 
@@ -93,7 +95,7 @@ namespace simireports
             postNumPed = numPed.Value;
             if (!postNumPed.Equals(""))
             {
-                postNumPed = " AND a.CodPed = " + postNumPed + "";
+                postNumPed = " AND a.CodProp like '%" + postNumPed + "%'";
             }
             postCodItem = codItem.Value.ToUpper();
             postCodItem = m.configCoringas(postCodItem);
@@ -114,6 +116,21 @@ namespace simireports
                 postRepres = postRepres.ToUpper();
             }
 
+            postClass = classprop.Value;
+            if(postClass == "1"){
+                postClass = " "; 
+            }else if(postClass == "2"){
+                postClass = " AND a.CLProp like 'AAC' ";
+            }else if(postClass == "3"){
+                postClass = " AND a.CLProp like 'AMC' ";            
+            }else if(postClass == "4"){
+                postClass = " AND a.CLProp like 'ABC' ";            
+            }
+            else if (postClass == "5")
+            {
+                postClass = " AND (a.CLProp like 'FTo' OR a.CLProp like 'FPa')";
+            }
+
             executarRelatorio();
         }
 
@@ -129,13 +146,13 @@ namespace simireports
             //SqlConnection conn2 = new BancoAzure().abrir();
             postDatFim = m.configDataHuman2Banco(postDatFim);
             postDatInicio = m.configDataHuman2Banco(postDatInicio);
-            string sql = "SELECT a.Unidade, a.dat_pedido, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante," +
+            string sql = "SELECT a.Unidade, a.DataProp, a.cod_cliente, a.CodProp, a.nom_cliente, a.Representante, a.CLProp," +
 
-                               " b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.LgxPedNum, b.Seq, b.Comis " +
+                               " b.Qtd, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.Seq, b.Comis " +
 
-                                        " FROM PrePEDIDOS a" +
+                                        " FROM PROPOSTAS a" +
 
-                                        " INNER JOIN PrePedidosItens b on a.CodPed = b.CodPed" +
+                                        " INNER JOIN PropostasItens b on a.CodProp = b.CodProp" +
 
                                         " inner join LgxPRODUTOS i on i.cod_item = b.cod_item" +
 
@@ -145,29 +162,28 @@ namespace simireports
 
                                         " AND a.Representante LIKE '%" + postRepres + "%'" +
 
-                                        " AND a.dat_pedido >= '" + postDatInicio + "'" +
-                                        //" AND a.DataUlt >= '2019-03-25 00:00:00'" +
+                                        " AND a.DataProp >= '" + postDatInicio + "  00:00:00'" +
 
-                                        " AND a.dat_pedido <= '" + postDatFim + "'" +
-                                        //" AND a.DataUlt <= '2019-03-26 23:59:59'" +
+                                        " AND a.DataProp <= '" + postDatFim + "  23:59:59'" +
 
                                         " AND b.cod_item like '%" + postCodItem + "%'" +
 
                                         " AND a.Unidade LIKE '%" + postUnidade + "%'" +
 
                                         " AND a.CLProp NOT like 'E%'" +
-                                        " AND a.CLProp NOT like 'LAC'" +
-                                        " AND a.CLProp NOT like 'LBq'" +
-                                        " AND a.CLProp NOT like 'LCd'" +
-                                        " AND a.CLProp NOT like 'LEP'" +
+                                        " AND a.CLProp NOT like 'S%'" +
+                                        " AND a.CLProp NOT like 'P%'" +
+
+                                        postClass +
 
                                         postNumPed +
 
-                                        " GROUP BY a.Unidade, a.dat_pedido, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante,b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.LgxPedNum, b.Seq, b.Comis  " +
-                                        " ORDER BY a.dat_pedido desc, a.CodPed, b.Seq";
+                                        " GROUP BY a.Unidade, a.DataProp, a.cod_cliente, a.CodProp, a.nom_cliente, a.Representante, a.CLProp," +
+                                        " b.Qtd, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.Seq, b.Comis " +
+                                        " ORDER BY a.DataProp desc, a.CodProp, b.Seq";
 
-            sqlview = sql; //ativa a exibicao do sql na tela
-            //String errosql = new BancoAzure().consultarErros(sql,conn);
+            //sqlview = sql; //ativa a exibicao do sql na tela
+            //errosql = new BancoAzure().consultarErros(sql,conn);
             reader = new BancoAzure().consultar(sql, conn);
             List<Item> itens = new List<Item>();
             string pedAnt = "zaburska";
@@ -178,20 +194,21 @@ namespace simireports
             string cliente = "";
             string repres = "";
             string numPed = "";
+            string clprop = "";
             Item item = null;
             bool primeiro = true;
             PedidoEfetivado pedEfet = null;
 
             if (reader != null && reader.HasRows)
             {
-                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel PedEfetiv CRM", (string)Session["nome"], postRepres);
+                string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel Prop CRM", (string)Session["nome"], postRepres);
                 while (reader.Read())
                 {
-                    numPed = reader.GetString(3);
+                    numPed = reader.GetString(4);
 
                     if (primeiro)
                     {
-                        pedAnt = reader.GetString(3);
+                        pedAnt = reader.GetString(4);
                         primeiro = false;
                     }
                     else
@@ -203,7 +220,7 @@ namespace simireports
                         else
                         {
                             itens.Add(item);
-                            pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres);
+                            pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres, clprop);
                             pedsEfets.Add(pedEfet);
                             itens = new List<Item>();
                             pedAnt = numPed;
@@ -212,71 +229,38 @@ namespace simireports
                     codEmpresa = reader.GetString(0);
                     dat = reader.GetDateTime(1);
                     codCliente = reader.GetString(2);
-                    //numPed = reader.GetString(3);
-                    cliente = reader.GetString(4);
+                    cliente = reader.GetString(3);
                     repres = reader.GetString(5);
-                    repres = repres.Substring(0, repres.IndexOf(","));
-                    //itens = new List<Item>();
-                    //string sql2 = "SELECT b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit" +
-                    //"                                                    FROM PrePedidosItens b inner join LgxPRODUTOS i on i.cod_item = b.cod_item" +
-                    //"                                                    WHERE b.CodPed = " + numPed;
+                    clprop = reader.GetString(6);
 
-                    //String errosql = new BancoAzure().consultarErros(sql2, conn);
 
-                    //reader2 = new
-                    // BancoAzure().consultar(sql2, conn2);
-
-                    //if (reader2 != null && reader2.HasRows)
-                    //{
-                    //    while (reader2.Read())
-                    //    {
-                    int qtdSolic = Convert.ToInt32(reader.GetDouble(6));
-                    int qtdCancel = Convert.ToInt32(reader.GetDouble(7));
-                    int qtdAtend = Convert.ToInt32(reader.GetDouble(8));
-                    string nomeItem = reader.GetString(9);
+                    int qtdSolic = Convert.ToInt32(reader.GetDouble(7));
+                    string nomeItem = reader.GetString(8);
 
                     string przEntregaS = "";
-                    if (!reader.IsDBNull(10))
+                    if (!reader.IsDBNull(9))
                     {
-                        przEntregaS = reader.GetString(10);
+                        przEntregaS = reader.GetString(9);
                     }
 
-                    string codItem = reader.GetString(11);
-                    Double preUnitD = reader.GetDouble(12);
+                    string codItem = reader.GetString(10);
+                    Double preUnitD = reader.GetDouble(11);
                     string preUnitS = Math.Round(preUnitD,2).ToString();
                     Decimal preUnit = Decimal.Parse(preUnitS);
 
                     //qtdSolic = m.pontoPorVirgula(qtdSolic);
                     //Decimal qtdSolicD = Decimal.Round(Decimal.Parse(qtdSolic), 0);
-                    totGeral += (((Decimal)qtdSolic - (Decimal)qtdCancel) * preUnit);
+                    totGeral += ((Decimal)qtdSolic * preUnit);
                     totGeralS = m.formatarDecimal(totGeral);
-                    Double desconto = reader.GetDouble(13);
-
-                    int pedLogix = 0;
-                    if (!reader.IsDBNull(14))
-                    {
-                        pedLogix = reader.GetInt32(14);
-                    }
-
-                    Double comiss = reader.GetDouble(16);
+                    Double desconto = reader.GetDouble(12);
+                    Double comiss = reader.GetDouble(14);
+                    if (comiss == 0.14) comiss = 0.0;
                     comiss *= 100;
-                    item = new Item(codItem, qtdSolic, qtdCancel, qtdAtend, nomeItem, preUnit, przEntregaS, Decimal.Round((((Decimal)desconto) * 100m)),
-                        pedLogix, Decimal.Round((Decimal)comiss, 3), 0, 0, 0);
-
-                    //    itens.Add(item);
-                    //}
-
-                    //PedidoEfetivado pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, numPed, itens, cliente, repres);
-                    //pedsEfets.Add(pedEfet);
-                    //reader2.Close();
-                    //}
-                    //new BancoAzure().fechar(conn2);
-
-                    //pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, numPed, itens, cliente, repres);
-                    //pedsEfets.Add(pedEfet);
+                    item = new Item().itemPropostasCRM(qtdSolic,nomeItem,przEntregaS,codItem,preUnit,desconto,comiss);
+                    
                 }
                 itens.Add(item);
-                pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, numPed, itens, cliente, repres);
+                pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, numPed, itens, cliente, repres, clprop);
                 pedsEfets.Add(pedEfet);
 
                 reader.Close();

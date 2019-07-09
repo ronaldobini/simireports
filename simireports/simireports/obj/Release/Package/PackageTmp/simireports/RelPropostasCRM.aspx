@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RelPedidosEfetivadosCRM.aspx.cs" Inherits="simireports.PagePedidosEfetivadosCRM" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RelPropostasCRM.aspx.cs" Inherits="simireports.PagePedidosEfetivadosCRM" %>
 
 <!DOCTYPE html>
 
@@ -43,7 +43,7 @@
             <img style="width: 50px;" src="img/syss.png" /></a>
     </div>
     <center>
-    <div id="titulo" style="margin-top:40px; margin-right:70px; color:white; font-size:30px;">003 - Pedidos CRM</div>
+    <div id="titulo" style="margin-top:40px; margin-right:70px; color:white; font-size:30px;">003 - Propostas CRM</div>
     <br />
     <p><%//=sqlview %></p>
        
@@ -56,10 +56,12 @@
                         <th>CNPJ</th>
                         <th>Nome Cliente</th>
                         <th>Representante</th>
-                        <th>Pedido</th>
+                        <th>Cod. Prop.</th>
                         <th>Cod. do Item</th>
                         <th>Data Inicio</th>
                         <th>Data Fim</th>
+                        <th>Class</th>
+
                     </tr>
                     <tr>
                         <td style="width:120px;">
@@ -79,6 +81,15 @@
                         <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="codItem"/></td>
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datIni"/></td>
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"/></td>
+                        <td style="width:120px;">
+                            <select class="form-control" style="width:100px;" id="classprop" runat="server">
+                                <option value="1">Todas</option>
+                                <option value="2">AAC</option>
+                                <option value="3">AMC</option>
+                                <option value="4">ABC</option>                                
+                                <option value="5">Fechadas</option>
+                            </select>
+                        </td>
                     </tr>
                 </table>
                 <br>
@@ -88,7 +99,7 @@
 
         <div id="resultados">
             
-            <font color=white>Mostrando <%=pedsEfets.Count%> resultados, de <%=m.configDataBanco2Human(postDatInicio) %> a <%=m.configDataBanco2Human(postDatFim) %> - Total Efetivado R$ <%=totGeralS %></font><br/>
+            <font color=white>Mostrando <%=pedsEfets.Count%> resultados, de <%=m.configDataBanco2Human(postDatInicio) %> a <%=m.configDataBanco2Human(postDatFim) %> - Total R$ <%=totGeralS %></font><br/>
                     
         <font color=white>Carregamento: <%= demora.Seconds%>.<%= demora.Milliseconds%>s</font><br/>
             <table class="table table-hover table-dark" style = "max-width:95%; color:white; font-size: 12px;">
@@ -97,12 +108,7 @@
                 <% 
                     Decimal totPed = 0.0m;
                     string totPedS = "";
-                    Decimal totAtend = 0.0m;
                     string totAtendS = "";
-                    Decimal totCancel = 0.0m;
-                    string totCancelS = "";
-                    Decimal totPend = 0.0m;
-                    string totPendS = "";
 
                     foreach (var pedEfet in pedsEfets)
                     {
@@ -112,10 +118,11 @@
                             <tr>
                                 <th scope="col" style="width: 5%; text-align:center;">Data</th>
                                 <th scope="col" style="width: 5%; text-align:center;">Unidade</th>
-                                <th scope="col"style="width: 10%; text-align:center;">Pedido</th>
+                                <th scope="col"style="width: 10%; text-align:center;">Proposta</th>
                                 <th scope="col" style="width: 5%; text-align:center;">CNPJ</th>
                                 <th scope="col" style="width: 10%; text-align:center;">Cliente</th>
                                 <th scope="col" style="width: 10%; text-align:center;">Representante</th>
+                                <th scope="col" style="width: 10%; text-align:center;">Class.</th>
                             </tr>
                         </thead>
                      <%
@@ -125,85 +132,75 @@
                          String numPed = pedEfet.NumPed;
                          string cliente = pedEfet.Cliente;
                          string repres = pedEfet.Repres;
+                         string clprop = pedEfet.Clprop;
+
                      %> 
                         <tr>
                             <td style="text-align:center;"><b><%= dat %></b></td>
                             <td style="text-align:center;"><b><%= codEmpresa %></b></td>
-                            <td style="text-align:center;"><b><%= numPed %></b></td>
-                            <td style="text-align:center;"><b><%= codCliente %></b></td>
                             <td style="text-align:center;"><b><%= cliente %></b></td>
+                            <td style="text-align:center;"><b><%= codCliente %></b></td>
+                            <td style="text-align:center;"><b><%= numPed %></b></td>
                             <td style="text-align:center;"><b><%= repres %></b></td>
+                            <td style="text-align:center;"><b><%= clprop %></b></td>
                         </tr>
                         <tr>
-                            <td colspan ="6">
+                            <td colspan ="8">
                                 <table class="table table-sm table-dark" style="background-color:#3f4142; width:100%; color:white; font-size: 12px;">
                                     <thead>
                                         <tr>
                                             <th style="width: 10%;">Cod. do Item</th>
-                                            <th style="text-align:left;width: 45%;">Desc. Item</th>
-                                            <th  style="text-align:center;width: 5%;">Solic</th>
-                                            <th style="text-align:center;width: 5%;">Cancel</th>
-                                            <th style="text-align:center;width: 5%;">Atend</th>
-                                            <th style="text-align:right;width: 10%;">Preço Unit</th>
-                                            <th style="text-align:center;width: 10%;">Desconto</th>
-                                            <th style="text-align:center;width: 10%;">Comiss</th>
-                                            <th style="text-align:center;width: 10%;">PedLogix</th>
+                                            <th style="text-align:left;width: 30%;">Desc. Item</th>
+                                            <th  style="text-align:center;width: 5%;">Qtd</th>
+                                            <th style="text-align:right;width: 10%;">Preço Unit (R$)</th>
+                                            <th style="text-align:right;width: 10%;">Total (R$)</th>
+                                            <th style="text-align:center;width: 10%;">Desconto (%)</th>
+                                            <th style="text-align:center;width: 10%;">Comissão (%)</th>
+                                            <th style="text-align:center;width: 15%;">Prazo</th>
                                             <%--<th style="text-align:center;width: 30%;">Prazo</th>--%>
                                         </tr>
                                     </thead>
                                     <%
                                         totPed = 0.0m;
-                                        totAtend = 0.0m;
-                                        totCancel = 0.0m;
                                         totPedS = m.formatarDecimal(totPed);
                                         totAtendS = m.formatarDecimal(totPed);
-                                        totCancelS = m.formatarDecimal(totPed);
                                         foreach (var item in pedEfet.Itens)
                                         {
                                             string codItem = item.CodItem;
                                             int qtdSolic = item.QtdSolic;
-                                            int qtdCancel = item.QtdCancel;
-                                            int qtdAtend = item.QtdAtend;
-                                            //qtdAtend = m.pontoPorVirgula(qtdAtend);
-                                            //Decimal qtdAtendD = Decimal.Round(Decimal.Parse(qtdAtend),0);
 
                                             string nomeItem = item.NomeItem;
                                             string przEntrega = item.PrzEntrega;
 
                                             Decimal preUnit = Decimal.Round(item.PrecoUnit,2);
                                             String preUnitS = m.formatarDecimal(preUnit);
-                                            
+
+                                            Decimal totItem = preUnit * qtdSolic;
+                                            String totItemS = m.formatarDecimal(totItem);
+
                                             Decimal desconto = item.Desconto;
                                             Decimal comiss = item.Comiss;
                                             int pedLogix = item.PedLogix;
 
-                                            totPed += preUnit*(qtdSolic-qtdCancel);
-                                            totAtend += preUnit*qtdAtend;
-                                            totCancel += preUnit*qtdCancel;
-
+                                            totPed = totPed + totItem;
                                             totPedS = m.formatarDecimal(totPed);
-                                            totAtendS = m.formatarDecimal(totAtend);
-                                            totCancelS = m.formatarDecimal(totCancel);
 
-                                            totPend = totPed - totAtend - totCancel;
-                                            totPendS =  m.formatarDecimal(totPend);
                                     %>
                                             <tr>
                                                 <td><%= codItem %></td>
                                                 <td style="text-align:left;"><%= nomeItem %></td>
                                                 <td style="text-align:center;"><%= qtdSolic %></td>
-                                                <td style="text-align:center;"><%= qtdCancel %></td>
-                                                <td style="text-align:center;"><%= qtdAtend %></td>
-                                                <td style="text-align:right;"><%= "R$ "+preUnitS %></td>
-                                                <td style="text-align:center;"><%= desconto +"%" %></td>
-                                                <td style="text-align:center;"><%= comiss +"%" %></td>
-                                                <td style="text-align:center;"><%= pedLogix %></td>
+                                                <td style="text-align:right;"><%= preUnitS %></td>
+                                                <td style="text-align:right;"><%= totItemS %></td>
+                                                <td style="text-align:center;"><%= Math.Round(desconto*100,0) %></td>
+                                                <td style="text-align:center;"><%= comiss %></td>
+                                                <td style="text-align:center;"><%= przEntrega %></td>
                                                 <%--<td><%= przEntrega %></td>--%>
                                             </tr>
                                                 
                                     <% } %>
                                     <tr>
-                                        <td colspan="8" style="background-color: #070a0e; color:white;"><b>Total Pedido: R$ <%= totPedS %></td>
+                                        <td colspan="8" style="background-color: #070a0e; color:white;"><b>Total Proposta: R$ <%= totPedS %></td>
                                         <%--<td colspan="2" style="background-color: #070a0e; color:white;"><div style="float:left;"><b>Total Atendido: R$ <%= totAtendS %></div>
                                             <div style="float:right;">Total Cancelado: R$ <%= totCancelS %></div></td>--%>
                                         <%--<td colspan="2" style="background-color: #070a0e; color:white;"><b>Total Cancelado: R$ <%= totCancelS %></td>--%>
@@ -224,3 +221,9 @@
         <font color=white>Carregamento: <%= demora.Seconds%>.<%= demora.Milliseconds%>s</font><br/>
 </body>
 </html>
+
+
+
+<%=errosql %>
+<br /><br />
+<%=sqlview %>

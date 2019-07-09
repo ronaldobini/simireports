@@ -159,7 +159,7 @@
     <Content Include="simireports\RelFaturamento.aspx" />
     <Content Include="simireports\RelFaturamentosEx.aspx" />
     <Content Include="simireports\RelOMsPendentes.aspx" />
-    <Content Include="simireports\RelPedidosEfetivadosCRM.aspx" />
+    <Content Include="simireports\RelPropostasCRM.aspx" />
     <Content Include="simireports\index.aspx" />
     <Content Include="simireports\login.aspx" />
     <Content Include="simireports\RelDevolucoes.aspx" />
@@ -269,12 +269,12 @@
     <Compile Include="simireports\RelOMsPendentes.aspx.designer.cs">
       <DependentUpon>RelOMsPendentes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="simireports\RelPedidosEfetivadosCRM.aspx.cs">
-      <DependentUpon>RelPedidosEfetivadosCRM.aspx</DependentUpon>
+    <Compile Include="simireports\RelPropostasCRM.aspx.cs">
+      <DependentUpon>RelPropostasCRM.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="simireports\RelPedidosEfetivadosCRM.aspx.designer.cs">
-      <DependentUpon>RelPedidosEfetivadosCRM.aspx</DependentUpon>
+    <Compile Include="simireports\RelPropostasCRM.aspx.designer.cs">
+      <DependentUpon>RelPropostasCRM.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="simireports\Conn\BancoLogix.cs" />
