@@ -12,8 +12,8 @@ namespace simireports.simireports
     public partial class RelComissoesEspec : System.Web.UI.Page
     {
 
-        public string data1 = "23/05/2019";
-        public string data2 = "22/06/2019";
+        public string data1;
+        public string data2 = "22/" + (DateTime.Now.Month).ToString("d2") + "/" + DateTime.Now.Year;
 
         public string comissVendin8;
         public string comissSimilar8;
@@ -33,8 +33,16 @@ namespace simireports.simireports
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
+            
+            data1 = "23/" + (DateTime.Now.Month - 1).ToString("d2") + "/";
+            if (DateTime.Now.Month.ToString("d2").Equals("01"))
+            {
+                data1 += DateTime.Now.Year - 1;
+            }
+            else
+            {
+                data1 += DateTime.Now.Year;
+            }
 
             try
             {

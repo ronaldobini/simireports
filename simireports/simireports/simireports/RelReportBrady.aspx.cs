@@ -23,9 +23,7 @@ namespace simireports
         public String mesPassado = "28/" + (DateTime.Now.Month - 1).ToString("d2") + "/" + (DateTime.Now.Year);
         public String hoje = DateTime.Now.Day.ToString("d2") + "/" + DateTime.Now.Month.ToString("d2") + "/" + (DateTime.Now.Year);
         public string represChange = "nao";
-
-
-
+        
         public static Decimal totNota = 0.0M;
         public static String totNotaS = "";
         public String erro = " ";
@@ -35,6 +33,15 @@ namespace simireports
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            mesPassado = "28/" + (DateTime.Now.Month - 1).ToString("d2") + "/";
+            if (DateTime.Now.Month.ToString("d2").Equals("01"))
+            {
+                mesPassado += DateTime.Now.Year - 1;
+            }
+            else
+            {
+                mesPassado += DateTime.Now.Year;
+            }
             if (Session["key"] != null)
             {
                 //VERIFICACAO DE SESSAO E NIVEL
