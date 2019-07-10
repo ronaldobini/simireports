@@ -57,6 +57,7 @@
                         <th>Nome Cliente</th>
                         <th>Representante</th>
                         <th>Cod. Prop.</th>
+                        <th>UF</th>
                         <th>Cod. do Item</th>
                         <th>Data Inicio</th>
                         <th>Data Fim</th>
@@ -78,12 +79,14 @@
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="cliente"/></td>
                         <td style="width:130px;"><input class="form-control" style="width:110px; text-align:center;" runat="server" type="text" id="repres"/></td>
                         <td style="width:100px;"><input class="form-control" style="width:80px; text-align:center;" runat="server" type="text" id="numPed"/></td>
+                        <td style="width:130px;"><input class="form-control" style="width:110px; text-align:center;" runat="server" type="text" id="UF"/></td>
                         <td style="width:120px;"><input class="form-control" style="width:100px; text-align:center;" runat="server" type="text" id="codItem"/></td>
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datIni"/></td>
                         <td style="width:140px;"><input class="form-control" style="width:120px; text-align:center;" runat="server" type="text" id="datFim"/></td>
                         <td style="width:120px;">
                             <select class="form-control" style="width:100px;" id="classprop" runat="server">
                                 <option value="1">Todas</option>
+                                <option value="6">Abertas</option>
                                 <option value="2">AAC</option>
                                 <option value="3">AMC</option>
                                 <option value="4">ABC</option>                                
@@ -119,6 +122,7 @@
                                 <th scope="col" style="width: 5%; text-align:center;">Data</th>
                                 <th scope="col" style="width: 5%; text-align:center;">Unidade</th>
                                 <th scope="col"style="width: 10%; text-align:center;">Proposta</th>
+                                <th scope="col"style="width: 10%; text-align:center;">UF</th>
                                 <th scope="col" style="width: 5%; text-align:center;">CNPJ</th>
                                 <th scope="col" style="width: 10%; text-align:center;">Cliente</th>
                                 <th scope="col" style="width: 10%; text-align:center;">Representante</th>
@@ -138,9 +142,10 @@
                         <tr>
                             <td style="text-align:center;"><b><%= dat %></b></td>
                             <td style="text-align:center;"><b><%= codEmpresa %></b></td>
-                            <td style="text-align:center;"><b><%= cliente %></b></td>
-                            <td style="text-align:center;"><b><%= codCliente %></b></td>
                             <td style="text-align:center;"><b><%= numPed %></b></td>
+                            <td style="text-align:center;"><b><%= pedEfet.Ufo %></b></td>
+                            <td style="text-align:center;"><b><%= codCliente %></b></td>
+                            <td style="text-align:center;"><b><%= cliente %></b></td>
                             <td style="text-align:center;"><b><%= repres %></b></td>
                             <td style="text-align:center;"><b><%= clprop %></b></td>
                         </tr>
