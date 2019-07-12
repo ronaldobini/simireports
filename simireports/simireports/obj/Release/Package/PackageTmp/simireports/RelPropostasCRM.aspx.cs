@@ -23,6 +23,7 @@ namespace simireports
         public string postCodItem = "";
         public string postPreUnit = "";
         public string postClass = "";
+        public string postUF = "";
         public string sqlview = "";
         public decimal totGeral = 0.0m;
         public string totGeralS = "0,00";
@@ -124,13 +125,17 @@ namespace simireports
             }else if(postClass == "3"){
                 postClass = " AND a.CLProp like 'AMC' ";            
             }else if(postClass == "4"){
-                postClass = " AND a.CLProp like 'ABC' ";            
+                postClass = " AND a.CLProp like 'ABC' ";
             }
             else if (postClass == "5")
             {
-                postClass = " AND (a.CLProp like 'FTo' OR a.CLProp like 'FPa')";
+                postClass = " AND (a.CLProp like 'FTo' OR a.CLProp like 'FPa') ";
             }
-
+            else if (postClass == "6")
+            {
+                postClass = " AND (a.CLProp like 'AAC' OR a.CLProp like 'AMC' OR a.CLProp like 'ABC') ";
+            }
+            postUF = UF.Value;
             executarRelatorio();
         }
 
@@ -148,7 +153,7 @@ namespace simireports
             postDatInicio = m.configDataHuman2Banco(postDatInicio);
             string sql = "SELECT a.Unidade, a.DataProp, a.cod_cliente, a.CodProp, a.nom_cliente, a.Representante, a.CLProp," +
 
-                               " b.Qtd, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.Seq, b.Comis " +
+                               " b.Qtd, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.Seq, b.Comis,a.UFO " +
 
                                         " FROM PROPOSTAS a" +
 
@@ -170,16 +175,18 @@ namespace simireports
 
                                         " AND a.Unidade LIKE '%" + postUnidade + "%'" +
 
-                                        " AND a.CLProp NOT like 'E%'" +
-                                        " AND a.CLProp NOT like 'S%'" +
-                                        " AND a.CLProp NOT like 'P%'" +
+                                        //" AND a.CLProp NOT like 'E%'" +
+                                        //" AND a.CLProp NOT like 'S%'" +
+                                        //" AND a.CLProp NOT like 'P%'" +
 
                                         postClass +
 
                                         postNumPed +
 
+                                        " AND a.UFO  like '%"+postUF+"%'" +
+
                                         " GROUP BY a.Unidade, a.DataProp, a.cod_cliente, a.CodProp, a.nom_cliente, a.Representante, a.CLProp," +
-                                        " b.Qtd, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.Seq, b.Comis " +
+                                        " b.Qtd, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.Seq, b.Comis, a.UFO " +
                                         " ORDER BY a.DataProp desc, a.CodProp, b.Seq";
 
             //sqlview = sql; //ativa a exibicao do sql na tela
@@ -195,6 +202,7 @@ namespace simireports
             string repres = "";
             string numPed = "";
             string clprop = "";
+            string ufo = "";
             Item item = null;
             bool primeiro = true;
             PedidoEfetivado pedEfet = null;
@@ -204,11 +212,11 @@ namespace simireports
                 string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel Prop CRM", (string)Session["nome"], postRepres);
                 while (reader.Read())
                 {
-                    numPed = reader.GetString(4);
+                    numPed = reader.GetString(3);
 
                     if (primeiro)
                     {
-                        pedAnt = reader.GetString(4);
+                        pedAnt = reader.GetString(3);
                         primeiro = false;
                     }
                     else
@@ -221,6 +229,7 @@ namespace simireports
                         {
                             itens.Add(item);
                             pedEfet = new PedidoEfetivado(codEmpresa, dat, codCliente, pedAnt, itens, cliente, repres, clprop);
+                            pedEfet.Ufo = ufo;
                             pedsEfets.Add(pedEfet);
                             itens = new List<Item>();
                             pedAnt = numPed;
@@ -229,10 +238,11 @@ namespace simireports
                     codEmpresa = reader.GetString(0);
                     dat = reader.GetDateTime(1);
                     codCliente = reader.GetString(2);
-                    cliente = reader.GetString(3);
+                    cliente = reader.GetString(4);
                     repres = reader.GetString(5);
                     clprop = reader.GetString(6);
 
+                    ufo = reader.GetString(15);
 
                     int qtdSolic = Convert.ToInt32(reader.GetDouble(7));
                     string nomeItem = reader.GetString(8);

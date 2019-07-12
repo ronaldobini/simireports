@@ -18,6 +18,7 @@ namespace simireports.simireports.Classes
         private string finalidade;
         private string condPgto;
         private string clprop;
+        private string ufo;
 
 
         public PedidoEfetivado(string codEmpresa, DateTime dat, string codCliente, string numPed, List<Item> itens, string cliente, string repres, string clprop)
@@ -57,5 +58,6 @@ namespace simireports.simireports.Classes
         public string Finalidade { get => finalidade; set => finalidade = value; }
         public string CondPgto { get => condPgto; set => condPgto = value; }
         public string Clprop { get => clprop; set => clprop = value; }
+        public string Ufo { get => ufo; set => ufo = value; }
     }
 }
