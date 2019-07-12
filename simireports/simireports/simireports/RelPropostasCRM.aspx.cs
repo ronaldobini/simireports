@@ -175,9 +175,9 @@ namespace simireports
 
                                         " AND a.Unidade LIKE '%" + postUnidade + "%'" +
 
-                                        " AND a.CLProp NOT like 'E%'" +
-                                        " AND a.CLProp NOT like 'S%'" +
-                                        " AND a.CLProp NOT like 'P%'" +
+                                        //" AND a.CLProp NOT like 'E%'" +
+                                        //" AND a.CLProp NOT like 'S%'" +
+                                        //" AND a.CLProp NOT like 'P%'" +
 
                                         postClass +
 
