@@ -225,7 +225,7 @@ namespace simireports.simireports
                                     " JOIN clientes c on c.cod_cliente = a.cod_cliente" +
                                     " JOIN item i on i.cod_item = b.cod_item and i.cod_empresa = b.cod_empresa " +
                                     " JOIN representante r on r.cod_repres = a.cod_repres " +
-                                    " JOIN estoque e on e.cod_item = b.cod_item and e.cod_empresa = b.cod_empresa " +
+                                    " LEFT JOIN estoque e on e.cod_item = b.cod_item and e.cod_empresa = b.cod_empresa " +
                                     " JOIN cond_pgto f on a.cod_cnd_pgto = f.cod_cnd_pgto " +
                                    " WHERE c.cod_cliente LIKE '%" + postCodCliente + "%'" +
 
@@ -275,7 +275,7 @@ namespace simireports.simireports
 
             string errosql = new BancoLogix().consultarErros(sql, conn);
 
-
+            Console.Write(" erro errinho errao " + errosql);
             if (reader != null && reader.HasRows)
             {
                 string resultLog = Metodos.inserirLog((int)Session["idd"], "Executou Rel PedEfetiv Ex", (string)Session["nome"], postRepres + " | " + postDatInicio + " | " + postCliente);
