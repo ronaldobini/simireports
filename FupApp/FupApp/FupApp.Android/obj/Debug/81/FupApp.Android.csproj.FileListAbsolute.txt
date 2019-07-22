@@ -164,7 +164,6 @@ C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\bin
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\bin\Debug\System.ServiceModel.Internals.pdb
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\bin\Debug\System.Web.Services.pdb
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\bin\Debug\Mono.Security.pdb
-C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\bin\Debug\FupApp.dll.mdb
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\linksrc\FupApp.Android.pdb
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\linksrc\FormsViewGroup.pdb
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\linksrc\Mono.Android.pdb
@@ -187,6 +186,7 @@ C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\linksrc\System.ServiceModel.Internals.pdb
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\linksrc\System.Web.Services.pdb
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\linksrc\Mono.Security.pdb
+C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\bin\Debug\FupApp.dll.mdb
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\linksrc\FupApp.dll.mdb
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\android\assets\FupApp.dll.mdb
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\android\assets\FormsViewGroup.pdb
@@ -211,6 +211,4 @@ C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\android\assets\Xamarin.Forms.Core.pdb
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\android\assets\Xamarin.Forms.Platform.Android.pdb
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\android\assets\Xamarin.Forms.Xaml.pdb
-C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp\bin\Debug\netstandard2.0\FupApp.dll
-C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\bin\Debug\FupApp.dll.mdb
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp.Android\obj\Debug\81\linksrc\FupApp.dll.mdb

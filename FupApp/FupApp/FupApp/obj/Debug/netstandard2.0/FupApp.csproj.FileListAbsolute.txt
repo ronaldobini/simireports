@@ -12,6 +12,7 @@ C:\Users\simi_bini\source\repos\FupApp\FupApp\FupApp\obj\Debug\netstandard2.0\Fu
 C:\Users\simi_bini\source\repos\FupApp\FupApp\FupApp\obj\Debug\netstandard2.0\Login.xaml.g.cs
 C:\Users\simi_bini\source\repos\FupApp\FupApp\FupApp\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
 C:\Users\simi_bini\source\repos\FupApp\FupApp\FupApp\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp\obj\Debug\netstandard2.0\FupApp.csprojAssemblyReference.cache
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp\obj\Debug\netstandard2.0\App.xaml.g.cs
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp\obj\Debug\netstandard2.0\EstoquePage.xaml.g.cs
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp\obj\Debug\netstandard2.0\FuPage.xaml.g.cs
@@ -26,4 +27,3 @@ C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp\bin\Debug\n
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp\obj\Debug\netstandard2.0\XamlC.stamp
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp\obj\Debug\netstandard2.0\FupApp.dll
 C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp\obj\Debug\netstandard2.0\FupApp.pdb
-C:\Users\simi_bini\Documents\GitHub\simireports\FupApp\FupApp\FupApp\obj\Debug\netstandard2.0\FupApp.csprojAssemblyReference.cache

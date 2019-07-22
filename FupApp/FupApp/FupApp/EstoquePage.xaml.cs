@@ -23,13 +23,24 @@ namespace FupApp
         {
             estoque.Children.Clear();
             string erro = "";
-            if (prod.Text != null && prod.Text.Length > 4)
+            if (codProd.Text != null || descProd.Text != null)
             {
-                string codItem = prod.Text;
+                string codItem = codProd.Text;
                 codItem = m.configCoringas(codItem);
+                if (codItem == null)
+                {
+                    codItem = "";
+                }
+                string descItem = descProd.Text;
+                descItem = m.configCoringas(descItem);
+                if (descItem == null)
+                {
+                    descItem = "";
+                }
                 SqlConnection conn = new BancoAzure().abrir();
-                string sql = "SELECT cod_item,cod_empresa,qtd_liberada,qtd_reservada,qtd_ped,qtd_oc,DataUltSP " +
-                    "FROM LgxProdutosSum WHERE cod_item LIKE '%" + codItem + "%' ORDER BY cod_item";
+                string sql = "SELECT TOP 100 ps.cod_item, ps.cod_empresa, ps.qtd_liberada, ps.qtd_reservada, ps.qtd_ped, ps.qtd_oc, ps.DataUltSP, p.den_item " +
+                    "FROM LgxProdutosSum ps JOIN LgxPRODUTOS p on ps.cod_item = p.cod_item " +
+                    "WHERE ps.cod_item LIKE '%" + codItem + "%' AND p.den_item LIKE '%" + descItem + "%' ORDER BY ps.cod_item ";
 
                 SqlDataReader reader = new BancoAzure().consultar(sql, conn);
                 string errosql = new BancoAzure().consultarErros(sql, conn);
@@ -46,6 +57,7 @@ namespace FupApp
                         double qtdReservadad = reader.GetDouble(3);
                         double qtdPedd = reader.GetDouble(4);
                         double qtdOcd = reader.GetDouble(5);
+                        string desc = reader.GetString(7);
                         int qtdLiberada = Convert.ToInt32(qtdLiberadad);
                         int qtdReservada = Convert.ToInt32(qtdReservadad);
                         int qtdPed = Convert.ToInt32(qtdPedd);
@@ -61,7 +73,8 @@ namespace FupApp
 
                         }
 
-                        est = new Estoque(codItem, empresa, qtdLiberada, qtdReservada, qtdPed, qtdOc, dataUltSP);
+                        est = new Estoque(codItem, empresa, qtdLiberada, qtdReservada, qtdPed, qtdOc, dataUltSP,desc);
+                        //est.Desc = desc;
                         estList.Add(est);
                     }
                     reader.Close();
@@ -77,6 +90,7 @@ namespace FupApp
                                 RowSpacing = 1
                             };
                             gridEstoque.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) });
+                            gridEstoque.RowDefinitions.Add(new RowDefinition { Height = new GridLength(10) });
                             gridEstoque.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
                             gridEstoque.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
                             gridEstoque.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
@@ -120,27 +134,41 @@ namespace FupApp
                             gridEstoque.Children.Add(lempresa, 3, 0);
                             //Grid.SetColumnSpan(lquemsup, 2);
 
+                            Label descric = new Label
+                            {
+                                Text = es.Desc,
+                                FontSize = 20,
+                                HorizontalOptions = LayoutOptions.Center,
+                                //TextColor = Color.FromHex(""),
+                                //BackgroundColor = Color.FromHex("#777"),
+                                Margin = new Thickness(10, 5, 10, 5)
+                            };
+                            gridEstoque.Children.Add(descric, 0, 2);
+                            Grid.SetColumnSpan(descric, 4);
+
                             Label lqtdL = new Label
                             {
                                 Text = "L: " + es.QtdLiberada.ToString(),
                                 FontSize = 25,
+                                FontAttributes = FontAttributes.Bold,
                                 HorizontalOptions = LayoutOptions.Center,
                                 //TextColor = Color.FromHex(""),
                                 //BackgroundColor = Color.FromHex("#777"),
-                                Margin = new Thickness(10, 10, 10, 20)
+                                Margin = new Thickness(10, 5, 10, 5)
                             };
-                            gridEstoque.Children.Add(lqtdL, 0, 1);
+                            gridEstoque.Children.Add(lqtdL, 0, 3);
                             Grid.SetColumnSpan(lqtdL, 2);
                             Label lqtdR = new Label
                             {
                                 Text = "R: " + es.QtdReservada.ToString(),
                                 FontSize = 25,
+                                FontAttributes = FontAttributes.Bold,
                                 HorizontalOptions = LayoutOptions.Center,
                                 //TextColor = Color.FromHex(""),
                                 //BackgroundColor = Color.FromHex("#777"),
-                                Margin = new Thickness(0, 10, 0, 0)
+                                Margin = new Thickness(0, 5, 0, 0)
                             };
-                            gridEstoque.Children.Add(lqtdR, 2, 1);
+                            gridEstoque.Children.Add(lqtdR, 2, 3);
                             Grid.SetColumnSpan(lqtdR, 2);
                             //Label lqtdP = new Label
                             //{
@@ -181,7 +209,7 @@ namespace FupApp
             }
             else
             {
-                erro = "Mínimo de 5 caracteres.";
+                erro = "Entre com um produto.";
                 DisplayAlert("", erro, "OK");
             }
     

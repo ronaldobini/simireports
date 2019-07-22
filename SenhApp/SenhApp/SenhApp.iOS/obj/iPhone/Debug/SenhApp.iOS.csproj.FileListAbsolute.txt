@@ -51,6 +51,7 @@ C:\Users\simi_bini\Documents\GitHub\simireports\SenhApp\SenhApp\SenhApp.iOS\obj\
 C:\Users\simi_bini\Documents\GitHub\simireports\SenhApp\SenhApp\SenhApp.iOS\obj\iPhone\Debug\coremlc\_PartialAppManifest.items
 C:\Users\simi_bini\Documents\GitHub\simireports\SenhApp\SenhApp\SenhApp.iOS\obj\iPhone\Debug\coremlc\_BundleResourceWithLogicalName.items
 C:\Users\simi_bini\Documents\GitHub\simireports\SenhApp\SenhApp\SenhApp.iOS\obj\iPhone\Debug\optimized\
+C:\Users\simi_bini\Documents\GitHub\simireports\SenhApp\SenhApp\SenhApp.iOS\obj\iPhone\Debug\SenhApp.iOS.csprojAssemblyReference.cache
 C:\Users\simi_bini\Documents\GitHub\simireports\SenhApp\SenhApp\SenhApp.iOS\obj\iPhone\Debug\SenhApp.iOS.csproj.CoreCompileInputs.cache
 C:\Users\simi_bini\Documents\GitHub\simireports\SenhApp\SenhApp\SenhApp.iOS\obj\iPhone\Debug\XamlC.stamp
 C:\Users\simi_bini\Documents\GitHub\simireports\SenhApp\SenhApp\SenhApp.iOS\obj\iPhone\Debug\SenhApp.iOS.csproj.CopyComplete

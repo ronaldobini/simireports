@@ -7,6 +7,7 @@ namespace FupApp.Classes
     class Estoque
     {
         private string codItem;
+        private string desc;
         private string empresa;
         private int qtdLiberada;
         private int qtdReservada;
@@ -14,7 +15,7 @@ namespace FupApp.Classes
         private int qtdOc;
         private DateTime dataUltSP;
 
-        public Estoque(string codItem, string empresa, int qtdLiberada, int qtdReservada, int qtdPed, int qtdOc, DateTime dataUltSP)
+        public Estoque(string codItem, string empresa, int qtdLiberada, int qtdReservada, int qtdPed, int qtdOc, DateTime dataUltSP, string desc)
         {
             this.codItem = codItem;
             this.empresa = empresa;
@@ -23,6 +24,7 @@ namespace FupApp.Classes
             this.qtdPed = qtdPed;
             this.qtdOc = qtdOc;
             this.dataUltSP = dataUltSP;
+            this.desc = desc;
         }
 
         public string CodItem { get => codItem; set => codItem = value; }
@@ -32,5 +34,6 @@ namespace FupApp.Classes
         public int QtdPed { get => qtdPed; set => qtdPed = value; }
         public int QtdOc { get => qtdOc; set => qtdOc = value; }
         public DateTime DataUltSP { get => dataUltSP; set => dataUltSP = value; }
+        public string Desc { get => desc; set => desc = value; }
     }
 }

@@ -14,8 +14,12 @@
             <Label Text="Estoque" FontSize="30" TextColor="#399bfc"/>
             <StackLayout>
                 <StackLayout>
-                    <Label Text="Produto" TextColor="#777" FontSize="15"/>
-                    <Entry x:Name="prod"  FontSize="20" TextColor="#555"/>
+                    <Label Text="Codigo do Produto" TextColor="#777" FontSize="15"/>
+                    <Entry x:Name="codProd"  FontSize="20" TextColor="#555"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Descricao do Produto" TextColor="#777" FontSize="15"/>
+                    <Entry x:Name="descProd"  FontSize="20" TextColor="#555"/>
                 </StackLayout>
                 <StackLayout Padding="10" HorizontalOptions="FillAndExpand">
                     <Button x:Name="botaoPesqEstoque" Text="Pesquisar Estoque" TextColor="White" Clicked="pesqEstoque" BorderColor="#012f8c" BackgroundColor="#399bfc"></Button>
