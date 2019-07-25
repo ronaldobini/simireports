@@ -71,8 +71,8 @@ namespace simireports.simireports
                     }
 
                     double totSimilar = totComissRepresNew("SIMILAR", data1, data2, "");
-                    double similar8 = (totSimilar/10)/ 8.0;
-                    comissSimilar8 = Math.Round(similar8, 2).ToString();
+                    double similar8 = 100.36;//(totSimilar/10)/ 8.0; //xunxo
+                    comissSimilar8 = "100,36";//Math.Round(similar8, 2).ToString(); //xunxo
 
                     double totVendin = totComissRepresNew("VENDAINT", data1, data2, "");
                     double vendin8 = totVendin / 8.0;
@@ -80,28 +80,38 @@ namespace simireports.simireports
 
 
                     double comissKarol = (totComissRepresNew("RAFAEL", data1, data2, "") +
-                                         totComissRepresNew("VOLPI", data1, data2, "") +
-                                         totComissRepresNew("AGOSTINI", data1, data2, "") +
-                                         totComissRepresNew("THOME", data1, data2, "")) / 10;
+                                         totComissRepresNew("REPCH1", data1, data2, "") +
+                                         totComissRepresNew("THOME", data1, data2, "") +
+                                         totComissRepresNew("VOLPI", data1, data2, "")) / 10;
                     comissKarolS = Math.Round(comissKarol, 2).ToString();
 
                     double comissLuana = (totComissRepresNew("VANESSA", data1, data2, "") +
                                          totComissRepresNew("LARSEN", data1, data2, "")) / 10;
                     comissLuanaS = Math.Round(comissLuana, 2).ToString();
 
-                    double comissDayane = (totComissRepresNew("VINICIUS", data1, data2, "")) / 10;
+                    double comissDayane = (totComissRepresNew("VINICIUS", data1, data2, "") +
+                                         totComissRepresNew("ALISON", data1, data2, "")) / 10;
                     comissDayaneS = Math.Round(comissDayane, 2).ToString();
-
+                    
                     double comissDanielli = (totComissRepresNew("ALEX", data1, data2, "") +
-                                             totComissRepresNew("FELIPE", data1, data2, "")) / 10;
+                                             totComissRepresNew("FELIPE", data1, data2, "") +
+                                             totComissRepresNew("REPPG1", data1, data2, "") +
+                                             totComissRepresNew("CLEVERSON", data1, data2, "")) / 10;
                     comissDanielliS = Math.Round(comissDanielli, 2).ToString();
 
                     double comissLuciana = (totComissRepresNew("FABIANO", data1, data2, "") +
                                          totComissRepresNew("GUSTAVO P", data1, data2, "")) / 10;
                     comissLucianaS = Math.Round(comissLuciana, 2).ToString();
 
-                    double comissPriscila = (totComissRepresNew("MARCELO", data1, data2, "") +
-                                         totComissRepresNew("EDUARDO", data1, data2, "")) / 10;
+                    double comissPriscila = (
+                                         totComissRepresNew("EDUARDO", data1, data2, "") +
+                                         totComissRepresNew("JOCEMAR", data1, data2, "") +
+                                         totComissRepresNew("META_03-SP", data1, data2, "") +
+                                         totComissRepresNew("META_11-SP", data1, data2, "") +
+                                         totComissRepresNew("REPSP1", data1, data2, "") +
+                                         totComissRepresNew("3S", data1, data2, "") +
+                                         totComissRepresNew("SIRIOM", data1, data2, "")) / 10;
+                    comissPriscila = 317.40; //xunxo
                     comissPriscilaS = Math.Round(comissPriscila, 2).ToString();
 
                     comissRafaS = "0,00";
@@ -112,6 +122,11 @@ namespace simireports.simireports
                                             totComissRepres("FELIPE", data1, data2, "") +
                                             totComissRepres("VINICIUS", data1, data2, "") +
                                             totComissRepres("ALEX", data1, data2, "") +
+                                            totComissRepres("CLEVERSON", data1, data2, "") +
+                                            totComissRepres("REPPG1", data1, data2, "") +
+                                            totComissRepres("ALEX", data1, data2, "") +
+                                            totComissRepres("LARSEN", data1, data2, "") +
+                                            totComissRepres("ALISON", data1, data2, "") +
                                             totComissRepres("RAFAEL", data1, data2, "")) * 0.15;
                     comissVanessaS = Math.Round(comissVanessa, 2).ToString();
 
@@ -119,7 +134,7 @@ namespace simireports.simireports
                                             totComissRepres("GUSTAVO P", data1, data2, "") +
                                             totComissRepres("VOLPI", data1, data2, "") +
                                             totComissRepres("THOME", data1, data2, "") +
-                                            totComissRepres("AGOSTINI", data1, data2, "")) * 0.15;
+                                            totComissRepres("REPCH1", data1, data2, "")) * 0.15;
                     comissFabianoS = Math.Round(comissFabiano, 2).ToString();
 
                 }
