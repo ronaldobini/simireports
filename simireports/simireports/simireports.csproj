@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\simireports.dll.config" />
+    <Content Include="libman.json" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile2.pubxml" />
@@ -90,6 +91,7 @@
     <Content Include="simiMaster\index.aspx" />
     <Content Include="simiMaster\sql.aspx" />
     <Content Include="simireports\BotEmailsPedCRM2.aspx" />
+    <Content Include="simireports\BotEmailsServCRM.aspx" />
     <Content Include="simireports\construcao.aspx" />
     <Content Include="simireports\css\design.css" />
     <Content Include="simireports\erro.html" />
@@ -201,6 +203,13 @@
     </Compile>
     <Compile Include="simireports\BotEmailsPedCRM2.aspx.designer.cs">
       <DependentUpon>BotEmailsPedCRM2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="simireports\BotEmailsServCRM.aspx.cs">
+      <DependentUpon>BotEmailsServCRM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="simireports\BotEmailsServCRM.aspx.designer.cs">
+      <DependentUpon>BotEmailsServCRM.aspx</DependentUpon>
     </Compile>
     <Compile Include="simireports\Classes\Comissao.cs" />
     <Compile Include="simireports\Classes\Devolucao.cs" />

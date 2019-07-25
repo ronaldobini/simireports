@@ -50,6 +50,7 @@ namespace simireports.simireports
                 new RepresEmails("LARSEN,","emerson.larsen@similar.ind.br"),
                 new RepresEmails("GUSTAVO P,","gustavo.brettas@similar.ind.br"),
                 new RepresEmails("EDUARDO,","eduardo.rost@lsbrasil.com.br"),
+                new RepresEmails("FELIPE,","felipe.thomaz@similar.ind.br"),
 
                 new RepresEmails("","vendas@similar.ind.br")
             };
@@ -208,7 +209,7 @@ namespace simireports.simireports
                 }
                 new BancoAzure().fechar(conn);
 
-                corpoEmail = "<body style=\"background-color:#fff; color:#000;\"><div style=\"background-color:#fff;\">Mostrando " + pedsEfets.Count + " resultados, de " + m.configDataBanco2Human(ontem) + " a " + m.configDataBanco2Human(ontem) + " -Total R$ " + totGeralS + "<br/>" +
+                corpoEmail = "<body style=\"background-color:#fff; color:#000;\"><div style=\"background-color:#fff;\"><B>PEDIDOS ONTEM</B><BR><BR>Mostrando " + pedsEfets.Count + " resultados, de " + m.configDataBanco2Human(ontem) + " a " + m.configDataBanco2Human(ontem) + " -Total R$ " + totGeralS + "<br/>" +
                     "<table style = \"max-width:100%;background-color:#ccc; color:#000; font-size: 12px;\">";
 
                 foreach (var pedE in pedsEfets)

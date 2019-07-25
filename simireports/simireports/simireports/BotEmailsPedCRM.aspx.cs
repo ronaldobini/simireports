@@ -16,7 +16,7 @@ namespace simireports.simireports
     public partial class PageEmailsCRM : System.Web.UI.Page
     {
 
-        public string resultado = "-";
+        public string resultado = "Sem Resultados";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -38,8 +38,8 @@ namespace simireports.simireports
             List<RepresEmails> represEmails = new List<RepresEmails>{
                 new RepresEmails("VENDAINT,","vanessa.boumer@similar.ind.br"),
                 new RepresEmails("VANESSA,","vanessa.boumer@similar.ind.br"),
+                new RepresEmails("REPRESPR,","vanessa.boumer@similar.ind.br"),
                 new RepresEmails("VINICIUS,","vinicius.lima@similar.ind.br"),
-                new RepresEmails("FELIPE,","felipe.thomaz@similar.ind.br"),
                 new RepresEmails("MARCOS,","marcos.riter@similar.ind.br"),
 
                 new RepresEmails("","jorge.isaka@similar.ind.br"),
@@ -66,6 +66,18 @@ namespace simireports.simireports
 
                 SqlConnection conn = new BancoAzure().abrir();
 
+                string represFiltro = " ";
+                if (re.nome.Equals("REPRESPR"))
+                {
+                    represFiltro = " AND (a.Representante LIKE '%ALISON,%' OR a.Representante LIKE '%FELIPE,%' OR a.Representante LIKE '%VINICIUS,%' OR a.Representante LIKE '%LARSEN,%' OR a.Representante LIKE '%REPPG,%')";
+                }
+                else{
+                    represFiltro = " AND a.Representante LIKE '%" + re.nome + "%'";
+                }
+
+                
+
+
                 string sql = "SELECT a.Unidade, a.dat_pedido, a.cod_cliente, a.CodPed, a.nom_cliente, a.Representante," +
 
                                " b.Qtd, b.QtdC, b.QtdA, i.den_item, b.Prazo, b.cod_item, b.vlrUnit, b.Desconto, b.Seq, b.Comis " +
@@ -80,7 +92,7 @@ namespace simireports.simireports
 
                                         " AND a.nom_cliente LIKE '%" + "" + "%'" +
 
-                                        " AND a.Representante LIKE '%" + re.nome + "%'" +
+                                        represFiltro +
 
                                         " AND a.dat_pedido >= '" + ontem + "'" +
 
@@ -201,7 +213,7 @@ namespace simireports.simireports
                 }
                 new BancoAzure().fechar(conn);
 
-                corpoEmail = "<body style=\"background-color:#fff; color:#000;\"><div style=\"background-color:#fff;\">Mostrando " + pedsEfets.Count + " resultados, de " + m.configDataBanco2Human(ontem) + " a " + m.configDataBanco2Human(ontem) + " -Total R$ " + totGeralS + "<br/>" +
+                corpoEmail = "<body style=\"background-color:#fff; color:#000;\"><div style=\"background-color:#fff;\"><B>PEDIDOS ONTEM</B><BR><BR>Mostrando " + pedsEfets.Count + " resultados, de " + m.configDataBanco2Human(ontem) + " a " + m.configDataBanco2Human(ontem) + " -Total R$ " + totGeralS + "<br/>" +
                     "<table style = \"max-width:100%;background-color:#ccc; color:#000; font-size: 12px;\">";
 
                 foreach (var pedE in pedsEfets)
