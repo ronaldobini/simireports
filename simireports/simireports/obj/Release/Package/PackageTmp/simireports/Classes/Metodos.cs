@@ -322,8 +322,18 @@ namespace simireports.simireports.Classes
         }
 
 
-        public static void linkarTabelasUser(int idUser, int nivel)
+        public static void linkarTabelasUser(int idUser, double idx)
         {
+            //DEFINE O NIVEL DO USUARIO
+            int nivel = 1;
+            if (idx <= 25) nivel = 2;
+            if (idx <= 24) nivel = 3;
+            if (idx <= 20) nivel = 5; // senha 2.0
+
+            if (idx <= 15) nivel = 7; // senha 1.5
+            if (idx <= 10) nivel = 8; // senha 1.0
+            
+
             try
             {
                 SqlConnection conn = new BancoAzure().abrir();

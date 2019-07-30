@@ -31,7 +31,8 @@
 	        <br>
                <center> 
                    <input runat="server" style="width:100px;" class="btn btn-lg btn-primary btn-block" type="submit" value="Entrar" onserverclick="Logar_Click" /><br />
-                   <font color="red"><%=erro %></font>
+                   <font color="red"><%=erro %></font><br /><br />
+                   <font color="orange"><%=erroDebug %></font>
                </center>
 	        
 	     </form>
