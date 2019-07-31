@@ -11,7 +11,8 @@
         "dependencies": {
           "NETStandard.Library": "2.0.3",
           "System.Data.SqlClient": "4.6.0",
-          "Xamarin.Forms": "3.4.0.1039999"
+          "Xamarin.Forms": "3.4.0.1039999",
+          "IBM.Data.Informix": "4.0.0.0"
         },
         "runtime": {
           "FupApp.dll": {}
@@ -154,6 +155,14 @@
             "fileVersion": "2.0.0.0"
           }
         }
+      },
+      "IBM.Data.Informix/4.0.0.0": {
+        "runtime": {
+          "IBM.Data.Informix.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.410.6"
+          }
+        }
       }
     }
   },
@@ -281,6 +290,11 @@
       "sha512": "sha512-XdGH8FFFH50/6/tJyFe5murtCI7CeS8Si7hwjWpu/1KeLhMcBSeHzKnc2T4rI3pbHPjIpLz/hPofZqdLLcDBiQ==",
       "path": "xamarin.forms/3.4.0.1039999",
       "hashPath": "xamarin.forms.3.4.0.1039999.nupkg.sha512"
+    },
+    "IBM.Data.Informix/4.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

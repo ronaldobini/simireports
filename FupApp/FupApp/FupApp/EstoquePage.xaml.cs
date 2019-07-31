@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using IBM.Data.Informix;
 
 namespace FupApp
 {
@@ -37,13 +38,25 @@ namespace FupApp
                 {
                     descItem = "";
                 }
-                SqlConnection conn = new BancoAzure().abrir();
-                string sql = "SELECT TOP 100 ps.cod_item, ps.cod_empresa, ps.qtd_liberada, ps.qtd_reservada, ps.qtd_ped, ps.qtd_oc, ps.DataUltSP, p.den_item " +
-                    "FROM LgxProdutosSum ps JOIN LgxPRODUTOS p on ps.cod_item = p.cod_item " +
-                    "WHERE ps.cod_item LIKE '%" + codItem + "%' AND p.den_item LIKE '%" + descItem + "%' ORDER BY ps.cod_item ";
+                //SqlConnection conn = new BancoAzure().abrir();
+                //string sql = "SELECT TOP 100 ps.cod_item, ps.cod_empresa, ps.qtd_liberada, ps.qtd_reservada, ps.qtd_ped, ps.qtd_oc, ps.DataUltSP, p.den_item " +
+                //    "FROM LgxProdutosSum ps JOIN LgxPRODUTOS p on ps.cod_item = p.cod_item " +
+                //    "WHERE ps.cod_item LIKE '%" + codItem + "%' AND p.den_item LIKE '%" + descItem + "%' ORDER BY ps.cod_item ";
 
-                SqlDataReader reader = new BancoAzure().consultar(sql, conn);
-                string errosql = new BancoAzure().consultarErros(sql, conn);
+                //SqlDataReader reader = new BancoAzure().consultar(sql, conn);
+                //string errosql = new BancoAzure().consultarErros(sql, conn);
+
+                IfxConnection conn = new BancoLogix().abrir();
+                string sql = "select e.cod_empresa, e.cod_item, i.den_item, e.qtd_liberada, e.qtd_reservada, eis.qtd_oc, eis.qtd_ped " +
+                    "from estoque e " +
+                    "join item i on e.cod_item = i.cod_item and e.cod_empresa = i.cod_empresa" +
+                    "join eis_t_pos_itens eis on eis.cod_item = e.cod_item and eis.cod_empresa = e.cod_empresa" +
+                    "WHERE e.cod_item LIKE '%" + codItem + "%' AND i.den_item LIKE '%" + descItem + "%' ORDER BY e.cod_item " +
+                    "limit 100";
+
+                IfxDataReader reader = new BancoLogix().consultar(sql, conn);
+
+                string errosql = new BancoLogix().consultarErros(sql, conn);
 
                 if (reader != null && reader.HasRows)
                 {
@@ -51,34 +64,34 @@ namespace FupApp
                     Estoque est = null;
                     while (reader.Read())
                     {
-                        codItem = reader.GetString(0);
-                        string empresa = reader.GetString(1);
-                        double qtdLiberadad = reader.GetDouble(2);
-                        double qtdReservadad = reader.GetDouble(3);
-                        double qtdPedd = reader.GetDouble(4);
+                        string empresa = reader.GetString(0);
+                        codItem = reader.GetString(1);
+                        string desc = reader.GetString(2);
+                        double qtdLiberadad = reader.GetDouble(3);
+                        double qtdReservadad = reader.GetDouble(4);
                         double qtdOcd = reader.GetDouble(5);
-                        string desc = reader.GetString(7);
+                        double qtdPedd = reader.GetDouble(6);
                         int qtdLiberada = Convert.ToInt32(qtdLiberadad);
                         int qtdReservada = Convert.ToInt32(qtdReservadad);
                         int qtdPed = Convert.ToInt32(qtdPedd);
                         int qtdOc = Convert.ToInt32(qtdOcd);
                         DateTime dataUltSP = new DateTime();
-                        try
-                        {
-                            dataUltSP = reader.GetDateTime(6);
-                        }
-                        catch (Exception ero)
-                        {
-                            //caguei pro erro
+                        //try
+                        //{
+                        //    dataUltSP = reader.GetDateTime(6);
+                        //}
+                        //catch (Exception ero)
+                        //{
+                        //    //caguei pro erro
 
-                        }
+                        //}
 
                         est = new Estoque(codItem, empresa, qtdLiberada, qtdReservada, qtdPed, qtdOc, dataUltSP,desc);
                         //est.Desc = desc;
                         estList.Add(est);
                     }
                     reader.Close();
-                    new BancoAzure().fechar(conn);
+                    new BancoLogix().fechar(conn);
                     if (estList.Count > 0)
                     {
                         foreach (Estoque es in estList)

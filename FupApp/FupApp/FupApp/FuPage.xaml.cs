@@ -19,6 +19,8 @@ namespace FupApp
         private string erro;
         private string quem;
         private string sup;
+
+        private Metodos m = new Metodos();
         //private string prop;
 
         public FuPage()
@@ -34,7 +36,6 @@ namespace FupApp
             this.login = login;
             //this.prop = prop;
             quem = login;
-            Metodos m = new Metodos();
             pickerSup.Title = "Selecione um Representante";
             quemLabel.Text = login;
             List<String> represes = new List<String>();
@@ -56,115 +57,10 @@ namespace FupApp
             {
                 pickerSup.Items.Add(repres);
             }
-
-
-
             string hojeMenosSete = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek - 6).ToString();
-            
-            fupsProp.Children.Clear();
-            conn = new BancoAzure().abrir();
             sql = "SELECT CodProp,FUP,DataFUP,Quem,QuemSup " +
-                "from PropostasFUP where Quem = '" + quem + "' AND DataFUP >= '" + m.configDataHuman2Banco(hojeMenosSete) + "' order by DataFUP desc ";
-            reader = new BancoAzure().consultar(sql, conn);
-
-            if (reader != null && reader.HasRows)
-            {
-                List<FollowUp> fupa = new List<FollowUp>();
-                FollowUp fup = null;
-                while (reader.Read())
-                {
-                    string codProp = reader.GetString(0);
-                    string fups = reader.GetString(1);
-                    DateTime dataFup = reader.GetDateTime(2);
-                    string quem = reader.GetString(3);
-                    string quemSup = reader.GetString(4);
-                    //codProp += ", " + dataFup.ToString() + ", Quem:" + quem + ", QuemSup:" + quemSup;
-                    fup = new FollowUp(codProp, fups, dataFup, quem, quemSup);
-                    fupa.Add(fup);
-                }
-                reader.Close();
-                new BancoAzure().fechar(conn);
-                if (fupa.Count > 0)
-                {
-                    foreach (FollowUp f in fupa)
-                    {
-                        Grid gridFups = new Grid
-                        {
-                            //BackgroundColor = Color.FromHex("#222")
-                            ColumnSpacing = 1,
-                            RowSpacing = 1
-                        };
-                        gridFups.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) });
-                        gridFups.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-                        gridFups.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-                        gridFups.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-                        gridFups.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-                        Label ldata = new Label
-                        {
-                            Text = f.Data.ToString(),
-                            FontSize = 15,
-                            //BackgroundColor = Color.FromHex("#777")
-                            Margin = new Thickness(3, 3, 0, 0),
-                            HorizontalTextAlignment = TextAlignment.Center
-                        };
-                        gridFups.Children.Add(ldata, 0, 0);
-                        //Grid.SetColumnSpan(ldata, 2);
-
-                        Label lquem = new Label
-                        {
-                            Text = "Quem: " + f.Quem,
-                            FontSize = 15,
-                            //BackgroundColor = Color.FromHex("#777")
-                            Margin = new Thickness(3, 3, 0, 0)
-                        };
-                        gridFups.Children.Add(lquem, 1, 0);
-                        //Grid.SetColumnSpan(lquem, 2);
-
-                        Label lquemsup = new Label
-                        {
-                            Text = "Sup: " + f.QuemSup,
-                            FontSize = 15,
-                            //BackgroundColor = Color.FromHex("#777")
-                            Margin = new Thickness(3, 3, 0, 0)
-                        };
-                        gridFups.Children.Add(lquemsup, 2, 0);
-                        //Grid.SetColumnSpan(lquemsup, 2);
-
-                        Label lfup = new Label
-                        {
-                            Text = f.Fup,
-                            FontSize = 20,
-                            //TextColor = Color.FromHex(""),
-                            //BackgroundColor = Color.FromHex("#777"),
-                            Margin = new Thickness(10, 10, 10, 20)
-                        };
-                        gridFups.Children.Add(lfup, 0, 1);
-                        Grid.SetColumnSpan(lfup, 3);
-
-                        Label line = new Label
-                        {
-                            HorizontalOptions = LayoutOptions.Fill,
-                            FontSize = 1,
-                            BackgroundColor = Color.FromHex("#888")
-                        };
-
-                        fupsProp.Children.Add(line);
-                        fupsProp.Children.Add(gridFups);
-                    }
-                }
-
-            }
-
-
-
-
-
-
-
-
-
-
-
+               "from PropostasFUP where Quem = '" + quem + "' AND DataFUP >= '" + m.configDataHuman2Banco(hojeMenosSete) + "' order by DataFUP desc ";
+            colocaFUPs(sql, "Erro ao buscar 7 dias.");
         }
 
         private void pickerSelected(object sender, EventArgs e)
@@ -230,14 +126,32 @@ namespace FupApp
         }
 
 
-
         private void pesqFups(object sender, EventArgs e)
         {
-            fupsProp.Children.Clear();
             string prop = propec.Text;
-            SqlConnection conn = new BancoAzure().abrir();
+            string cliente = clientext.Text;
+            string clProp = classificacao.Text;
+            string sql = "SELECT a.CodProp,a.FUP,a.DataFUP,a.Quem,a.QuemSup " +
+                "from PropostasFUP a JOIN PROPOSTAS b ON a.CodProp = b.CodProp " +
+                "where a.CodProp like '%" + prop + "%' " +
+                "AND a.nom_cliente like '%" + cliente + "%'" +
+                "AND b.CLProp like '%" + clProp + "%'" +
+                "order by a.DataFUP desc";
+            colocaFUPs(sql, "Proposta Invalida.");
+        }
+
+        private void pesqUlt7Dias(object sender, EventArgs e)
+        {
+            string hojeMenosSete = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek - 6).ToString();
             string sql = "SELECT CodProp,FUP,DataFUP,Quem,QuemSup " +
-                "from PropostasFUP where CodProp = '" + prop + "' order by DataFUP desc";
+               "from PropostasFUP where Quem = '" + quem + "' AND DataFUP >= '" + m.configDataHuman2Banco(hojeMenosSete) + "' order by DataFUP desc ";
+            colocaFUPs(sql, "Erro ao buscar 7 dias.");
+        }
+
+        private void colocaFUPs(string sql, string msgErro)
+        {
+            fupsProp.Children.Clear();
+            SqlConnection conn = new BancoAzure().abrir();
             SqlDataReader reader = new BancoAzure().consultar(sql, conn);
             string errosql = new BancoAzure().consultarErros(sql, conn);
 
@@ -330,7 +244,7 @@ namespace FupApp
             }
             else
             {
-                erro = "Proposta invalida";
+                erro = msgErro;
                 DisplayAlert("", erro, "OK");
             }
             //++count;

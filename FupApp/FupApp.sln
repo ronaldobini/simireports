@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FupApp.Android", "FupApp\Fu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FupApp.iOS", "FupApp\FupApp.iOS\FupApp.iOS.csproj", "{834640F0-3157-4B1B-8670-50D34429FEAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FupApp", "FupApp\FupApp\FupApp.csproj", "{790EFCFE-CB22-433C-90C6-D619B5549B40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FupApp", "FupApp\FupApp\FupApp.csproj", "{790EFCFE-CB22-433C-90C6-D619B5549B40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

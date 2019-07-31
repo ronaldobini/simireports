@@ -20,6 +20,9 @@
                     <EntryCell x:Name="fup" Placeholder="Informe o FUP"></EntryCell>-->
             <Label Text="FUP" VerticalOptions="CenterAndExpand" FontSize="30" TextColor="#399bfc"/>
             <StackLayout>
+                <StackLayout Padding="10" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                    <Button x:Name="btnPesqFupU7D" Text="Ultima Semana" TextColor="White" Clicked="pesqUlt7Dias" BorderColor="#012f8c" BackgroundColor="#399bfc"></Button>
+                </StackLayout>
                 <StackLayout>
                     <Label Text="Quem: " TextColor="#777" FontSize="15"/>
                     <Label x:Name="quemLabel" TextColor="#555" FontSize="20"/>
@@ -32,6 +35,12 @@
 
                     <Label Text="Proposta" TextColor="#777" FontSize="15"/>
                     <Entry x:Name="propec"  FontSize="20" TextColor="#555"/>
+
+                    <Label Text="Cliente" TextColor="#777" FontSize="15"/>
+                    <Entry x:Name="clientext"  FontSize="20" TextColor="#555"/>
+
+                    <Label Text="Classificacao" TextColor="#777" FontSize="15"/>
+                    <Entry x:Name="classificacao"  FontSize="20" TextColor="#555"/>
 
                     <Label Text="Follow-Up" TextColor="#777" FontSize="15"/>
                     <Editor x:Name="fup" AutoSize="TextChanges" FontSize="20" TextColor="#555"/>

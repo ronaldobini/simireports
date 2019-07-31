@@ -23,6 +23,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="IBM.Data.Informix">
+      <HintPath>..\bin\Debug\netstandard2.0\IBM.Data.Informix.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="FuPage.xaml.cs">
       <DependentUpon>FuPage.xaml</DependentUpon>
     </Compile>
