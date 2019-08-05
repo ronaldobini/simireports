@@ -37,11 +37,11 @@ namespace simireports.simireports
             List<RepresEmails> represEmails = new List<RepresEmails>{
                //new RepresEmails("","marcos.riter@similar.ind.br"),
                //new RepresEmails("","gabriel.riter@similar.ind.br"),
-               //new RepresEmails("","kyung.choi@lsbrasil.com.br"),
+               new RepresEmails("","kyung.choi@lsbrasil.com.br"),
                //new RepresEmails("","alberto.riter@similar.ind.br"),
 
 
-               //new RepresEmails("","ti@similar.ind.br")
+               new RepresEmails("","ti@similar.ind.br")
             };
 
             foreach (var re in represEmails)
@@ -239,7 +239,7 @@ namespace simireports.simireports
                                 "<td style = \"border: 1px solid #ccc;text-align:center;color:#aaa;width: 5%;\" > Solic </th>" +
                                 //"<td style=\"color:#aaa;width: 5%;\">Cancel</th>" +
                                 //"<td style = \"color:#aaa;width: 5%;\" > Atend </th>" +
-                                "<td style = \"border: 1px solid #ccc;text-align:center;color:#aaa;width: 10%;\" > Desconto</th>" +
+                                //"<td style = \"border: 1px solid #ccc;text-align:center;color:#aaa;width: 10%;\" > Desconto</th>" +
                                 "<td style = \"border: 1px solid #ccc;text-align:center;color:#aaa;width: 10%;\" > Comiss</th>" +
                                 "<td style = \"border: 1px solid #ccc;text-align:right;color:#aaa;width: 10%;\" > Preço Unit R$</th>" +
                             //"<td style=\"color:#aaa;width:10%;\">Preço Total Atend</th>" +
@@ -285,7 +285,7 @@ namespace simireports.simireports
                             "<td style = \"border: 1px solid #ccc;text-align:center;\">" + qtdSolic + " </td>" +
                             //"<td style = \"text-align:center;\">" + qtdCancelD + " </td>" +
                             //"<td style = \"text-align:center;\">" + qtdAtendD + " </td>" +
-                            "<td style=\"border: 1px solid #ccc;text-align:center;\">" + desconto + "%</td>" +
+                            //"<td style=\"border: 1px solid #ccc;text-align:center;\">" + desconto + "%</td>" +
                             "<td style=\"border: 1px solid #ccc;text-align:center;\">" + comiss + "%</td>" +
                             "<td style=\"border: 1px solid #ccc;text-align:right;\">" + preUnitS + "</td>" +
                         //"<td>R$" + totAtend + "</td>" +
@@ -317,7 +317,7 @@ namespace simireports.simireports
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
                 client.Credentials = new System.Net.NetworkCredential("ti@similar.ind.br", "Simi1717");
-                MailMessage mm = new MailMessage("ti@similar.ind.br", re.email, "SimiWeb - SERV Ontem", corpoEmail);
+                MailMessage mm = new MailMessage("ti@similar.ind.br", re.email, "SimiWeb - SERV Aberto", corpoEmail);
                 mm.BodyEncoding = UTF8Encoding.UTF8;
                 mm.IsBodyHtml = true;
                 mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;

@@ -14,7 +14,7 @@ namespace simireports.simireports
     public partial class WebForm1 : System.Web.UI.Page
     {
         // VERSAO
-        public static string swver = "v1.1.5"; 
+        public static string swver = "v1.1.5.2"; 
         // padrao: v9.9.99 - opcional extra: .9  (na terceira casa pode-se deixar apenas o primeiro digito quando o segundo for zero)
         //
         private string loginPost = "-";
