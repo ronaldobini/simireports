@@ -218,6 +218,9 @@
                                             Decimal preUnit = Decimal.Round(item.PrecoUnit,2);
                                             String preUnitS = m.formatarDecimal(preUnit);
 
+                                            Decimal itemTot =  preUnit*item.QtdSolic;
+                                            String itemTotS = m.formatarDecimal(itemTot);
+
                                             totPed += preUnit*(item.QtdSolic-item.QtdCancel);
                                             totAtend += preUnit*item.QtdAtend;
 
@@ -226,6 +229,9 @@
 
                                             totPend = totPed - totAtend;
                                             totPendS =  m.formatarDecimal(totPend);
+
+
+                                            
 
 
                                             string cor = "red";
@@ -262,7 +268,7 @@
                                                 <td class="qtdOcultos" style="text-align:center;display:none;"><%= item.QtdLib %></td>
                                                 <td class="qtdOcultos" style="text-align:center;display:none;"><%= item.QtdRes %></td>
                                                 <td style="text-align:right;"><%= preUnitS %></td>
-                                                <td style="text-align:right;"><%= preUnit*item.QtdSolic %></td>
+                                                <td style="text-align:right;"><%= itemTotS %></td>
                                                 <td style="text-align:right;"><%= m.configDataBanco2Human(przEntrega) %></td>
                                             </tr>
                                                 

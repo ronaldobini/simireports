@@ -253,7 +253,7 @@ namespace simireports
 
                                    " AND a.num_pedido = b.num_pedido AND a.cod_empresa = b.cod_empresa AND c.cod_cliente = a.cod_cliente" +
                                    " GROUP BY a.cod_empresa, a." + tipoData + ", a.cod_cliente, a.num_pedido, c.nom_cliente, r.nom_repres, b.qtd_pecas_solic, b.qtd_pecas_cancel, b.qtd_pecas_atend, i.den_item, b.prz_entrega, b.cod_item, b.pre_unit,b.num_sequencia,a.num_pedido_cli, b.qtd_pecas_romaneio, e.qtd_liberada, e.qtd_reservada, a.ies_finalidade, f.den_cnd_pgto  " +
-                                   " ORDER BY a.num_pedido, b.num_sequencia";
+                                   " ORDER BY a." + tipoData + " DESC, a.num_pedido DESC, b.num_sequencia";
 
             //sqlview = sql; //ativa a exibicao do sql na tela
 

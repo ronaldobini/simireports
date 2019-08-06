@@ -35,10 +35,10 @@ namespace simireports.simireports
             ontem = m.configDataHuman2Banco(ontem);
             //Necessario por o nome dos representantes em maiuscula, toUpper nao funciona dentro do for each porque nao pode mudar variavel de iteraçao
             List<RepresEmails> represEmails = new List<RepresEmails>{
-               //new RepresEmails("","marcos.riter@similar.ind.br"),
-               //new RepresEmails("","gabriel.riter@similar.ind.br"),
+               new RepresEmails("","marcos.riter@similar.ind.br"),
+               new RepresEmails("","gabriel.riter@similar.ind.br"),
                new RepresEmails("","kyung.choi@lsbrasil.com.br"),
-               //new RepresEmails("","alberto.riter@similar.ind.br"),
+               new RepresEmails("","alberto.riter@similar.ind.br"),
 
 
                new RepresEmails("","ti@similar.ind.br")
