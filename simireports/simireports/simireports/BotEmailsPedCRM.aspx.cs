@@ -67,7 +67,7 @@ namespace simireports.simireports
                 SqlConnection conn = new BancoAzure().abrir();
 
                 string represFiltro = " ";
-                if (re.nome.Equals("REPRESPR"))
+                if (re.nome.Equals("REPRESPR,"))
                 {
                     represFiltro = " AND (a.Representante LIKE '%ALISON,%' OR a.Representante LIKE '%FELIPE,%' OR a.Representante LIKE '%VINICIUS,%' OR a.Representante LIKE '%LARSEN,%' OR a.Representante LIKE '%REPPG,%')";
                 }
