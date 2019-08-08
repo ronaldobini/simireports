@@ -50,6 +50,7 @@
                         <td style="width:140px;">
                             <select class="form-control" style="width:120px;" id="familia" runat="server">
                                 <option value="00">Todas</option>
+                                <option value="100">Produtos</option>
                                 <option value="01">SICK</option>
                                 <option value="02">LS</option>
                                 <option value="03">BRADY</option>

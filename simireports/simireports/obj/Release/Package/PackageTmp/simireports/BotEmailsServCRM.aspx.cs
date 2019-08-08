@@ -214,16 +214,16 @@ namespace simireports.simireports
                     corpoEmail +=
                         "<thead style = \"background-color: #ccc; color:#000;\">" +
                     "<tr>" +
-                        //"<td scope = \"col\"style = \"width: 5%; text-align:center;background-color: #fff;\"> Data </th>" +
+                        "<td scope = \"col\"style = \"width: 15%; text-align:center;color:#777;background-color: #ccc;\"> Data </th>" +
                         //"<td scope = \"col\"style = \"width: 5%; text-align:center;background-color: #fff;\"> Unidade </th>" +
                         "<td scope = \"col\"style = \"width: 20%; text-align:left;color:#777;background-color: #ccc;\"> Pedido </th>" +
                         //"<td scope = \"col\"style = \"width: 5%; text-align:center;background-color: #fff;\"> CNPJ </th>" +
-                        "<td scope = \"col\"style = \"width: 45%; text-align:left;color:#777;background-color: #ccc;\"> Cliente </th>" +
-                        "<td scope = \"col\"style = \"width: 35%; text-align:left;color:#777;background-color: #ccc;\"> Representante </th>" +
+                        "<td scope = \"col\"style = \"width: 40%; text-align:left;color:#777;background-color: #ccc;\"> Cliente </th>" +
+                        "<td scope = \"col\"style = \"width: 30%; text-align:left;color:#777;background-color: #ccc;\"> Representante </th>" +
                     "</tr>" +
                     "</thead>" +
                     "<tr>" +
-                        //"<td style = \"text-align:center;\">" + pedE.Dat + "</td>" +
+                        "<td style = \"text-align:center;color:#000\">" + (pedE.Dat).ToString("d") + "</td>" +
                         //"<td style = \"text-align:center;\">" + pedE.CodEmpresa + "</td>" +
                         "<td style = \"text-align:left;color:#000\">" + pedE.NumPed + "</td>" +
                         //"<td style = \"text-align:center;\">" + pedE.CodCliente + "</td>" +
@@ -231,7 +231,7 @@ namespace simireports.simireports
                         "<td style = \"text-align:left;color:#000\">" + pedE.Repres + "</td>" +
                     "</tr>" +
                     "<tr>" +
-                        "<td colspan = \"3\">" +
+                        "<td colspan = \"4\">" +
                         "<table style=\"border: 1px solid #ccc;border-collapse: collapse; background-color:#fff; width:100%; color:#000; font-size: 12px;\">" +
                             "<tr style=\"border: 1px solid #ccc;\">" +
                                 "<td style =\"border: 1px solid #ccc;text-align:left;color:#aaa;width: 20%;\" > Cod. do Item</th>" +
