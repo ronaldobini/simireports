@@ -39,6 +39,7 @@ namespace simireports.simireports
                new RepresEmails("","gabriel.riter@similar.ind.br"),
                new RepresEmails("","kyung.choi@lsbrasil.com.br"),
                new RepresEmails("","alberto.riter@similar.ind.br"),
+               new RepresEmails("","cristiano.diefenthaeler@similar.ind.br"),
 
 
                new RepresEmails("","ti@similar.ind.br")
