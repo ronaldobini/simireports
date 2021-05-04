@@ -11,7 +11,7 @@ using System.Data.SqlClient;
         {
             string connetionString = null;
             SqlConnection conn;
-            connetionString = "Data Source=similar.database.windows.net;Initial Catalog=SimiSysDB;User ID=similar;Password=@lbertor!ter15";
+            connetionString = "Data Source=similar.database.windows.net;Initial Catalog=SimiSysDB;User ID=similar;Password=xxc";
             conn = new SqlConnection(connetionString);
             try
             {
